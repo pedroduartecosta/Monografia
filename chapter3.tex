@@ -12,9 +12,6 @@
 %``arquitetural'', etc.
 
 
-
-
-
 \section{Defining Trust}
 
 At this point, a definition of what trust in a oracle is seems appropriate. Trust has a lot of meanings, depending on the needs of all the parties involved. I will model several levels of trust and the requirements and fallacies of each model as well as its application and drawbacks.
@@ -66,10 +63,8 @@ A proposed and existing solution in the market is Oracles as a Service. Oraclize
 \subsubsection{Resulting Context}
 This solution results in an architecture that compromises two points of trust. The first being the data-feed itself. No guarantees are given that the data provided is reliable and the smart contract owner must therefore, to the best of his knowledge, select a data-feed in which, by the operator size or record of good behaviour, he can trust.
 
-The second point of failure is the oracle service itself. Altough the smart contract, in the resulting context, has access to the information from the outsite, that is only possible due to the use of a third party to honestly relay the data. In this architecture, if the oracle simply relays the data, then no trust model can be achieved as the oracle good behaviour is not tested against. As this would not be a feasible architecture the existing services provide autenticity proofs to guarantee, to a certain level, their honest behaviour. The problem here is on how are these proofs generated, can they be verified on-chain or only off-chain and who is making, or providing, the verification tools. In chapter X I'll deep dive on these questions and technicques. Another reason to trust in the service can be the monetary incentive for good behaviour. By paying the oracle for each request, that becomes the oracle service business model and therefore an extensive record of good behaviour if crucial for business propesrity and therefore a good enough incentive for honestly conveying the requested data.
+The second point of failure is the oracle service itself. Although smart contracts, in the resulting context, have access to the information from the outside, that is only possible due to the use of a third party to honestly relay the data. In this architecture, if the oracle simply relays the data, then no trust model can be achieved as the oracle good behavior is not tested against. As this would not be a feasible architecture the existing services provide autenticity proofs to guarantee, to a certain level, their honest behavior. The problem here is on how are these proofs generated, can they be verified on-chain or only off-chain and who is making, or providing, the verification tools. In chapter X I'll deep dive on these questions and technicques. Another reason to trust in the service can be the monetary incentive for good behavior. By paying the oracle for each request, that becomes the oracle service business model and therefore an extensive record of good behavior if crucial for business propesrity and therefore a good enough incentive for honestly conveying the requested data.
 In this context, if the autenticity proofs provide enough assurances for the smart contract creator and he trustes in the selected data-feed to provide the required data, then this model can satisfy its needs in terms of trust, as well as, performance, since it only queries one data-feed and uses only one oracle. By not having any consensus mechanism an exchangin the least amount of messages it can both achieve greater performance and a lower cost. But this lower cost and higher performance architecture by itself  is prone to failure due to lack of decentralization and does not guarantee service availability which could lead to a failure in the smart contract to obtain the requested information.
-
-
 
 
 
