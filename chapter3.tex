@@ -28,14 +28,14 @@ The second, and most relevant for analysis, is the oracle service used. Oracles 
 \subsection{Oracle as a Service w/ Single Data Feed.}
 
 \subsubsection{Context}
-Smart contracts will provably power a decentralized world of automation and trust-less commitments. Companies, groups and individuals will be able to automate tasks and contracts but as far as the ecosystem is, at the moment, smart contracts are limited to the information available in the blockchain. Therefore, connecting with the outside world requires a trusted authority to input in the blockchain the required information upon request from the smart contract. This trusted authority is generally called an oracle.
+Smart contracts will provably power a decentralized world of automation and trust-less commitments. Companies, groups and individuals will be able to automate tasks and contracts but as far as the ecosystem is, at the moment, smart contracts are limited to the information available in the blockchain. Therefore, connecting with the outside world requires a trusted authority to input in the blockchain the required information upon request from the smart contract. This trusted authority is generally called an oracle. 
 
 \subsubsection{Example}
 
 
 
 \subsubsection{Problem}
-As explained before, the deterministic nature of blockchain does not allow smart contracts to directly query a data-feed for information. In this context, oracles surge to empower business and smart contract capabilities, connecting smart contracts to the world outside of the blockchain. The problem here is to trust in the oracle service to not behave maliciously and undermine the trust provided by the blockchain consensus mechanisms. Blockchain technology can be trusted to behave correctly even in byzantine environments, but the oracle service does not abide by the same mechanisms and therefore must provide some kind of proof of honesty. 
+As explained before, the deterministic nature of blockchain does not allow smart contracts to directly query a data-feed for information. In this context, oracles surge to empower business and smart contract capabilities, connecting smart contracts to the world outside of the blockchain. The problem here is to trust in the oracle service to not behave maliciously and undermine the trust provided by the blockchain consensus mechanisms. Blockchain technology can be trusted to behave correctly even in byzantine environments, but the oracle service does not abide by the same mechanisms and therefore must provide some kind of proof of honesty.
 
 \subsubsection{Forces}
 \begin{itemize}
@@ -122,7 +122,7 @@ Currently, oracle behavior is neither easy to check nor fully transparent and tr
 \end{itemize}
 
 \subsubsection{Solution}
-A solution to trusting a oracle service is to deploy our own oracle service. Surely, doing so incurs in technical expenses for programming, deploying and maintaining the oracle, however doing so requires no trust in a third party but only on our ability to maintain the necessary level of security in our own oracle. Additionally, it will free the smart contract owner from the fees charged by the oracle provider and allow for further flexibility in adapting the oracle to new sources of information. Furthermore, it will also lead to simpler and cheaper smart contracts by not requiring the use of authenticity proofs in regards to the oracle behavior, as the developer knows exactly what the oracle is running under the hood.
+A solution to trusting a oracle service is to deploy our own oracle service. Surely, doing so incurs in technical expenses for programming, deploying and maintaining the oracle, however does not require to trust in a third party but only on our ability to maintain the necessary level of security in our own oracle. Additionally, it will free the smart contract owner from the fees charged by the oracle provider and allow for further flexibility in adapting the oracle to new sources of information. Furthermore, it will also lead to simpler and cheaper smart contracts by not requiring the use of authenticity proofs in regards to the oracle behavior, as the developer knows exactly what the oracle is running under the hood.
 
 \begin{figure*}[t]
   \begin{center}
@@ -136,7 +136,7 @@ A solution to trusting a oracle service is to deploy our own oracle service. Sur
 
 \subsubsection{Example Resolved}
 \subsubsection{Resulting Context}
-
+With this solution we almost remove the second layer of trust, trusting in the oracle service. Nonetheless we move the trust to the developer ability in coding a secure and reliable oracle. The main benefit is not requiring to have the overhead expense of using, understanding and verifying the authenticity required for a trustable use of Oracles as a service.
 
 \subsubsection{Known Uses}
 
