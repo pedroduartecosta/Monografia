@@ -112,10 +112,17 @@ Although the use of Oracles as a Service allows for a low product time to market
 
 
 \subsubsection{Problem}
-Currently, oracle behavior is neither easy to check nor fully transparent and trustable. As seen in chapter \ref{chap:chap4}, verifying oracles authenticity proofs sometimes cannot be done on-chain, resulting in a contract being executed with an incorrect proof which is only later verified but the contract is irreversible adding not much to oracle trustability except the ability to cancel future contracts.
+Currently, oracle behavior is neither easy to check nor fully transparent and trustable. As seen in chapter \ref{chap:chap4}, verifying oracles authenticity proofs sometimes cannot be done on-chain, resulting in a contract being executed with an incorrect proof which is only later verified but the contract is irreversible adding not much to oracle trustability except the ability to cancel future contracts. Proofs also add complexity to the smart contract code which will result in slower contract development and more importantly in higher contract costs. Most blockchains charge contracts by either CPU, memory and network use, or even all of these, and therefore receiving the proof and verifying it on chain will increase the cost of running a contract. 
 
 \subsubsection{Forces}
+\begin{itemize}
+  \item \textbf{Higher trust on oracle behavior} - Oracle good behavior is usually backed by authenticity proofs which are expensive to check on chain or don't bring much value to the contract when verified off-chain since the current contract already executed its code with tampered data.
+  \item \textbf{Lower smart contract costs} - Checking authenticity proofs leads to higher contract deployment costs, as the proof can be long and computational expensive.
+  \item \textbf{Lower smart contract complexity} - Verifying authenticity proofs on chain requires the developer to have sufficient knowledge to write the verifying functions. 
+\end{itemize}
+
 \subsubsection{Solution}
+A solution to trusting a oracle service is to deploy our own oracle service. Surely, doing so incurs in technical expenses for programming, deploying and maintaining the oracle, however doing so requires no trust in a third party but only on our ability to maintain the necessary level of security in our own oracle. Additionally, it will free the smart contract owner from the fees charged by the oracle provider and allow for further flexibility in adapting the oracle to new sources of information. Furthermore, it will also lead to simpler and cheaper smart contracts by not requiring the use of authenticity proofs in regards to the oracle behavior, as the developer knows exactly what the oracle is running under the hood.
 
 \begin{figure*}[t]
   \begin{center}
@@ -129,6 +136,8 @@ Currently, oracle behavior is neither easy to check nor fully transparent and tr
 
 \subsubsection{Example Resolved}
 \subsubsection{Resulting Context}
+
+
 \subsubsection{Known Uses}
 
 \subsection{Multi-Party Self Hosted Oracle.}
