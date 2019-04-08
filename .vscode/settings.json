@@ -10,7 +10,4 @@
         "alias": null
     },
     "latex-workshop.latex.outDir": "..",
-    "latex-workshop.latex.autoClean.run": "onBuilt",
-    "latex-workshop.latex.clean.subfolder.enabled": true
-
 }
