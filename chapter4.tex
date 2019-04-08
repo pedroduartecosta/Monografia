@@ -1,14 +1,23 @@
 \chapter{Authenticity Proofs}\label{chap:chap4}
 
 \section*{}
-As seen in the state-of-the-art revision, most oracles as a service providers use authenticity proofs to prove their honest behaviour. However, these proofs are not infallible and the details or their implementation are not always transparent or do not provide the disclosed level of trust. In this section, I will deep dive on the most common proofs and discuss their implementation and applicability.
+As technology evolves and becomes mainstream so does the amount of generated data and its distribution. And so it becomes crucial to be able to authenticate a piece of information as originating from a known, trusted source. 
+
+In the context of today's web we are accustomed to trust that a certain website or data is originated from the expected source due to the general adoption of the HTTPS protocol. An extension fo the HTTP protocol which creates and encrypted and authenticated channel between the client and the web-server providing the requested information. Then it becomes a matter of whether we trust the source or not, but not doubts are raised as for the channel through which we received it.
+
+Unfortunately, in the context of blockchain, the most used, available and trusted protocols have not direct way of communicating with HTTPS enabled services and therefore obtain authenticated data. Creating a need for a trusted service, which if centralized if fallible unless it can provide an irrefutable proof of its honesty. 
+
+Several authenticity have therefore been developed and, as seen in the state-of-the-art revision, most oracles as a service providers use authenticity proofs to prove their honest behaviour. However, these proofs are not infallible and the details or their implementation are not always transparent or do not provide the disclosed level of trust. In this section, I will deep dive on the most common proofs and discuss their implementation and applicability.
 
 
 \subsection{TLSNotary}
-\subsubsection{Context}
 
+TLSNotary, as presented in its white-paper \cite{2014TLSnotary-aSessions}, is a mechanism for independently audited HTTPS sessions. Allowing clients to provide evidence to a third party auditor that certain web traffic occurred between himself and the server. This mechanism takes leverage of the TLS handshake protocol to create a irrefutable proof as long as the auditor trusts the server's public key by splitting the TLS master key between three parties: the server, the auditee and the auditor.
 
 \subsubsection{How it works}
+The algorithm works by allowing an auditor to verify some part of a session by withholding a small part of the secret data used to set up the HTTPS connection while allowing the client to conduct a HTTPS session normally. The auditor never fully possesses, at any time, any of the session keys and therefore cannot decrypt any sensitive information and can only verify that a certain traffic did occurred.
+
+
 
 \subsubsection{Applicability to blockchain oracles}
 
