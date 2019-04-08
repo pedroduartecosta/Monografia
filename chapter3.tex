@@ -136,17 +136,29 @@ A solution to trusting a oracle service is to deploy our own oracle service. Sur
 
 \subsubsection{Example Resolved}
 \subsubsection{Resulting Context}
-With this solution we almost remove the second layer of trust, trusting in the oracle service. Nonetheless we move the trust to the developer ability in coding a secure and reliable oracle. The main benefit is not requiring to have the overhead expense of using, understanding and verifying the authenticity required for a trustable use of Oracles as a service. 
+With this solution we almost remove the second layer of trust, trusting in the oracle service. Nonetheless, we move the trust to the developer ability in coding a secure and reliable oracle. The main benefit is not requiring to have the overhead expense of using, understanding and verifying the authenticity proofs required for a trustable use of Oracles as a service. 
 
 \subsubsection{Known Uses}
 
 \subsection{Multi-Party Self Hosted Oracle.}
 
 \subsubsection{Context}
+In some cases, competing parties may rely on a smart contract to keep track of some value with interest to them, therefore, it may be a requirement that several of these parties take part in the process of providing the data to the smart contract. It may also be the case, that if a single oracle is the source of truth of a smart contract, then the easiest way to attack the smart contract is by attacking the central point of failure, the oracle. In both of theses cases the oracle singularity needs to be tackled.
+
 \subsubsection{Example}
 \subsubsection{Problem}
+This context raises to problems, oracle consensus and availability. Whoever owns the oracle providing the data to the smart contract holds the smart contract and therefore can influence the execution of the contract, in which several competing parties rely. In terms of availability a single oracle creates a single point of failure in case of an attack or system failure.
+
 \subsubsection{Forces}
+\begin{itemize}
+  \item \textbf{Oracle decentralization} - connecting a smart contract to data through a single node, creates the problem that smart contracts intend to avoid, a single point of failure. With a single oracle, a smart contract is only as reliable as that one oracle.
+  \item \textbf{Oracle ownership decentralization} - having one party control the oracle network centralizes the power to manipulate all the contracts relying on the information provided by that network of oracles.
+\end{itemize}
+
 \subsubsection{Solution}
+The most beneficial solution, here, is having each interested party launching their own oracle and having all oracles communicating between themselves with a mechanism for consensus. The consensus mechanism would vary from case to case, and from how critical the smart contract solution is. However, the consensus algorithm should never require that all nodes provide a response since that would again create a weak network in which by tacking down on oracle the whole system would fail.
+To increase the level of trust in each party, each could sign their response and be able to launch only one node. With this, once one of the nodes had all the signatures than it would provide the contract with the requested information. Also, a party would not be able to gain control over the network of oracles by launching more nodes than the remaining stakeholders.
+
 
 \begin{figure*}[t]
   \begin{center}
@@ -159,10 +171,9 @@ With this solution we almost remove the second layer of trust, trusting in the o
 
 \subsubsection{Example Resolved}
 \subsubsection{Resulting Context}
+With this context, we bring the same trust level given by blockchain technology to the oracle service. Resulting in a decentralized network with no single party running it and every stakeholder having the same weight in providing the data.
+
 \subsubsection{Known Uses}
-
-
-
 
 
 \section{Summary and conclusions}
