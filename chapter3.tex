@@ -146,8 +146,9 @@ With this solution we almost remove the second layer of trust, trusting in the o
 In some cases, competing parties may rely on a smart contract to keep track of some value with interest to them, therefore, it may be a requirement that several of these parties take part in the process of providing the data to the smart contract. It may also be the case, that if a single oracle is the source of truth of a smart contract, then the easiest way to attack the smart contract is by attacking the central point of failure, the oracle. In both of theses cases the oracle singularity needs to be tackled.
 
 \subsubsection{Example}
+
 \subsubsection{Problem}
-This context raises to problems, oracle consensus and availability. Whoever owns the oracle providing the data to the smart contract holds the smart contract and therefore can influence the execution of the contract, in which several competing parties rely. In terms of availability a single oracle creates a single point of failure in case of an attack or system failure.
+This context raises two problems, oracle consensus and availability. Whoever owns the oracle providing the data to the smart contract holds the smart contract and therefore can influence the execution of the contract, in which several competing parties rely. In terms of availability, a single oracle creates a single point of failure in case of an attack or system failure.
 
 \subsubsection{Forces}
 \begin{itemize}
@@ -156,8 +157,9 @@ This context raises to problems, oracle consensus and availability. Whoever owns
 \end{itemize}
 
 \subsubsection{Solution}
-The most beneficial solution, here, is having each interested party launching their own oracle and having all oracles communicating between themselves with a mechanism for consensus. The consensus mechanism would vary from case to case, and from how critical the smart contract solution is. However, the consensus algorithm should never require that all nodes provide a response since that would again create a weak network in which by tacking down on oracle the whole system would fail.
-To increase the level of trust in each party, each could sign their response and be able to launch only one node. With this, once one of the nodes had all the signatures than it would provide the contract with the requested information. Also, a party would not be able to gain control over the network of oracles by launching more nodes than the remaining stakeholders.
+The most beneficial and simple solution, here, is having each interested party launching their own oracle and having all oracles communicating between themselves with a mechanism for consensus. The consensus mechanism would vary from case to case, and from how critical the smart contract solution is.
+To increase the level of trust in each party, each node would sign their response and be able to launch only one node. With this, once one of the nodes had collected all the signatures than it would provide the contract with the requested information. Also, a party would not be able to gain control over the network of oracles by launching more nodes than the remaining stakeholders.
+However, the consensus algorithm should never require that all nodes provide a response since that would again create a weak network in which by tacking down one oracle the whole system would fail.
 
 
 \begin{figure*}[t]
@@ -171,7 +173,9 @@ To increase the level of trust in each party, each could sign their response and
 
 \subsubsection{Example Resolved}
 \subsubsection{Resulting Context}
-With this context, we bring the same trust level given by blockchain technology to the oracle service. Resulting in a decentralized network with no single party running it and every stakeholder having the same weight in providing the data.
+With this context, we bring the same trust level given by blockchain technology to the oracle service. Resulting in a decentralized network with no single party running it and every stakeholder having the same weight in providing the data. This context, however, is only suitable for previously defined user groups, with and agreed minimum necessary quorum for consensus and known public keys of all nodes.
+
+In a community context, this approach is not suitable since nodes would be able to join and leave making it harder to achieve a predefined consensus. Involved parties would be able to launch more than one node, resulting in some parties being able to take over the minimum consensus quorum and overpower the network, unless some proof-of-work mechanism is implemented. This would also result in a context of wisdom of the crowd, in which the most effective way of controlling a correct answer would be by implementing some incentives mechanism such as \cite{AdlerAstraea:Oracle}. The problem around incentives is that they do not guarantee that, in edge cases, with enough incentives the network will provide a wrong answer if justifiable. Although, as far as the author is concerned, no other mechanism is available when dealing with wisdom of the crowd information. // Talvez valha a pena continuar esta parte numa nova architectura em que por ventura se use crowd em conjunto com provas criptograficas.
 
 \subsubsection{Known Uses}
 
