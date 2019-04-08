@@ -51,6 +51,7 @@ biblio:
 	  $(BIBTEX) $(TARGET); $(PDFLATEX) $< $@; fi
 	while grep 'Rerun to get cross-references right.' $*.log ; do \
 	  $(PDFLATEX) $< $@ || { rm -f $*.aux $*.idx && false ; } ; done
+	mv $(TARGET).pdf ..
 
 .tex.dvi:
 	rm -f $*.ps $*.pdf
