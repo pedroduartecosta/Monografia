@@ -18,6 +18,5 @@
     "workbench.editor.highlightModifiedTabs": true,
     //"files.autoSave": "afterDelay",
     "explorer.sortOrder": "type",
-    "editor.cursorStyle": "block",
     "files.trimFinalNewlines": true
 }

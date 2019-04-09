@@ -91,6 +91,25 @@ TLSNotary, provides some capabilities to attest TLS connections but comes with s
 The TLSNotary proof is promising due to be software based and is, as of this moment, the most spoken of authenticity proof. However, it's applicability is increasingly getting limited due to the deployment of new TLS versions and the assurances provided by the proof current implementations, which simply move the trust to a bigger entity. Therefore, it should not be considered a reliable authentication method for future implementations.
 
 \section{Android Proof}
+In the oracle context, the Android proof results from Oraclize research and development efforts. It takes leverage of SafetyNet software attestation and Android Hardware Attestation to provision a secure and auditable environment to fetch authenticated data. 
+
+\subsection{SafetyNet Attestation}
+SafetyNet, developed by Google, is an api service that allows to assess the Android device in which an app is running on. It provides a cryptographically-signed attestation, assessing the integrity of the device, looking at the software and hardware environment for integrity issues. By returning an SHA-256 hash of the application that called the SafeyNet API it allows to assess if the application running on the device has not been tampered with by comparing the application SHA-256 hash with its public available and distributed open-source code.
+
+\subsection{Android Hardware Attestation}
+Since Android Nougat, developers are able to generate and hardware attestation object with details regarding the device unique key stored in the Android Hardware KeyStore. The attestation object is signed by a special attestation key kept on the device and the root certificate regarding that key is a known Google certificate. This guarantees that the hardware running the code has not been tampered with.
+
+\subsection{How it works}
+The application running on the Android device, on its first run, creates a NIST-256p key pair, containing the Hardware Attestation Object to prove the integrity of the key, using the Android Hardware KeyStore and 
+
+When a request is sent to the Android device, it starts an HTTPS connection and the entire HTTP response is retrieved. The response's SHA256 hash is signed using the hardware attested key pair created on the application start. A call to SafetyNet API is then used to attest the SHA-256 hash of the application package running on the device, which should be open-source and public available and distributed, guaranteeing the application integrity and therefore that not alteration has occurred on the HTTP response before it is signed and its hash used in the SafetyNet request.
+
+SafetyNet then returns an attestation response in the JSON Web Signature format (JWS) that guarantees the integrity of the application running, the integrity of the system in which the application ran and that both the HTTPS request and signing process using the initially created and attested key have taken place in the application issuing the SafetyNet request.
+
+The SafetyNet JWS response and the HTTP response is sent back for verification and validation.
+
+\subsection{Conclusions}
+The Android proof is a far more complex and in-depth proof in comparison to TLSNotary. It provides strong guarantees of software and hardware integrity as well as of the requested data, Nonetheless, it relies on a centralized authority, Google, to develop a secure Trusted Execution Environment (TEE), used by Android to generate private keys, and to maintain SafetyNet security sophisticated enough to offer good guarantees of the device and application integrity. The required use of a physical android device, limits the scalability of this approach, but nonetheless, as long as Google is trustworthy it is a very secure model. 
 
 
 \section{Ledger Proof}
