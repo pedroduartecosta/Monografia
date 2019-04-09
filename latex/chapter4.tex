@@ -106,10 +106,10 @@ When a request is sent to the Android device, it starts an HTTPS connection and 
 
 SafetyNet then returns an attestation response in the JSON Web Signature format (JWS) that guarantees the integrity of the application running, the integrity of the system in which the application ran and that both the HTTPS request and signing process using the initially created and attested key have taken place in the application issuing the SafetyNet request.
 
-The SafetyNet JWS response and the HTTP response is sent back for verification and validation.
+The SafetyNet JWS response and the HTTP response is sent back for off-chain verification and validation.
 
 \subsection{Conclusions}
-The Android proof is a far more complex and in-depth proof in comparison to TLSNotary. It provides strong guarantees of software and hardware integrity as well as of the requested data, Nonetheless, it relies on a centralized authority, Google, to develop a secure Trusted Execution Environment (TEE), used by Android to generate private keys, and to maintain SafetyNet security sophisticated enough to offer good guarantees of the device and application integrity. The required use of a physical android device, limits the scalability of this approach, but nonetheless, as long as Google is trustworthy it is a very secure model. 
+The Android proof is a far more complex and in-depth authenticity proof in comparison to TLSNotary. It provides strong guarantees of software and hardware integrity as well as of the requested data. Nonetheless, it relies on a centralized authority, Google, to develop a secure Trusted Execution Environment (TEE), used by Android to generate private keys, and to maintain SafetyNet security sophisticated enough to offer good guarantees of the device and application integrity. A bottleneck in this approach can be the required use of a physical android device, limiting the scalability of this approach, but nonetheless, as long as Google is trustworthy it is a very secure model. 
 
 
 \section{Ledger Proof}
