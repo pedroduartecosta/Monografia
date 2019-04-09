@@ -20,7 +20,7 @@ MKIDX=makeindex
 ## Basename for result in EN
 TARGET=mieic-en
 
-## Basename for PDIS
+## Basename for PDIS 
 #TARGET=pdis
 #TARGET=pdis-en
 

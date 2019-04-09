@@ -10,4 +10,14 @@
         "alias": null
     },
     "latex-workshop.latex.outDir": "..",
+    "git-graph.showStatusBarItem": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.fontFamily": "'Fira Code'",
+    "editor.fontLigatures": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    //"files.autoSave": "afterDelay",
+    "explorer.sortOrder": "type",
+    "editor.cursorStyle": "block",
+    "files.trimFinalNewlines": true
 }
