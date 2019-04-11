@@ -119,7 +119,12 @@ Currently the ledger proof is used by Oraclize to provide true random data to a 
 \section{Promising proofs}
 
 \subsection{TLS-N}
-TLS-N \cite{Ritzdorf2017}, is the first privacy preserving TLS extensions that is efficient and provides non-repudiation, not only in a single TLS message exchange but in a conversation compromising several messages. It allows, with an additional computation overhead, to obfuscate certain parts of the conversation (such as passwords or other sensitive information) while keeping it's trust model intact. TLS-N does not require the use of a third-party or any trusted hardware, it is an extension to the TLS 1.3 protocol, keeping it future proof (at least in a foresable future) comparing to other implentations such as TLSNotary which relie on deprecated versions.
+TLS-N \cite{Ritzdorf2017}, is the first privacy preserving TLS extensions that is efficient and provides non-repudiation, not only in a single TLS message exchange but in a conversation compromising several messages. It allows, with an additional computation overhead, to obfuscate certain parts of the conversation (such as passwords or other sensitive information) while keeping it's trust model intact. TLS-N does not require the use of a third-party or any trusted hardware and is an extension to the TLS 1.3 protocol, in comparison to other implementations such as TLSNotary which rely on deprecated versions, is up to date to the current technologies. 
+
+In the TLS-N model, there is no need to trust in a single auditor, such as in TLSNotary, since the proofs are non-interactive and can be inspected by anyone, at any point in time, without having to trust in the single auditor honesty.
+
+%% FIXME: explain smart contract connection
+
 
 \subsection{Blockchain-based TLS notary service}
 
