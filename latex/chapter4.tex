@@ -7,7 +7,7 @@ In the context of today's web we are accustomed to trust that a certain website 
 
 Unfortunately, in the context of blockchain, the most used, available and trusted protocols have not direct way of communicating with HTTPS enabled services and therefore obtain authenticated data. Creating a need for a trusted service, which if centralized if fallible unless it can provide an irrefutable proof of its honesty. 
 
-Several authenticity mechnismis have therefore been developed and, as seen in the state-of-the-art revision, most oracles as a service providers use authenticity proofs to prove their honest behaviour. However, these proofs are not infallible and the details or their implementation are not always transparent or do not provide the disclosed level of trust. In this section, I will deep dive on the most common proofs and discuss their implementation and applicability.
+Several authenticity mechanisms have therefore been developed and, as seen in the state-of-the-art revision, most oracles as a service providers use authenticity proofs to prove their honest behaviour. However, these proofs are not infallible and the details or their implementation are not always transparent or do not provide the disclosed level of trust. In this section, I will deep dive on the most common proofs and discuss their implementation and applicability.
 
 
 \section{TLSNotary}
@@ -111,8 +111,10 @@ The SafetyNet JWS response and the HTTP response is sent back for off-chain veri
 \subsection{Conclusions}
 The Android proof is a far more complex and in-depth authenticity proof in comparison to TLSNotary. It provides strong guarantees of software and hardware integrity as well as of the requested data. Nonetheless, it relies on a centralized authority, Google, to develop a secure Trusted Execution Environment (TEE), used by Android to generate private keys, and to maintain SafetyNet security sophisticated enough to offer good guarantees of the device and application integrity. A bottleneck in this approach can be the required use of a physical android device, limiting the scalability of this approach, but nonetheless, as long as Google is trustworthy it is a very secure model. 
 
-
 \section{Ledger Proof}
+The ledger proof is based on the use of a specific trusted environment, the Ledger Nano S and Ledger Blue, invented by a French company to secure crypto assets safely. This devices implement several layers of hardware and software to prove the security of its execution. These devices run a specific software, BOLOS, which has an SDK that enables developers to build application which can be installed on the hardware. BOLOS exposes a set of kernel-level API which allow running secure cryptographic operations as well as attest the device and the code running on it. The later is very useful as it allows to run code in a secure manner and provide an attestation for the code. An application can ask the kernel to produce a signed hash of the application binary code. A special attesting key is used in this process and is safely controlled by the kernel, away from attacks attempts by any application code. With this, the ledger proof leverages both the device attesting and code attesting features to prove that the applications are running on a TEE of a ledger device.
+
+Currently the ledger proof is used by Oraclize to provide true random data to a smart contract. But is use can be extended to other computation operation that may required to be ran outside of the blockchain as long as supported in terms of computational and memory capacity by the ledger device. The device also lacks direct connection to the internet and therefore cannot be used to query data from the internet.
 
 \section{Promising proofs}
 

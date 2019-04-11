@@ -69,6 +69,11 @@ The solution to the smart contract connectivity problem and to outsourcing compu
 \section{Oracles trust}
 Trust in oracles comprises two main components, service availability, trusting that the service will always return a response to our query, and untampered relay of information, meaning the information the oracle computed or queried is original and not tampered with. If oracles are compromised we risk compromising the trust of the underlying blockchain by inputting falsified information in a system that is trusted to always have a valid state. Therefore it is imperative that oracles provide a proof for the information they provide, as well, as keep a decentralized approach by having a network of oracles always available to answer the queries.
 
+
+\section{Trusted Execution Environment} %% FIXME: rewrite this part - copy pasted
+A Trusted Execution Environment (TEE) is a computational environment strongly isolated from the main operating system running on a given device. The isolation is achieved through software and hardware enforced mechanisms. A TEE runs a small-footprint operative system, which exposes a minimal interface to the main operative system running on the device in order to reduce the attack surface. TEEs can run special applications with high-security requirements, such as cryptographic key management, biometric authentication, secure payment processing and DRM. Some examples of TEEs are ARM Trustzone-based Secure Elements , widely used in smartphones, and the more recently released Intel Software Guard Extensions (SGX) Enclaves.
+
+
 \section{Motivation and Objectives} \label{sec:goals}
 The research hereby exposed was proposed by Takai, a blockchain start-up born in Porto, Portugal with the purpose to be the first blockchain open innovation platform. Sponsored by Bright Pixel, an innovation hub and venture investment house, who supports promising startups in their early years. Taikai is building a platform that connects talent and entrepreneurs with the challenges of the corporate players, through the power of the sharing economy and blockchain trust. Taikai's project will serve as proof-of-concept for the implementation of trustable oracles.
 
