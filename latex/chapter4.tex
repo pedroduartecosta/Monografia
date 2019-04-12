@@ -119,9 +119,19 @@ Currently the ledger proof is used by Oraclize to provide true random data to a 
 \section{Promising proofs}
 
 \subsection{TLS-N}
-TLS-N \cite{Ritzdorf2017}, is the first privacy preserving TLS extensions that is efficient and provides non-repudiation, not only in a single TLS message exchange but in a conversation compromising several messages. It allows, with an additional computation overhead, to obfuscate certain parts of the conversation (such as passwords or other sensitive information) while keeping it's trust model intact. TLS-N does not require the use of a third-party or any trusted hardware and is an extension to the TLS 1.3 protocol, in comparison to other implementations such as TLSNotary which rely on deprecated versions, is up to date to the current technologies. 
+TLS-N \cite{Ritzdorf2017}, is the first privacy preserving TLS extension that is efficient and most importantly provides non-repudiation. TLS-N does not require the use of a third-party or any trusted hardware and is an extension to the TLS 1.3 protocol, in comparison to other implementations such as TLSNotary which rely on deprecated versions, is up to date to the current technologies.
+It guarantees non-repudiation, not only in a single TLS message exchange but also in a conversation compromising several messages. It allows, with an additional computation overhead, to obfuscate certain parts of the conversation (such as passwords or other sensitive information) while keeping it's trust model intact.
 
-In the TLS-N model, there is no need to trust in a single auditor, such as in TLSNotary, since the proofs are non-interactive and can be inspected by anyone, at any point in time, without having to trust in the single auditor honesty.
+In the TLS-N model, there is no need to trust in a single auditor, such as in TLSNotary, since the proofs are non-interactive and can be inspected by anyone, at any point in time, without having to trust in a single auditor honesty.
+
+
+\subsection{How it works}
+TLs-N requires the webs server (generator) and client (requester) to have both support for the protocol.
+
+Initially, both generator and requester establish a TLS connection and negotiate the TLS-N parameters in the handshake. The generator stores the state of the conversation which compromises a hash value incorporating all previous records, an ordering vector and time stamp from the start of the session.
+
+The protocol ends when the requester sends a request for evidence. The evidence is composed of a windows of ordered messages exchanged. The windows begins right after the handshake, this prevents Content Omission Attacks, in which the evidence collection only starts after que request is done, and another request is asked right after (this one, inside the window collection) and the response for the first request is assumed to be the response to the second one and only this to messages are stored in the evidence window even though the answer was not to the question in the window.
+
 
 %% FIXME: explain smart contract connection
 
