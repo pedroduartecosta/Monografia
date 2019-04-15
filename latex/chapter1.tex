@@ -26,7 +26,7 @@ In 2015, Ethereum was launched as an alternative protocol for building decentral
 
 Smart contracts have a wide range of use cases. For example, they can be used in Supply Chains and Logistics. Smart contracts allow tracking product movement from the factory to the store shelves. Each intermediary signs a step of the contract which then the final consumer can analyse and have the guarantee of the origin of the product.
 
-\section{The smart contract connectivity problem}
+\section{The Smart Contract Connectivity Problem}
 
 \begin{figure*}[t]
   \begin{center}
@@ -41,7 +41,7 @@ The Ethereum blockchain is designed to be entirely deterministic~\cite{GavinWood
 
 
 
-\section{Smart contracts space and computation limits}
+\section{Smart Contracts Space and Computation Limits}
 
 Another problem for smart contracts is performing long and costly operations in terms of computation and space. Several platforms are implementing smart contracts, also called DAPPs, Distributed Applications, namely Ethereum and EOS, among others. 
 
@@ -52,7 +52,7 @@ EOS, on the opposite of Ethereum, works on an ownership model whereby users own 
 All in all, either for users of smart contracts or the teams deploying them, keeping smart contracts efficient and performing non-costly operation is the key. Nonetheless, sometimes applications require costly operations and outsourcing them to an oracle outside of the blockchain is the answer.
 
 
-\section{Oracles as a solution}
+\section{Oracles as a Solution}
 The solution to the smart contract connectivity problem and to outsourcing computation from the blokchain is the use of a secure blockchain middle-ware, mentioned before as, an oracle. Oracles can query data from APIs, datafeeds, other blockchains or perform their own calculations and input that data on the smart contract. This way the blockchain has all the necessary information to verify the result of running a smart contract, and will always produce the same result, independently of the point in time in which that verification is ran.
 
 
@@ -66,7 +66,7 @@ The solution to the smart contract connectivity problem and to outsourcing compu
 \end{figure*}
 
 
-\section{Oracles trust}
+\section{Oracles Trust}
 Trust in oracles comprises two main components, service availability, trusting that the service will always return a response to our query, and untampered relay of information, meaning the information the oracle computed or queried is original and not tampered with. If oracles are compromised we risk compromising the trust of the underlying blockchain by inputting falsified information in a system that is trusted to always have a valid state. Therefore it is imperative that oracles provide a proof for the information they provide, as well, as keep a decentralized approach by having a network of oracles always available to answer the queries.
 
 
