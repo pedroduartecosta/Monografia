@@ -1,183 +1,153 @@
-\chapter{Trustable Oracles }\label{chap:chap3}
+\chapter{Oracles Trust}\label{chap:chap4}
 
 \section*{}
-%Este capítulo deve começar por fazer uma apresentação detalhada do
-%problema a resolver\footnote{Na introdução a apresentação do
-%  problema foi breve.} podendo mesmo, caso se justifique,
-%constituir-se um capítulo com essa finalidade.
+As technology evolves and becomes mainstream so does the amount of generated data and its distribution. And so it becomes crucial to be able to authenticate a piece of information as originating from a known, trusted source. 
 
-%Deve depois dedicar-se à apresentação da solução sem detalhes de
-%implementação. 
-%Dependendo do trabalho, pode ser uma descrição mais teórica, mais
-%``arquitetural'', etc.
+In the context of today's web we are accustomed to trust that a certain website or data is originated from the expected source due to the general adoption of the HTTPS protocol. An extension fo the HTTP protocol which creates and encrypted and authenticated channel between the client and the web-server providing the requested information. Then it becomes a matter of whether we trust the source or not, but not doubts are raised as for the channel through which we received it.
 
+Unfortunately, in the context of blockchain, the most used, available and trusted protocols have not direct way of communicating with HTTPS enabled services and therefore obtain authenticated data. Creating a need for a trusted service, which if centralized if fallible unless it can provide an irrefutable proof of its honesty. 
 
-\section{Defining Trust}
+Trust in oracles comprises therefore two main components, service availability, trusting that the service will always return a response to our query, and untampered relay of information, meaning the information the oracle computed or queried is original and not tampered with. If oracles are compromised we risk compromising the trust of the underlying blockchain by inputting falsified information in a system that is trusted to always have a valid state. Therefore it is imperative that oracles provide a proof for the information they provide, as well, as keep a decentralized approach by having a network of oracles always available to answer the queries.
 
-At this point, a definition of what trust in a oracle is seems appropriate. Trust has a lot of meanings, depending on the needs of all the parties involved. I will model several levels of trust and the requirements and fallacies of each model as well as its application and drawbacks.
+Oracles, currently resort to two main techniques to prove their honesty. Authenticity proofs, which is a software or hardware generated cryptographic proof during or after na execution that can later be used to prove the integrity and honesty of the execution or of the provided data. And Trusted Execution Environments (TEE) which add another layer of security by isolating the application code from the environment in which is ran, and may also provide a cryptographic proof of their honest behaviour.
 
-Starting from an absolute trust scenario, in this model, the end user, being the smart contract which receives information provided by the oracle, has complete assurances from both the veracity of the data provided by the data-source, as well as, undeniable proof that the oracle did not tamper with the relayed information. This scenario points out two main points of failure, either maliciously or unintentionally. 
+\section{Trusted Execution Environment}
+A Trusted Execution Environment is a secure computational environment that is strongly isolated from the main operating system. It provides application isolation, integrity and memory confidentiality. Sensitive data is store, processed and protected from the main operating system or network. This isolation is accomplished through software and hardware enforced mechanism. TEE run a small operating system which exposes a minimal interface to the running application and therefore reduce the attack surface. Advanced TEE embed unique identities that allow to verify the device authenticity and can be used to generate proofs of the device honest execution.
 
-The first component which can be faulty or compromised is the data-source. Assuring that the information provided is correct does not have a straightforward answer. What correct means is open to interpretation. For example, if the data source is an IoT sensor, which is prone to failures, being correct is relative. The sensor needs to be perfectly calibrated and accurate. In this case, using several sensors and averaging its values or removing outliers would solve its correctness. Another example, could be an API that returns the current value of the EUR in USD. In this scenario a party that would benefit from a higher conversion than the real one could coerce or attack the data-source into providing a favorable value. The answer here can also be using several data-sources. Another solution would be to use a highly trusted entity such as the European Central Bank (ECB) which can be a lot harder to coerce or attack and having a signatures from the ECB that backs the provided data. Choosing what type of data-source to use has a huge impact on the trust fullness of the provided data not to mention architecture centralization when using a source such as the ECB. All in all, the end user will have to understand the requirements and level of trust necessary.
+\section{Authenticity Proofs}
 
-The second, and most relevant for analysis, is the oracle service used. Oracles are a necessary part of the process, since the other option would be having the data providers adapting to the blockchain which does not seem to be a realistic option at the moment. Therefore we most trust an oracle or a group of oracles. Two main options are available, either trusting a third-party oracle or self deploying an oracle. In the first scenario, three variables take part in the level of trust. Firstly he third-party oracle, if paid for, has the monetary incentive to be honest, since a bad record of dishonesty would have the service loosing credibility and therefore clients. Secondly, by using proofs the oracle can establish its legitimacy, as long as, the proofs can undoubtedly be trusted and verifiable by the smart contract, I will later analyse in depth this issue. Finally, oracle execution transparency by using open-source code and having means for being audit. Additionally to guaranteeing single oracle integrity, it may be in the interest of the user to use several oracles either to provide service availability or to increase trust by combining the result from different oracle services.
+Several authenticity mechanisms have been developed and, as described in the state-of-the-art revision, most oracles as a service providers use authenticity proofs to prove their honest behaviour. However, these proofs are not infallible and the details or their implementation are not always transparent or do not provide the disclosed level of trust. I will deep dive on the most common proofs and discuss their implementation and applicability.
+ 
+\subsection{TLSNotary}
 
+TLSNotary is a mechanism for independently audited HTTPS sessions. Allowing clients to provide evidence to a third party auditor that certain web traffic occurred between himself and the server. This mechanism takes leverage of the TLS handshake protocol to create a irrefutable proof as long as the auditor trusts the server's public key by splitting the TLS master key between three parties: the server, the auditee and the auditor.
 
-\section{Oracle Architectures}
+The algorithm allows an auditor to verify some part of a session by withholding a small part of the secret data used to set up the HTTPS connection while allowing the client to conduct a HTTPS session normally. The auditor never fully possesses, at any time, any of the session keys and therefore cannot decrypt any sensitive information and can only verify that a certain traffic did occurred.
 
-\subsection{Oracle as a Service w/ Single Data Feed.}
+\subsubsection{How it works}
+TLSNotary modifies the TLS handshake protocol on the client side by levering some properties of TLS 1.0 and 1.1. More specifically the pseudorandom function (PRF) used in the TLS 1.0 RFC 2246.
 
-\subsubsection{Context}
-Smart contracts will provably power a decentralized world of automation and trust-less commitments. Companies, groups and individuals will be able to automate tasks and contracts but as far as the ecosystem is, at the moment, smart contracts are limited to the information available in the blockchain. Therefore, connecting with the outside world requires a trusted authority to input in the blockchain the required information upon request from the smart contract. This trusted authority is generally called an oracle. 
+\begin{ceqn}
+    \begin{align}
+        PRF(secret,label,seed) = PMD5(S1,label+seed) \otimes PSHA-1(S2,label+seed)
+    \end{align}
+\end{ceqn}
 
-\subsubsection{Example}
+This function compromises two secrets, S1 and S2. The auditor and auditee will independently generate S1 and S2, respectively. 
 
+The auditee applies P\_MD5 to S1, generating 48 bytes:
 
+\begin{ceqn}
+    \begin{align}
+        H_{1} = H_{1,1} \parallel H_{1,2}
+    \end{align}
+\end{ceqn}
 
-\subsubsection{Problem}
-As explained before, the deterministic nature of blockchain does not allow smart contracts to directly query a data-feed for information. In this context, oracles surge to empower business and smart contract capabilities, connecting smart contracts to the world outside of the blockchain. The problem here is to trust in the oracle service to not behave maliciously and undermine the trust provided by the blockchain consensus mechanisms. Blockchain technology can be trusted to behave correctly even in byzantine environments, but the oracle service does not abide by the same mechanisms and therefore must provide some kind of proof of honesty.
+The auditor applies P\_SHA-1 to S2, generating 48 bytes:
 
-\subsubsection{Forces}
-\begin{itemize}
-\item \textbf{Smart contract empowerment} - Providing smart contracts with trustable information from outside of the blockchain is decisive to gain general adoption and practicality.
-\item \textbf{Blockchain Interoperability} - The ability to get information from other blockchains if possible using an oracle that queries one blockchain and inputs the information on another.
-\item \textbf{Keeping trust standards} - As blockchain technology creates a trust-less environment, oracles should as well keep up with the level of trust in their functioning.
-\end{itemize}
-
-
-\subsubsection{Solution}
-A solution is to use a secure authenticated channel between any external data-source and blockchain applications, known as Oracle. A proposed and existing solution in the market is Oraclize  \cite{Oraclize.it2018OraclizeDocumentation}. Currently providing fee-based oracles in which smart contracts pay for each request. In order to achieve a higher level of trust, for an extra fee, it can also provide proofs that the provided data as not been tampered by their oracle. The extent to which this proofs can be trusted will be further analysed. 
-
-\begin{figure*}[t]
-  \begin{center}
-    \leavevmode
-    \includegraphics[width=0.5\textwidth]{figures/oraclearch1.jpg}
-    \caption{Oracle as a Service w/ Single Data Feed.}
-    \label{fig:/figures/paper-screening}
-  \end{center}
-\end{figure*}
-
-\subsubsection{Example Resolved}
+\begin{ceqn}
+    \begin{align}
+        H_{2} = H_{2,1} \parallel H_{2,2}
+    \end{align}
+\end{ceqn}
 
 
-\subsubsection{Resulting Context}
-This solution results in an architecture that compromises two points of trust. The first being the data-feed itself. No guarantees are given that the data provided is reliable and the smart contract owner must therefore, to the best of his knowledge, select a data-feed in which, by the operator size or record of good behavior, he can trust.
+The auditor and auditee then exchange H21 and H12 allowing each other to construct different halves of the master secret, M2 and M1, respectively.
 
-The second point of failure is the oracle service itself. Although smart contracts, in the resulting context, have access to the information from the outside, that is only possible due to the use of a third party to honestly relay the data. In this architecture, if the oracle simply relays the data, then no trust model can be achieved as the oracle good behavior is not tested against. As this would not be a feasible architecture the existing services provide authenticity proofs to guarantee, to a certain level, their honest behavior. The problem here is on how are these proofs generated, can they be verified on-chain or only off-chain and who is making, or providing, the verification tools. In chapter 4 I deep dive on these questions and techniques. Another reason to trust in the service can be the monetary incentive for good behavior. By paying the oracle for each request, that becomes the oracle service business model and therefore an extensive record of good behavior if crucial for business prosperity and therefore a good enough incentive for honestly conveying the requested data.
-In this context, if the authenticity proofs provide enough assurances for the smart contract creator and he trustees in the selected data-feed to provide the required data, then this model can satisfy its needs in terms of trust, as well as, performance, since it only queries one data-feed and uses only one oracle. By not having any consensus mechanism an exchanging the least amount of messages it can both achieve greater performance and a lower cost. But this lower cost and higher performance architecture by itself  is prone to failure due to lack of decentralization and does not guarantee service availability which could lead to a failure in the smart contract to obtain the requested information.
+\begin{ceqn}
+    \begin{align}
+        M_{2} = H_{1,2} \parallel H_{2,2}
+    \end{align}
+\end{ceqn}
 
+\begin{ceqn}
+    \begin{align}
+        M_{1} = H_{2,1} \parallel H_{1,1}
+    \end{align}
+\end{ceqn}
 
+The auditee and auditor calculate X and Y, respectively.
 
-\subsubsection{Known Uses}
+\begin{ceqn}
+    \begin{align}
+        X = P\_MD5(M_{1})
+    \end{align}
+\end{ceqn}
 
+\begin{ceqn}
+    \begin{align}
+        Y = P\_SHA-1(M_{2})
+    \end{align}
+\end{ceqn}
 
-\subsection{Oracle as a Service w/ Multiple Data Feeds.}
+The auditor sends sufficient bytes from Y to the auditee so that it can compute the necessary encryption keys and client mac key to send the request to the server. 
 
-\subsubsection{Context}
-Sometimes an answer to a contract request cannot be truly accepted unless several sources confirm it. Either because it is unwise to trust in a single identity or because there might not be a single true answer but only an answer that is accepted by a selected majority.
+Then the server response is received, but not decrypted, and the network traffic is logged and a hash is of the traffic is computed and set to the auditor as commitment. 
 
-\subsubsection{Example} 
+Only then, does the auditor send the remaining bytes of Y to the auditee that allow him to calculate the server mac key and safely execute a normal TLS decryption and authentication step.
 
-\subsubsection{Problem}
-The previous architecture specified a single point of failure on the data-source layer. A contract with high requirements in terms of availability cannot rely on using a single data-source, as doing so would void the contract when the service providing that data is down or taken down. In terms of trust, certain contracts may also require that several services provide an answer and then have a consensus between all the received answers. This cannot be achieved by querying a single source and therefore the oracle service must be able to query several sources and either define the resulting answer or provide all the responses to the smart contract and let the smart contract resolve to a final answer.
+These complex sequence of calculations prevent the auditee from creating a fake version of the post-handshake traffic from the server since he did not have in his possession the server mac write secret to decrypt and authenticate the initially requested data.
 
-\subsubsection{Forces}
-\begin{itemize}
-\item \textbf{Data-feed fault tolerance} - Ensuring that a contract can follow through even if a data provider is down by querying another provider.
-\item \textbf{Trusting data} - By querying several data sources there is a higher trust on the veracity of the data.
-\end{itemize}
+A more detailed flow and explanation can be consulted in the TLSNotary white-paper \cite{2014TLSnotary-aSessions}.
 
-\subsubsection{Solution}
-\begin{figure*}[t]
-  \begin{center}
-    \leavevmode
-    \includegraphics[width=0.5\textwidth]{figures/oraclearch2.jpg}
-    \caption{Oracle as a Service w/ Multiple Data Feeds.}
-    \label{fig:/figures/paper-screening}
-  \end{center}
-\end{figure*}
-
-\subsubsection{Example Resolved}
-\subsubsection{Resulting Context}
-In this context, the layer of trust regarding the data-feed is almost eliminated by having the ability to choose from several data providers and therefore not relying on a source of truth. It also provides a higher system availability, as the oracle/smart contract can have some degree of redundancy in the data providers selection.
-
-\subsubsection{Known Uses}
-
-\subsection{Single-Party Self Hosted Oracle.}
-
-\subsubsection{Context}
-Although the use of Oracles as a Service allows for a low product time to market by not having to take care of the development, maintenance and deployment of the oracle service it usually leads to less flexibility in the oracle design, vendor lock-in and fees charged by the vendor. If the product requirements do not allow for the specified challenges or the trust levels required by the contract are more than what the oracle vendor can provide it may be a solution to deploy its own oracle. A company with its own developing team capable of allocating resources for the development of the oracle or a single developer who does not want to incur in the oracle vendor fees will benefit from their own deployment in terms of cost and most importantly in regard to trusting the oracle behavior.
-
-\subsubsection{Example}
+   
+\subsubsection{Limitations}
+TLSNotary, provides some capabilities to attest TLS connections but comes with several limitation. Firstly, TLSNotary supports only TLS 1.0 or 1.1, the properties mentioned before are not present in TLS 1.2 and 1.3 and former are considered less secure versions of TLS. Secondly, TLSNotary depends on RSA Key exchange, which does not provide forward secrecy. Thirdly, TLSNotary uses MD5 and SHA-1 functions, which are now considered deprecated. Finally and most importantly, TLSNotary requires trusting in a third party in most of its implementations, such as in Oraclize \cite{Oraclize.it2018OraclizeDocumentation}, and being an interactive proof there is no way to verify the TLSNotary proof unless you were performing the role of the auditor during the retrieval. Oraclize, runs an auditor node on Amazon Web Services(AWS), claiming that this implementation is secure as far as AWS is trusted, simply moving trust to a bigger another central entity. It also only allows the existence of one auditor in which we must trust, in a situation in which more than one auditor is required TLSNotary will not be able to satisfy such requirement.
 
 
-\subsubsection{Problem}
-Currently, oracle behavior is neither easy to check nor fully transparent and trustable. As seen in chapter \ref{chap:chap4}, verifying oracles authenticity proofs sometimes cannot be done on-chain, resulting in a contract being executed with an incorrect proof which is only later verified but the contract is irreversible adding not much to oracle trustability except the ability to cancel future contracts. Proofs also add complexity to the smart contract code which will result in slower contract development and more importantly in higher contract costs. Most blockchains charge contracts by either CPU, memory and network use, or even all of these, and therefore receiving the proof and verifying it on chain will increase the cost of running a contract. 
+\subsubsection{Conclusions}
+The TLSNotary proof is promising due to be software based and is, as of this moment, the most spoken of authenticity proof. However, it's applicability is increasingly getting limited due to the deployment of new TLS versions and the assurances provided by the proof current implementations, which simply move the trust to a bigger entity. Therefore, it should not be considered a reliable authentication method for future implementations.
 
-\subsubsection{Forces}
-\begin{itemize}
-  \item \textbf{Higher trust on oracle behavior} - Oracle good behavior is usually backed by authenticity proofs which are expensive to check on chain or don't bring much value to the contract when verified off-chain since the current contract already executed its code with tampered data.
-  \item \textbf{Lower smart contract costs} - Checking authenticity proofs leads to higher contract deployment costs, as the proof can be long and computational expensive.
-  \item \textbf{Lower smart contract complexity} - Verifying authenticity proofs on chain requires the developer to have sufficient knowledge to write the verifying functions. 
-\end{itemize}
+\subsection{Android Proof}
+In the oracle context, the Android proof results from Oraclize research and development efforts. It takes leverage of SafetyNet software attestation and Android Hardware Attestation to provision a secure and auditable environment to fetch authenticated data. 
 
-\subsubsection{Solution}
-A solution to trusting a oracle service is to deploy our own oracle service. Surely, doing so incurs in technical expenses for programming, deploying and maintaining the oracle, however does not require to trust in a third party but only on our ability to maintain the necessary level of security in our own oracle. Additionally, it will free the smart contract owner from the fees charged by the oracle provider and allow for further flexibility in adapting the oracle to new sources of information. Furthermore, it will also lead to simpler and cheaper smart contracts by not requiring the use of authenticity proofs in regards to the oracle behavior, as the developer knows exactly what the oracle is running under the hood.
+\subsubsection{SafetyNet Attestation}
+SafetyNet, developed by Google, is an api service that allows to assess the Android device in which an app is running on. It provides a cryptographically-signed attestation, assessing the integrity of the device, looking at the software and hardware environment for integrity issues. By returning an SHA-256 hash of the application that called the SafeyNet API it allows to assess if the application running on the device has not been tampered with by comparing the application SHA-256 hash with its public available and distributed open-source code.
 
-\begin{figure*}[t]
-  \begin{center}
-    \leavevmode
-    \includegraphics[width=0.5\textwidth]{figures/oraclearch3.jpg}
-    \caption{Single-Party Self Hosted Oracle.}
-    \label{fig:/figures/paper-screening}
-  \end{center}
-\end{figure*}
+\subsubsection{Android Hardware Attestation}
+Since Android Nougat, developers are able to generate and hardware attestation object with details regarding the device unique key stored in the Android Hardware KeyStore. The attestation object is signed by a special attestation key kept on the device and the root certificate regarding that key is a known Google certificate. This guarantees that the hardware running the code has not been tampered with.
 
+\subsubsection{How it works}
+The application running on the Android device, on its first run, creates a NIST-256p key pair, containing the Hardware Attestation Object to prove the integrity of the key, using the Android Hardware KeyStore and 
 
-\subsubsection{Example Resolved}
-\subsubsection{Resulting Context}
-With this solution we almost remove the second layer of trust, trusting in the oracle service. Nonetheless, we move the trust to the developer ability in coding a secure and reliable oracle. The main benefit is not requiring to have the overhead expense of using, understanding and verifying the authenticity proofs required for a trustable use of Oracles as a service. 
+When a request is sent to the Android device, it starts an HTTPS connection and the entire HTTP response is retrieved. The response's SHA256 hash is signed using the hardware attested key pair created on the application start. A call to SafetyNet API is then used to attest the SHA-256 hash of the application package running on the device, which should be open-source and public available and distributed, guaranteeing the application integrity and therefore that not alteration has occurred on the HTTP response before it is signed and its hash used in the SafetyNet request.
 
-\subsubsection{Known Uses}
+SafetyNet then returns an attestation response in the JSON Web Signature format (JWS) that guarantees the integrity of the application running, the integrity of the system in which the application ran and that both the HTTPS request and signing process using the initially created and attested key have taken place in the application issuing the SafetyNet request.
 
-\subsection{Multi-Party Self Hosted Oracle.}
+The SafetyNet JWS response and the HTTP response is sent back for off-chain verification and validation.
 
-\subsubsection{Context}
-In some cases, competing parties may rely on a smart contract to keep track of some value with interest to them, therefore, it may be a requirement that several of these parties take part in the process of providing the data to the smart contract. It may also be the case, that if a single oracle is the source of truth of a smart contract, then the easiest way to attack the smart contract is by attacking the central point of failure, the oracle. In both of theses cases the oracle singularity needs to be tackled.
+\subsubsection{Conclusions}
+The Android proof is a far more complex and in-depth authenticity proof in comparison to TLSNotary. It provides strong guarantees of software and hardware integrity as well as of the requested data. Nonetheless, it relies on a centralized authority, Google, to develop a secure Trusted Execution Environment (TEE), used by Android to generate private keys, and to maintain SafetyNet security sophisticated enough to offer good guarantees of the device and application integrity. A bottleneck in this approach can be the required use of a physical android device, limiting the scalability of this approach, but nonetheless, as long as Google is trustworthy it is a very secure model. 
 
-\subsubsection{Example}
+%% FIXME: Add how it works and conclusions subsection
 
-\subsubsection{Problem}
-This context raises two problems, oracle consensus and availability. Whoever owns the oracle providing the data to the smart contract holds the smart contract and therefore can influence the execution of the contract, in which several competing parties rely. In terms of availability, a single oracle creates a single point of failure in case of an attack or system failure.
+\subsection{Ledger Proof}
+The ledger proof is based on the use of a specific trusted environment, the Ledger Nano S and Ledger Blue, invented by a French company to secure crypto assets safely. This devices implement several layers of hardware and software to prove the security of its execution. These devices run a specific software, BOLOS, which has an SDK that enables developers to build application which can be installed on the hardware. BOLOS exposes a set of kernel-level API which allow running secure cryptographic operations as well as attest the device and the code running on it. The later is very useful as it allows to run code in a secure manner and provide an attestation for the code. An application can ask the kernel to produce a signed hash of the application binary code. A special attesting key is used in this process and is safely controlled by the kernel, away from attacks attempts by any application code. With this, the ledger proof leverages both the device attesting and code attesting features to prove that the applications are running on a TEE of a ledger device.
 
-\subsubsection{Forces}
-\begin{itemize}
-  \item \textbf{Oracle decentralization} - connecting a smart contract to data through a single node, creates the problem that smart contracts intend to avoid, a single point of failure. With a single oracle, a smart contract is only as reliable as that one oracle.
-  \item \textbf{Oracle ownership decentralization} - having one party control the oracle network centralizes the power to manipulate all the contracts relying on the information provided by that network of oracles.
-\end{itemize}
-
-\subsubsection{Solution}
-The most beneficial and simple solution, here, is having each interested party launching their own oracle and having all oracles communicating between themselves with a mechanism for consensus. The consensus mechanism would vary from case to case, and from how critical the smart contract solution is.
-To increase the level of trust in each party, each node would sign their response and be able to launch only one node. With this, once one of the nodes had collected all the signatures than it would provide the contract with the requested information. Also, a party would not be able to gain control over the network of oracles by launching more nodes than the remaining stakeholders.
-However, the consensus algorithm should never require that all nodes provide a response since that would again create a weak network in which by tacking down one oracle the whole system would fail.
+Currently the ledger proof is used by Oraclize to provide true random data to a smart contract. But is use can be extended to other computation operation that may required to be ran outside of the blockchain as long as supported in terms of computational and memory capacity by the ledger device. The device also lacks direct connection to the internet and therefore cannot be used to query data from the internet.
 
 
-\begin{figure*}[t]
-  \begin{center}
-    \leavevmode
-    \includegraphics[width=0.5\textwidth]{figures/oraclearch4.jpg}
-    \caption{Multi-Party Self Hosted Oracle.}
-    \label{fig:/figures/paper-screening}
-  \end{center}
-\end{figure*}
+\subsection{TLS-N}
+TLS-N \cite{Ritzdorf2017}, is the first privacy preserving TLS extension that is efficient and most importantly provides non-repudiation. TLS-N does not require the use of a third-party or any trusted hardware and is an extension to the TLS 1.3 protocol, in comparison to other implementations such as TLSNotary which rely on deprecated versions, is up to date to the current technologies.
+It guarantees non-repudiation, not only in a single TLS message exchange but also in a conversation compromising several messages. It allows, with an additional computation overhead, to obfuscate certain parts of the conversation (such as passwords or other sensitive information) while keeping it's trust model intact.
 
-\subsubsection{Example Resolved}
-\subsubsection{Resulting Context}
-With this context, we bring the same trust level given by blockchain technology to the oracle service. Resulting in a decentralized network with no single party running it and every stakeholder having the same weight in providing the data. This context, however, is only suitable for previously defined user groups, with and agreed minimum necessary quorum for consensus and known public keys of all nodes.
-
-In a community context, this approach is not suitable since nodes would be able to join and leave making it harder to achieve a predefined consensus. Involved parties would be able to launch more than one node, resulting in some parties being able to take over the minimum consensus quorum and overpower the network, unless some proof-of-work mechanism is implemented. This would also result in a context of wisdom of the crowd, in which the most effective way of controlling a correct answer would be by implementing some incentives mechanism such as \cite{AdlerAstraea:Oracle}. The problem around incentives is that they do not guarantee that, in edge cases, with enough incentives the network will provide a wrong answer if justifiable. Although, as far as the author is concerned, no other mechanism is available when dealing with wisdom of the crowd information. // Talvez valha a pena continuar esta parte numa nova architectura em que por ventura se use crowd em conjunto com provas criptograficas.
-
-\subsubsection{Known Uses}
+In the TLS-N model, there is no need to trust in a single auditor, such as in TLSNotary, since the proofs are non-interactive and can be inspected by anyone, at any point in time, without having to trust in a single auditor honesty.
 
 
-\section{Summary and Conclusions}
+\subsubsection{How it works}
+TLs-N requires the web server (generator) and the client (requester) to have both support for the protocol.
+
+Initially, both generator and requester establish a TLS connection and negotiate the TLS-N parameters in the handshake. The generator stores the state of the conversation which comprises an hash value incorporating all previous records, an ordering vector and the time stamp from the start of the session.
+
+The protocol ends when the requester sends a request for evidence. The evidence is composed of a windows of the exchanged ordered messages signed by the generator. The window begins right after the handshake, this prevents Content Omission Attacks, in which if the evidence collection only starts after que request is done, and another request is asked right after (this one, inside the window collection) and the response for the first request is assumed to be the response to the second one and only this to messages are stored in the evidence window even though the answer was not to the question in the window.
+
+To generate a small proof independently of the number os messages, TLS-N uses Merkle Trees to create a chain of messages' hashes and then returns only the last hash, which to be created requires all the previous hashes. This ensures a small storage overhead per TLS session.
+
+
+\subsubsection{Conclusions}
+TLS-N was designed with the oracle trust problem in mind, the generated proof is small enough to be evaluated on chain on a smart-contract. The only drawback, is that the smart contracts cannot verify TLS signatures based on the web-PKI (public-key infrastructure) and therefore the contract must have the generator public key.
+
+TLS-N is therefore a promising solution to the oracle trust problem being the only major drawback requiring the data providers to adopt the TLS-N protocol.
+
+
+\section{Summary and conclusions}
