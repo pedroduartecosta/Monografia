@@ -44,13 +44,14 @@ The following four electronic databases were used to query for such information:
 \item Google Scholar
 \end{itemize}
 
-%% FIXME: Explain the search query
 
-The defined search query for the search of the relevant paper was the following:
+The defined search query for the search of the relevant papers was the following:
 
 (("blockchain" OR "block chain" OR "block-chain") 
 AND 
 ("oracles" OR "oracle" OR "middle-ware" OR "middleware" OR "middle ware" OR "datafeed" OR "data feed" OR "data-feed"))
+
+This search query was used comprise all the possible ways of referring to blockchain and oracles. Some scholars have investigated the oracle issue by simply calling them a middleware or data-feed, since oracles can either be used as an intermediary that relays data or as the source of the data.
 
 The search was performed on the 5th of February 2019 and revealed the results presented in Table \ref{search-results-table}.
 
@@ -69,7 +70,7 @@ Google Scholar & Title & 8 \\ \hline
 \label{search-results-table}
 \end{table}
 
-Since the concept of smart contracts on the blockchain was only introduced in 2015, with the introduction of the Ethereum blockchain, only results after 2015 were considered. Analysing the initial search results per year, in Table \ref{search-results-per-year}, we can infer the growing popularity of oracle-related academic research. The year 2019 only comprises work done in the month of January since the search was performed in the beginning of February.
+Since the concept of smart contracts on the blockchain was only introduced in 2015, with the introduction of the Ethereum blockchain, only results after 2015 were considered, also, all duplicated papers were removed. Analysing the initial search results per year, in Figure \ref{search-results-per-year}, we can infer the growing popularity of oracle-related academic research. The year 2019 only comprises work done in the month of January since the search was performed in the beginning of February. 
 
 \begin{figure}[H]
 \centering
@@ -77,20 +78,22 @@ Since the concept of smart contracts on the blockchain was only introduced in 20
 \begin{axis}[
     xlabel={Year},
     ylabel={Number of papers},
+    xtick=data, 
     x tick label style={
 		/pgf/number format/1000 sep=},
     xmin=2015, xmax=2019,
-    ymin=0, ymax=80,
-    ytick={15,30,45,60,75},
+    ymin=0, ymax=60,
+    ytick={0,15,30,45,60,75},
     ymajorgrids=true,
     grid style=dashed,
+    enlargelimits=0.10,
 ]
  
 \addplot[
-    mark=square,
+      mark=square, nodes near coords
     ]
     coordinates {
-    (2015,1)(2016,11)(2017,38)(2018,70)(2019,3)
+      (2015,1)(2016,6)(2017,27)(2018,55)(2019,2)
     };
 
 \end{axis}
@@ -110,7 +113,6 @@ The study selection process initially started with a pool of 123 papers from the
 \item Stage 4: Full article reading to assess if the final bucket of articles answer the research questions.
 \end{itemize} 
 
-%% FIXME: Era excelente apresentar em anexo a lista de artigos que apareceu neste ponto, bem como as listas de artigos que foram ficando (e que foram sendo excluidas) em cada uma das fases ao descer no diagrama. Isto pode ser uma única tabela com os artigos todos que surgiram no início e a fase em que foram excluídos (se o foram). Se fores por esta via, acho que dará jeito numerar cada uma destas fases pela sequência em que acontecem, e na tabela também apresentar essa numeração.
 
 %% FIXME: referir a figurar no texto
 
