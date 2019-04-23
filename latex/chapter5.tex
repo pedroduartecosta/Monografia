@@ -1,18 +1,6 @@
 \chapter{Trustable Oracles }\label{chap:chap5}
 
 \section*{}
-%Este capítulo deve começar por fazer uma apresentação detalhada do
-%problema a resolver\footnote{Na introdução a apresentação do
-%  problema foi breve.} podendo mesmo, caso se justifique,
-%constituir-se um capítulo com essa finalidade.
-
-%Deve depois dedicar-se à apresentação da solução sem detalhes de
-%implementação. 
-%Dependendo do trabalho, pode ser uma descrição mais teórica, mais
-%``arquitetural'', etc.
-
-
-\section{Defining Trust}
 
 At this point, a definition, of what trust in an oracle is, seems appropriate. Trust has a lot of meanings, depending on the needs of all the parties involved. I will model several levels of trust and the requirements and fallacies of each model as well as its application and drawbacks.
 
@@ -25,10 +13,8 @@ The second, and most relevant for analysis, is the oracle service used. Oracles 
 
 \section{Oracle Architectures}
 
-%% FIXME: Falta introduzir aqui porque é que vais falar de arquiteturas de oracles neste ponto. Já hás-de ter falado disto mais acima no documento, mas aqui é importante para o que se segue não parecer caído do céu. 
-
-%% FIXME: Outra coisa que faz falta aqui é uma discussão geral do problema (necessidade de ter informação exogenea na blockchain) e de como é que os oracles o resolvem. Isto também já há-de ter sido descrito de alguma forma mais acima, mas aqui poderia aparecer num formato parecido ao que usas em baixo para descrever cada uma das arquiteturas (context, example, problem, forces, solution, example resolved, resulting context, known uses) e possivelmente com mais detalhe. Podes inclusive dizer que estás a descrever isto como um padrão de software chamado "Blockchain Oracle", porque a existência de oracles é algo que vemos recorrentemente e para a qual até temos vários "know uses". O mesmo pode não acontecer com as arquiteturas que descreves a seguir, e daí não ser adequado chamar-lhes padrões.
-
+Having analysed what trust means, it is evident that no short definition is appropriate and that it depends on the stakeholder beliefs. Hence, several architectural models for what a trustable system arise. Varying in decentralization and complexity. Each model satisfies different requirements, such as performance, security and decentralization.
+In this section, I will describe several possible architectures and point out use cases and compromises for each model.
 
 \subsection{Oracle as a Service w/ Single Data Feed.}
 
@@ -43,7 +29,6 @@ Connecting smart contracts with information provided by data-feeds, which do not
 How can a non-blockchain company keep up with the fast pace of industry while maintaining trust in its services? It is critical to be able to quickly build a smart contract and connect it with the needed information. How can a company do so, without allocating human resources into to the development of yet another service and simply focus on its business logic?
 
 \subsubsection{Forces}
-%% estas forças também me parecem um pouco genéricas para esta arquitetura. as forças são as restrições que consideramos quando procuramos pela solução para um problema. ajudam-nos o leitor a compreender a escolha da solução
 
 \begin{itemize}
   \item \textbf{Fast time to market} - Not having to assemble a team or allocate resources into a developing a new product which will only serve as component of the main product being developed.
@@ -186,7 +171,9 @@ However, the consensus algorithm should never require that all nodes provide a r
 \subsubsection{Resulting Context}
 With this context, we bring the same trust level given by blockchain technology to the oracle service. Resulting in a decentralized network with no single party running it and every stakeholder has the same weight in providing the data. This context, however, is only suitable for previously defined user groups, with an agreed minimum necessary quorum for consensus and known public keys of all nodes.
 
-In a community context, this approach is not suitable since nodes would be able to join and leave making it harder to achieve a predefined consensus. Involved parties would be able to launch more than one node, resulting in some parties being able to take over the minimum consensus quorum and overpower the network unless some proof-of-work mechanism is implemented. This would also result in a context of wisdom of the crowd, in which the most effective way of controlling a correct answer would be by implementing some incentives mechanism such as \cite{AdlerAstraea:Oracle}. The problem around incentives is that they do not guarantee that, in edge cases, with enough incentives, the network will provide a wrong answer if justifiable. Although, as far as the author is concerned, no other mechanism is available when dealing with wisdom-of-the-crowd information. // Talvez valha a pena continuar esta parte numa nova architectura em que por ventura se use crowd em conjunto com provas criptograficas.
+In a community context, this approach is not suitable since nodes would be able to join and leave making it harder to achieve a predefined consensus. Involved parties would be able to launch more than one node, resulting in some parties being able to take over the minimum consensus quorum and overpower the network unless some proof-of-work mechanism is implemented. This would also result in a context of wisdom of the crowd, in which the most effective way of controlling a correct answer would be by implementing some incentives mechanism such as \cite{Adler2018a}. The problem around incentives is that they do not guarantee that, in edge cases, with enough incentives, the network will provide a wrong answer if justifiable. Although, as far as the author is concerned, no other mechanism is available when dealing with wisdom-of-the-crowd information.
+
+
 
 \subsubsection{Known Uses}
 

@@ -1,9 +1,4 @@
 {
-    "spellright.language": [],
-    "spellright.documentTypes": [
-        "markdown",
-        "plaintext"
-    ],
     "editor.wordWrap": "on",
     "azure-iot-edge.defaultPlatform": {
         "platform": "amd64",
