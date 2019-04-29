@@ -16,7 +16,7 @@ The second, and most relevant for analysis, is the oracle service used. Oracles 
 Having analysed what trust means, it is evident that no short definition is appropriate and that it depends on the stakeholder beliefs. Hence, several architectural models for what a trustable system arise. Varying in decentralization and complexity. Each model satisfies different requirements, such as performance, security and decentralization.
 In this section, I will describe several possible architectures and point out use cases and compromises for each model.
 
-\subsection{Oracle as a Service w/ Single Data Feed.}
+\subsection{Oracle as a Service w/ Single Data Feed.}\label{OaaSwSingleDataFeed}
 
 \subsubsection{Context}
 Connecting smart contracts with information provided by data-feeds, which do not, by themselves, input the required information on the blockchain requires the use of a trusted oracle. Developing and maintaining a oracle may be prohibitive in terms of cost and desired time to market. Outsourcing such service would be desirable in this context, it may not be in the interest of the company to specialize in the secure development of oracles.
@@ -63,7 +63,7 @@ In this context, if the authenticity proofs provide enough assurances for the sm
 %% FIXME: Mention oraclize here
 
 
-\subsection{Oracle as a Service w/ Multiple Data Feeds.}
+\subsection{Oracle as a Service w/ Multiple Data Feeds.}\label{OaaSwMultipleDataFeed}
 
 \subsubsection{Context}
 Sometimes an answer to a contract request cannot be truly accepted unless several sources confirm it. Either because it is unwise to trust in a single identity or because there might not be a single true answer but only an answer that is accepted by a selected majority.
@@ -99,7 +99,7 @@ In this context, the layer of trust regarding the data-feed is almost eliminated
 
 \subsubsection{Known Uses}
 
-\subsection{Single-Party Self Hosted Oracle.}
+\subsection{Single-Party Self Hosted Oracle.}\label{SPSelfHostedOracle}
 
 \subsubsection{Context}
 Although the use of Oracles as a Service allows for a low product time to market by not having to take care of the development, maintenance and deployment of the oracle service it usually leads to less flexibility in the oracle design, vendor lock-in and fees charged by the vendor. If the product requirements do not allow for the specified challenges or the trust levels required by the contract are more than what the oracle vendor can provide it may be a solution to deploy its own oracle. A company with its own developing team capable of allocating resources for the development of the oracle or a single developer who does not want to incur in the oracle vendor fees will benefit from their own deployment in terms of cost and most importantly in regard to trusting the oracle behaviour.
@@ -136,7 +136,7 @@ With this solution we almost remove the second layer of trust, trusting in the o
 
 \subsubsection{Known Uses}
 
-\subsection{Multi-Party Self Hosted Oracle.}
+\subsection{Multi-Party Self Hosted Oracle.}\label{MPSelfHostedOracle}
 
 \subsubsection{Context}
 In some cases, competing parties may rely on a smart contract to keep track of some value with interest to them, therefore, it may be a requirement that several of these parties take part in the process of providing the data to the smart contract. It may also be the case, that if a single oracle is the source of truth of a smart contract, then the easiest way to attack the smart contract is by attacking the central point of failure, the oracle. In both of these cases, the oracle singularity needs to be tackled.
@@ -179,6 +179,22 @@ In a community context, this approach is not suitable since nodes would be able 
 
 
 \section{Summary and Conclusions}
+
+The described patterns represent different trust level requirements and forces. Each resolve a specific issue and may create another. When the trust requirements increase so does the gap from idea to market and development costs. Each architecture involves trading cost and flexibility with trust. 
+
+Figure \ref{fig:/figures/oracle-pattern-flow} depicts a possible simple flow of thought when choosing the previous defined pattern that better fits a specific need.
+
+First the decision maker must look at the smart contract needs and decide if the level of trust and audibility provided by an oracle service is sufficient. If so, then can he trust the data source or is there a need for several data providers? Leaving two patterns, \ref{OaaSwSingleDataFeed} and \ref{OaaSwMultipleDataFeed}.
+If he cannot trust any existing oracle service, either because the existing proofs are to expensive to verify, or cannot be verified in the contract or just don't provide the necessary audibility, among others, whatever the reason he needs to think if he has the, either monetary and human, to build his own oracle service. If not, and with increasing costs due to per-request fees, he may choose to use multiple oracle services and then perform some consensus mechanism on the smart contract. If he can then build and maintain its own oracle service he must aks him self the question, Who will use this oracle? How many different and maybe competing parties rely on the smart contract to which the oracle will provide data. If there is only one stakeholder of the smart contract and he runs the oracle, then a perfect system of trust is achieved since outside the blockchain he controls every part of the process, resulting in the pattern \ref{SPSelfHostedOracle}. However if a smart contract has several stakeholders then, no single party should control the oracle and there must be a mechanism to deploy several oracles to power the smart contract while achieving consensus outside of the blockchain and only providing the smart contract with the final result. This reduces smart contract costs while allowing every stakeholder to have a say in the data provided to the smart contract, pattern \ref{MPSelfHostedOracle}.
+
+\begin{figure*}[t]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=1\textwidth]{figures/oracle-pattern-flow.png}
+    \caption{Oracle patter selection flow.}
+    \label{fig:/figures/oracle-pattern-flow}
+  \end{center}
+\end{figure*}
 
 
 %% Add two diagrams:
