@@ -1,0 +1,28 @@
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y git wget vim net-tools
+
+RUN wget https://github.com/eosio/eos/releases/download/v1.5.0/eosio_1.5.0-1-ubuntu-18.04_amd64.deb && \
+    apt -y install ./eosio_1.5.0-1-ubuntu-18.04_amd64.deb
+
+RUN mkdir -p /app/eosio && \
+    mkdir -p /app/eosio/data && \
+    mkdir -p /app/eosio/config
+
+COPY eos.ini /app/eosio/config/config.ini
+
+COPY init.sh /app/eosio
+COPY init_wallet.sh /app/eosio
+RUN chmod u+x  /app/eosio/*.sh
+
+WORKDIR /app/eosio
+
+RUN ./init_wallet.sh
+
+COPY start_eos.sh /app/eosio
+RUN chmod u+x  /app/eosio/start_eos.sh
+CMD /app/eosio/start_eos.sh
+
+EXPOSE 8888
+
+EXPOSE 8899

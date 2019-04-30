@@ -1,0 +1,12 @@
+const NODE_URL=process.env.NODE_URL
+const { Api, JsonRpc, RpcError } = require('eosjs');
+const fetch = require('node-fetch');                            // node only; not needed in browsers
+const  JsSignatureProvider  = require('eosjs/dist/eosjs-jssig');
+const { TextDecoder, TextEncoder } = require('text-encoding');
+const defaultPrivateKey = process.env.TAKAI_FUND_PRIVATE_KEY; // taikai.fund
+const tokenPrivateKey = process.env.TAKAI_TOKEN_PRIVATE_KEY;
+const privateKeys = [defaultPrivateKey, tokenPrivateKey];
+const signatureProvider =  new JsSignatureProvider.default(privateKeys);
+const rpc = new JsonRpc(NODE_URL, { fetch });
+module.exports.rpc = rpc;
+module.exports.api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
