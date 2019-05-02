@@ -1,0 +1,13 @@
+windows:
+  - name: oracle
+    root: /tmp/Monografia/eth-oracle/
+    layout: main-vertical
+    panes:
+      - commands:
+        - cd ./client
+        - truffle compile
+        - truffle develop
+      - commands:
+        - cd ./oracle
+        - truffle compile
+        - truffle develop
