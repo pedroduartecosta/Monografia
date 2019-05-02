@@ -1,4 +1,4 @@
-pragma solidity ^0.4.17;
+pragma solidity >=0.4.21 <0.6.0;
 
 contract OracleInterface {
 
@@ -9,16 +9,16 @@ contract OracleInterface {
         Decided     //index of participant who is the winner 
     }
 
-    function getPendingMatches() public view returns (bytes32[]);
+    function getPendingMatches() public view returns (bytes32[] memory);
 
-    function getAllMatches() public view returns (bytes32[]);
+    function getAllMatches() public view returns (bytes32[] memory);
 
     function matchExists(bytes32 _matchId) public view returns (bool); 
 
     function getMatch(bytes32 _matchId) public view returns (
         bytes32 id,
-        string name, 
-        string participants,
+        string memory name, 
+        string memory participants,
         uint8 participantCount,
         uint date, 
         MatchOutcome outcome, 
@@ -26,8 +26,8 @@ contract OracleInterface {
 
     function getMostRecentMatch(bool _pending) public view returns (
         bytes32 id,
-        string name, 
-        string participants,
+        string memory name, 
+        string memory participants,
         uint participantCount,
         uint date, 
         MatchOutcome outcome, 

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.17;
+pragma solidity >=0.4.21 <0.6.0;
 
 import "./OracleInterface.sol";
 import "./Ownable.sol";
@@ -14,7 +14,7 @@ contract BoxingBets is Ownable {
     mapping(bytes32 => Bet[]) private matchToBets;
 
     //boxing results oracle 
-    address internal boxingOracleAddr = 0;
+    address internal boxingOracleAddr = address(0);
     OracleInterface internal boxingOracle = OracleInterface(boxingOracleAddr); 
 
     //constants
@@ -69,7 +69,7 @@ contract BoxingBets is Ownable {
  
     /// @notice gets a list ids of all currently bettable matches
     /// @return array of match ids 
-    function getBettableMatches() public view returns (bytes32[]) {
+    function getBettableMatches() public view returns (bytes32[] memory) {
         return boxingOracle.getPendingMatches(); 
     }
 
@@ -78,8 +78,8 @@ contract BoxingBets is Ownable {
     /// @return match data 
     function getMatch(bytes32 _matchId) public view returns (
         bytes32 id,
-        string name, 
-        string participants,
+        string memory name, 
+        string memory participants,
         uint8 participantCount,
         uint date, 
         OracleInterface.MatchOutcome outcome, 
@@ -92,8 +92,8 @@ contract BoxingBets is Ownable {
     /// @return match data 
     function getMostRecentMatch() public view returns (
         bytes32 id,
-        string name, 
-        string participants,
+        string memory name, 
+        string memory participants,
         uint participantCount, 
         uint date, 
         OracleInterface.MatchOutcome outcome, 
