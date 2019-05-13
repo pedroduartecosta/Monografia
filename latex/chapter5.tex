@@ -185,7 +185,7 @@ The described patterns represent different trust level requirements and forces. 
 Figure \ref{fig:/figures/oracle-pattern-flow} depicts a possible simple flow of thought when choosing the previous defined pattern that better fits a specific need.
 
 First the decision maker must look at the smart contract needs and decide if the level of trust and audibility provided by an oracle service is sufficient. If so, then can he trust the data source or is there a need for several data providers? Leaving two patterns, \ref{OaaSwSingleDataFeed} and \ref{OaaSwMultipleDataFeed}.
-If he cannot trust any existing oracle service, either because the existing proofs are to expensive to verify, or cannot be verified in the contract or just don't provide the necessary audibility, among others, whatever the reason he needs to think if he has the, either monetary and human, to build his own oracle service. If not, and with increasing costs due to per-request fees, he may choose to use multiple oracle services and then perform some consensus mechanism on the smart contract. If he can then build and maintain its own oracle service he must aks him self the question, Who will use this oracle? How many different and maybe competing parties rely on the smart contract to which the oracle will provide data. If there is only one stakeholder of the smart contract and he runs the oracle, then a perfect system of trust is achieved since outside the blockchain he controls every part of the process, resulting in the pattern \ref{SPSelfHostedOracle}. However if a smart contract has several stakeholders then, no single party should control the oracle and there must be a mechanism to deploy several oracles to power the smart contract while achieving consensus outside of the blockchain and only providing the smart contract with the final result. This reduces smart contract costs while allowing every stakeholder to have a say in the data provided to the smart contract, pattern \ref{MPSelfHostedOracle}.
+If he cannot trust any existing oracle service, either because the existing proofs are to expensive to verify, or cannot be verified in the contract or just don't provide the necessary audibility, among others, whatever the reason he needs to think if he has the, either monetary and human, to build his own oracle service. If not, and with increasing costs due to per-request fees, he may choose to use multiple oracle services and then perform some consensus mechanism on the smart contract. If he can then build and maintain its own oracle service he must aks him self the question, Who will use this oracle? How many different and maybe competing parties rely on the smart contract to which the oracle will provide data. If there is only one stakeholder of the smart contract and he runs the oracle, then a perfect system of trust is achieved since outside the blockchain he controls every part of the process, resulting in the pattern \ref{SPSelfHostedOracle}. However if a smart contract has several stakeholders then, no single party should control the oracle and there must be a mechanism to deploy several oracles to power the smart contract while achieving consensus outside of the blockchain and only providing the smart contract with the final result. This reduces smart contract costs while allowing every stakeholder to have a say in the data provided to the smart contract, pattern \ref{MPSelfHostedOracle}. 
 
 \begin{figure*}[t]
   \begin{center}
@@ -195,8 +195,11 @@ If he cannot trust any existing oracle service, either because the existing proo
     \label{fig:/figures/oracle-pattern-flow}
   \end{center}
 \end{figure*}
-
+  
 
 %% Add two diagrams:
 %% - flow of architecture choice
 %% - quadrandt inputing each architecture on a two axys: trust and complexity
+
+
+\section{Oracle Development}
