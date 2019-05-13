@@ -4,17 +4,17 @@ windows:
     layout: main-vertical
     panes:
       - commands:
+        - sleep 1
         - tmux select-pane -t 0 -T Ganache 
-        - tmux select-pane -t 1 -T SC_CLIENT 
-        - tmux select-pane -t 2 -T SC_ORACLE 
+        - tmux select-pane -t 1 -T ORACLE_SERVER 
+        - tmux select-pane -t 2 -T ORACLE_SC 
         - ganache-cli
       - commands:
-        - cd ./client
-        - truffle compile
-        - sleep 4
-        - truffle console
+        - cd ./oracle-server
+        - sleep 2
+        - yarn run develop
       - commands:
-        - cd ./oracle
-        - truffle compile
-        - sleep 4
-        - truffle console
+        - cd ./oracle-sc
+        - sleep 2
+        - yarn run truffle compile
+        - yarn run truffle migrate
