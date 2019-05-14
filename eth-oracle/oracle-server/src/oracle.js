@@ -30,7 +30,6 @@ const parseData = (body) => {
       windSpeed = body.wind.speed.toString();
       windDirection = body.wind.deg.toString();
       windGust = (body.wind.gust || 0).toString();
-      o
     } catch (error) {
       reject(error);
       return;
