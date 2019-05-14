@@ -2,16 +2,21 @@ require("dotenv").config();
 
 import request from "request-promise-native";
 
-import { updateWeather } from "./ethereum";
+import {
+  updateWeather
+} from "./ethereum";
 
-const options = { uri: process.env.WEATHER_URL, json: true };
+const options = {
+  uri: process.env.WEATHER_URL,
+  json: true
+};
 
 const start = () => {
   request(options)
-  .then(parseData)
-  .then(updateWeather)
-  .then(restart)
-  .catch(error);
+    .then(parseData)
+    .then(updateWeather)
+    .then(restart)
+    .catch(error);
 };
 
 const parseData = (body) => {
@@ -25,11 +30,20 @@ const parseData = (body) => {
       windSpeed = body.wind.speed.toString();
       windDirection = body.wind.deg.toString();
       windGust = (body.wind.gust || 0).toString();
-    } catch(error) {
+      o
+    } catch (error) {
       reject(error);
       return;
     }
-    resolve({ weatherDescription, temperature, humidity, visibility, windSpeed, windDirection, windGust });
+    resolve({
+      weatherDescription,
+      temperature,
+      humidity,
+      visibility,
+      windSpeed,
+      windDirection,
+      windGust
+    });
   });
 };
 

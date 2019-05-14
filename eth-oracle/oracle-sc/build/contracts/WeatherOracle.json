@@ -13,7 +13,8 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "signature": "0xa89ae4ba"
     },
     {
       "inputs": [
@@ -24,7 +25,8 @@
       ],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "constructor"
+      "type": "constructor",
+      "signature": "constructor"
     },
     {
       "anonymous": false,
@@ -66,7 +68,8 @@
         }
       ],
       "name": "WeatherUpdate",
-      "type": "event"
+      "type": "event",
+      "signature": "0xec6344556027118abac8448a3cc40772c47ba3078250f7e8f1b7dfed078f2082"
     },
     {
       "constant": false,
@@ -104,7 +107,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x929d1910"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"weatherDescription\",\"type\":\"string\"},{\"name\":\"temperature\",\"type\":\"string\"},{\"name\":\"humidity\",\"type\":\"string\"},{\"name\":\"visibility\",\"type\":\"string\"},{\"name\":\"windSpeed\",\"type\":\"string\"},{\"name\":\"windDirection\",\"type\":\"string\"},{\"name\":\"windGust\",\"type\":\"string\"}],\"name\":\"updateWeather\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"oracleAddress\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"_oracleAddress\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"weatherDescription\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"temperature\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"humidity\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"visibility\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"windSpeed\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"windDirection\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"windGust\",\"type\":\"string\"}],\"name\":\"WeatherUpdate\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/tmp/Monografia/eth-oracle/oracle-sc/contracts/WeatherOracle.sol\":\"WeatherOracle\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/tmp/Monografia/eth-oracle/oracle-sc/contracts/WeatherOracle.sol\":{\"keccak256\":\"0x0e4ff7b4c45499e517ac23c6b0edfac4e6b2458c4fe2aa3ef536d74094278e2d\",\"urls\":[\"bzzr://33e0ff5b8d2dae36e26794d130bd91726e0e708297b3ff129f2f3c66e8052e55\"]}},\"version\":1}",
@@ -169,11 +173,11 @@
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "62:7:1",
+              "stateMutability": "nonpayable",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
                 "typeString": "address"
-              },
-              "stateMutability": "nonpayable"
+              }
             },
             "value": null,
             "visibility": "public"
@@ -235,8 +239,7 @@
             "documentation": null,
             "id": 70,
             "implemented": true,
-            "isConstructor": true,
-            "isDeclaredConst": false,
+            "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
@@ -262,11 +265,11 @@
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "108:7:1",
+                    "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
-                    },
-                    "stateMutability": "nonpayable"
+                    }
                   },
                   "value": null,
                   "visibility": "internal"
@@ -274,7 +277,6 @@
               ],
               "src": "107:24:1"
             },
-            "payable": false,
             "returnParameters": {
               "id": 64,
               "nodeType": "ParameterList",
@@ -285,8 +287,7 @@
             "src": "95:85:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
-            "visibility": "public",
-            "kind": "constructor"
+            "visibility": "public"
           },
           {
             "anonymous": false,
@@ -764,8 +765,7 @@
             "documentation": null,
             "id": 121,
             "implemented": true,
-            "isConstructor": false,
-            "isDeclaredConst": false,
+            "kind": "function",
             "modifiers": [],
             "name": "updateWeather",
             "nodeType": "FunctionDefinition",
@@ -958,7 +958,6 @@
               ],
               "src": "404:221:1"
             },
-            "payable": false,
             "returnParameters": {
               "id": 102,
               "nodeType": "ParameterList",
@@ -969,8 +968,7 @@
             "src": "381:469:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
-            "visibility": "public",
-            "kind": "function"
+            "visibility": "public"
           }
         ],
         "scope": 123,
@@ -1034,11 +1032,11 @@
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "62:7:1",
+              "stateMutability": "nonpayable",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
                 "typeString": "address"
-              },
-              "stateMutability": "nonpayable"
+              }
             },
             "value": null,
             "visibility": "public"
@@ -1100,8 +1098,7 @@
             "documentation": null,
             "id": 70,
             "implemented": true,
-            "isConstructor": true,
-            "isDeclaredConst": false,
+            "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
@@ -1127,11 +1124,11 @@
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "108:7:1",
+                    "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
-                    },
-                    "stateMutability": "nonpayable"
+                    }
                   },
                   "value": null,
                   "visibility": "internal"
@@ -1139,7 +1136,6 @@
               ],
               "src": "107:24:1"
             },
-            "payable": false,
             "returnParameters": {
               "id": 64,
               "nodeType": "ParameterList",
@@ -1150,8 +1146,7 @@
             "src": "95:85:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
-            "visibility": "public",
-            "kind": "constructor"
+            "visibility": "public"
           },
           {
             "anonymous": false,
@@ -1629,8 +1624,7 @@
             "documentation": null,
             "id": 121,
             "implemented": true,
-            "isConstructor": false,
-            "isDeclaredConst": false,
+            "kind": "function",
             "modifiers": [],
             "name": "updateWeather",
             "nodeType": "FunctionDefinition",
@@ -1823,7 +1817,6 @@
               ],
               "src": "404:221:1"
             },
-            "payable": false,
             "returnParameters": {
               "id": 102,
               "nodeType": "ParameterList",
@@ -1834,8 +1827,7 @@
             "src": "381:469:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
-            "visibility": "public",
-            "kind": "function"
+            "visibility": "public"
           }
         ],
         "scope": 123,
@@ -1849,15 +1841,15 @@
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {
-    "1528830916910": {
+    "1557849080955": {
       "events": {},
       "links": {},
-      "address": "0xa3f8ebe08267c096514634ba41bc6240e10758cb",
-      "transactionHash": "0x07022ee1e436bec8225f1cf3c2015151bfac0ea86af5b469e19b1bac0fc55abf"
+      "address": "0x413D32da279766c56F6A5CCF7Ae0e0EC119b4780",
+      "transactionHash": "0x5753082ffb68c639f853e81279c7ee4aadf7d888518a3f38cdd85bd2060f19ff"
     }
   },
   "schemaVersion": "3.0.8",
-  "updatedAt": "2019-05-14T15:26:07.030Z",
+  "updatedAt": "2019-05-14T16:49:44.743Z",
   "devdoc": {
     "methods": {}
   },
