@@ -1,4 +1,4 @@
-pragma solidity 0.4.24;
+pragma solidity >=0.4.21 <0.6.0;
 
 
 contract WeatherOracle {
@@ -19,13 +19,13 @@ contract WeatherOracle {
   );
 
   function updateWeather (
-    string weatherDescription,
-    string temperature,
-    string humidity,
-    string visibility,
-    string windSpeed,
-    string windDirection,
-    string windGust
+    string memory weatherDescription,
+    string memory temperature,
+    string memory humidity,
+    string memory visibility,
+    string memory windSpeed,
+    string memory windDirection,
+    string memory windGust
   )
   public
   {
