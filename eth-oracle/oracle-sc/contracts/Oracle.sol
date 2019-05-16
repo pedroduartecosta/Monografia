@@ -54,7 +54,7 @@ contract Oracle {
   ) public {
     require(msg.sender == oracleAddress);
 
-    Request memory currRequest = requests[id];
+    Request storage currRequest = requests[id];
 
     currRequest.valueRetrieved = valueRetrieved;
 
