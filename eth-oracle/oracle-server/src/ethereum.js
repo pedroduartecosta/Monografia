@@ -1,9 +1,8 @@
 require("dotenv").config();
 
-import HDWalletProvider from "truffle-hdwallet-provider";
 import Web3 from "web3";
 
-//const web3 = new Web3(new HDWalletProvider(process.env.MNEMONIC, process.env.WEB3_PROVIDER_ADDRESS));
+
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.WEB3_PROVIDER_ADDRESS));
 const abi = JSON.parse(process.env.ABI);
 const address = process.env.CONTRACT_ADDRESS;
@@ -21,18 +20,13 @@ const account = () => {
   });
 };
 
-export const updateWeather = ({
-  weatherDescription,
-  temperature,
-  humidity,
-  visibility,
-  windSpeed,
-  windDirection,
-  windGust
+export const updateRequest = ({
+  id,
+  valueRetrieved
 }) => {
   return new Promise((resolve, reject) => {
     account().then(account => {
-      contract.updateWeather(weatherDescription, temperature, humidity, visibility, windSpeed, windDirection, windGust, {
+      contract.updateRequest(id, valueRetrieved, {
         from: account
       }, (err, res) => {
         if (err === null) {
@@ -45,6 +39,29 @@ export const updateWeather = ({
   });
 };
 
-export const weatherUpdate = (callback) => {
-  contract.WeatherUpdate((error, result) => callback(error, result));
+export const createRequest = ({
+  urlToQuery,
+  attributeToFetch
+}) => {
+  return new Promise((resolve, reject) => {
+    account().then(account => {
+      contract.updateRequest(urlToQuery, attributeToFetch, {
+        from: account
+      }, (err, res) => {
+        if (err === null) {
+          resolve(res);
+        } else {
+          reject(err);
+        }
+      });
+    }).catch(error => reject(error));
+  });
+};
+
+export const newRequest = (callback) => {
+  contract.NewRequest((error, result) => callback(error, result));
+};
+
+export const updatedRequest = (callback) => {
+  contract.UpdatedRequest((error, result) => callback(error, result));
 };

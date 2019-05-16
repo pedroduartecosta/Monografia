@@ -3,45 +3,40 @@ require("dotenv").config();
 import request from "request-promise-native";
 
 import {
-  updateWeather
+  updateRequest,
+  newRequest
 } from "./ethereum";
 
-const options = {
-  uri: process.env.WEATHER_URL,
-  json: true
-};
-
 const start = () => {
-  request(options)
-    .then(parseData)
-    .then(updateWeather)
-    .then(restart)
-    .catch(error);
+
+  newRequest((error, result) => {
+
+    let options = {
+      uri: result.args.urlToQuery,
+      json: true
+    };
+
+    request(options)
+      .then(parseData(result))
+      .then(updateRequest)
+      .catch(error);
+  });
+
 };
 
-const parseData = (body) => {
+const parseData = result => (body) => {
   return new Promise((resolve, reject) => {
-    let weatherDescription, temperature, humidity, visibility, windSpeed, windDirection, windGust;
+    let id, valueRetrieved;
     try {
-      weatherDescription = body.weather[0].description.toString();
-      temperature = body.main.temp.toString();
-      humidity = body.main.humidity.toString();
-      visibility = body.visibility.toString();
-      windSpeed = body.wind.speed.toString();
-      windDirection = body.wind.deg.toString();
-      windGust = (body.wind.gust || 0).toString();
+      id = result.args.id;
+      valueRetrieved = (body[result.args.attributeToFetch] || 0).toString();
     } catch (error) {
       reject(error);
       return;
     }
     resolve({
-      weatherDescription,
-      temperature,
-      humidity,
-      visibility,
-      windSpeed,
-      windDirection,
-      windGust
+      id,
+      valueRetrieved
     });
   });
 };
@@ -56,7 +51,7 @@ const wait = (milliseconds) => {
 
 const error = (error) => {
   console.error(error);
-  restart();
+  //restart();
 };
 
 export default start;

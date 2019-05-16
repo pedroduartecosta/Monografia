@@ -1,7 +1,7 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 contract Oracle {
-  address public oracleAddress;
+  address public oracleAddress; //address of the account running the oracle outside of the blockchain
   Request[] requests;
   uint currentId = 0;
 
@@ -38,7 +38,7 @@ contract Oracle {
   {
     requests.push(Request(currentId, urlToQuery, attributeToFetch, ""));
 
-    // launch event to be detected by oracle outside of blockchain
+    // launch an event to be detected by oracle outside of blockchain
     emit NewRequest (
       currentId,
       urlToQuery,
@@ -48,7 +48,7 @@ contract Oracle {
     currentId++;
   }
 
-  function UpdateRequest (
+  function updateRequest (
     uint id,
     string memory valueRetrieved
   ) public {
