@@ -5,17 +5,19 @@ windows:
     panes:
       - commands:
         - sleep 1
-        - tmux select-pane -t 0 -T Ganache 
-        - tmux select-pane -t 1 -T ORACLE_SERVER 
-        - tmux select-pane -t 2 -T ORACLE_SC 
+        - tmux select-pane -t 0 -T Ganache
+        - tmux select-pane -t 1 -T ORACLE_SERVER
+        - tmux select-pane -t 2 -T ORACLE_SC
         - ganache-cli -a 1 -d -m "stomach wage stem judge control beauty glue chapter cannon kitchen pilot orbit"
       - commands:
         - cd ./oracle-server
+        - cp .env.example .env
         - yarn install
         - sleep 7
         - yarn run develop
       - commands:
         - cd ./oracle-sc
+        - cp .env.example .env
         - yarn install
         - truffle compile
         - truffle migrate

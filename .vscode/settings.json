@@ -8,6 +8,7 @@
     "git-graph.showStatusBarItem": true,
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
+    "files.trimTrailingWhitespace": true,
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
     "workbench.editor.highlightModifiedTabs": true,
