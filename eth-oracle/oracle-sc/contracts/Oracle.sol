@@ -1,11 +1,9 @@
 pragma solidity >=0.4.21 <0.6.0;
 
-
 contract Oracle {
   address public oracleAddress;
   Request[] requests;
   uint currentId = 0;
-
 
   // defines a general api request
   struct Request {
