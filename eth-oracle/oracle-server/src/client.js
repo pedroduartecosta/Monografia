@@ -10,7 +10,10 @@ const start = () => {
   let urlToQuery = 'https://pedrocosta.eu/shameless-promotion';
   let attributeToFetch = 'Website';
 
-  createRequest(urlToQuery, attributeToFetch)
+  createRequest({
+      urlToQuery,
+      attributeToFetch
+    })
     .then(restart)
     .catch(error);
 };
