@@ -12,7 +12,7 @@ contract Oracle {
     string urlToQuery;          //API url
     string attributeToFetch;    //json attribute (key) to retrieve in the response
     string valueRetrieved;      //value from key
-    WebOracle[3] quorum;
+    WebOracle[3] quorum;        //oracles which will query the answer
   }
 
   struct WebOracle {
@@ -63,11 +63,11 @@ contract Oracle {
   }
 
   function updateRequest (
-    uint id,
-    string memory valueRetrieved
+    uint _id,
+    string memory _valueRetrieved
   ) public {
 
-    Request storage currRequest = requests[id];
+    Request storage currRequest = requests[_id];
 
     bool found = false;
     bool participated = false;
@@ -77,7 +77,7 @@ contract Oracle {
         found = true;
         if(currRequest.quorum[i].hasParticipated == false){
           currRequest.quorum[i].hasParticipated = true;
-          currRequest.quorum[i].proposition = valueRetrieved;
+          currRequest.quorum[i].proposition = _valueRetrieved;
         }else{
           participated = true;
         }
@@ -91,12 +91,14 @@ contract Oracle {
     uint currentQuorum = 0;
     for (uint i = 0; i<currRequest.quorum.length; i++) {
       bytes memory a = bytes(currRequest.quorum[i].proposition);
-      bytes memory b = bytes(valueRetrieved);
+      bytes memory b = bytes(_valueRetrieved);
 
       if(currRequest.quorum[i].hasParticipated && keccak256(a) == keccak256(b)){
         currentQuorum++;
       }
       if(currentQuorum == minQuorum){
+        currRequest.valueRetrieved = _valueRetrieved;
+
         // only for logging purposes
         emit UpdatedRequest (
           currRequest.id,
