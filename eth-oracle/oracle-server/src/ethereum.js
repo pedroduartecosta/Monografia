@@ -12,7 +12,7 @@ const account = () => {
   return new Promise((resolve, reject) => {
     web3.eth.getAccounts((err, accounts) => {
       if (err === null) {
-        resolve(accounts[0]);
+        resolve(accounts[process.env.ACCOUNT_NUMBER]);
       } else {
         reject(err);
       }

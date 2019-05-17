@@ -1,9 +1,10 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 contract Oracle {
-  address public oracleAddress; //address of the account running the oracle outside of the blockchain
+  address[] public oracleAddress; //address of the account running the oracle outside of the blockchain
   Request[] requests;
   uint currentId = 0;
+  uint minQuorum = 2; //minimum number of responses to receive before declaring final result
 
   // defines a general api request
   struct Request {
@@ -11,9 +12,16 @@ contract Oracle {
     string urlToQuery;          //API url
     string attributeToFetch;    //json attribute (key) to retrieve in the response
     string valueRetrieved;      //value from key
+    WebOracle[3] quorum;
   }
 
-  constructor (address _oracleAddress) public {
+  struct WebOracle {
+    address oracleAddress;
+    bool hasParticipated;
+    string proposition;
+  }
+
+  constructor (address[] memory _oracleAddress) public {
     oracleAddress = _oracleAddress;
   }
 
@@ -36,7 +44,13 @@ contract Oracle {
   )
   public
   {
-    requests.push(Request(currentId, urlToQuery, attributeToFetch, ""));
+    WebOracle[3] memory quorum = [
+      WebOracle(0x6c2339b46F41a06f09CA0051ddAD54D1e582bA77,false,""),
+      WebOracle(0xb5346CF224c02186606e5f89EACC21eC25398077,false,""),
+      WebOracle(0xb5346CF224c02186606e5f89EACC21eC25398077,false,"")
+    ];
+
+    requests.push(Request(currentId, urlToQuery, attributeToFetch, "", quorum));
 
     // launch an event to be detected by oracle outside of blockchain
     emit NewRequest (
@@ -52,19 +66,40 @@ contract Oracle {
     uint id,
     string memory valueRetrieved
   ) public {
-    require(msg.sender == oracleAddress);
 
     Request storage currRequest = requests[id];
 
-    currRequest.valueRetrieved = valueRetrieved;
+    bool found = false;
+    for (uint i = 0; i<currRequest.quorum.length; i++) {
+      if(currRequest.quorum[i].oracleAddress == msg.sender){
+        found = true;
+        if(currRequest.quorum[i].hasParticipated == false){
+          currRequest.quorum[i].hasParticipated = true;
+          currRequest.quorum[i].proposition = valueRetrieved;
+        }
+        break;
+      }
+    }
 
-    // only for logging purposes
-    emit UpdatedRequest (
-      currRequest.id,
-      currRequest.urlToQuery,
-      currRequest.attributeToFetch,
-      currRequest.valueRetrieved
-    );
+    require(found); //check if message was sent by whitelisted oracles
+
+    uint currentQuorum = 0;
+    for (uint i = 0; i<currRequest.quorum.length; i++) {
+      if(currRequest.quorum[i].hasParticipated && currRequest.quorum[i].proposition == valueRetrieved){
+        currentQuorum++;
+      }
+      if(currentQuorum == minQuorum){
+        // only for logging purposes
+        emit UpdatedRequest (
+          currRequest.id,
+          currRequest.urlToQuery,
+          currRequest.attributeToFetch,
+          currRequest.valueRetrieved
+        );
+      }
+    }
+
+
 
   }
 }
