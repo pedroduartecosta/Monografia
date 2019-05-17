@@ -28,7 +28,7 @@ export const updateRequest = ({
     account().then(account => {
       contract.updateRequest(id, valueRetrieved, {
         from: account,
-        gas: 6000000
+        gas: 60000000
       }, (err, res) => {
         if (err === null) {
           resolve(res);
@@ -48,7 +48,7 @@ export const createRequest = ({
     account().then(account => {
       contract.createRequest(urlToQuery, attributeToFetch, {
         from: account,
-        gas: 6000000
+        gas: 60000000
       }, (err, res) => {
         if (err === null) {
           resolve(res);

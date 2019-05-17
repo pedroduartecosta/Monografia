@@ -1,28 +1,19 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 contract Oracle {
-  address[] public oracleAddress; //address of the account running the oracle outside of the blockchain
   Request[] requests;
   uint currentId = 0;
   uint minQuorum = 2; //minimum number of responses to receive before declaring final result
 
   // defines a general api request
   struct Request {
-    uint id;                    //request id
-    string urlToQuery;          //API url
-    string attributeToFetch;    //json attribute (key) to retrieve in the response
-    string valueRetrieved;      //value from key
-    WebOracle[3] quorum;        //oracles which will query the answer
-  }
-
-  struct WebOracle {
-    address oracleAddress;
-    bool hasParticipated;
-    string proposition;
-  }
-
-  constructor (address[] memory _oracleAddress) public {
-    oracleAddress = _oracleAddress;
+    uint id;                            //request id
+    uint oracleCount;                    //hardcoded oracle count
+    string urlToQuery;                  //API url
+    string attributeToFetch;            //json attribute (key) to retrieve in the response
+    string agreedValue;                 //value from key
+    mapping(uint => string) anwers;
+    mapping(address => uint) quorum;    //oracles which will query the answer
   }
 
   event NewRequest (
@@ -35,7 +26,7 @@ contract Oracle {
     uint id,
     string urlToQuery,
     string attributeToFetch,
-    string valueRetrieved
+    string agreedValue
   );
 
   function createRequest (
@@ -44,13 +35,14 @@ contract Oracle {
   )
   public
   {
-    WebOracle[3] memory quorum = [
-      WebOracle(0x6c2339b46F41a06f09CA0051ddAD54D1e582bA77,false,""),
-      WebOracle(0xb5346CF224c02186606e5f89EACC21eC25398077,false,""),
-      WebOracle(0xb5346CF224c02186606e5f89EACC21eC25398077,false,"")
-    ];
+    // Hardcoded oracle count
+    uint lenght = requests.push(Request(currentId, 3, urlToQuery, attributeToFetch, ""));
+    Request storage r = requests[lenght-1];
 
-    requests.push(Request(currentId, urlToQuery, attributeToFetch, "", quorum));
+    // Hardcoded oracles address
+    r.quorum[address(0x6c2339b46F41a06f09CA0051ddAD54D1e582bA77)] = 1;
+    r.quorum[address(0xb5346CF224c02186606e5f89EACC21eC25398077)] = 1;
+    r.quorum[address(0xb5346CF224c02186606e5f89EACC21eC25398077)] = 1;
 
     // launch an event to be detected by oracle outside of blockchain
     emit NewRequest (
@@ -69,43 +61,40 @@ contract Oracle {
 
     Request storage currRequest = requests[_id];
 
-    bool found = false;
-    bool participated = false;
+    if(currRequest.quorum[address(msg.sender)] == 1){
 
-    for (uint i = 0; i<currRequest.quorum.length; i++) {
-      if(currRequest.quorum[i].oracleAddress == msg.sender){
-        found = true;
-        if(currRequest.quorum[i].hasParticipated == false){
-          currRequest.quorum[i].hasParticipated = true;
-          currRequest.quorum[i].proposition = _valueRetrieved;
-        }else{
-          participated = true;
+      // meaning this address has voted already
+      currRequest.quorum[msg.sender] = 2;
+
+      uint tmpI = 0;
+      bool found = false;
+      while(!found) {
+        //find first empty space
+        if(bytes(currRequest.anwers[tmpI]).length == 0){
+          found = true;
+          currRequest.anwers[tmpI] = _valueRetrieved;
         }
-        break;
+        tmpI++;
       }
-    }
 
-    require(found); //check if message was sent by whitelisted oracles
-    require(participated == false);
+      uint currentQuorum = 0;
 
-    uint currentQuorum = 0;
-    for (uint i = 0; i<currRequest.quorum.length; i++) {
-      bytes memory a = bytes(currRequest.quorum[i].proposition);
-      bytes memory b = bytes(_valueRetrieved);
+      for(uint i = 0; i < currRequest.oracleCount; i++){
+        bytes memory a = bytes(currRequest.anwers[i]);
+        bytes memory b = bytes(_valueRetrieved);
 
-      if(currRequest.quorum[i].hasParticipated && keccak256(a) == keccak256(b)){
-        currentQuorum++;
-      }
-      if(currentQuorum == minQuorum){
-        currRequest.valueRetrieved = _valueRetrieved;
-
-        // only for logging purposes
-        emit UpdatedRequest (
-          currRequest.id,
-          currRequest.urlToQuery,
-          currRequest.attributeToFetch,
-          currRequest.valueRetrieved
-        );
+        if(keccak256(a) == keccak256(b)){
+          currentQuorum++;
+          if(currentQuorum == minQuorum){
+            currRequest.agreedValue = _valueRetrieved;
+            emit UpdatedRequest (
+              currRequest.id,
+              currRequest.urlToQuery,
+              currRequest.attributeToFetch,
+              currRequest.agreedValue
+            );
+          }
+        }
       }
     }
   }

@@ -16,13 +16,13 @@ windows:
         - sleep 7
         - yarn run develop
       - commands:
-        - cd ./oracle-server
+        - cd ./oracle-server2
         - cp .env.example .env
         - yarn install
         - sleep 7
         - yarn run develop
       - commands:
-        - cd ./oracle-server
+        - cd ./oracle-server3
         - cp .env.example .env
         - yarn install
         - sleep 7

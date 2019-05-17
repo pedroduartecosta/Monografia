@@ -1,5 +1,5 @@
 var Oracle = artifacts.require("../contracts/Oracle.sol");
 
 module.exports = function (deployer, network) {
-  deployer.deploy(Oracle, process.env.ORACLE_ADDRESS);
+  deployer.deploy(Oracle);
 };
