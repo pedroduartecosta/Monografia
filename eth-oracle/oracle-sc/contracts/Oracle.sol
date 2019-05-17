@@ -70,22 +70,30 @@ contract Oracle {
     Request storage currRequest = requests[id];
 
     bool found = false;
+    bool participated = false;
+
     for (uint i = 0; i<currRequest.quorum.length; i++) {
       if(currRequest.quorum[i].oracleAddress == msg.sender){
         found = true;
         if(currRequest.quorum[i].hasParticipated == false){
           currRequest.quorum[i].hasParticipated = true;
           currRequest.quorum[i].proposition = valueRetrieved;
+        }else{
+          participated = true;
         }
         break;
       }
     }
 
     require(found); //check if message was sent by whitelisted oracles
+    require(participated == false);
 
     uint currentQuorum = 0;
     for (uint i = 0; i<currRequest.quorum.length; i++) {
-      if(currRequest.quorum[i].hasParticipated && currRequest.quorum[i].proposition == valueRetrieved){
+      bytes memory a = bytes(currRequest.quorum[i].proposition);
+      bytes memory b = bytes(valueRetrieved);
+
+      if(currRequest.quorum[i].hasParticipated && keccak256(a) == keccak256(b)){
         currentQuorum++;
       }
       if(currentQuorum == minQuorum){
@@ -98,8 +106,5 @@ contract Oracle {
         );
       }
     }
-
-
-
   }
 }
