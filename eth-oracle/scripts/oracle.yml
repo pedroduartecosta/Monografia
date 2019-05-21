@@ -3,17 +3,14 @@ windows:
     root: /tmp/Monografia/eth-oracle/
     layout: main-vertical
     panes:
-      - commands:
-        - sleep 1
-        - tmux select-pane -t 0 -T Ganache
-        - tmux select-pane -t 1 -T ORACLE_SERVER
-        - tmux select-pane -t 2 -T ORACLE_SC
-        - ganache-cli -a 3 -d -m "stomach wage stem judge control beauty glue chapter cannon kitchen pilot orbit"
+      #- commands:
+        #- sleep 1
+        #- ganache-cli -a 3 -d -m "stomach wage stem judge control beauty glue chapter cannon kitchen pilot orbit"
       - commands:
         - cd ./oracle-server
         - cp .env.example .env
         - yarn install
-        - sleep 7
+        - sleep 10
         - yarn run develop
       - commands:
         - cd ./oracle-server2
@@ -23,6 +20,18 @@ windows:
         - yarn run develop
       - commands:
         - cd ./oracle-server3
+        - cp .env.example .env
+        - yarn install
+        - sleep 7
+        - yarn run develop
+      - commands:
+        - cd ./oracle-server4
+        - cp .env.example .env
+        - yarn install
+        - sleep 7
+        - yarn run develop
+      - commands:
+        - cd ./oracle-server5
         - cp .env.example .env
         - yarn install
         - sleep 7
