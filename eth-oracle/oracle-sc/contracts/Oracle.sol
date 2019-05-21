@@ -1,27 +1,29 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 contract Oracle {
-  Request[] requests;
+  Request[] requests; //list of requests made to the contract
   uint currentId = 0; //increasing request id
   uint minQuorum = 3; //minimum number of responses to receive before declaring final result
 
   // defines a general api request
   struct Request {
     uint id;                            //request id
-    uint oracleCount;                    //hardcoded oracle count
+    uint oracleCount;                   //hardcoded oracle count
     string urlToQuery;                  //API url
     string attributeToFetch;            //json attribute (key) to retrieve in the response
     string agreedValue;                 //value from key
     mapping(uint => string) anwers;     //answers provided by the oracles
-    mapping(address => uint) quorum;    //oracles which will query the answer
+    mapping(address => uint) quorum;    //oracles which will query the answer (1=oracle hasn't voted, 2=oracle has voted)
   }
-
+  
+  //event that triggers oracle outside of the blockchain
   event NewRequest (
     uint id,
     string urlToQuery,
     string attributeToFetch
   );
 
+  //triggered when there's a consensus on the final result
   event UpdatedRequest (
     uint id,
     string urlToQuery,
@@ -36,7 +38,9 @@ contract Oracle {
   public
   {
     // Hardcothroughded oracle count
-    uint lenght = requests.push(Request(currentId, 5, urlToQuery, attributeToFetch, ""));
+    uint totalOracleCount = 5;
+
+    uint lenght = requests.push(Request(currentId, totalOracleCount, urlToQuery, attributeToFetch, ""));
     Request storage r = requests[lenght-1];
 
     // Hardcoded oracles address
@@ -52,22 +56,27 @@ contract Oracle {
       urlToQuery,
       attributeToFetch
     );
-
+    
+    //increase request id
     currentId++;
   }
 
+  //called by the oracle to record its answer
   function updateRequest (
     uint _id,
     string memory _valueRetrieved
   ) public {
 
     Request storage currRequest = requests[_id];
-
+    
+    //check if oracle is in the list of trusted oracles
+    //and if the oracle hasn't voted yet
     if(currRequest.quorum[address(msg.sender)] == 1){
 
-      // meaning this address has voted already
+      //marking that this address has voted
       currRequest.quorum[msg.sender] = 2;
 
+      //iterate through "array" of answers until a position if free and save the retrieved value
       uint tmpI = 0;
       bool found = false;
       while(!found) {
@@ -80,7 +89,9 @@ contract Oracle {
       }
 
       uint currentQuorum = 0;
-
+     
+      //iterate through oracle list and check if enough oracles(minimum quorum)
+      //have voted the same answer has the current one
       for(uint i = 0; i < currRequest.oracleCount; i++){
         bytes memory a = bytes(currRequest.anwers[i]);
         bytes memory b = bytes(_valueRetrieved);
