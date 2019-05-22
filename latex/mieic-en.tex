@@ -9,7 +9,7 @@
 %%========================================
 %% Commands: pdflatex tese
 %%           bibtex tese
-%%           makeindex tese (only if creating an index) 
+%%           makeindex tese (only if creating an index)
 %%           pdflatex tese
 %% Alternative:
 %%          latexmk -pdf tese.tex
@@ -29,7 +29,7 @@
 %\usepackage[mieic,final]{feupteses}
 %\usepackage[mieic,final,onpaper]{feupteses}
 
-%% Additional options for feupteses.sty: 
+%% Additional options for feupteses.sty:
 %% - onpaper: links are not shown (for paper versions)
 %% - backrefs: include back references from bibliography to citation place
 
@@ -63,6 +63,8 @@
 
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
+
+\input{solidity-highlighting.tex}
 
 \lstset{ %
  language=C,                        % choose the language of the code
@@ -162,12 +164,12 @@
 \StartBody
 
 %% TIP: use a separate file for each chapter
-\include{chapter1} 
+\include{chapter1}
 \include{chapter2}
 \include{chapter3}
 \include{chapter4}
-\include{chapter5} 
-
+\include{chapter5}
+\include{chapter6}
 %%----------------------------------------
 %% Final materials
 %%----------------------------------------

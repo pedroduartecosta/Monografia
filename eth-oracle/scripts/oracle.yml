@@ -7,6 +7,12 @@ windows:
         #- sleep 1
         #- ganache-cli -a 3 -d -m "stomach wage stem judge control beauty glue chapter cannon kitchen pilot orbit"
       - commands:
+        - cd ./oracle-sc
+        - cp .env.example .env
+        - yarn install
+        - truffle compile
+        - truffle migrate
+      - commands:
         - cd ./oracle-server
         - cp .env.example .env
         - yarn install
@@ -24,21 +30,3 @@ windows:
         - yarn install
         - sleep 7
         - yarn run develop
-      - commands:
-        - cd ./oracle-server4
-        - cp .env.example .env
-        - yarn install
-        - sleep 7
-        - yarn run develop
-      - commands:
-        - cd ./oracle-server5
-        - cp .env.example .env
-        - yarn install
-        - sleep 7
-        - yarn run develop
-      - commands:
-        - cd ./oracle-sc
-        - cp .env.example .env
-        - yarn install
-        - truffle compile
-        - truffle migrate

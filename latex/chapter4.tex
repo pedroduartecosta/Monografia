@@ -14,7 +14,7 @@ Smart contracts power a decentralized world of automation and trust-less commitm
 As explained before, the deterministic nature of blockchain does not allow smart contracts to directly query a data-feed for information. In this context, oracles help connecting smart contracts to the world outside of the blockchain. The problem here is to trust in the oracle service to not behave maliciously and undermine the trust provided by the blockchain consensus mechanisms. Blockchain technology can be trusted to behave correctly even in byzantine environments, but the oracle service does not abide by the same mechanisms and therefore some mechanisms must be put in action to ensure the oracle's response credibility.
 
 
-%% acredito que ao fazer x tenho y beneficios 
+%% acredito que ao fazer x tenho y beneficios
 
 \section{Forces}
 \begin{itemize}
@@ -27,5 +27,4 @@ As explained before, the deterministic nature of blockchain does not allow smart
 
 With this thesis, I intend to lay the foundations for the development and architecture of trustable oracle systems that will power several use cases and smart contracts. By describing in a trust-guided manner multiple patterns and examples where they are being applied or possible use cases not yet documented. This guided model should help future cases to have a systematic approach to which architecture will fit the best to each case.
 
-%% FIXME: Add further explanation on the implementation
-Furthermore, I will implement a possible oracle in respect to a specific architecture as to prove it's strengths and weaknesses, as well as, its applicability to solve the connectivity and oracle trust problem.
+Furthermore, I will present a possible implementation of a self-hosted oracle. As the following architectures and previous analysis of autenticity proofs point out, the best way to have trust in an oracle is to deploy one instead of relying on an oracle service. This approach reduces operations costs and empowers the contract with a purpose built oracle.
