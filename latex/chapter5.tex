@@ -215,12 +215,6 @@ In this setup, competing parties which may not trust each other, would be able t
 
 The oracle compromises two main components, the on-chain oracle and the off-chain oracle. Figure \ref{fig:/figures/self-hosted-architecture} depicts the general architecture and a simplified version of the messages exchanged.
 
-The on-chain oracle is a smart contract which is the bridge between a client smart contract which needs to query the web and the oracle service which will query the web. This oracle has a whitelist of oracle addresses which are trusted by the oracle to query the web and has the necessary functions to create events that will trigger API calls and reach a consensus and the necessary data structures to store the requests and the agreed answer.
-
-The off-chain oracle, or oracles, are services that continuously listen to specific events emitted by the oracle smart contract. Upon listening to a NewRequest event query the specified API and key and return a single value to the smart contract by means of a new transaction.
-
-This architecture allows for the use of several oracle nodes and different minimum voting quorums to achieve higher levels of trust, include more parties or increase service availability. Nonetheless, the higher the number of oracles the higher the cost per transaction. Table \ref{oracle-query-cost} shows the cost each query in Euros (queried Google Finance on the 22th of May, 2019) using different numbers of oracles.
-
 \begin{figure*}[t]
   \begin{center}
     \leavevmode
@@ -231,126 +225,11 @@ This architecture allows for the use of several oracle nodes and different minim
 \end{figure*}
 
 
-\subsection{Component Overview}
+The on-chain oracle is a smart contract which is the bridge between a client smart contract which needs to query the web and the oracle service which will query the web. This oracle has a whitelist of oracle addresses which are trusted by the oracle to query the web and has the necessary functions to create events that will trigger API calls and reach a consensus and the necessary data structures to store the requests and the agreed answer.
 
+The off-chain oracle, or oracles, are services that continuously listen to specific events emitted by the oracle smart contract. Upon listening to a \textit{NewRequest} event query the specified API and key and return a single value to the smart contract by means of a new transaction.
 
-\begin{lstlisting}[language=Solidity]
-  pragma solidity >=0.4.21 <0.6.0;
-
-  contract Oracle {
-    Request[] requests; //list of requests made to the contract
-    uint currentId = 0; //increasing request id
-    uint minQuorum = 2; //minimum number of responses to receive before declaring final result
-
-    // defines a general api request
-    struct Request {
-      uint id;                            //request id
-      uint oracleCount;                   //hardcoded oracle count
-      string urlToQuery;                  //API url
-      string attributeToFetch;            //json attribute (key) to retrieve in the response
-      string agreedValue;                 //value from key
-      mapping(uint => string) anwers;     //answers provided by the oracles
-      mapping(address => uint) quorum;    //oracles which will query the answer (1=oracle hasn't voted, 2=oracle has voted)
-    }
-
-    //event that triggers oracle outside of the blockchain
-    event NewRequest (
-      uint id,
-      string urlToQuery,
-      string attributeToFetch
-    );
-
-    //triggered when there's a consensus on the final result
-    event UpdatedRequest (
-      uint id,
-      string urlToQuery,
-      string attributeToFetch,
-      string agreedValue
-    );
-
-    function createRequest (
-      string memory urlToQuery,
-      string memory attributeToFetch
-    )
-    public
-    {
-      // Hardcothroughded oracle count
-      uint totalOracleCount = 3;
-
-      uint lenght = requests.push(Request(currentId, totalOracleCount, urlToQuery, attributeToFetch, ""));
-      Request storage r = requests[lenght-1];
-
-      // Hardcoded oracles address
-      r.quorum[address(0x6c2339b46F41a06f09CA0051ddAD54D1e582bA77)] = 1;
-      r.quorum[address(0xb5346CF224c02186606e5f89EACC21eC25398077)] = 1;
-      r.quorum[address(0xa2997F1CA363D11a0a35bB1Ac0Ff7849bc13e914)] = 1;
-
-      // launch an event to be detected by oracle outside of blockchain
-      emit NewRequest (
-        currentId,
-        urlToQuery,
-        attributeToFetch
-      );
-
-      //increase request id
-      currentId++;
-    }
-
-    //called by the oracle to record its answer
-    function updateRequest (
-      uint _id,
-      string memory _valueRetrieved
-    ) public {
-
-      Request storage currRequest = requests[_id];
-
-      //check if oracle is in the list of trusted oracles
-      //and if the oracle hasn't voted yet
-      if(currRequest.quorum[address(msg.sender)] == 1){
-
-        //marking that this address has voted
-        currRequest.quorum[msg.sender] = 2;
-
-        //iterate through "array" of answers until a position if free and save the retrieved value
-        uint tmpI = 0;
-        bool found = false;
-        while(!found) {
-          //find first empty slot
-          if(bytes(currRequest.anwers[tmpI]).length == 0){
-            found = true;
-            currRequest.anwers[tmpI] = _valueRetrieved;
-          }
-          tmpI++;
-        }
-
-        uint currentQuorum = 0;
-
-        //iterate through oracle list and check if enough oracles(minimum quorum)
-        //have voted the same answer has the current one
-        for(uint i = 0; i < currRequest.oracleCount; i++){
-          bytes memory a = bytes(currRequest.anwers[i]);
-          bytes memory b = bytes(_valueRetrieved);
-
-          if(keccak256(a) == keccak256(b)){
-            currentQuorum++;
-            if(currentQuorum >= minQuorum){
-              currRequest.agreedValue = _valueRetrieved;
-              emit UpdatedRequest (
-                currRequest.id,
-                currRequest.urlToQuery,
-                currRequest.attributeToFetch,
-                currRequest.agreedValue
-              );
-            }
-          }
-        }
-      }
-    }
-  }
-
-\end{lstlisting}
-
-\subsection{Summary and Conclusions}
+This architecture allows for Nonetheless, the higher the number of oracles the higher the cost per request. Table 5.7 shows thecost each query using different numbers of oracles.several oracle nodes and different minimum vNonetheless, the higher the number of oracles the higher the cost per request. Table 5.7 shows thecost each query using different numbers of oracles.ms to achieve higher levels of trust, incluNonetheless, the higher the number of oracles the higher the cost per request. Table 5.7 shows thecost each query using different numbers of oracles.ties or increase service availability. NonetheNonetheless, the higher the number of oracles the higher the cost per request. Table 5.7 shows thecost each query using different numbers of oracles.igher the number of oracles the higher the cosNonetheless, the higher the number of oracles the higher the cost per request. Table 5.7 shows thecost each query using different numbers of oracles.st. Table \ref{oracle-query-cost} shows theNonetheless, the higher the number of oracles the higher the cost per request. Table 5.7 shows thecost each query using different numbers of oracles.ch query using different numbers of oracles.Nonetheless, the higher the number of oracles the higher the cost per request. Table 5.7 shows thecost each query using different numbers of oracles.
 
 \begin{figure}[H]
   \centering
@@ -378,6 +257,31 @@ This architecture allows for the use of several oracle nodes and different minim
 
     \end{axis}
   \end{tikzpicture}
-  \caption{Cost per query using a consensus of 2/3.}
+  \caption{Cost per query using a consensus of 2/3,}{Queried Google Finance on the 22th of May, 2019.}
+  \
   \label{oracle-query-cost}
 \end{figure}
+
+\subsection{Component analysis}
+
+
+\subsubsection{On-Chain Oracle}
+
+The on-chain oracle is a smart contract that has an array which stores the requests made to the contract. Hard-coded in the contract is the predefined minimum quorum, which is the minimum number of equal answers needed to trust in the declaration of a final result. This minimum quorum will be used in all requests to the contract.
+Also hard-coded are the white-listed addresses of oracles that the contract will accept transactions to update requests.
+
+Initially the request structure \ref{code:request-struct} only contains the URL which will be queried by the off-chain oracle and the attribute to return in the json API response.
+
+\begin{lstlisting}[language=Solidity, label=code:request-struct]
+  struct Request {
+    uint id;                            //request id
+    string urlToQuery;                  //API url
+    string attributeToFetch;            //json attribute (key) to retrieve in the response
+    string agreedValue;                 //value from key
+    mapping(uint => string) anwers;     //answers provided by the oracles
+    mapping(address => uint) quorum;    //oracles which will query the answer (1=oracle hasn't voted, 2=oracle has voted)
+  }
+\end{lstlisting}
+
+
+\subsection{Summary and Conclusions}

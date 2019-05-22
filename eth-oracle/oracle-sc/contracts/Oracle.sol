@@ -4,11 +4,11 @@ contract Oracle {
   Request[] requests; //list of requests made to the contract
   uint currentId = 0; //increasing request id
   uint minQuorum = 2; //minimum number of responses to receive before declaring final result
+  uint totalOracleCount = 3; // Hardcothroughded oracle count
 
   // defines a general api request
   struct Request {
     uint id;                            //request id
-    uint oracleCount;                   //hardcoded oracle count
     string urlToQuery;                  //API url
     string attributeToFetch;            //json attribute (key) to retrieve in the response
     string agreedValue;                 //value from key
@@ -37,10 +37,10 @@ contract Oracle {
   )
   public
   {
-    // Hardcothroughded oracle count
-    uint totalOracleCount = 3;
 
-    uint lenght = requests.push(Request(currentId, totalOracleCount, urlToQuery, attributeToFetch, ""));
+
+
+    uint lenght = requests.push(Request(currentId, urlToQuery, attributeToFetch, ""));
     Request storage r = requests[lenght-1];
 
     // Hardcoded oracles address
@@ -90,7 +90,7 @@ contract Oracle {
 
       //iterate through oracle list and check if enough oracles(minimum quorum)
       //have voted the same answer has the current one
-      for(uint i = 0; i < currRequest.oracleCount; i++){
+      for(uint i = 0; i < totalOracleCount; i++){
         bytes memory a = bytes(currRequest.anwers[i]);
         bytes memory b = bytes(_valueRetrieved);
 
