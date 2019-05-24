@@ -4,7 +4,7 @@ contract Oracle {
   Request[] requests; //list of requests made to the contract
   uint currentId = 0; //increasing request id
   uint minQuorum = 2; //minimum number of responses to receive before declaring final result
-  uint totalOracleCount = 3; // Hardcothroughded oracle count
+  uint totalOracleCount = 3; // Hardcoded oracle count
 
   // defines a general api request
   struct Request {
@@ -32,15 +32,12 @@ contract Oracle {
   );
 
   function createRequest (
-    string memory urlToQuery,
-    string memory attributeToFetch
+    string memory _urlToQuery,
+    string memory _attributeToFetch
   )
   public
   {
-
-
-
-    uint lenght = requests.push(Request(currentId, urlToQuery, attributeToFetch, ""));
+    uint lenght = requests.push(Request(currentId, _urlToQuery, _attributeToFetch, ""));
     Request storage r = requests[lenght-1];
 
     // Hardcoded oracles address
@@ -51,11 +48,11 @@ contract Oracle {
     // launch an event to be detected by oracle outside of blockchain
     emit NewRequest (
       currentId,
-      urlToQuery,
-      attributeToFetch
+      _urlToQuery,
+      _attributeToFetch
     );
 
-    //increase request id
+    // increase request id
     currentId++;
   }
 

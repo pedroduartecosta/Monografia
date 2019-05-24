@@ -2,7 +2,7 @@
 
 \section*{}
 
-In this chapter I present a possible implementation of a multi-purpose self-hosted oracle. Multi-purpose since it will be able to query a requested API and return a specific key from the answer of that API, allowing to be used by several contracts which require different information and different sources. Self-hosted, as its code is available for anyone to copy and use for their own purpose and not having to rely on and oracle-as-a-service product.
+In this chapter I present a possible implementation of a multi-purpose self-hosted oracle. Multi-purpose since it will be able to query a requested API and return a specific value from the answer of that API, allowing to be used by several contracts which require different information and different sources. Self-hosted, as its code is available for anyone to copy and use for their own purpose and not having to rely on and oracle-as-a-service product by deploying their own version of the oracle.
 
 As far as the author as searched, at the moment there is no clear explanation on how to implement your own oracle and therefore on how to power smart-contracts to query the web. Creating, therefore, a need for such a clear and detailed explanation as it will be presented in this section.
 
@@ -23,11 +23,11 @@ The oracle compromises two main components, the on-chain oracle and the off-chai
 \end{figure*}
 
 
-The on-chain oracle is a smart contract which is the bridge between a client smart contract which needs to query the web and the oracle service which will query the web. This oracle has a whitelist of oracle addresses which are trusted by the oracle to query the web and has the necessary functions to create events that will trigger API calls and reach a consensus and the necessary data structures to store the requests and the agreed answer.
+The on-chain oracle is a smart contract that functions as a bridge between a client smart contract that needs information from the web and the oracle service that will query the web. This oracle has a whitelist of oracle addresses which are trusted by the oracle to query the web and has the necessary functions to create events that will trigger API calls and reach a consensus and the necessary data structures to store the requests and the agreed answer.
 
 The off-chain oracle, or oracles, are services that continuously listen to specific events emitted by the oracle smart contract. Upon listening to a \textit{NewRequest} event query the specified API and key and return a single value to the smart contract by means of a new transaction.
 
-This architecture allows for the use of several oracle nodes and different minimum voting quorums to achieve higher levels of trust, include more parties or increase service availability. Nonetheless, the higher the number of oracles the higher the cost per transaction. Table \ref{oracle-query-cost} shows the cost each query in Euros (queried Google Finance on the 22th of May, 2019) using different numbers of oracles.
+This architecture allows for the use of several oracle nodes and the use of minimum voting quorums to achieve higher levels of trust, include more parties or increase service availability. However, the higher the number of oracles the higher the cost per transaction. Table \ref{oracle-query-cost} shows the cost of each query in euro using different numbers of oracles.
 
 
 \begin{figure}[H]
@@ -66,8 +66,11 @@ This architecture allows for the use of several oracle nodes and different minim
 
 \subsection{On-Chain Oracle}
 
-The on-chain oracle is a smart contract that has an array which stores the requests made to the contract. Hard-coded in the contract is the predefined minimum quorum, which is the minimum number of equal answers needed to trust in the declaration of a final result. This minimum quorum will be used in all requests to the contract.
-Also hard-coded are the white-listed addresses of oracles that the contract will accept transactions to update requests.
+The on-chain oracle is a smart contract that has an array which stores the requests made to the contract. Hard-coded in the contract is the predefined minimum quorum, which is the minimum number of equal answers needed to trust in the declaration of a final result. This minimum quorum will be used in all requests to the contract. Also hard-coded are the white-listed addresses of oracles that the contract will accept transactions to update requests.
+
+Having the addresses and minimum quorum hard-coded on the oracle smart contract is not a software anti-pattern but rather an imposition on the contract terms. Doing so allows all parties who depend on this oracle to previously know that the oracle will always query those addresses and therefore they cannot be later altered for the benefit of one or more parties.
+
+\subsubsection{Creating a request}
 
 Initially the request structure \ref{code:request-struct} only contains the URL which will be queried by the off-chain oracle and the attribute to return in the json API response.
 
@@ -81,6 +84,22 @@ Initially the request structure \ref{code:request-struct} only contains the URL 
     mapping(address => uint) quorum;    //oracles which will query the answer (1=oracle hasn't voted, 2=oracle has voted)
   }
 \end{lstlisting}
+
+A client smart contract calls the public function \textit{createRequest}
+passing the url to query and the attribute from the api response that it needs to retrieve. This will add a new request to the array of requests in the oracle smart contract, initializing the list of trusted off-chain oracles addresses, the quorum. This list is composed of the addresses of the accounts which are trusted to add their input by creating transactions to the on-chain oracle contract.
+
+The mapping of each address to an unsigned int is initialized at one, due to the fact that by default a mapping contains all possible addresses initialized at zero. By marking an address at one we explicitly set the trusted addresses so that later we can filter messages whose sender was previously marked with one.
+
+Finally, an the \textit{NewRequest} event is emitted so as to alert the off-chain oracles of the existence of a new request.
+
+\subsubsection{Reaching consensus}
+
+Each off-chain oracle, upon listening to the \textit{NewRequest} event will query the specified API and call the \textit{updateRequest} function on the on-chain oracle contract passing the id of the request and the value it retrieved from the API. The calling of the function is done by means of inputing a new transaction on the blockchain addressed to the smart contract, this will make the requested information available on the blockchain to be used by the contract.
+
+The on-chain oracle contract, will first check if the transaction came from the whitelisted oracle addresses and if so, mark that for this specific request this oracle has inputed his answer. Then it will save the answer on the list of answers for that request and count how many answers are on the list that match the current answer. If the count matches the minimum quorum set on the contract, the oracle contract will set a final agreed value for that request, meaning that at least a specified minimum number of oracles have provided the same answer and so it can be trusted to be the correct answer. This will emit a \textit{UpdatedRequest} event that will alert who ever made that request that an agreement was reached on its answer.
+
+
+\subsection{Off-Chain Oracle}
 
 
 \section{Summary and Conclusions}
