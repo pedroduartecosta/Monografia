@@ -70,6 +70,8 @@ The on-chain oracle is a smart contract that has an array which stores the reque
 
 Having the addresses and minimum quorum hard-coded on the oracle smart contract is not a software anti-pattern but rather an imposition on the contract terms. Doing so allows all parties who depend on this oracle to previously know that the oracle will always query those addresses and therefore they cannot be later altered for the benefit of one or more parties.
 
+The code for the on-chain oracle can be found in the appendix \ref{ap2:on-chain-oracle-code} and due to its small size can be easily interpreted. Nonetheless, an explanation of its logic is detailed bellow.
+
 \subsubsection{Creating a request}
 
 Initially the request structure \ref{code:request-struct} only contains the URL which will be queried by the off-chain oracle and the attribute to return in the json API response.
@@ -90,13 +92,30 @@ passing the url to query and the attribute from the api response that it needs t
 
 The mapping of each address to an unsigned int is initialized at one, due to the fact that by default a mapping contains all possible addresses initialized at zero. By marking an address at one we explicitly set the trusted addresses so that later we can filter messages whose sender was previously marked with one.
 
-Finally, an the \textit{NewRequest} event is emitted so as to alert the off-chain oracles of the existence of a new request.
+Finally, an the \textit{NewRequest} event \ref{code:newrequest-event} is emitted so as to alert the off-chain oracles of the existence of a new request.
+
+\begin{lstlisting}[language=Solidity, label=code:newrequest-event]
+    event NewRequest (
+        uint id,
+        string urlToQuery,
+        string attributeToFetch
+    );
+\end{lstlisting}
 
 \subsubsection{Reaching consensus}
 
 Each off-chain oracle, upon listening to the \textit{NewRequest} event will query the specified API and call the \textit{updateRequest} function on the on-chain oracle contract passing the id of the request and the value it retrieved from the API. The calling of the function is done by means of inputing a new transaction on the blockchain addressed to the smart contract, this will make the requested information available on the blockchain to be used by the contract.
 
-The on-chain oracle contract, will first check if the transaction came from the whitelisted oracle addresses and if so, mark that for this specific request this oracle has inputed his answer. Then it will save the answer on the list of answers for that request and count how many answers are on the list that match the current answer. If the count matches the minimum quorum set on the contract, the oracle contract will set a final agreed value for that request, meaning that at least a specified minimum number of oracles have provided the same answer and so it can be trusted to be the correct answer. This will emit a \textit{UpdatedRequest} event that will alert who ever made that request that an agreement was reached on its answer.
+The on-chain oracle contract, will first check if the transaction came from the whitelisted oracle addresses and if so, mark that for this specific request this oracle has inputed his answer. Then it will save the answer on the list of answers for that request and count how many answers are on the list that match the current answer. If the count matches the minimum quorum set on the contract, the oracle contract will set a final agreed value for that request, meaning that at least a specified minimum number of oracles have provided the same answer and so it can be trusted to be the correct answer. This will emit a \textit{UpdatedRequest} event \ref{code:updatedrequest-event} that will alert who ever made that request that an agreement was reached on its answer.
+
+\begin{lstlisting}[language=Solidity, label=code:updatedrequest-event]
+    event UpdatedRequest (
+        uint id,
+        string urlToQuery,
+        string attributeToFetch,
+        string agreedValue
+    );
+\end{lstlisting}
 
 
 \subsection{Off-Chain Oracle}
