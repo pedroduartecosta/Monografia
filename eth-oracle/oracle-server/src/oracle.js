@@ -21,7 +21,6 @@ const start = () => {
       .then(updateRequest)
       .catch(error);
   });
-
 };
 
 const parseData = result => (body) => {
@@ -39,19 +38,6 @@ const parseData = result => (body) => {
       valueRetrieved
     });
   });
-};
-
-const restart = () => {
-  wait(process.env.TIMEOUT).then(start);
-};
-
-const wait = (milliseconds) => {
-  return new Promise((resolve, reject) => setTimeout(() => resolve(), milliseconds));
-};
-
-const error = (error) => {
-  console.error(error);
-  //restart();
 };
 
 export default start;
