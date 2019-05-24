@@ -121,5 +121,13 @@ The on-chain oracle contract, will first check if the transaction came from the 
 
 \subsection{Off-Chain Oracle}
 
+The off-chain oracle is a service that continuously listens to the events emitted by the on-chain oracle contract, more specifically to the \textit{NewRequest} event.
+
+For this proof-of-concept the author used a node.js service, detailed in Appendix \ref{ap3:off-chain-oracle-code}, which upon new requests queries a specified API and returns a value to the smart contract by means of a transaction.
+
+In order to create theses transactions we connect to the Ethereum blockchain, using web3.js, an Ethereum JavaScript API, and configure the accounts which will add the transactions with the answers to the requests to the smart contract. These accounts are the ones whose account addresses are specified on the white-listed list of addresses on the on-chain oracle. The detailed code can be found on Appendix \ref{ap4:off-chain-ethereum-connection}.
+
+
+
 
 \section{Summary and Conclusions}
