@@ -1,6 +1,9 @@
-\chapter{Background}\label{chap:chap3}
+\chapter{Authenticity Proofs}\label{chap:chap3}
 
 \section*{}
+
+In this chapter, the author takes a deep dive into existing authenticity mechanisms, in terms of their applicability and limitations. This chapter backs several statements in regard to certain proofs in the following chapters and can be skipped and consulted later on when assertions regarding the proofs are taken.
+
 As technology evolves and becomes mainstream so does the amount of generated data and its distribution. And so it becomes crucial to be able to authenticate a piece of information as originating from a known, trusted source.
 
 In the context of today's web, we are accustomed to trusting that a certain website or data is originated from the expected source due to the general adoption of the HTTPS protocol. An extension of the HTTP protocol which creates an encrypted and authenticated channel between the client and the web-server providing the requested information. Then it becomes a matter of whether we trust the source or not, but not doubts are raised as for the channel through which we received it.
@@ -14,7 +17,7 @@ Oracles, currently resort to two main techniques to prove their honesty. Authent
 \section{Trusted Execution Environment}
 A Trusted Execution Environment is a secure computational environment that is strongly isolated from the main operating system. It provides application isolation, integrity and memory confidentiality. Sensitive data is stored, processed and protected from the main operating system or network. This isolation is accomplished through software and hardware-enforced mechanism. TEE runs a small operating system which exposes a minimal interface to the running application and therefore reduces the attack surface. Advanced TEE embeds unique identities that allow to verify the device authenticity and can be used to generate proofs of the device honest execution.
 
-\section{Authenticity Proofs}
+\section{Authenticity Proofs Mechanisms}
 
 Several authenticity mechanisms have been developed and, as described in the state-of-the-art revision, most oracles as a service providers use authenticity proofs to prove their honest behaviour. However, these proofs are not infallible and the details or their implementation are not always transparent or do not provide the disclosed level of trust. I will deep dive on the most common proofs and discuss their implementation and applicability.
 
