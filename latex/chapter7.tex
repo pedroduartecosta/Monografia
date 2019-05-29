@@ -1,3 +1,46 @@
 \chapter{Validation} \label{chap:chap7}
 
 \section*{}
+In this chapter, the author validates the proposed statements in the chapter~\ref{chap:chap4} and to what extent they accomplish the proposed challenge.
+
+Initially, the author compares the defined architectures with existing solutions and how broadly they describe all possible scenarios.
+
+Then, the implemented solution in comparison to the state of the art, as well as its applicability, use case scenarios and limitations.
+
+
+\section{Oracle Architectures}
+
+
+\section{Self-hosted Oracle Implementation}
+
+The author, proposes three main characteristics of its implementation comparing to the current existing oracle-as-a-service solutions. Reduced costs, higher trust and higher contract empowerment.
+
+\subsection{Reduced costs}
+
+In this context, cost per query compromises multiple dimensions. Firstly, the cost of querying the oracle and inputting the result in the contract which correspond to the execution of the contract code and is therefore directly related to the amount of code that needs to run. Secondly, underlying fees imposed by the third-party service. And finally, a cost of less importance relative to the former ones, the cost of the off-chain oracle service that will query the API.
+
+Analysing the first one, the contract executing cost paid by the caller that is not much that the developer of the smart contract can do to optimize this cost since its fully managed by the third-party service. Hence, on a self-deployed oracle, cost can be further optimized by modelling a single purpose oracle for the smart contract needs which will inherently run less code due to its simplicity. Also, on a self-hosted oracle there is no need to add the over-head of authenticity proofs which either verified on chain or partially stored off-chain lead to higher transaction costs.
+
+Secondly, existing services are for-profit companies and therefore require an extra-payment for their service. Oraclize.it adds an extra fee paid in dollars, depicted on table ~\ref{tab:oraclize-fees}, that depends on the datasource and authenticity proof used. Chainlink requires that every request is paid using its token LINK whose value depends on the current market price. In a self-deployed oracle approach none of this fees are present lowering therefore to lower costs.
+
+\begin{table}[]
+\centering
+\begin{tabular}{@{}llllll@{}}
+\cmidrule(l){3-6}
+    & \multicolumn{1}{l|}{} & \multicolumn{4}{c|}{Proof type} \\ \cmidrule(r){1-2}
+\multicolumn{1}{c}{Datasource} & \multicolumn{1}{c}{Base price} & \multicolumn{1}{r}{None} & \multicolumn{1}{r}{TLSNotary} & \multicolumn{1}{r}{Android} & \multicolumn{1}{r}{Ledger} \\ \midrule
+URL & 0.01\$ & +0.0\$ & +0.04\$ & +0.04\$ & N/A \\
+WolframAlpha & 0.03\$ & +0.0\$ & N/A & N/A & N/A \\
+IPFS & 0.01\$ & +0.0\$ & N/A & N/A & N/A \\
+random & 0.05\$ & +0.0\$ & N/A & N/A & +0.0\$ \\
+computation & 0.50\$ & +0.0\$ & +0.04\$ & +0.04\$ & N/A \\ \bottomrule
+\end{tabular}
+\caption{}
+\label{tab:oraclize-fees}
+\end{table}
+https://aws.amazon.com/lambda/
+Finally, in a self-deployed oracle scenario there are inherent costs of running the off-chain oracle which are taken care on a third-party service. Although the cost per transaction of the service depends on the platform in which the service will be deployed it can be assumed that in comparison to the fees or, even more, to the cost of executing the smart contract code this cost is risible. Solutions such as AWS Lambda~\footnote{https://aws.amazon.com/lambda/} that offer 1M requests and 400,000 GB-SECONDS of compute time per month for free in their free tier~\footnote{https://aws.amazon.com/lambda/pricing/ queried on the 29th of May 2019.}, and even in a scaling scenario each requests costs \$0.0000002. Therefore, this cost is not considered throughout this dissertation due to its small size in comparison with the previous analysed ones.
+
+\subsection{Higher trust}
+
+\subsection{Higher contract empowerment}
