@@ -24,23 +24,27 @@ Analysing the first one, the contract executing cost paid by the caller that is 
 Secondly, existing services are for-profit companies and therefore require an extra-payment for their service. Oraclize.it adds an extra fee paid in dollars, depicted on table ~\ref{tab:oraclize-fees}, that depends on the datasource and authenticity proof used. Chainlink requires that every request is paid using its token LINK whose value depends on the current market price. In a self-deployed oracle approach none of this fees are present lowering therefore to lower costs.
 
 \begin{table}[]
-\centering
-\begin{tabular}{@{}llllll@{}}
-\cmidrule(l){3-6}
-    & \multicolumn{1}{l|}{} & \multicolumn{4}{c|}{Proof type} \\ \cmidrule(r){1-2}
-\multicolumn{1}{c}{Datasource} & \multicolumn{1}{c}{Base price} & \multicolumn{1}{r}{None} & \multicolumn{1}{r}{TLSNotary} & \multicolumn{1}{r}{Android} & \multicolumn{1}{r}{Ledger} \\ \midrule
-URL & 0.01\$ & +0.0\$ & +0.04\$ & +0.04\$ & N/A \\
-WolframAlpha & 0.03\$ & +0.0\$ & N/A & N/A & N/A \\
-IPFS & 0.01\$ & +0.0\$ & N/A & N/A & N/A \\
-random & 0.05\$ & +0.0\$ & N/A & N/A & +0.0\$ \\
-computation & 0.50\$ & +0.0\$ & +0.04\$ & +0.04\$ & N/A \\ \bottomrule
-\end{tabular}
-\caption{}
-\label{tab:oraclize-fees}
+    \centering
+    \begin{tabular}{@{}llllll@{}}
+        \cmidrule(l){3-6}
+                                       & \multicolumn{1}{l|}{}          & \multicolumn{4}{c|}{Proof type}                                                                                            \\ \cmidrule(r){1-2}
+        \multicolumn{1}{c}{Datasource} & \multicolumn{1}{c}{Base price} & \multicolumn{1}{r}{None}        & \multicolumn{1}{r}{TLSNotary} & \multicolumn{1}{r}{Android} & \multicolumn{1}{r}{Ledger} \\ \midrule
+        URL                            & 0.01\$                         & +0.0\$                          & +0.04\$                       & +0.04\$                     & N/A                        \\
+        WolframAlpha                   & 0.03\$                         & +0.0\$                          & N/A                           & N/A                         & N/A                        \\
+        IPFS                           & 0.01\$                         & +0.0\$                          & N/A                           & N/A                         & N/A                        \\
+        random                         & 0.05\$                         & +0.0\$                          & N/A                           & N/A                         & +0.0\$                     \\
+        computation                    & 0.50\$                         & +0.0\$                          & +0.04\$                       & +0.04\$                     & N/A                        \\ \bottomrule
+    \end{tabular}
+    \caption{Oraclize fees in USD}
+    \label{tab:oraclize-fees}
 \end{table}
-https://aws.amazon.com/lambda/
+
 Finally, in a self-deployed oracle scenario there are inherent costs of running the off-chain oracle which are taken care on a third-party service. Although the cost per transaction of the service depends on the platform in which the service will be deployed it can be assumed that in comparison to the fees or, even more, to the cost of executing the smart contract code this cost is risible. Solutions such as AWS Lambda~\footnote{https://aws.amazon.com/lambda/} that offer 1M requests and 400,000 GB-SECONDS of compute time per month for free in their free tier~\footnote{https://aws.amazon.com/lambda/pricing/ queried on the 29th of May 2019.}, and even in a scaling scenario each requests costs \$0.0000002. Therefore, this cost is not considered throughout this dissertation due to its small size in comparison with the previous analysed ones.
 
 \subsection{Higher trust}
+
+Trust is defined as having complete certainty that the provided answer is corrected or was indeed the one provided by the API. In the self-hosted oracle scenario both can be achieved. The first proposition, that the answer is correct, can be maximized by using multiple oracles and a quorum so that multiple sources can confirm the requested result. With minor alterations the oracle could receive more than one URL and maximize even more the trust in the result by querying multiple sources. The second, that the API actually return that value is achieved since the off-chain oracle is fully controlled by the parties interested in the result of the smart-contract and therefore know exactly the code being executed.
+
+This approach, comparing to the state-of-the-art, although simple provides higher guarantees that the smart contract will receive the desired answer. In the current existing solutions, trust is ultimatly achieved through the use of authenticity proofs, which, as analised in chapter~\ref{chap:chap3}, do not provide the necessary guarantees. Either by not being able to be analysed on the chain contract, and can only be later inspected which at this point its effects are already irreversible. And even, their implementations can be dubious, has they are being managed by a third party and always require to trust in a higher entity such as the service where they are being deployed.
 
 \subsection{Higher contract empowerment}
