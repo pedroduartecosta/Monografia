@@ -40,4 +40,18 @@ This section describes the architectures that will be investigated. Some are alr
 
 To better discuss the purpose and usability of each architecture, the following subsections explain the use cases of each solution.
 
-\subsection{Use Case 1: Oracle as a Service w/ Single Data Feed. }
+\subsection{Use Case 1: Oracle as a Service w/ Single Data Feed}
+
+A smart contract developer needs to obtain information from an API source without having the trouble to develop and launch its on oracle whilst having some guarantees of the origin of the information. Mainly, this scenario is focusing on fast-time to market, untampered data and cost is not a problem.
+
+\subsection{Use Case 2: Oracle as a Service w/ Multiple Data Feeds}
+
+This scenario iterates on the previous one but focuses on data veracity. It can happen that the owner of the smart contract can not trust a single entity to provide the data. Either because he wants that no single entity can have a say on the final result of the contract or because the requested data may not have a discrete value and the best answer is the median of multiple values.
+
+\subsection{Use Case 3: Single-Party Self Hosted Oracle}
+
+This use case takes a different approach from the previous ones. Instead of fast-time to market the main focus here is trusting the oracle provider to behave correctly. The smart contract output will only affect a single party or multiple parties which are non competing and therefore trust someone to run the oracle. In such scenario, costs can be reduces, with increasing developer workload, by not using any authenticity proofs and the oracle can be further customised to handle a specific contract requirement.
+
+\subsection{Use Case 4: Multi-Party Self Hosted Oracle}
+
+Iterating on the previous use-case, this scenario adds a new trust problem. When competing parties deploy depend on the behaviour of the same smart contract. For example, in a bet, all parties want to have the same say in the final result as all of them have something to gain and to loose in the result inputed by the oracle. Therefore, some mechanism must ensure that several oracles and a predefined agreed quorum can be used to ensure that no party can cheat on the final result of the smart contract.
