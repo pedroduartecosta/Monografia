@@ -34,5 +34,10 @@ The author believes that by describing, in a trust-guided manner, multiple patte
 Furthermore, in Chapter \ref{chap:chap6}, the author presents a possible implementation of a self-hosted oracle. After analysing the state of the art in oracle development and the specifics of used authenticity proofs, the author believes that the best way to achieve trust in an oracle is to deploy one instead of relying on a third-party. The described approach, when in comparison to deployed solutions in the industry reduces operations costs, increases trust and empowers the contract with purpose built oracles. The author will demonstrate that deploying and oracle, can be more trivial than at first seems, and that trust in its operation is directly the trust in one's code and no more measures (authenticity proofs) are need. This measures usually add a considerable extra cost and constrain the developer.
 
 
-
 \section{Desiderata}
+
+This section describes the architectures that will be investigated. Some are already seen in oracle-as-a-service providers others not yet but can be explored in a self-hosted manner. They intend to open way to how oracles are developed and how they tackle different points of trust and scenarios.
+
+To better discuss the purpose and usability of each architecture, the following subsections explain the use cases of each solution.
+
+\subsection{Use Case 1: Oracle as a Service w/ Single Data Feed. }
