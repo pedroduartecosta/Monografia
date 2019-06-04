@@ -4,7 +4,7 @@
         "platform": "amd64",
         "alias": null
     },
-    "latex-workshop.latex.outDir": "..",
+    "latex-workshop.latex.outDir": "../",
     "git-graph.showStatusBarItem": true,
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
