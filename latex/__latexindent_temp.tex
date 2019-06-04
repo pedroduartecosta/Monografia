@@ -1,53 +1,37 @@
-\chapter{Validation} \label{chap:chap7}
+\chapter{Problem Statement}\label{chap:chap4}
 
 \section*{}
-In this chapter, the author validates the proposed statements in the chapter~\ref{chap:chap4} and to what extent they accomplish the proposed challenge.
 
-Initially, the author compares the defined architectures with existing solutions and how broadly they describe all possible scenarios.
+%% FIXME: Problem chapter
+%O capítulo sobre o problema que devia aparecer neste ponto, precisa de conter:
+% - descrição geral do problema (possivelmente repetindo um pouco, mas não inteiramente, do que foi dito no capítulo da introdução) e âmbito que pretendemos atacar
+% - a hipótese central subjacente ao trabalho
+% - as sub-hipóteses ou research questions mais concretas
+% - qual a estratégia de investigação que será usada
 
-Then, the implemented solution in comparison to the state of the art, as well as its applicability, use case scenarios and limitations.
+Smart contracts power a decentralized world of automation and trust-less commitments. Companies, groups and individuals are able to automate tasks and contracts but as far as the ecosystem is, smart contracts are still very much limited to the information available in the blockchain. Therefore, connecting with the outside world requires a trusted authority to input in the blockchain the required information upon request from the smart contract. This trusted authority is generally called an oracle.
+
+As explained before, the deterministic nature of blockchain does not allow smart contracts to directly query a data-feed for information. In this context, oracles help connecting smart contracts to the world outside of the blockchain. The problem here is to trust in the oracle service to not behave maliciously and undermine the trust provided by the blockchain consensus mechanisms. Blockchain technology can be trusted to behave correctly even in byzantine environments, but the oracle service does not abide by the same mechanisms and therefore some mechanisms must be put in action to ensure the oracle's response credibility.
+
+As seen in Chapter~\ref{chap:sota}, current solutions to the oracle problem use complex mechanisms to achieve a certain desired level of trust. Some use complex trusted hardware others incentive based mechanisms or authenticity proofs, neither of these are simple and fully trusted approaches and add extra complexity from the developer side. Either if the developer needs to implement it or if he has to analyse how current oracle-as-a-service providers are using it.
+
+The oracle problem is neither simple nor has a single solution, but its importance in powering greater applications for smart contracts is undeniable and its forces can be summarized in the following bullet points:
+
+%% acredito que ao fazer x tenho y beneficios
+
+\begin{itemize}
+    \item \textbf{Smart contract empowerment} - Providing smart contracts with trustable information from outside of the blockchain is decisive to gain general adoption and practicality.
+    \item \textbf{Cost optimization} - Blockchain operations tend to be quite expensive, therefore, the oracle solution should introduce a lower overhead cost as possible.
+    \item \textbf{Keeping trust standards} - As blockchain technology creates a trust-less environment, oracles should as well keep up with the level of trust in their functioning.
+\end{itemize}
+
+\section{Proposal}
+
+With this thesis, the author intends to lay the foundations for the development and architecture of trustable oracle systems that will power several smart contract use cases.
+
+The author believes that by describing, in a trust-guided manner, multiple patterns and examples where they are being applied or possible use cases not yet documented creates a guided model that helps future cases to have a systematic approach to which architecture will fit the best. This, subject is still very much unexplored territory, specially in terms of academia research but also in the industry, and therefore it is important to first approach it broadly and investigate all the possible approaches and their trade-offs so that latter studies can be developed on the specifics of each architecture.
+
+Furthermore, in Chapter \ref{chap:chap6}, the author presents a possible implementation of a self-hosted oracle. After analysing the state of the art in oracle development and the specifics of used authenticity proofs, the author believes that the best way to achieve trust in an oracle is to deploy one instead of relying on a third-party. The described approach, when in comparison to deployed solutions in the industry reduces operations costs, increases trust and empowers the contract with purpose built oracles. The author will demonstrate that deploying and oracle, can be more trivial than at first seems, and that trust in its operation is directly the trust in one's code and no more measures (authenticity proofs) are need. This measures usually add a considerable extra cost and constrain the developer.
 
 
-\section{Oracle Architectures}
-
-
-\section{Self-hosted Oracle Implementation}
-
-The author, proposes three main characteristics of its implementation comparing to the current existing oracle-as-a-service solutions. Reduced costs, higher trust and higher contract empowerment.
-
-
-\subsection{Reduced costs}
-
-In this context, cost per query compromises multiple dimensions. Firstly, the cost of querying the oracle and inputting the result in the contract which correspond to the execution of the contract code and is therefore directly related to the amount of code that needs to run. Secondly, underlying fees imposed by the third-party service. And finally, a cost of less importance relative to the former ones, the cost of the off-chain oracle service that will query the API.
-
-Analysing the first one, the contract executing cost paid by the caller that is not much that the developer of the smart contract can do to optimize this cost since its fully managed by the third-party service. Hence, on a self-deployed oracle, cost can be further optimized by modelling a single purpose oracle for the smart contract needs which will inherently run less code due to its simplicity. Also, on a self-hosted oracle there is no need to add the over-head of authenticity proofs which either verified on chain or partially stored off-chain lead to higher transaction costs.
-
-Secondly, existing services are for-profit companies and therefore require an extra-payment for their service. Oraclize.it adds an extra fee paid in dollars, depicted on table ~\ref{tab:oraclize-fees}, that depends on the datasource and authenticity proof used. Chainlink requires that every request is paid using its token LINK whose value depends on the current market price. In a self-deployed oracle approach none of this fees are present lowering therefore to lower costs.
-
-\begin{table}[]
-    \centering
-    \begin{tabular}{@{}llllll@{}}
-        \cmidrule(l){3-6}
-                                       & \multicolumn{1}{l|}{}          & \multicolumn{4}{c|}{Proof type}                                                                                            \\ \cmidrule(r){1-2}
-        \multicolumn{1}{c}{Datasource} & \multicolumn{1}{c}{Base price} & \multicolumn{1}{r}{None}        & \multicolumn{1}{r}{TLSNotary} & \multicolumn{1}{r}{Android} & \multicolumn{1}{r}{Ledger} \\ \midrule
-        URL                            & 0.01\$                         & +0.0\$                          & +0.04\$                       & +0.04\$                     & N/A                        \\
-        WolframAlpha                   & 0.03\$                         & +0.0\$                          & N/A                           & N/A                         & N/A                        \\
-        IPFS                           & 0.01\$                         & +0.0\$                          & N/A                           & N/A                         & N/A                        \\
-        random                         & 0.05\$                         & +0.0\$                          & N/A                           & N/A                         & +0.0\$                     \\
-        computation                    & 0.50\$                         & +0.0\$                          & +0.04\$                       & +0.04\$                     & N/A                        \\ \bottomrule
-    \end{tabular}
-    \caption{Oraclize fees in USD}
-    \label{tab:oraclize-fees}
-\end{table}
-
-Finally, in a self-deployed oracle scenario there are inherent costs of running the off-chain oracle which are taken care on a third-party service. Although the cost per transaction of the service depends on the platform in which the service will be deployed it can be assumed that in comparison to the fees or, even more, to the cost of executing the smart contract code this cost is risible. Solutions such as AWS Lambda~\footnote{https://aws.amazon.com/lambda/} that offer 1M requests and 400,000 GB-SECONDS of compute time per month for free in their free tier~\footnote{https://aws.amazon.com/lambda/pricing/ queried on the 29th of May 2019.}, and even in a scaling scenario each requests costs \$0.0000002. Therefore, this cost is not considered throughout this dissertation due to its small size in comparison with the previous analysed ones.
-
-\subsection{Higher trust}
-
-Trust is defined as having complete certainty that the provided answer is corrected or was indeed the one provided by the API. In the self-hosted oracle scenario both can be achieved. The first proposition, that the answer is correct, can be maximized by using multiple oracles and a quorum so that multiple sources can confirm the requested result. With minor alterations the oracle could receive more than one URL and maximize even more the trust in the result by querying multiple sources. The second, that the API actually return that value is achieved since the off-chain oracle is fully controlled by the parties interested in the result of the smart-contract and therefore know exactly the code being executed.
-
-This approach, comparing to the state-of-the-art found solutions, although simple provides higher guarantees that the smart contract will receive the desired answer. In the current existing solutions, trust is ultimately achieved through the use of authenticity proofs, which, as analysed in chapter~\ref{chap:chap3}, do not provide the necessary guarantees. Either by not being able to be analysed on the chain contract, and can only be later inspected. And also, their implementations can be dubious, has they are being managed by a third party and always require to trust in a higher entity such as the service where they are being deployed.
-
-\subsection{Higher contract empowerment}
-
-The presented implementation, provides a great starting point to be worked upon and tailored to a specific contract needs. At the moment, can already work with any JSON API and therefore be used in a huge range of applications. Being able to pick and tailor with minimum effort the existing boiler plate and adapt to its needs. When using third-party services there's no such flexibility and where you can deploy the contract, some services are not yet available on some blockchains' mainnet, and features available are totally dependent on the oracle service provider.
+\section{Desiderata}
