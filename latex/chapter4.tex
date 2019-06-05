@@ -9,13 +9,13 @@
 % - as sub-hipóteses ou research questions mais concretas
 % - qual a estratégia de investigação que será usada
 
-Smart contracts power a decentralized world of automation and trust-less commitments. Companies, groups and individuals are able to automate tasks and contracts but as far as the ecosystem is, smart contracts are still very much limited to the information available in the blockchain. Therefore, connecting with the outside world requires a trusted authority to input in the blockchain the required information upon request from the smart contract. This trusted authority is generally called an oracle.
+Smart contracts power a decentralized world of automation and trust-less commitments. Companies, groups and individuals are able to automate tasks and contracts but in the current ecosystem, smart contracts are still very much limited to the information available in the blockchain. Therefore, connecting with the outside world requires a trusted authority to input in the blockchain the required information upon request from the smart contract. This trusted authority is generally called an oracle.
 
-As explained before, the deterministic nature of blockchain does not allow smart contracts to directly query a data-feed for information. In this context, oracles help connecting smart contracts to the world outside of the blockchain. The problem here is to trust in the oracle service to not behave maliciously and undermine the trust provided by the blockchain consensus mechanisms. Blockchain technology can be trusted to behave correctly even in byzantine environments, but the oracle service does not abide by the same mechanisms and therefore some mechanisms must be put in action to ensure the oracle's response credibility.
+As explained before, the deterministic nature of blockchain does not allow smart contracts to directly query a data-feed for information. In this context, oracles help connecting smart contracts to the world outside of the blockchain. The problem here is to trust the oracle service to not behave maliciously and undermine the trust provided by the blockchain consensus mechanisms. Blockchain technology can be trusted to behave correctly even in byzantine environments, but the oracle service does not abide by the same rules and therefore some workings must be put into action to ensure the oracle's response credibility.
 
-As seen in Chapter~\ref{chap:sota}, current solutions to the oracle problem use complex mechanisms to achieve a certain desired level of trust. Some use complex trusted hardware others incentive based mechanisms or authenticity proofs, neither of these are simple and fully trusted approaches and add extra complexity from the developer side. Either if the developer needs to implement it or if he has to analyse how current oracle-as-a-service providers are using it.
+As seen in Chapter~\ref{chap:sota}, current solutions to the oracle problem use complex techniques to achieve a certain desired level of trust. Some use complicated trusted hardware others incentive-based mechanisms or authenticity proofs, but neither of these are simple and fully trusted approaches and they add extra complexity from the developer side.
 
-The oracle problem is neither simple nor has a single solution, but its importance in powering greater applications for smart contracts is undeniable and its forces can be summarized in the following bullet points:
+The oracle problem is neither simple nor has a single solution, but its importance in powering greater applications for smart contracts  is undeniable. Their need arises from the following three factors.
 
 %% acredito que ao fazer x tenho y beneficios
 
@@ -29,7 +29,7 @@ The oracle problem is neither simple nor has a single solution, but its importan
 
 With this thesis, the author intends to lay the foundations for the development and architecture of trustable oracle systems that will power several smart contract use cases.
 
-The author believes that by describing, in a trust-guided manner, multiple patterns and examples where they are being applied or possible use cases not yet documented creates a guided model that helps future cases to have a systematic approach to which architecture will fit the best. This, subject is still very much unexplored territory, specially in terms of academia research but also in the industry, and therefore it is important to first approach it broadly and investigate all the possible approaches and their trade-offs so that latter studies can be developed on the specifics of each architecture.
+The author believes that by describing, in a trust-guided manner, multiple patterns and examples where they are being applied or possible use cases not yet documented creates a guided model that helps future cases to have a systematic approach to which architecture will fit the best. The architecture and design of blockchain oracles is still very much unexplored territory, specially in terms of academia research but also in the industry, and therefore this thesis approaches it broadly and investigates possible approaches and their trade-offs so that later studies can be developed on the specifics of each architecture.
 
 Furthermore, in Chapter \ref{chap:chap6}, the author presents a possible implementation of a self-hosted oracle. After analysing the state of the art in oracle development and the specifics of used authenticity proofs, the author believes that the best way to achieve trust in an oracle is to deploy one instead of relying on a third-party. The described approach, when in comparison to deployed solutions in the industry reduces operations costs, increases trust and empowers the contract with purpose built oracles. The author will demonstrate that deploying and oracle, can be more trivial than at first seems, and that trust in its operation is directly the trust in one's code and no more measures (authenticity proofs) are need. This measures usually add a considerable extra cost and constrain the developer.
 
@@ -39,6 +39,9 @@ Furthermore, in Chapter \ref{chap:chap6}, the author presents a possible impleme
 This section describes the architectures that will be investigated. Some are already seen in oracle-as-a-service providers others not yet but can be explored in a self-hosted manner. They intend to open way to how oracles are developed and how they tackle different points of trust and scenarios.
 
 To better discuss the purpose and usability of each architecture, the following subsections explain the use cases of each solution.
+
+
+% FIXME: Change use cases name to be more specific to the problem
 
 \subsection{Use Case 1: Oracle as a Service w/ Single Data Feed}
 
