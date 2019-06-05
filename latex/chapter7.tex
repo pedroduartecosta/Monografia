@@ -11,6 +11,28 @@ Then, the implemented solution in comparison to the state of the art, as well as
 \section{Oracle Architectures}
 
 
+\subsection{Use Case 1: Oracle as a Service w/ Single Data Feed}
+
+%A smart contract developer needs to obtain information from an API source without having the trouble to develop and launch its on oracle whilst having some guarantees of the origin of the information. Mainly, this scenario is focusing on fast-time to market, untampered data and cost is not a problem.
+
+
+
+
+\subsection{Use Case 2: Oracle as a Service w/ Multiple Data Feeds}
+
+%This scenario iterates on the previous one but focuses on data veracity. It can happen that the owner of the smart contract can not trust a single entity to provide the data. Either because he wants that no single entity can have a say on the final result of the contract or because the requested data may not have a discrete value and the best answer is the median of multiple values.
+
+\subsection{Use Case 3: Single-Party Self Hosted Oracle}
+
+%This use case takes a different approach from the previous ones. Instead of fast-time to market the main focus here is trusting the oracle provider to behave correctly. The smart contract output will only affect a single party or multiple parties which are non competing and therefore trust someone to run the oracle. In such scenario, costs can be reduces, with increasing developer workload, by not using any authenticity proofs and the oracle can be further customised to handle a specific contract requirement.
+
+\subsection{Use Case 4: Multi-Party Self Hosted Oracle}
+
+%Iterating on the previous use-case, this scenario adds a new trust problem. When competing parties deploy depend on the behaviour of the same smart contract. For example, in a bet, all parties want to have the same say in the final result as all of them have something to gain and to loose in the result inputed by the oracle. Therefore, some mechanism must ensure that several oracles and a predefined agreed quorum can be used to ensure that no party can cheat on the final result of the smart contract.
+
+%As this scenario, seems to be the least described in current literature but has the possibility of being applied to a plethora os use cases, for example betting contracts, logistic chains with competing companies and so on, an implementation is demonstrated on Chapter~\ref{chap:chap6}.
+
+
 \section{Self-hosted Oracle Implementation}
 
 The author, proposes three main characteristics of its implementation comparing to the current existing oracle-as-a-service solutions. Reduced costs, higher trust and higher contract empowerment.
@@ -24,7 +46,7 @@ Analysing the first one, the contract executing cost paid by the caller that is 
 
 Secondly, existing services are for-profit companies and therefore require an extra-payment for their service. Oraclize.it adds an extra fee paid in dollars, depicted on table ~\ref{tab:oraclize-fees}, that depends on the datasource and authenticity proof used. Chainlink requires that every request is paid using its token LINK whose value depends on the current market price. In a self-deployed oracle approach none of this fees are present lowering therefore to lower costs.
 
-\begin{table}[]
+\begin{table}
     \centering
     \begin{tabular}{@{}llllll@{}}
         \cmidrule(l){3-6}
@@ -50,4 +72,4 @@ This approach, comparing to the state-of-the-art found solutions, although simpl
 
 \subsection{Higher contract empowerment}
 
-The presented implementation, provides a great starting point to be worked upon and tailored to a specific contract needs. At the moment, can already work with any JSON API and therefore be used in a huge range of applications. Being able to pick and tailor with minimum effort the existing boiler plate and adapt to its needs. When using third-party services there's no such flexibility and where you can deploy the contract, some services are not yet available on some blockchains' mainnet, and features available are totally dependent on the oracle service provider.
+The presented implementation, provides a great starting point to be worked upon and tailored to a specific contract needs. At the moment, can already work with any JSON API and therefore be used in a wide range of applications. Being able to use and tailor, with minimum effort, the existing boiler plate and adapt to its needs. When using third-party services there's no such flexibility. Even in terms of which blockchain you can deploy the contract, some services are not yet available on some blockchains' mainnet, and features available are totally dependent on the oracle service provider.

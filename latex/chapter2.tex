@@ -6,21 +6,24 @@
 %O capítulo deve também efetuar uma revisão tecnológica às principais ferramentas utilizáveis no âmbito do projeto, justificando futuras escolhas.
 
 
-The topic of blockchain oracles is still unexplored territory mostly investigated by start-up companies and individuals thriving to solve a new problem. Therefore, research related to oracles may not yet be documented on peer-reviewed papers but, nonetheless, is invaluable in an early phase of the technology. Consequently, the state of the art cannot be complete without reviewing the work developed by the academia and also by start-ups, enterprises, governments and individuals.
+The topic of blockchain oracles is still unexplored territory mostly investigated by start-up companies and individuals thriving to solve a new problem. Therefore, research related to oracles is scarcely found on peer-reviewed publications but, nonetheless, is invaluable in such an early phase of the technology. Consequently, the state of the art cannot be complete without reviewing the work developed by the academia and also by start-ups, enterprises, governments and individuals.
 
-\section{Research}
+\section{Literature Review}
 
 To get an overview of academic research a systematic literature review was performed. It's main components and finding are described in this section.
 
 A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders \cite{Kitchenham2007GuidelinesEngineering}, meaning, not duplicating existing research and find the gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review, to the extent that a human can, it is necessary to clarify and identify at the beginning of the research its methodology, what are the data sources and what is the selection criteria.
 
+The goal of this literature review is to get a sense of the corpus of existing works on the topic of blockchain oracles, and the directions and extent to which previous research has rendered significant results.
+
 \subsection{Research Questions}
-First of all and to guide the focus of the research, the following research question was defined:
+First of all and to guide the focus of the research, the following research questions were defined:
 \begin{itemize}
   \item RQ1: What kind of blockchain oracles have been proposed?
   \item RQ2: What are the research trends on blockchain oracles?
 \end{itemize}
 
+% FIXME: Add small explanation on each RQ
 
 \subsection{Search Strategy and Data-sources}
 Figure \ref{fig:/figures/SLR_stages}, presents the predefined review strategy used in order to achieve such a goal and maintain unbiased, transparent and reproducible research.
@@ -34,6 +37,8 @@ Figure \ref{fig:/figures/SLR_stages}, presents the predefined review strategy us
   \end{center}
 \end{figure*}
 
+% FIXME: Explain each step for the review strategy
+
 The following four electronic databases were used to query for such information:
 
 \begin{itemize}
@@ -46,9 +51,11 @@ The following four electronic databases were used to query for such information:
 
 The defined search query for the search of the relevant papers was the following:
 
-(("blockchain" OR "block chain" OR "block-chain")
-AND
-("oracles" OR "oracle" OR "middle-ware" OR "middleware" OR "middle ware" OR "datafeed" OR "data feed" OR "data-feed"))
+\texttt{
+  (("blockchain" OR "block chain" OR "block-chain")
+  AND
+  ("oracles" OR "oracle" OR "middle-ware" OR "middleware" OR "middle ware" OR "datafeed" OR "data feed" OR "data-feed"))
+}
 
 This search query was used to comprise all the possible ways of referring to blockchain and oracles. Some scholars have investigated the oracle issue by simply calling them a middleware or data-feed since oracles can either be used as an intermediary that relays data or as the source of the data.
 
@@ -148,9 +155,9 @@ J. Eberhardt \cite{Eberhardt2018Off-chainingComputations} does not propose a spe
 
 
 
-\section{Non-Academia Research}
+\section{Commercial Products and Projects}
 
-To search for non-academic research Google, a search engine and Medium, a platform for blog posting used widely by developers and the start-up community, were used as a means to find new projects or solutions for the oracle trust problem. Using these two tools a lot of projects were found trying to solve the oracle trust problem and are solely documented on white-papers or on the companies website documentation page. This kind of literature cannot be found in peer-reviewed databases, but can nonetheless provide invaluable information and is therefore worth being analysed.
+To search for existing commercial products and projects, Google, a search engine and Medium, a platform for blog posting used widely by developers and the start-up community, were used as a means to find new projects or solutions for the oracle trust problem. Using these two tools a lot of projects were found trying to solve the oracle trust problem and are solely documented on white-papers or on the companies website documentation page. This kind of literature cannot be found in peer-reviewed databases, but can nonetheless provide invaluable information and is therefore worth being analysed.
 
 The results of this search revealed a wide range of projects and protocols trying to achieve with varying degrees of decentralization or authenticity, a short explanation of each will be detailed here:
 
