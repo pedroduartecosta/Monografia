@@ -16,6 +16,8 @@ The second, and most relevant for analysis, is the oracle service used. Oracles 
 Having analysed what trust means, it is evident that no short definition is appropriate and that it depends on the stakeholder beliefs. Hence, several architectural models for what a trustable system arise. Varying in decentralization and complexity. Each model satisfies different requirements, such as performance, security and decentralization.
 In this section, I will describe several possible architectures and point out use cases and compromises for each model.
 
+% FIXME: Explain the structure of the architecures
+
 \section{Oracle as a Service w/ Single Data Feed.}\label{OaaSwSingleDataFeed}
 
 \subsection{Context}
@@ -44,7 +46,7 @@ Oracle as a service, come as a quick and efficient solution for fast moving comp
     \leavevmode
     \includegraphics[width=0.5\textwidth]{figures/oraclearch1.jpg}
     \caption{Oracle as a Service w/ Single Data Feed.}
-    \label{fig:/figures/paper-screening}
+    \label{fig:/figures/OaaSwSingleDataFeed}
   \end{center}
 \end{figure*}
 
@@ -88,7 +90,7 @@ The oracle service should have a mechanism to query several data-sources during 
     \leavevmode
     \includegraphics[width=0.5\textwidth]{figures/oraclearch2.jpg}
     \caption{Oracle as a Service w/ Multiple Data Feeds.}
-    \label{fig:/figures/paper-screening}
+    \label{fig:/figures/OaaSwMultipleDataFeed}
   \end{center}
 \end{figure*}
 
@@ -125,7 +127,7 @@ A solution to trusting an oracle service is to deploy our own oracle service. Su
     \leavevmode
     \includegraphics[width=0.5\textwidth]{figures/oraclearch3.jpg}
     \caption{Single-Party Self Hosted Oracle.}
-    \label{fig:/figures/paper-screening}
+    \label{fig:/figures/SPSelfHostedOracle}
   \end{center}
 \end{figure*}
 
@@ -163,7 +165,7 @@ However, the consensus algorithm should never require that all nodes provide a r
     \leavevmode
     \includegraphics[width=0.5\textwidth]{figures/oraclearch4.jpg}
     \caption{Multi-Party Self Hosted Oracle.}
-    \label{fig:/figures/paper-screening}
+    \label{fig:/figures/MPSelfHostedOracle}
   \end{center}
 \end{figure*}
 

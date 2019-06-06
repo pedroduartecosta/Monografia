@@ -1,4 +1,4 @@
-\chapter{State of the Art} \label{chap:sota}
+\chapter{Blockchain Oracles} \label{chap:sota}
 
 \section*{}
 %Neste capítulo é descrito o estado da arte e são apresentados trabalhos relacionados para mostrar o que existe no mesmo domínio e quais os problemas em aberto. Deve deixar claro que existe uma oportunidade de desenvolvimento que cobre alguma falha concreta .
@@ -23,10 +23,17 @@ First of all and to guide the focus of the research, the following research ques
   \item RQ2: What are the research trends on blockchain oracles?
 \end{itemize}
 
-% FIXME: Add small explanation on each RQ
+\textit{RQ1}, analyses the scope of existing blockchain oracles. The methodologies and technologies used, so as to understand how the oracle problem is tackled.
+
+\textit{RQ2}, tries to identify the direction that is proving to be the most effective. Analysing past solutions that never made it into production and solutions currently adopted.
 
 \subsection{Search Strategy and Data-sources}
 Figure \ref{fig:/figures/SLR_stages}, presents the predefined review strategy used in order to achieve such a goal and maintain unbiased, transparent and reproducible research.
+
+% FIXME: Explain each step for the review strategy. Explain the diference in "Screening and cleaning" box from the quality assessment exclusion boxes.
+
+
+
 
 \begin{figure*}[t]
   \begin{center}
@@ -37,7 +44,6 @@ Figure \ref{fig:/figures/SLR_stages}, presents the predefined review strategy us
   \end{center}
 \end{figure*}
 
-% FIXME: Explain each step for the review strategy
 
 The following four electronic databases were used to query for such information:
 
@@ -56,6 +62,8 @@ The defined search query for the search of the relevant papers was the following
   AND
   ("oracles" OR "oracle" OR "middle-ware" OR "middleware" OR "middle ware" OR "datafeed" OR "data feed" OR "data-feed"))
 }
+
+% FIXME: Explain if there was any variantion on the search query in the different databases
 
 This search query was used to comprise all the possible ways of referring to blockchain and oracles. Some scholars have investigated the oracle issue by simply calling them a middleware or data-feed since oracles can either be used as an intermediary that relays data or as the source of the data.
 
@@ -111,7 +119,9 @@ Since the concept of smart contracts on the blockchain was only introduced in 20
 
 \subsection{Study Selection and Quality Assessment}
 
-The study selection process initially started with a pool of 123 papers from the previously stated online databases. As described on Figure \ref{fig:/figures/SLR_stages}, the selection compromised four stages:
+The process of exclusion is depicted in Figure \ref{fig:/figures/paper-screening} and all the information regarding the papers and in which phase they were excluded is transparently presented in Appendix \ref{ap1:slr}.
+
+The study selection process initially started with a pool of 123 papers from the previously stated online databases. As described on Figure \ref{fig:/figures/SLR_stages}, the selection and quality assessment compromised four stages:
 \begin{itemize}
   \item Stage 1: Screening and cleaning duplicated articles or articles that were not in English.
   \item Stage 2: Exclusion by carefully reading the title but most importantly the abstract. After this stage, only 13 of the 91 non-duplicated papers were either describing specific trustable oracle implementations or mentioning the use of oracles.
@@ -119,7 +129,8 @@ The study selection process initially started with a pool of 123 papers from the
   \item Stage 4: Full article reading to assess if the final bucket of articles answers the research questions.
 \end{itemize}
 
-The process of exclusion is depicted in Figure \ref{fig:/figures/paper-screening} and all the information regarding the papers and in which phase they were excluded is transparently presented in Appendix \ref{ap1:slr}.
+
+%FIXME: Há uma relação entre esta figura e a 2.1. Esta parece uma versão simplificada com mais alguns detalhes (números dos que foram considerados e dos ue foram excluídos) mas nem sempre consigo fazer facilmente um match entre estas caixas e as da Figura 2.1. Pode ajudar se se uniformizar as expressões usadas em ambas. Em vez de as cores serem usadas apenas para fazer um gradiente, se forem usadas para ajudar a ver a equivalência entre as caixas dos dois diagramas, também pode ajudar.
 
 \begin{figure*}[t]
   \begin{center}
@@ -132,34 +143,57 @@ The process of exclusion is depicted in Figure \ref{fig:/figures/paper-screening
 
 \subsection{Data extraction and Data Synthesis}
 
+% FIXME: É francamente pouco para um SLR. Já sabemos que a razão para isto é que existem de facto poucas coisas publicadas sobre o assunto... mas... Que esforço achas que estaria envolvido em tornar a correr a SLR? Se apanhássemos mais dois~três artigos relevantes já seria bom. Assumindo que a maioria dos artigos que aparecerá será a que já apareceu antes, terias que "processar" apenas os novos. Ao fazê-lo também podes aproveitar para rever o processo de execução da SLR que descreves aqui, para confirmar se não falta nenhum detalhe importante do teu processo
+
 The following process resulted in three articles and two theses that approach varying problems in implementing and guaranteeing trust in oracles.
 
-Town Crier \cite{Zhang2016TownCrier}, leverages trusted hardware, specifically Intel SGX, to scrape HTTPS-enabled websites and serve source-authenticated data to relaying smart contracts. TC architecture involves a TC contract on the blockchain that receives datagram requests from a User Contract on the blockchain and communicates those request to a TC server which then retrieves an answer from a data source through an HTTPS connection.
+Town Crier (TC) \cite{Zhang2016TownCrier}, leverages trusted hardware, specifically Intel SGX\footnote{Intel Corporation. Intel® Software Guard Extensions
+SDK. https://software.intel.com/en-us/sgx-sdk, 2019}, to scrape HTTPS-enabled websites and serve source-authenticated data to smart contracts. TC architecture involves a TC contract on the blockchain that receives datagram requests from a client contract and communicates those request to a TC server which then retrieves an answer from a data source through an HTTPS connection.
+
+% FIXME: O que achas de incluir em cada um destes parágrafos uma figura da arquitetura de cada uma destas soluções? não seriam diagramas genéricos como os que aparecem mais à frente no catálogo, seriam instanciados a estes oracles tanto quanto possível. Não tenho a certeza se para todos, mas para alguns, além do diagrama de arquitetura poderia fazer sentido incluir um diagrama de atividades, para explicar de que forma é que os vários componentes interagem numa utilização típica
+
+% FIXME: Outra coisa que seria interessante aqui seria já mencionares explicitamente, para cada uma das soluções que aqui são descritas, até que ponto é que nos dão trust, e a que nível o fazem. nalgumas já o mencionas, noutras fica um bocado nas entrelinhas
 
 Astraea \cite{Adler2018Astraea:Oracleb} proposes a decentralized oracle network with submitters, voters and certifiers, in which voters play a low-risk game and certifies a high-risk game with associated resources. Using game theory incentive structure as a means to keep the players honest.
+
+% FIXME: Explain a bit futher aestraea incentives
 
 Gilroy Gordon \cite{Gordon2017ProvenanceSensorsb} proposes a protocol for oracle sensor data authenticity and integrity to an IoT devices network with low computational resources. Using sets of public and private keys to authenticate that the oracle sensor data actually was originated by that oracle even if the information needs to pass by several oracles before being consumed by the application.
 
 Francisco Monroy \cite{MontotoMonroy2018BitcoinBlockchain} defines a gambling protocol based on incentives and assuming that every entity involved has the objective to maximize their profit. The protocol overcomes the trust in a single Oracle by polling a network of 7 oracles from a large network of available oracles, they will then stake their money on a specific bet and only receive their investment back if the majority of the oracles vote in the same winner. Creating, therefore, incentives for Oracle good behaviour.
 
-J. Eberhardt \cite{Eberhardt2018Off-chainingComputations} does not propose a specific method but analyses existing solutions and define a systematic classification for existing trustable off-chain computation oracles. The authors identify the following off-chain computation oracles approaches:
+% FIXME: Explain ^ incentrives
+
+J. Eberhardt \cite{Eberhardt2018Off-chainingComputations} does not propose a specific method but analyses existing solutions and defines a systematic classification for existing trustable off-chain computation oracles. The authors identify the following off-chain computation oracles approaches:
 
 
 
 \begin{itemize}
   \item \textit{Verifiable off-chain Computation}, a technique where a prover executes a computation and then publishes the result including a cryptographic proof attesting the computation’s correctness to the blockchain. An on-chain verifier then verifies the proof and persists the result in case of success. Identified existing solutions are zkSNARKs, Bulletproofs and zkSTARKs. zkSNARKs require a setup phase which is more expensive than naive execution. After the setup, however, proof size and verification complexity are extremely small and independent of circuit complexity. This amortization makes zkSNARKs especially efficient for computations executed repeatedly, which is usually the case for off-chain state transitions. While zkSTARKs and Bulletproofs require no setup, proof size and verification complexity grow with circuit complexity, which limits applicability.
-  \item \textit{Secure Multiparty Computation}, SMPCs, enable a set of nodes to compute functions on secret data in a way that none of the nodes ever has access to the data in its entirety. Identifies Enigma, which proposes a privacy-preserving decentralized computation platform based on sMPCs where a blockchain stores a publicly verifiable audit trail. However, current sMPC protocols add too much overhead for such a network to be practical. Hence, Enigma now relies on Trusted Execution Environments
-  \item \textit{Enclave-based Computation}, relying on Trusted Execution Environments (TEE) to execute computations off-chain. Identified existing solutions are Enigma and Ekiden which present two different implementations of EOCs. In Enigma, programs can either be executed on-chain or in enclaves that are distributed across a separate off-chain network. An Enigma-specific scripting language allows developers to mark objects as private and hence, enforce off-chain computation. In contrast to Enigma, Ekiden does not allow on-chain computation but instead, the blockchain is solely used as persistent state storage.
-  \item \textit{Incentive-driven Off-chain Computation}, IOC, relies on incentive mechanisms applied to motivate off-chain computation and guarantee computational correctness. IOCs inherit two critical design issues: (1) Keep verifiers motivated to validate solutions and (2) reduce computational effort for the on-chain judge. The paper identifies TrueBit, as the first IOC implementation, proposing solutions for both challenges. As verifiers would stop validating if solvers only published correct solutions, TrueBit enforces solvers to provide erroneous solutions from time to time and offers a reward to the verifiers for finding them.
+  \item \textit{Secure Multiparty Computation}, SMPCs, enable a set of nodes to compute functions on secret data in a way that none of the nodes ever has access to the data in its entirety. Identifies Enigma, which proposes a privacy-preserving decentralized computation platform based on multiple parties where a blockchain stores a publicly verifiable audit trail. However, current SMPC protocols add too much overhead for them to be practical. Hence, Enigma now relies on Trusted Execution Environments.
+
+  %FIXME: clarificar se este Enigma é uma implementação (ou um produto?) desta abordagem ou outra coisa. adicionar referencia para Enigma
+
+  \item \textit{Enclave-based Computation}, EbC, relying on Trusted Execution Environments (TEE) to execute computations off-chain. Identified existing solutions are Enigma and Ekiden which present two different implementations of EbCs. In Enigma, programs can either be executed on-chain or in enclaves that are distributed across a separate off-chain network. An Enigma-specific scripting language allows developers to mark objects as private and hence, enforce off-chain computation. In contrast to Enigma, Ekiden does not allow on-chain computation but instead, the blockchain is solely used as persistent state storage.
+
+  % FIXME: Add reference to Enigma and Ekiden
+  % FIXME: Explain what are enclaves
+
+  \item \textit{Incentive-driven Off-chain Computation}, IOC, relies on incentive mechanisms applied to motivate off-chain computation and guarantee computational correctness. IOCs inherit two critical design issues: (1) keep verifiers motivated to validate solutions and (2) reduce computational effort for the on-chain judge. The paper identifies TrueBit, as the first IOC implementation, proposing solutions for both challenges. As verifiers would stop validating if solvers only published correct solutions, TrueBit enforces solvers to provide erroneous solutions from time to time and offers a reward to the verifiers for finding them.
+
+  % FIXME: Add reference for TrueBit
+
 \end{itemize}
 
 
 
 \section{Commercial Products and Projects}
 
-To search for existing commercial products and projects, Google, a search engine and Medium, a platform for blog posting used widely by developers and the start-up community, were used as a means to find new projects or solutions for the oracle trust problem. Using these two tools a lot of projects were found trying to solve the oracle trust problem and are solely documented on white-papers or on the companies website documentation page. This kind of literature cannot be found in peer-reviewed databases, but can nonetheless provide invaluable information and is therefore worth being analysed.
+% FIXME: Adicionar a isto uma justificação breve de porque é que esta pesquisa (ao contrário da anterior) não foi sistemática.
 
-The results of this search revealed a wide range of projects and protocols trying to achieve with varying degrees of decentralization or authenticity, a short explanation of each will be detailed here:
+To search for existing commercial products and projects, Google, a search engine and Medium, a platform for blog posting used widely by developers and the start-up community, were used as a means to find new projects or solutions for the oracle trust problem. Using these two tools a lot of projects were found trying to solve the oracle trust problem and are solely documented on white-papers or on the companies' website documentation page. This kind of literature cannot be found in peer-reviewed databases, but can nonetheless provide invaluable information and is therefore worth being analysed.
+
+The results of this search revealed a wide range of projects and protocols with varying degrees of decentralization or authenticity. A short explanation of each will be detailed here:
 
 \begin{itemize}
   \item Oraclize.it \cite{Oraclize.it2018OraclizeDocumentation}, provides Authenticity Proofs for the data it fetches guaranteeing that the original data-source is genuine and untampered and can even make use of several data sources in order the gather trustable data, but its centralized model does not guarantee an always available service.
@@ -176,7 +210,13 @@ The results of this search revealed a wide range of projects and protocols tryin
 
 \section{Summary and Conclusions}
 
+% FIXME: Summary, ou Conclusions, evita misturar os dois... Esta secção está a precisar de ser reorganizada. começas por fazer a distinção entre data-carrier oracles e computation oracles, depois falas de questões bibliométricas ("lack of academic research"...) e depois voltas a falar de diferenças entre oracles. Sugiro que fales apenas de questões bibliométricas primeiro (e podes concluir sobre várias outras de que falas em cima mas para as quais não tens aqui informação nas conclusões) e então depois tentasses concluir sobre os oracles que encontraste.  Ontem chegamos a falar em dividir estas conclusões, uma para a SLR e outra para a pesquisa no google, mas depois de ler todo o capítulo de novo estou a achar que faz mais sentido manter apenas uma secção final de conclusões. Nesta secção (ou numa anterior, a adicionar) seria umportante tentar responder às perguntas de investigação que colocaste no início.
+
 Summing up, this research highlighted two main types of oracles. The first is \textbf{Data-Carrier oracles}, whose main purpose is relaying query results from a trusted data source to a smart contract. The second is \textbf{Computation Oracles}, which not only relay query results but also perform the relevant computation themselves. Computation oracles can be used as building blocks to construct off-chain computation markets. A summary of the results is described in Table \ref{oracle-summary}.
+
+% FIXME: Force table to be on this section when compiled
+
+% FIXME: Além do mecanismo que é usado, era interessante concluir aqui o que é que é efetivamente confiável. Será que conseguimos decompor esta coluna em várias? Por exemplo: Incentive System, Specialized Hardware, Concensus Protocol, Authenticity Proofs, Data carrier, Computational. A ideia seria que se conseguisse visualmente perceber de forma rápida até que ponto têm coisas em comum.
 
 \begin{table}[]
   \centering
@@ -198,10 +238,14 @@ Summing up, this research highlighted two main types of oracles. The first is \t
 
 Two main conclusions come from both academic and non-academic research.
 
-First of all, there is a clear lack of academic research on the topic of creating trustable oracles. Town Crier proposes a solution for relaying data securely but requiring specific hardware. Astraea and \cite{MontotoMonroy2018BitcoinBlockchain} uses incentives and game theory as a means for good oracle behaviour but does not provide complete trust in edge cases in which pursing erratic behaviour may be worth it.
+% FIXME: Explicar porque é que acho que não há pesquisa suficiente a nivel acadamico.
 
-\cite{Eberhardt2018Off-chainingComputations} is very promising in the field of Internet of Things for oracle sensor authentication but can only guarantee that data was generated by a specific sensor but the approach cannot be generalised for other oracle scenarios.
+First of all, there is a clear lack of academic research on the topic of creating trustable oracles. Town Crier proposes a solution for relaying data securely but requiring specific hardware. Astraea and the work done by \cite{MontotoMonroy2018BitcoinBlockchain} uses incentives and game theory as a means for good oracle behaviour but does not provide complete trust in edge cases in which pursing erratic behaviour may be worth it.
+
+The work done by \cite{Eberhardt2018Off-chainingComputations} is very promising in the field of Internet of Things for oracle sensor authentication but can only guarantee that data was generated by a specific sensor but the approach cannot be generalised for other oracle scenarios.
 
 Secondly, even though the main research on trustable oracles is being pursued by startups or sole developers all the existing projects seem to be blockchain specific or in very early phases and not yet ready to be generally adopted.
 
-The literature review points out the lack of research done by the academic in trying to solve one of the most important motives for blockchain general adoption. Only second, maybe, to scalability. The oracle trust problem, efficiently solved, opens doors to the contracts of the futures. Start-ups and sole developers are for now the main force in solving this problem which launches the challenge and motivation for the next Chapter of this research.
+%FIXME: mais duas potenciais colunas para a tabela acima: specific to a blockchain, maturity (available product, announced for future availability, proposed design, ...)
+
+The literature review points out the lack of research done by the academic in trying to solve one of the most important motives for blockchain general adoption. Only second, maybe, to scalability. The oracle trust problem, efficiently solved, opens doors to the contracts of the futures. Start-ups and sole developers are for now the main force in solving this problem which launches the challenge and motivation for the next chapter of this research.
