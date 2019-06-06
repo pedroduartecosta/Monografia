@@ -2,28 +2,38 @@
 
 \section*{}
 
-In this chapter, the author takes a deep dive into existing authenticity mechanisms, in terms of their applicability and limitations. This Chapter backs several statements in regard to certain proofs in the following Chapters and can be skipped and consulted later on when assertions regarding the proofs are taken.
+% FIXME: Falta explicar a importância de authenticity proofs e  fazer a ligação com o que será dito no capítulo da introdução sobre isso
+
+In this chapter, the author takes a deep dive into existing authenticity mechanisms, in terms of their applicability and limitations.
+
+%FIXME: rever a frase. a quantidade de dados tb se torna mainstream?!
 
 As technology evolves and becomes mainstream so does the amount of generated data and its distribution. And so it becomes crucial to be able to authenticate a piece of information as originating from a known, trusted source.
 
-In the context of today's web, we are accustomed to trusting that a certain website or data is originated from the expected source due to the general adoption of the HTTPS protocol. An extension of the HTTP protocol which creates an encrypted and authenticated channel between the client and the web-server providing the requested information. Then it becomes a matter of whether we trust the source or not, but not doubts are raised as for the channel through which we received it.
+% FIXME: clarificar porquê que se torna crucial. qual a consequência se a autenticação da informação não existir?
 
-Unfortunately, in the context of blockchain, the most used, available and trusted protocols have not a direct way of communicating with HTTPS enabled services and therefore obtain authenticated data. Creating a need for a trusted service, which if centralized if fallible unless it can provide irrefutable proof of its honesty.
+In the context of today's Web, we are accustomed to trusting that a certain website or data is originated from the expected source due to the general adoption of the HTTPS protocol. An extension of the HTTP protocol which creates an encrypted and authenticated channel between the client and the web-server providing the requested information. Then it becomes a matter of whether we trust the source or not, but no doubts are raised as for the channel through which we received it.
 
-Trust in oracles comprises, therefore, two main components, service availability, trusting that the service will always return a response to our query, and untampered relay of information, meaning the information the oracle computed or queried is original and not tampered with. If oracles are compromised we risk compromising the trust of the underlying blockchain by inputting falsified information in a system that is trusted to always have a valid state. Therefore it is imperative that oracles provide a proof for the information they provide, as well, as to keep a decentralized approach by having a network of oracles always available to answer the queries.
+Unfortunately, in the context of blockchain, the most used, available and trusted protocols do not have a direct way of communicating with HTTPS enabled services and therefore obtain authenticated data. This creates the need for a trusted service to input that information, but trusting in a third-party service requires it to provide irrefutable proof of its honesty.
 
-Oracles, currently resort to two main techniques to prove their honesty. Authenticity proofs, which is a software or hardware generated cryptographic proof during or after an execution that can later be used to prove the integrity and honesty of the execution or of the provided data. And Trusted Execution Environments (TEE) which add another layer of security by isolating the application code from the environment in which it ran, and may also provide cryptographic proof of their honest behaviour.
+Oracles, currently resort to two main techniques to prove their honesty. (1) Authenticity proofs, which is a software or hardware generated cryptographic proof during or after an execution that can later be used to prove the integrity and honesty of the execution or of the provided data. (2) Trusted Execution Environments (TEE) which add another layer of security by isolating the application code from the environment in which it ran, and may also provide cryptographic proof of their honest behaviour.
 
 \section{Trusted Execution Environment}
 A Trusted Execution Environment is a secure computational environment that is strongly isolated from the main operating system. It provides application isolation, integrity and memory confidentiality. Sensitive data is stored, processed and protected from the main operating system or network. This isolation is accomplished through software and hardware-enforced mechanism. TEE runs a small operating system which exposes a minimal interface to the running application and therefore reduces the attack surface. Advanced TEE embeds unique identities that allow to verify the device authenticity and can be used to generate proofs of the device honest execution.
+
+% FIXME: Seria excelente dar aqui alguns exemplos de TEEs, à semelhança do que se faz na secção seguinte para as APs. Esta secção precisa de referências.
 
 \section{Authenticity Proofs Mechanisms}
 
 Several authenticity mechanisms have been developed and, as described in the state-of-the-art revision, most oracles as a service providers use authenticity proofs to prove their honest behaviour. However, these proofs are not infallible and the details or their implementation are not always transparent or do not provide the disclosed level of trust. I will deep dive on the most common proofs and discuss their implementation and applicability.
 
+% FIXME: Add references
+
 \subsection{TLSNotary}
 
-TLSNotary is a mechanism for independently audited HTTPS sessions. Allowing clients to provide evidence to a third party auditor that certain web traffic occurred between himself and the server. This mechanism takes leverage of the TLS handshake protocol to create an irrefutable proof as long as the auditor trusts the server's public key by splitting the TLS master key between three parties: the server, the auditee and the auditor.
+% FIXME: devias explicar sucintamente como funciona o HTTPS e o que é o TLS. o sítio certo para isso talvez seja a secção seguinte, e talvez nem seja preciso mesmo mencionar TLS aqui.  Ambos estes acronimos (HTTPS e TLS) deviam aparecer por extenso nalgum ponto. quando explicares em que consiste o TLS, explca também o papel desta master key
+
+TLSNotary is a mechanism for independently audited HTTPS sessions. Allowing clients to provide evidence to a third party auditor that certain web traffic occurred between himself and the server. This mechanism takes leverage of the TLS handshake protocol to create an irrefutable proof, as long as the auditor trusts the server's public key, by splitting the TLS master key between three parties: the server, the auditee and the auditor.
 
 The algorithm allows an auditor to verify some part of a session by withholding a small part of the secret data used to set up the HTTPS connection while allowing the client to conduct an HTTPS session normally. The auditor never fully possesses, at any time, any of the session keys and therefore cannot decrypt any sensitive information and can only verify that certain traffic did occur.
 
@@ -32,7 +42,7 @@ TLSNotary modifies the TLS handshake protocol on the client side by levering som
 
 \begin{ceqn}
     \begin{align}
-        PRF(secret,label,seed) = PMD5(S1,label+seed) \otimes PSHA-1(S2,label+seed)
+        PRF(secret,label,seed) = P_MD5(S1,label+seed) \otimes P_SHA-1(S2,label+seed)
     \end{align}
 \end{ceqn}
 
@@ -85,58 +95,63 @@ The auditee and auditor calculate X and Y, respectively.
 
 The auditor sends sufficient bytes from Y to the auditee so that it can compute the necessary encryption keys and client mac key to send the request to the server.
 
-Then the server response is received, but not decrypted, and the network traffic is logged and a hash is of the traffic is computed and set to the auditor as commitment.
+Then the server response is received, but not decrypted, and the network traffic is logged and a hash of the traffic is computed and set to the auditor as commitment.
 
-Only then, does the auditor send the remaining bytes of Y to the auditee that allow him to calculate the server mac key and safely execute a normal TLS decryption and authentication steps.
+Only then, does the auditor send the remaining bytes of Y to the auditee and this allows him to calculate the server mac key and safely execute the regular TLS decryption and authentication steps.
 
-These complex sequence of calculations prevent the auditee from creating a fake version of the post-handshake traffic from the server since he did not have in his possession the server-mac-write-secret to decrypt and authenticate the initially requested data.
+This complex sequence of calculations prevents the auditee from creating a fake version of the post-handshake traffic from the server since he did not have in his possession the server-mac-write-secret to decrypt and authenticate the initially requested data.
 
 A more detailed flow and explanation can be consulted in the TLSNotary white-paper \cite{2014TLSnotary-aSessions}.
 
 
 \subsubsection{Limitations}
-TLSNotary provides some capabilities to attest TLS connections but comes with several limitations. Firstly, TLSNotary supports only TLS 1.0 or 1.1, the properties mentioned before are not present in TLS 1.2 and 1.3 and former are considered less secure versions of TLS. Secondly, TLSNotary depends on RSA Key exchange, which does not provide forward secrecy. Thirdly, TLSNotary uses MD5 and SHA-1 functions, which are now considered deprecated. Finally and most importantly, TLSNotary requires trusting in a third party in most of its implementations, such as in Oraclize \cite{Oraclize.it2018OraclizeDocumentation}, and being an interactive proof there is no way to verify the TLSNotary proof unless you were performing the role of the auditor during the retrieval. Oraclize, runs an auditor node on Amazon Web Services(AWS), claiming that this implementation is secure as far as AWS is trusted, simply moving the trust to a bigger another central entity. It also only allows the existence of one auditor in which we must trust, in a situation in which more than one auditor is required TLSNotary will not be able to satisfy such condition.
+TLSNotary provides some capabilities to attest TLS connections but comes with several limitations. Firstly, TLSNotary supports only TLS 1.0 or 1.1, the properties mentioned before are not present in TLS 1.2 and 1.3 and the former are considered less secure versions of TLS. Secondly, TLSNotary depends on RSA Key exchange, which does not provide forward secrecy. Thirdly, TLSNotary uses MD5 and SHA-1 functions, which are now considered deprecated. Finally and most importantly, TLSNotary requires trusting in a third party in most of its implementations, such as in Oraclize \cite{Oraclize.it2018OraclizeDocumentation}, and being an interactive proof there is no way to verify the TLSNotary proof unless you were performing the role of the auditor during the retrieval. Oraclize, runs an auditor node on Amazon Web Services (AWS), claiming that this implementation is secure as far as AWS is trusted, simply moving the trust to a larger central entity. It also only allows the existence of one auditor in which we must trust, TLSNotary will not be a suitable solution if more than one auditor is required.
 
 
 \subsubsection{Conclusions}
 The TLSNotary proof is promising due to be software based and is, as of this moment, the most spoken of authenticity proof. However, it's applicability is increasingly getting limited due to the deployment of new TLS versions and the assurances provided by the proof current implementations, which simply move the trust to a bigger entity. Therefore, it should not be considered a reliable authentication method for future implementations.
 
 \subsection{Android Proof}
+%FIXME: add references
+
 In the oracle context, the Android proof results from Oraclize research and development efforts. It takes leverage of SafetyNet software attestation and Android Hardware Attestation to provision a secure and auditable environment to fetch authenticated data.
 
 \subsubsection{SafetyNet Attestation}
 SafetyNet, developed by Google, is an API service that allows assessing the Android device in which an app is running on. It provides a cryptographically-signed attestation, assessing the integrity of the device, looking at the software and hardware environment for integrity issues. By returning an SHA-256 hash of the application that called the SafetyNet API it allows assessing if the application running on the device has not been tampered with by comparing the application SHA-256 hash with its publicly available and distributed open-source code.
 
 \subsubsection{Android Hardware Attestation}
-Since Android Nougat, developers are able to generate and hardware attestation object with details regarding the device unique key stored in the Android Hardware KeyStore. The attestation object is signed by a special attestation key kept on the device and the root certificate regarding that key is a known Google certificate. This guarantees that the hardware running the code has not been tampered with.
+Since Android Nougat, developers are able to generate an hardware attestation object with details regarding the device unique key stored in the Android Hardware KeyStore. The attestation object is signed by a special attestation key kept on the device and the root certificate used by that key is a known Google certificate. This guarantees that the hardware running the code has not been tampered with.
 
 \subsubsection{How it works}
-The application running on the Android device, on its first run, creates a NIST-256p key pair, containing the Hardware Attestation Object to prove the integrity of the key, using the Android Hardware KeyStore and
+The application running on the Android device, on its first run, creates a NIST-256p key pair, containing the Hardware Attestation Object to prove the integrity of the key, using the Android Hardware KeyStore.
 
-When a request is sent to the Android device, it starts an HTTPS connection and the entire HTTP response is retrieved. The response's SHA256 hash is signed using the hardware attested key pair created on the application start. A call to SafetyNet API is then used to attest the SHA-256 hash of the application package running on the device, which should be open-source and public available and distributed, guaranteeing the application integrity and therefore that no alteration has occurred on the HTTP response before it is signed and its hash used in the SafetyNet request.
+When a request is sent to the Android device, it starts an HTTPS connection and the entire HTTP response is retrieved. The response's SHA256 hash is signed using the hardware attested key pair created on the application start. A call to SafetyNet API is then issued to attest the SHA-256 hash of the application package running on the device, which should be open-source and public available and distributed, guaranteeing the application integrity and therefore that no change has occurred on the HTTP response before it was signed and its hash used in the SafetyNet request.
 
-SafetyNet then returns an attestation response in the JSON Web Signature format (JWS) that guarantees the integrity of the application running, the integrity of the system in which the application ran and that both the HTTPS request and signing process using the initially created and attested key has taken place in the application issuing the SafetyNet request.
+SafetyNet then returns an attestation response in the JSON Web Signature format (JWS) that guarantees the integrity of the application running, the integrity of the system in which the application ran and that both the HTTPS request and the signing process using the initially created and attested key has taken place in the application issuing the SafetyNet request.
 
 The SafetyNet JWS response and the HTTP response is sent back for off-chain verification and validation.
 
 \subsubsection{Conclusions}
-The Android proof is a far more complex and in-depth authenticity proof in comparison to TLSNotary. It provides strong guarantees of software and hardware integrity as well as of the requested data. Nonetheless, it relies on a centralized authority, Google, to develop a secure Trusted Execution Environment (TEE), used by Android to generate private keys, and to maintain SafetyNet security sophisticated enough to offer good guarantees of the device and application integrity. A bottleneck in this approach can be the required use of a physical Android device, limiting the scalability of this approach, but nonetheless, as long as Google is trustworthy it is a very secure model.
+The Android proof is a far more complex and in-depth authenticity proof in comparison to TLSNotary. It provides strong guarantees of software and hardware integrity as well as of the requested data. Nonetheless, it relies on a centralized authority, Google, to develop a secure Trusted Execution Environment (TEE), used by Android to generate private keys, and to maintain SafetyNet security sophisticated enough to offer good guarantees of the device and application integrity. A bottleneck in this approach can be the required use of a physical Android device, limiting the scalability context of this approach, but nonetheless, as long as Google is trustworthy it is a very secure model.
 
 \subsection{Ledger Proof}
 
-The ledger proof is based on the use of a specific trusted environment, the Ledger Nano S and Ledger Blue, invented by a French company to secure crypto assets safely. This device provides an attestation for its authenticity and code integrity.
+The ledger proof is based on the use of a specific trusted environment, the Ledger Nano S and Ledger Blue, developed by a French company to secure crypto assets safely. This device provides an attestation for its authenticity and code integrity.
 
 \subsubsection{How it works}
 
-This device implements several layers of hardware and software to prove the security of its execution. These devices run specific software, BOLOS, which has an SDK that enables developers to build application which can be installed on the hardware. BOLOS exposes a set of kernel-level API which allows running secure cryptographic operations as well as attest the device and the code running on it. The later is very useful as it allows to run code in a secure manner and provide an attestation for the code. An application can ask the kernel to produce a signed hash of the application binary code. A special attesting key is used in this process and is safely controlled by the kernel, away from attacks attempts by any application code. With this, the ledger proof leverages both the device attesting and code attesting features to prove that the applications are running on a TEE of a ledger device.
+This device implements several layers of hardware and software to prove the security of its execution. These devices run specific software, BOLOS (Blockchain Open Ledger Operating System), which has an SDK that enables developers to build application which can be installed on the hardware. BOLOS exposes a set of kernel-level APIs which allows running secure cryptographic operations as well as attest the device and the code running on it. The later is very useful as it allows to run code in a secure manner and provides an attestation for the code. An application can ask the kernel to produce a signed hash of the application binary code. A special attesting key is used in this process and is safely controlled by the kernel, away from attacks attempts by any application code. With this, the ledger proof leverages both the device attesting and code attesting features to prove that the applications are running on a TEE of a ledger device.
 
 \subsubsection{Conclusions}
 
-Currently, the ledger proof is used by Oraclize to provide true random data to a smart contract. But its use can be extended to other computation operations that may require to run outside of the blockchain as long as support in terms of computational and memory capacity by the ledger device. The device also lacks a direct connection to the internet and therefore cannot be used to query data from the internet.
+Currently, the ledger proof is used by Oraclize to provide true random data to a smart contract. But its use can be extended to other computation operations that may require to run outside of the blockchain as long as there is support in terms of computational and memory capacity by the ledger device. The device also lacks a direct connection to the internet and therefore cannot be used to query data from the internet.
 
 
 \subsection{TLS-N}
-TLS-N \cite{Ritzdorf2017}, is the first privacy preserving TLS extension that is efficient and most importantly provides non-repudiation. TLS-N does not require the use of a third-party or any trusted hardware and is an extension to the TLS 1.3 protocol, in comparison to other implementations such as TLSNotary which rely on deprecated versions, is up to date to the current technologies.
+
+%FIXME: Explain what non-repudiation is
+
+TLS-N \cite{Ritzdorf2017}, is the first privacy preserving TLS extension that is efficient and most importantly provides non-repudiation. TLS-N does not require the use of a third-party or any trusted hardware and is an extension to the TLS 1.3 protocol. In comparison to other implementations such as TLSNotary which rely on deprecated versions, is up to date to the current technologies.
 It guarantees non-repudiation, not only in a single TLS message exchange but also in a conversation compromising several messages. It allows, with an additional computation overhead, to obfuscate certain parts of the conversation (such as passwords or other sensitive information) while keeping its trust model intact.
 
 In the TLS-N model, there is no need to trust in a single auditor, such as in TLSNotary, since the proofs are non-interactive and can be inspected by anyone, at any point in time, without having to trust in a single auditor honesty.
@@ -149,7 +164,11 @@ Initially, both generator and requester establish a TLS connection and negotiate
 
 The protocol ends when the requester sends a request for evidence. The evidence is composed of a window of the exchanged ordered messages signed by the generator. The window begins right after the handshake, this prevents Content Omission Attacks, in which if the evidence collection only starts after the request is done, and another request is asked right after (this one, inside the window collection) and the response for the first request is assumed to be the response to the second one and only this to messages are stored in the evidence window even though the answer was not to the question in the window.
 
-To generate a small proof independently of the number of messages, TLS-N uses Merkle Trees to create a chain of messages' hashes and then returns only the last hash, which to be created requires all the previous hashes. This ensures a small storage overhead per TLS session.
+%FIXME: Add diagram or explain the previous sentence
+
+To generate a small proof independently of the number of messages, TLS-N uses merkle trees to create a chain of messages' hashes and then returns only the last hash, which to be created requires all the previous hashes. This ensures a small storage overhead per TLS session.
+
+% Add reference to merkle trees
 
 
 \subsubsection{Conclusions}
@@ -159,3 +178,5 @@ TLS-N is, therefore, a promising solution to the oracle trust problem being the 
 
 
 \section{Summary and conclusions}
+
+%FIXME: Falta aqui um texto a comparar as várias opções, se possível ilustrado por uma tabela de síntese em que se mostre rapidamente em que pontos são semelhantes e diferentes
