@@ -12,21 +12,20 @@ Oracles, currently resort to two main techniques to prove their honesty. (1) Aut
 
 \section{Trusted Execution Environment (TEE)}
 A Trusted Execution Environment is a secure computational environment that is strongly isolated from the main operating system. It provides application isolation, integrity and memory confidentiality. Sensitive data is stored, processed and protected from the main operating system or network. This isolation is accomplished through software and hardware-enforced mechanism. TEE runs a small operating system which exposes a minimal interface to the running application and therefore reduces the attack surface. Advanced TEE embeds unique identities that allow to verify the device authenticity and can be used to generate proofs of the device honest execution.
-Examples of TEE are Intel Software Guard Extensions (SGX)~\footnote{More information on Intel SGX can be found here: https://software.intel.com/en-us/sgx/sdk} and ARM Trustzone-based Secure Elements~\footnote{ARM whitepaper on ARM Trustzone-based TEE can be found here: https://www.arm.com/files/pdf/TrustZone-and-FIDO-white-paper.pdf}, the latter is commonly found on smartphones.
 
-% FIXME: Seria excelente dar aqui alguns exemplos de TEEs, à semelhança do que se faz na secção seguinte para as APs. Esta secção precisa de referências.
+Examples of TEEs are Intel Software Guard Extensions (SGX)~\footnote{More information on Intel SGX can be found here: https://software.intel.com/en-us/sgx/sdk} and ARM Trustzone-based Secure Elements~\footnote{ARM whitepaper on ARM Trustzone-based TEE can be found here: https://www.arm.com/files/pdf/TrustZone-and-FIDO-white-paper.pdf}, the latter is commonly found on smartphones. Another example is Trusty~\footnote{More information on Trusty can be found here: https://source.android.com/security/trusty}, a secure Operating System (OS) that provides a TEE for Android. It is isolated from the rest of the system by both hardware and software. Trusty's isolation protects it from malicious apps installed by the user and potential vulnerabilities that may be discovered in Android.
+
+% FXIME: Confirmar se estas referencias em footnote deveriam estar em referencia mesmo no final
 
 \section{Authenticity Proofs Mechanisms}
 
 Several authenticity mechanisms have been developed and, as described in the state-of-the-art revision, most oracles as a service providers use authenticity proofs to prove their honest behaviour. However, these proofs are not infallible and the details or their implementation are not always transparent or do not provide the disclosed level of trust. I will deep dive on the most common proofs and discuss their implementation and applicability.
 
-% FIXME: Add references
-
-\subsection{TLSNotary}
+\subsection{TLSNotary}\label{proof:TLSNotary}
 
 % FIXME: devias explicar sucintamente como funciona o HTTPS e o que é o TLS. o sítio certo para isso talvez seja a secção seguinte, e talvez nem seja preciso mesmo mencionar TLS aqui.  Ambos estes acronimos (HTTPS e TLS) deviam aparecer por extenso nalgum ponto. quando explicares em que consiste o TLS, explca também o papel desta master key
 
-TLSNotary is a mechanism for independently audited HTTPS sessions. Allowing clients to provide evidence to a third party auditor that certain web traffic occurred between himself and the server. This mechanism takes leverage of the TLS handshake protocol to create an irrefutable proof, as long as the auditor trusts the server's public key, by splitting the TLS master key between three parties: the server, the auditee and the auditor.
+TLSNotary is a mechanism for independently audited HTTPS (Hyper Text Transfer Protocol Secure) sessions. Allowing clients to provide evidence to a third party auditor that certain web traffic occurred between himself and the server. This mechanism takes leverage of the TLS (Transport Layer Security)~\footnote{Information on the TLS protocol can be found here: https://www.ietf.org/rfc/rfc2246.txt} handshake protocol to create an irrefutable proof, as long as the auditor trusts the server's public key, by splitting the TLS master secret~\footnote{The master secret is used, when generating keys and MAC secrets, as an entropy source, and the random values provide unencrypted salt material and IVs for exportable ciphers.} between three parties: the server, the auditee and the auditor.
 
 The algorithm allows an auditor to verify some part of a session by withholding a small part of the secret data used to set up the HTTPS connection while allowing the client to conduct an HTTPS session normally. The auditor never fully possesses, at any time, any of the session keys and therefore cannot decrypt any sensitive information and can only verify that certain traffic did occur.
 
@@ -39,7 +38,7 @@ TLSNotary modifies the TLS handshake protocol on the client side by levering som
     \end{align}
 \end{ceqn}
 
-This function compromises two secrets, S1 and S2. The auditor and auditee will independently generate S1 and S2, respectively.
+This function compromises two secrets, S1 and S2. The auditor and auditee will independently generate random bytes of data, S1 and S2, respectively.
 
 The auditee applies P\_MD5 to S1, generating 48 bytes:
 
@@ -94,11 +93,12 @@ Only then, does the auditor send the remaining bytes of Y to the auditee and thi
 
 This complex sequence of calculations prevents the auditee from creating a fake version of the post-handshake traffic from the server since he did not have in his possession the server-mac-write-secret to decrypt and authenticate the initially requested data.
 
-A more detailed flow and explanation can be consulted in the TLSNotary white-paper \cite{2014TLSnotary-aSessions}.
+A more detailed flow and explanation can be consulted in the TLSNotary white-paper \cite{TLSNotary}.
+
 
 
 \subsubsection{Limitations}
-TLSNotary provides some capabilities to attest TLS connections but comes with several limitations. Firstly, TLSNotary supports only TLS 1.0 or 1.1, the properties mentioned before are not present in TLS 1.2 and 1.3 and the former are considered less secure versions of TLS. Secondly, TLSNotary depends on RSA Key exchange, which does not provide forward secrecy. Thirdly, TLSNotary uses MD5 and SHA-1 functions, which are now considered deprecated. Finally and most importantly, TLSNotary requires trusting in a third party in most of its implementations, such as in Oraclize \cite{Oraclize.it2018OraclizeDocumentation}, and being an interactive proof there is no way to verify the TLSNotary proof unless you were performing the role of the auditor during the retrieval. Oraclize, runs an auditor node on Amazon Web Services (AWS), claiming that this implementation is secure as far as AWS is trusted, simply moving the trust to a larger central entity. It also only allows the existence of one auditor in which we must trust, TLSNotary will not be a suitable solution if more than one auditor is required.
+TLSNotary provides some capabilities to attest TLS connections but comes with several limitations. Firstly, TLSNotary supports only TLS 1.0 or 1.1, the properties mentioned before are not present in TLS 1.2 and 1.3 and the former are considered less secure versions of TLS. Secondly, TLSNotary depends on RSA Key exchange, which does not provide forward secrecy. Thirdly, TLSNotary uses MD5 and SHA-1 functions, which are now considered deprecated. Finally and most importantly, TLSNotary requires trusting in a third party in most of its implementations, such as in Oraclize~\cite{Oraclize}, and being an interactive proof there is no way to verify the TLSNotary proof unless you were performing the role of the auditor during the retrieval. Oraclize, runs an auditor node on Amazon Web Services (AWS), claiming that this implementation is secure as far as AWS is trusted, simply moving the trust to a larger central entity. It also only allows the existence of one auditor in which we must trust, TLSNotary will not be a suitable solution if more than one auditor is required.
 
 
 \subsubsection{Conclusions}
@@ -110,10 +110,10 @@ The TLSNotary proof is promising due to be software based and is, as of this mom
 In the oracle context, the Android Proof \footnote{Documented explanation of the proof can be found here: https://provable.xyz/papers/android\_proof-rev2.pdf} results from Oraclize research and development efforts. It takes leverage of SafetyNet software attestation and Android Hardware Attestation to provision a secure and auditable environment to fetch authenticated data.
 
 \subsubsection{SafetyNet Attestation}
-SafetyNet, developed by Google, is an API service that allows assessing the Android device in which an app is running on. It provides a cryptographically-signed attestation, assessing the integrity of the device, looking at the software and hardware environment for integrity issues. By returning an SHA-256 hash of the application that called the SafetyNet API it allows assessing if the application running on the device has not been tampered with by comparing the application SHA-256 hash with its publicly available and distributed open-source code.
+SafetyNet~\footnote{Further described on the google developer page: https://developer.android.com/training/safetynet/attestation.html}, developed by Google, is an API service that allows assessing the Android device in which an app is running on. It provides a cryptographically-signed attestation, assessing the integrity of the device, looking at the software and hardware environment for integrity issues. By returning an SHA-256 hash of the application that called the SafetyNet API it allows assessing if the application running on the device has not been tampered with by comparing the application SHA-256 hash with its publicly available and distributed open-source code.
 
 \subsubsection{Android Hardware Attestation}
-Since Android Nougat, developers are able to generate an hardware attestation object with details regarding the device unique key stored in the Android Hardware KeyStore. The attestation object is signed by a special attestation key kept on the device and the root certificate used by that key is a known Google certificate. This guarantees that the hardware running the code has not been tampered with.
+Since Android Nougat~\footnote{https://www.android.com/versions/nougat-7-0/}, developers are able to generate an hardware attestation object with details regarding the device unique key stored in the Android Hardware KeyStore~\footnote{Further explanation can be found here: https://source.android.com/security/keystore/}. The attestation object is signed by a special attestation key kept on the device and the root certificate used by that key is a known Google certificate. This guarantees that the hardware running the code has not been tampered with.
 
 \subsubsection{How it works}
 The application running on the Android device, on its first run, creates a NIST-256p key pair, containing the Hardware Attestation Object to prove the integrity of the key, using the Android Hardware KeyStore.
@@ -129,11 +129,11 @@ The Android proof is a far more complex and in-depth authenticity proof in compa
 
 \subsection{Ledger Proof}
 
-The ledger proof is based on the use of a specific trusted environment, the Ledger Nano S and Ledger Blue, developed by a French company to secure crypto assets safely. This device provides an attestation for its authenticity and code integrity.
+The ledger proof is based on the use of a specific trusted environment, the Ledger Nano S~\footnote{https://shop.ledger.com/products/ledger-nano-s} and Ledger Blue~\footnote{https://shop.ledger.com/products/ledger-blue}, developed by a French company to secure crypto assets safely. This device provides an attestation for its authenticity and code integrity.
 
 \subsubsection{How it works}
 
-This device implements several layers of hardware and software to prove the security of its execution. These devices run specific software, BOLOS (Blockchain Open Ledger Operating System), which has an SDK that enables developers to build application which can be installed on the hardware. BOLOS exposes a set of kernel-level APIs which allows running secure cryptographic operations as well as attest the device and the code running on it. The later is very useful as it allows to run code in a secure manner and provides an attestation for the code. An application can ask the kernel to produce a signed hash of the application binary code. A special attesting key is used in this process and is safely controlled by the kernel, away from attacks attempts by any application code. With this, the ledger proof leverages both the device attesting and code attesting features to prove that the applications are running on a TEE of a ledger device.
+This device implements several layers of hardware and software to prove the security of its execution. These devices run specific software, BOLOS~\footnote{Specific information regarding BOLOS can be found here: https://ledger.readthedocs.io/en/0/bolos/index.html} (Blockchain Open Ledger Operating System), which has an SDK that enables developers to build application which can be installed on the hardware. BOLOS exposes a set of kernel-level APIs which allows running secure cryptographic operations as well as attest the device and the code running on it. The later is very useful as it allows to run code in a secure manner and provides an attestation for the code. An application can ask the kernel to produce a signed hash of the application binary code. A special attesting key is used in this process and is safely controlled by the kernel, away from attacks attempts by any application code. With this, the ledger proof leverages both the device attesting and code attesting features to prove that the applications are running on a TEE of a ledger device.
 
 \subsubsection{Conclusions}
 
@@ -144,7 +144,7 @@ Currently, the ledger proof is used by Oraclize to provide true random data to a
 
 %FIXME: Explain what non-repudiation is
 
-TLS-N \cite{Ritzdorf2017}, is the first privacy preserving TLS extension that is efficient and most importantly provides non-repudiation. TLS-N does not require the use of a third-party or any trusted hardware and is an extension to the TLS 1.3 protocol. In comparison to other implementations such as TLSNotary which rely on deprecated versions, is up to date to the current technologies.
+TLS-N \cite{Ritzdorf2017}, is the first privacy preserving TLS extension that is efficient and most importantly provides non-repudiation~\footnote{Non-repudiation refers to a state of affairs in which the authenticity of something cannot be challenged, meaning that there is absolute guarantee that something happened the way that it is stated.}. TLS-N does not require the use of a third-party or any trusted hardware and is an extension to the TLS 1.3 protocol. In comparison to other implementations such as TLSNotary which rely on deprecated versions, is up to date to the current technologies.
 It guarantees non-repudiation, not only in a single TLS message exchange but also in a conversation compromising several messages. It allows, with an additional computation overhead, to obfuscate certain parts of the conversation (such as passwords or other sensitive information) while keeping its trust model intact.
 
 In the TLS-N model, there is no need to trust in a single auditor, such as in TLSNotary, since the proofs are non-interactive and can be inspected by anyone, at any point in time, without having to trust in a single auditor honesty.
@@ -159,9 +159,53 @@ The protocol ends when the requester sends a request for evidence. The evidence 
 
 %FIXME: Add diagram or explain the previous sentence
 
-To generate a small proof independently of the number of messages, TLS-N uses merkle trees to create a chain of messages' hashes and then returns only the last hash, which to be created requires all the previous hashes. This ensures a small storage overhead per TLS session.
+\begin{tikzpicture}[>=latex]
+    \coordinate (A) at (2,8);
+    \coordinate (B) at (2,0);
+    \coordinate (C) at (6,8);
+    \coordinate (D) at (6,0);
+    \draw[thick] (A)--(B) (C)--(D);
+    \draw (A) node[above]{\Large Requester};
+    \draw (C) node[above]{\Large Generator};
 
-% Add reference to merkle trees
+    \coordinate (Q) at ($(C)!.1!(D)$);
+    \coordinate (R) at ($(A)!.1!(B)$);
+
+    \draw[->] (Q) -- (R) node[midway,sloped,above]{\verb$TLS Handshake$};
+    \draw[->] (R) -- (Q) node[midway,sloped,above]{\verb$TLS Handshake$};
+
+    \coordinate (E) at ($(A)!.25!(B)$);
+    \coordinate (F) at ($(C)!.35!(D)$);
+    \coordinate (G) at ($(A)!.35!(B)$);
+    \coordinate (H) at ($(C)!.45!(D)$);
+
+    \draw[->] (E) -- (F) node[midway,sloped,above]{\verb$Req x$};
+    \draw[loosely dashed, ->] (G) -- (H) node[midway,sloped,above]{\verb$Collect Evidence$};
+
+    \coordinate (I) at ($(A)!.45!(B)$);
+    \coordinate (J) at ($(C)!.55!(D)$);
+    \coordinate (K) at ($(A)!.55!(B)$);
+    \coordinate (L) at ($(C)!.65!(D)$);
+
+    \draw[->] (I) -- (J) node[midway,sloped,above]{\verb$Req y$};
+    \draw[loosely dashed, ->] (K) -- (L) node[midway,sloped,above]{\verb$Return Evidence$};
+
+    \coordinate (M) at ($(C)!.6!(D)$);
+    \coordinate (N) at ($(A)!.7!(B)$);
+    \coordinate (O) at ($(C)!.7!(D)$);
+    \coordinate (P) at ($(A)!.8!(B)$);
+
+    \draw[->] (M) -- (N) node[midway,sloped,above]{\verb$123$};
+    \draw[->] (O) -- (P) node[midway,sloped,above]{\verb$987$};
+
+
+
+
+\end{tikzpicture}
+
+
+
+To generate a small proof independently of the number of messages, TLS-N uses merkle trees~\cite{MerkleTrees} to create a chain of messages' hashes and then returns only the last hash, which to be created requires all the previous hashes. This ensures a small storage overhead per TLS session.
 
 
 \subsubsection{Conclusions}
