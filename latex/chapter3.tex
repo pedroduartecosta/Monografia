@@ -2,15 +2,7 @@
 
 \section*{}
 
-% FIXME: Falta explicar a importância de authenticity proofs e  fazer a ligação com o que será dito no capítulo da introdução sobre isso
-
 In this chapter, the author takes a deep dive into existing authenticity mechanisms, in terms of their applicability and limitations.
-
-%FIXME: rever a frase. a quantidade de dados tb se torna mainstream?!
-
-As technology evolves and becomes mainstream so does the amount of generated data and its distribution. And so it becomes crucial to be able to authenticate a piece of information as originating from a known, trusted source.
-
-% FIXME: clarificar porquê que se torna crucial. qual a consequência se a autenticação da informação não existir?
 
 In the context of today's Web, we are accustomed to trusting that a certain website or data is originated from the expected source due to the general adoption of the HTTPS protocol. An extension of the HTTP protocol which creates an encrypted and authenticated channel between the client and the web-server providing the requested information. Then it becomes a matter of whether we trust the source or not, but no doubts are raised as for the channel through which we received it.
 
@@ -18,8 +10,9 @@ Unfortunately, in the context of blockchain, the most used, available and truste
 
 Oracles, currently resort to two main techniques to prove their honesty. (1) Authenticity proofs, which is a software or hardware generated cryptographic proof during or after an execution that can later be used to prove the integrity and honesty of the execution or of the provided data. (2) Trusted Execution Environments (TEE) which add another layer of security by isolating the application code from the environment in which it ran, and may also provide cryptographic proof of their honest behaviour.
 
-\section{Trusted Execution Environment}
+\section{Trusted Execution Environment (TEE)}
 A Trusted Execution Environment is a secure computational environment that is strongly isolated from the main operating system. It provides application isolation, integrity and memory confidentiality. Sensitive data is stored, processed and protected from the main operating system or network. This isolation is accomplished through software and hardware-enforced mechanism. TEE runs a small operating system which exposes a minimal interface to the running application and therefore reduces the attack surface. Advanced TEE embeds unique identities that allow to verify the device authenticity and can be used to generate proofs of the device honest execution.
+Examples of TEE are Intel Software Guard Extensions (SGX)~\footnote{More information on Intel SGX can be found here: https://software.intel.com/en-us/sgx/sdk} and ARM Trustzone-based Secure Elements~\footnote{ARM whitepaper on ARM Trustzone-based TEE can be found here: https://www.arm.com/files/pdf/TrustZone-and-FIDO-white-paper.pdf}, the latter is commonly found on smartphones.
 
 % FIXME: Seria excelente dar aqui alguns exemplos de TEEs, à semelhança do que se faz na secção seguinte para as APs. Esta secção precisa de referências.
 
@@ -114,7 +107,7 @@ The TLSNotary proof is promising due to be software based and is, as of this mom
 \subsection{Android Proof}
 %FIXME: add references
 
-In the oracle context, the Android proof results from Oraclize research and development efforts. It takes leverage of SafetyNet software attestation and Android Hardware Attestation to provision a secure and auditable environment to fetch authenticated data.
+In the oracle context, the Android Proof \footnote{Documented explanation of the proof can be found here: https://provable.xyz/papers/android\_proof-rev2.pdf} results from Oraclize research and development efforts. It takes leverage of SafetyNet software attestation and Android Hardware Attestation to provision a secure and auditable environment to fetch authenticated data.
 
 \subsubsection{SafetyNet Attestation}
 SafetyNet, developed by Google, is an API service that allows assessing the Android device in which an app is running on. It provides a cryptographically-signed attestation, assessing the integrity of the device, looking at the software and hardware environment for integrity issues. By returning an SHA-256 hash of the application that called the SafetyNet API it allows assessing if the application running on the device has not been tampered with by comparing the application SHA-256 hash with its publicly available and distributed open-source code.
