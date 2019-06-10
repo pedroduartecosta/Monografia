@@ -142,8 +142,6 @@ Currently, the ledger proof is used by Oraclize to provide true random data to a
 
 \subsection{TLS-N}
 
-%FIXME: Explain what non-repudiation is
-
 TLS-N \cite{Ritzdorf2017}, is the first privacy preserving TLS extension that is efficient and most importantly provides non-repudiation~\footnote{Non-repudiation refers to a state of affairs in which the authenticity of something cannot be challenged, meaning that there is absolute guarantee that something happened the way that it is stated.}. TLS-N does not require the use of a third-party or any trusted hardware and is an extension to the TLS 1.3 protocol. In comparison to other implementations such as TLSNotary which rely on deprecated versions, is up to date to the current technologies.
 It guarantees non-repudiation, not only in a single TLS message exchange but also in a conversation compromising several messages. It allows, with an additional computation overhead, to obfuscate certain parts of the conversation (such as passwords or other sensitive information) while keeping its trust model intact.
 
@@ -155,55 +153,28 @@ TLs-N requires the web server (generator) and the client (requester) to have bot
 
 Initially, both generator and requester establish a TLS connection and negotiate the TLS-N parameters in the handshake. The generator stores the state of the conversation which comprises a hash value incorporating all previous records, an ordering vector and the time stamp from the start of the session.
 
-The protocol ends when the requester sends a request for evidence. The evidence is composed of a window of the exchanged ordered messages signed by the generator. The window begins right after the handshake, this prevents Content Omission Attacks, in which if the evidence collection only starts after the request is done, and another request is asked right after (this one, inside the window collection) and the response for the first request is assumed to be the response to the second one and only this to messages are stored in the evidence window even though the answer was not to the question in the window.
+The protocol ends when the requester sends a request for evidence. The evidence is composed of a window of the exchanged ordered messages signed by the generator. The window begins right after the handshake, this prevents Content Omission Attacks, depicted on Figure~\ref{fig:/figures/tlsn-content-omission}.
 
-%FIXME: Add diagram or explain the previous sentence
+\begin{figure*}[h]
+    \begin{center}
+      \leavevmode
+      \includegraphics[width=0.9\textwidth]{figures/tlsn-content-omission.PNG}
+      \caption{Content Omission Attack - The left figure shows the original and the right figure the signed conversation.}{Image extracted from \citet{Ritzdorf2017a}}
+      \label{fig:/figures/tlsn-content-omission}
+    \end{center}
+\end{figure*}
 
-\begin{tikzpicture}[>=latex]
-    \coordinate (A) at (2,8);
-    \coordinate (B) at (2,0);
-    \coordinate (C) at (6,8);
-    \coordinate (D) at (6,0);
-    \draw[thick] (A)--(B) (C)--(D);
-    \draw (A) node[above]{\Large Requester};
-    \draw (C) node[above]{\Large Generator};
-
-    \coordinate (Q) at ($(C)!.1!(D)$);
-    \coordinate (R) at ($(A)!.1!(B)$);
-
-    \draw[->] (Q) -- (R) node[midway,sloped,above]{\verb$TLS Handshake$};
-    \draw[->] (R) -- (Q) node[midway,sloped,above]{\verb$TLS Handshake$};
-
-    \coordinate (E) at ($(A)!.25!(B)$);
-    \coordinate (F) at ($(C)!.35!(D)$);
-    \coordinate (G) at ($(A)!.35!(B)$);
-    \coordinate (H) at ($(C)!.45!(D)$);
-
-    \draw[->] (E) -- (F) node[midway,sloped,above]{\verb$Req x$};
-    \draw[loosely dashed, ->] (G) -- (H) node[midway,sloped,above]{\verb$Collect Evidence$};
-
-    \coordinate (I) at ($(A)!.45!(B)$);
-    \coordinate (J) at ($(C)!.55!(D)$);
-    \coordinate (K) at ($(A)!.55!(B)$);
-    \coordinate (L) at ($(C)!.65!(D)$);
-
-    \draw[->] (I) -- (J) node[midway,sloped,above]{\verb$Req y$};
-    \draw[loosely dashed, ->] (K) -- (L) node[midway,sloped,above]{\verb$Return Evidence$};
-
-    \coordinate (M) at ($(C)!.6!(D)$);
-    \coordinate (N) at ($(A)!.7!(B)$);
-    \coordinate (O) at ($(C)!.7!(D)$);
-    \coordinate (P) at ($(A)!.8!(B)$);
-
-    \draw[->] (M) -- (N) node[midway,sloped,above]{\verb$123$};
-    \draw[->] (O) -- (P) node[midway,sloped,above]{\verb$987$};
+In this situation the evidence collection only starts after the first request is done, and another request is asked right after (this one, inside the window collection, Req y on the image) and the response for the first request is assumed to be the response to the second one. Only this two messages are stored in the evidence window, since context is missing in the signed conversation, the response 123 appears to belong to request y which is incorrect. Therefore, TLS-N always starts right after the TLS handshake. The correct TLS-N flow is presented on Figure~\ref{fig:/figures/tlsn-normal-flow}.
 
 
-
-
-\end{tikzpicture}
-
-
+\begin{figure*}[h]
+    \begin{center}
+      \leavevmode
+      \includegraphics[width=0.7\textwidth]{figures/tlsn-normal-flow.PNG}
+      \caption{Simplied Overview of TLS-N.}{Image extracted from \citet{Ritzdorf2017a}}
+      \label{fig:/figures/tlsn-normal-flow}
+    \end{center}
+\end{figure*}
 
 To generate a small proof independently of the number of messages, TLS-N uses merkle trees~\cite{MerkleTrees} to create a chain of messages' hashes and then returns only the last hash, which to be created requires all the previous hashes. This ensures a small storage overhead per TLS session.
 
