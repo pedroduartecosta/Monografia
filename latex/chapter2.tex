@@ -12,7 +12,7 @@ The topic of blockchain oracles is still unexplored territory mostly investigate
 
 To get an overview of academic research a systematic literature review was performed. It's main components and finding are described in this section.
 
-A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders \cite{Kitchenham2007GuidelinesEngineering}, meaning, not duplicating existing research and find the gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review, to the extent that a human can, it is necessary to clarify and identify at the beginning of the research its methodology, what are the data sources and what is the selection criteria.
+A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders, meaning, not duplicating existing research and find the gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review, to the extent that a human can, it is necessary to clarify and identify at the beginning of the research its methodology, what are the data sources and what is the selection criteria.
 
 The goal of this literature review is to get a sense of the corpus of existing works on the topic of blockchain oracles, and the directions and extent to which previous research has rendered significant results.
 
@@ -28,14 +28,9 @@ First of all and to guide the focus of the research, the following research ques
 \textit{RQ2}, tries to identify the direction that is proving to be the most effective. Analysing past solutions that never made it into production and solutions currently adopted.
 
 \subsection{Search Strategy and Data-sources}
-Figure \ref{fig:/figures/SLR_stages}, presents the predefined review strategy used in order to achieve such a goal and maintain unbiased, transparent and reproducible research.
+Figure \ref{fig:/figures/SLR_stages}, depicts the predefined review strategy used in order to achieve such a goal and maintain unbiased, transparent and reproducible research. These steps are inspired on the guidelines for performing a systematic review by Kitchenham et al., 2007 \citet{Kitchenham2007}.
 
-% FIXME: Explain each step for the review strategy. Explain the diference in "Screening and cleaning" box from the quality assessment exclusion boxes.
-
-
-
-
-\begin{figure*}[t]
+\begin{figure*}[h]
   \begin{center}
     \leavevmode
     \includegraphics[width=\textwidth]{SLR_stages.png}
@@ -44,8 +39,17 @@ Figure \ref{fig:/figures/SLR_stages}, presents the predefined review strategy us
   \end{center}
 \end{figure*}
 
+The first step, \textbf{Search Strategy}, compromises a preliminary search on several databases trying to optimize the query that best fits the research questions. After identifying the set of keywords that best describe the problem a full query is built and tested. Finally, we define and describe the steps to of the systematic review.
 
-The following four electronic databases were used to query for such information:
+Once a satisfactory query is achieved, we proceed to the next step, \textbf{Study selection}, here we aggregate the studies from all databases and in the \textit{Screening and cleaning} phase we remove papers written in other languages or duplicated.
+
+Next, in the \textbf{Quality assessment} step we iteratively exclude papers that do not answers to any of the research questions. Initially analysing only the title, and alter the abstract and so on until a full read of the article seems worth it to take conclusions and respond to que research queries.
+
+This leads to the \textbf{Data extraction} step, in which we take and summarize the findings after reading each paper.
+
+So that later, in the \textbf{Data synthesis} step, we can summarize all the findings, infer some conclusions and answer the research questions.
+
+Having defined the strategy for the systematic review and after testing some keywords on several databases, the author selected the following four electronic databases to query for relevant information:
 
 \begin{itemize}
   \item ACM Digital Library
@@ -55,7 +59,7 @@ The following four electronic databases were used to query for such information:
 \end{itemize}
 
 
-The defined search query for the search of the relevant papers was the following:
+The defined search query was the following:
 
 \texttt{
   (("blockchain" OR "block chain" OR "block-chain")
@@ -148,7 +152,7 @@ The study selection process initially started with a pool of 123 papers from the
 The following process resulted in three articles and two theses that approach varying problems in implementing and guaranteeing trust in oracles.
 
 Town Crier (TC) \cite{Zhang2016TownCrier}, leverages trusted hardware, specifically Intel SGX\footnote{Intel Corporation. Intel® Software Guard Extensions
-SDK. https://software.intel.com/en-us/sgx-sdk, 2019}, to scrape HTTPS-enabled websites and serve source-authenticated data to smart contracts. TC architecture involves a TC contract on the blockchain that receives datagram requests from a client contract and communicates those request to a TC server which then retrieves an answer from a data source through an HTTPS connection.
+  SDK. https://software.intel.com/en-us/sgx-sdk, 2019}, to scrape HTTPS-enabled websites and serve source-authenticated data to smart contracts. TC architecture involves a TC contract on the blockchain that receives datagram requests from a client contract and communicates those request to a TC server which then retrieves an answer from a data source through an HTTPS connection.
 
 % FIXME: O que achas de incluir em cada um destes parágrafos uma figura da arquitetura de cada uma destas soluções? não seriam diagramas genéricos como os que aparecem mais à frente no catálogo, seriam instanciados a estes oracles tanto quanto possível. Não tenho a certeza se para todos, mas para alguns, além do diagrama de arquitetura poderia fazer sentido incluir um diagrama de atividades, para explicar de que forma é que os vários componentes interagem numa utilização típica
 
@@ -172,16 +176,16 @@ J. Eberhardt \cite{Eberhardt2018Off-chainingComputations} does not propose a spe
   \item \textit{Verifiable off-chain Computation}, a technique where a prover executes a computation and then publishes the result including a cryptographic proof attesting the computation’s correctness to the blockchain. An on-chain verifier then verifies the proof and persists the result in case of success. Identified existing solutions are zkSNARKs, Bulletproofs and zkSTARKs. zkSNARKs require a setup phase which is more expensive than naive execution. After the setup, however, proof size and verification complexity are extremely small and independent of circuit complexity. This amortization makes zkSNARKs especially efficient for computations executed repeatedly, which is usually the case for off-chain state transitions. While zkSTARKs and Bulletproofs require no setup, proof size and verification complexity grow with circuit complexity, which limits applicability.
   \item \textit{Secure Multiparty Computation}, SMPCs, enable a set of nodes to compute functions on secret data in a way that none of the nodes ever has access to the data in its entirety. Identifies Enigma, which proposes a privacy-preserving decentralized computation platform based on multiple parties where a blockchain stores a publicly verifiable audit trail. However, current SMPC protocols add too much overhead for them to be practical. Hence, Enigma now relies on Trusted Execution Environments.
 
-  %FIXME: clarificar se este Enigma é uma implementação (ou um produto?) desta abordagem ou outra coisa. adicionar referencia para Enigma
+        %FIXME: clarificar se este Enigma é uma implementação (ou um produto?) desta abordagem ou outra coisa. adicionar referencia para Enigma
 
   \item \textit{Enclave-based Computation}, EbC, relying on Trusted Execution Environments (TEE) to execute computations off-chain. Identified existing solutions are Enigma and Ekiden which present two different implementations of EbCs. In Enigma, programs can either be executed on-chain or in enclaves that are distributed across a separate off-chain network. An Enigma-specific scripting language allows developers to mark objects as private and hence, enforce off-chain computation. In contrast to Enigma, Ekiden does not allow on-chain computation but instead, the blockchain is solely used as persistent state storage.
 
-  % FIXME: Add reference to Enigma and Ekiden
-  % FIXME: Explain what are enclaves
+        % FIXME: Add reference to Enigma and Ekiden
+        % FIXME: Explain what are enclaves
 
   \item \textit{Incentive-driven Off-chain Computation}, IOC, relies on incentive mechanisms applied to motivate off-chain computation and guarantee computational correctness. IOCs inherit two critical design issues: (1) keep verifiers motivated to validate solutions and (2) reduce computational effort for the on-chain judge. The paper identifies TrueBit, as the first IOC implementation, proposing solutions for both challenges. As verifiers would stop validating if solvers only published correct solutions, TrueBit enforces solvers to provide erroneous solutions from time to time and offers a reward to the verifiers for finding them.
 
-  % FIXME: Add reference for TrueBit
+        % FIXME: Add reference for TrueBit
 
 \end{itemize}
 
@@ -228,7 +232,7 @@ Summing up, this research highlighted two main types of oracles. The first is \t
     \cite{Gordon2017ProvenanceSensorsb}       & Computation  & Yes                 & Sets of public and private keys      \\
     \cite{MontotoMonroy2018BitcoinBlockchain} & Data carrier & Yes                 & Incentive based                      \\
     TrueBit                                   & Computation  & Yes                 & Incentive based                      \\
-    Oraclize.it                               & Data carrier & No                  & TLSNotary~\ref{proof:TLSNotary}                            \\
+    Oraclize.it                               & Data carrier & No                  & TLSNotary~\ref{proof:TLSNotary}      \\
     ChainLink                                 & Data carrier & Yes                 & Query multiple sources               \\
     SchellingCoin                             & Computation  & Yes                 & Incentive based                      \\ \hline
   \end{tabular}
