@@ -21,10 +21,10 @@ In this section, I will describe several possible architectures and point out us
 \section{Oracle as a Service w/ Single Data Feed.}\label{OaaSwSingleDataFeed}
 
 \subsection{Context}
-Connecting smart contracts with information provided by data-feeds, which do not, by themselves, input the required information on the blockchain requires the use of a trusted oracle. Developing and maintaining a oracle may be prohibitive in terms of cost and desired time to market. Outsourcing such service would be desirable in this context, it may not be in the interest of the company to specialize in the secure development of oracles.
+Connecting smart contracts with information provided by data-feeds, which do not, by themselves, input the required information on the blockchain requires the use of a trusted oracle. Developing and maintaining a oracle may be prohibitive in terms of cost (if assembling a team was needed) and desired time to market. Outsourcing such service would be desirable in this context, it may not be in the interest of the company to specialize in the secure development of oracles.
 
 \subsection{Example}
-
+A smart contract developer needs to obtain information from an API source without having the trouble to develop and launch its on oracle whilst having some guarantees of the origin of the information. Mainly, this scenario is focusing on fast-time to market, untampered data and cost is not a problem.
 
 
 \subsection{Problem}
@@ -68,7 +68,7 @@ In this context, if the authenticity proofs provide enough assurances for the sm
 \section{Oracle as a Service w/ Multiple Data Feeds.}\label{OaaSwMultipleDataFeed}
 
 \subsection{Context}
-Sometimes an answer to a contract request cannot be truly accepted unless several sources confirm it. Either because it is unwise to trust in a single identity or because there might not be a single true answer but only an answer that is accepted by a selected majority.
+This scenario iterates on the previous one but focuses on data veracity. Sometimes an answer to a contract request cannot be truly accepted unless several sources confirm it. Either because it is unwise to trust in a single identity or because there might not be a single true answer but only an answer that is accepted by a selected majority.
 
 \subsection{Example}
 
@@ -104,7 +104,9 @@ In this context, the layer of trust regarding the data-feed is almost eliminated
 \section{Single-Party Self Hosted Oracle.}\label{SPSelfHostedOracle}
 
 \subsection{Context}
-Although the use of Oracles as a Service allows for a low product time to market by not having to take care of the development, maintenance and deployment of the oracle service it usually leads to less flexibility in the oracle design, vendor lock-in and fees charged by the vendor. If the product requirements do not allow for the specified challenges or the trust levels required by the contract are more than what the oracle vendor can provide it may be a solution to deploy its own oracle. A company with its own developing team capable of allocating resources for the development of the oracle or a single developer who does not want to incur in the oracle vendor fees will benefit from their own deployment in terms of cost and most importantly in regard to trusting the oracle behaviour.
+Although the use of Oracles as a Service allows for a lower product time to market by not having to take care of the development, maintenance and deployment of the oracle service it usually leads to less flexibility in the oracle design, vendor lock-in and fees charged by the vendor. If the product requirements do not allow for the specified challenges or the trust levels required by the contract are more than what the oracle vendor can provide it may be a solution to deploy its own oracle. A company with its own developing team capable of allocating resources for the development of the oracle or a single developer who does not want to incur in the oracle vendor fees will benefit from their own deployment in terms of cost and most importantly in regard to trusting the oracle behaviour.
+
+Instead of fast-time to market the main focus here is trusting the oracle provider to behave correctly. The smart contract output will only affect a single party or multiple parties which are non competing and therefore trust someone to run the oracle. In such scenario, costs can be reduces, with increasing developer workload, by not using any authenticity proofs and the oracle can be further customised to handle a specific contract requirement.
 
 \subsection{Example}
 
