@@ -35,10 +35,9 @@ Furthermore, in Chapter \ref{chap:chap6}, the author presents a possible impleme
 
 
 \section{Desiderata}
-
 This section describes several forces that separately or in combination drive the design of oracle architectures and implementations. Defining this forces will help validate each architecture/implementation in what forces they are able to accomplish in their different scenarios.
 
-\subsection{Fast time to market}
+\subsection{Fast time-to-market}
 Not having to assemble a team or allocate resources into a developing a new product which will only serve as component of the main product being developed.
 
 \subsection{Keeping trust standards}
@@ -47,24 +46,20 @@ The company focus is not the development and security of the  oracle  service an
 \subsection{Data-feed fault tolerance}
 Ensuring  that  a  contract  can  follow  through  even  if  a  data provider is down by querying another provider.
 
-\subsection{Trusting data}
-By querying several data sources there is a higher trust on the veracity of the data.
-
-\subsection{Higher trust on oracle behaviour}
-Oracle good behaviour is usually backed by authenticity proofs which are expensive to check on-chain or don't bring much value to the contract when verified off-chain since the current contract already executed its code with tampered data.
+\subsection{Data veracity}
+Querying several data sources guarantees a higher trust on the veracity of the data by not allowing a single service to be the owner o the truth.
 
 \subsection{Lower smart contract costs}
-Checking authenticity proofs leads to higher contract deployment costs, as the proof can be long and computationally expensive.
+Checking authenticity proofs leads to higher contract deployment costs, as the proof can be long and computationally expensive. Striving to build simple oracle smart contracts will lead to reduced costs.
 
-\subsection{Lower smart contract complexity}
-Verifying authenticity proofs on chain requires the developer to have sufficient knowledge to write the verifying functions.
-
+\subsection{Lower oracle complexity}
+Dealing with authenticity proofs and implementing the necessary mechanisms verify them requires a higher and deeper knowledge of theys implementation mechanisms and underlying cryptography.
 
 \subsection{Oracle decentralization}
 Connecting a smart contract to data through a single node, creates the problem that smart contracts intend to avoid, a single point of failure.  With a single oracle, a smart contract is only as reliable as that one oracle.
 
 \subsection{Oracle ownership decentralization}
-Having one party control the oracle network central-izes the power to manipulate all the contracts relying on the information provided by thatnetwork of oracles.
+Having one party control the oracle network centralizes the power to manipulate all the contracts relying on the information provided by that network of oracles.
 
 
 \section{Conclusions}

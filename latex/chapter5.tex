@@ -33,13 +33,13 @@ How can a non-blockchain company keep up with the fast pace of industry while ma
 \subsection{Forces}
 
 \begin{itemize}
-  \item \textbf{Fast time to market} - Not having to assemble a team or allocate resources into a developing a new product which will only serve as component of the main product being developed.
-  \item \textbf{Keeping trust standards} - The company focus is not the development and securement of the oracle service and may not have enough resources to keep the oracle as secure and reliable as the underlying blockchain.
+  \item \textbf{Fast time-to-market} - Quickly deploy a product without the overhead of focusing on oracle functionality and security.
+  \item \textbf{Trust} - The oracle should guarantee as much as possible the same level of trust in its functioning as the underlying blockchain technology.
 \end{itemize}
 
 
 \subsection{Solution}
-Oracle as a service, come as a quick and efficient solution for fast moving companies and individuals. Providing easy integration between a smart contract and a data-feed by means of specific function calls and/or libraries. Theses services are per-request fee-based and can be cheaper comparing to assemblying a team dedicated to the development and maintainance of an oracle. The fee-based system increases the trust in the service as being honest is crucial to their business model. Additionally, this services usally provide authenticity proofs which serve as another layer of trust in the service. In the Chapter \ref{chap:chap4} I deep dive on the subject of the proofs.
+Oracle as a service, come as a quick and efficient solution for fast moving companies and individuals. Providing easy integration between a smart contract and a data-feed by means of specific function calls and/or libraries. Theses services are per-request fee-based and can be cheaper comparing to assembling a team dedicated to the development and maintenance of an oracle. The fee-based system increases the trust in the service as being honest is crucial to their business model. Additionally, this services usually provide authenticity proofs which serve as another layer of trust in the service. In the Chapter \ref{chap:chap4} I deep dive on the subject of the proofs.
 
 \begin{figure*}[t]
   \begin{center}
@@ -77,8 +77,8 @@ The previous architecture specified a single point of failure on the data-source
 
 \subsection{Forces}
 \begin{itemize}
-  \item \textbf{Data-feed fault tolerance} - Ensuring that a contract can follow through even if a data provider is down by querying another provider.
-  \item \textbf{Trusting data} - By querying several data sources there is a higher trust on the veracity of the data.
+  \item \textbf{Availability} - Higher fault-tolerance guarantees in the data provider.
+  \item \textbf{Trust} - Higher trust on the veracity of the queried data..
 \end{itemize}
 
 \subsection{Solution}
@@ -116,9 +116,8 @@ Currently, oracle behaviour is neither easy to check nor fully transparent and t
 
 \subsection{Forces}
 \begin{itemize}
-  \item \textbf{Higher trust on oracle behaviour} - Oracle good behaviour is usually backed by authenticity proofs which are expensive to check on-chain or don't bring much value to the contract when verified off-chain since the current contract already executed its code with tampered data.
-  \item \textbf{Lower smart contract costs} - Checking authenticity proofs leads to higher contract deployment costs, as the proof can be long and computationally expensive.
-  \item \textbf{Lower smart contract complexity} - Verifying authenticity proofs on chain requires the developer to have sufficient knowledge to write the verifying functions.
+  \item \textbf{Trust} - Higher trust requirements than those provided by the authenticity proofs.
+  \item \textbf{Cost optimization} - Checking authenticity proofs leads to higher contract deployment costs, as the proof can be long and computationally expensive. The use of authenticity proofs also increases personal cost, as it requires higher knowledge of the proofs workings and of cryptography.
 \end{itemize}
 
 \subsection{Solution}
@@ -152,8 +151,8 @@ This context raises two problems, oracle consensus and availability. Whoever own
 
 \subsection{Forces}
 \begin{itemize}
-  \item \textbf{Oracle decentralization} - connecting a smart contract to data through a single node, creates the problem that smart contracts intend to avoid, a single point of failure. With a single oracle, a smart contract is only as reliable as that one oracle.
-  \item \textbf{Oracle ownership decentralization} - having one party control the oracle network centralizes the power to manipulate all the contracts relying on the information provided by that network of oracles.
+  \item \textbf{Availability} - Oracle decentralization eliminates the oracle service as a single point of failure and possible denial-of-service attacks.
+  \item \textbf{Trust} - Oracle ownership decentralization brings increased trust in the result of the smart contract, as it requires multiple distinct entities to deploy an oracle and have their say in the final data provided by the oracle to the smart contract.
 \end{itemize}
 
 \subsection{Solution}
