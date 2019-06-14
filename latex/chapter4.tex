@@ -34,7 +34,7 @@ The author believes that by describing, in a trust-guided manner, multiple patte
 Furthermore, in Chapter \ref{chap:chap6}, the author presents a possible implementation of a self-hosted oracle. After analysing the state of the art in oracle development and the specifics of used authenticity proofs, the author believes that the best way to achieve trust in an oracle is to deploy one instead of relying on a third-party. The described approach, when in comparison to deployed solutions in the industry reduces operations costs, increases trust and empowers the contract with purpose built oracles. The author will demonstrate that deploying and oracle, can be more trivial than at first seems, and that trust in its operation is directly the trust in one's code and no more measures (authenticity proofs) are need. This measures usually add a considerable extra cost and constrain the developer.
 
 
-\section{Desiderata}
+\section{Desiderata}\label{Desiderata}
 This section describes several forces that separately or in combination drive the design of oracle architectures and implementations. Defining this forces will help validate each architecture/implementation in what forces they are able to accomplish in their different scenarios.
 
 \subsection{Fast time-to-market}
@@ -53,7 +53,7 @@ Querying several data sources guarantees a higher trust on the veracity of the d
 Checking authenticity proofs leads to higher contract deployment costs, as the proof can be long and computationally expensive. Striving to build simple oracle smart contracts will lead to reduced costs.
 
 \subsection{Lower oracle complexity}
-Dealing with authenticity proofs and implementing the necessary mechanisms verify them requires a higher and deeper knowledge of theys implementation mechanisms and underlying cryptography.
+Dealing with authenticity proofs and implementing the necessary mechanisms verify them requires a higher and deeper knowledge of their implementation mechanisms and underlying cryptography.
 
 \subsection{Oracle decentralization}
 Connecting a smart contract to data through a single node, creates the problem that smart contracts intend to avoid, a single point of failure.  With a single oracle, a smart contract is only as reliable as that one oracle.
