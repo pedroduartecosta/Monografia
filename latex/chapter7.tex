@@ -13,18 +13,24 @@ In this section I will validate each architecture against the forces defined pre
 
 
 \subsection{Oracle as a Service w/ Single Data Feed}\label{OaaS w/SDF}
-This architecture achieves a \textbf{fast time-to-market}, allowing the developer of the smart-contract to quickly retrieve data from the web by plugin-in a oracle-as-a-service solution.
+This architecture achieves a \textbf{fast time-to-market}, allowing the developer of the smart-contract to quickly retrieve data from the web by plugin-in a oracle-as-a-service solution. Thus, not requiring any study and development and maintenance of a oracle service, quickly satisfying the contract data needs.
 
-It may allow, depending on the contract requirements to \textbf{keep trust standards}. This type of architectures usually involves the use of trusted hardware or authenticity proofs. There are some caveats associated with some of them, such as the most widely used one, TLSNotary, but others such has the Android Proof and the use of trusted hardware may suffice to guarantee trust in the oracle service if their implementation and proofs is readily and transparently available.
-
-
+In terms of \textbf{keeping trust standards}, this type of architectures usually involves the use of trusted hardware or authenticity proofs to achieve such end. There are some caveats associated with some of them, such as the most widely used one, TLSNotary, but others such has the Android Proof and the use of trusted hardware may suffice to guarantee trust in the oracle service if their implementation and proofs is readily and transparently available. This proofs are managed by the third-party provider and therefore are not an overhead in achieving a fast time-to-market.
 
 \subsection{Oracle as a Service w/ Multiple Data Feeds}\label{OaaS w/ MDF}
+Iterating on the previous architecture, this one upholds the same characteristics of the previous one, \textbf{fast time-to-market} and \textbf{keeping trust standards}.
+
+However, in this scenario we don't fully trust the data-source. Trust here, has two components. Trusting the data-source availability (uptime) and trusting the veracity of the data provided. By querying multiple data-feeds and setting a quorum both problems are solved. If some data providers fail to answer the request and the minimum quorum upholds the contract can still perform its duties. And if we cannot trust a single party to provide the data, as doing so will give full power to the outcome of the contract to that single data provider, the problem is solved by having a minimum quorum that can provide the same answer. This way, any outlier in the selected data provider is discarded. Guaranteeing both \textbf{data-feed fault tolerance} and \textbf{data veracity}.
 
 \subsection{Single-Party Self Hosted Oracle}\label{SP-SHO}
+This scenario takes a different approach, from the two previous ones, in terms of where to place the trust. In the previous scenario, due to the use of a third-party, it is required that some sort of proof is generated in order to guarantee the good behaviour of the third party. However, this proofs do add an extra over head to each request in terms of memory and computation used. In a scenario where in which a set of predefined set of parties are stakeholders in the smart-contract execution, it is possible to skip the use of authenticity proofs by having all the parties contributing to the oracle execution. With such approach we get to \textbf{keep the trust standards} of the execution of the smart-contract as a whole.
 
+However, this approach introduces increases the time-to-market as it requires to develop and maintain the oracle service.
+
+Additionally, it reduces the costs of the oracle operation by removing the extra fee from each query. Also, as there is no need for authenticity proofs, the contract code becomes simpler and the storage costs decrease as well leading to \textbf{lower smart contract costs}. In fact, due to being purpose built, these contracts should have less executable code in comparison to contracts that need to fulfil a bigger list of requisites, \textbf{lower oracle complexity}, and therefore become cheaper contracts.
 
 \subsection{Multi-Party Self Hosted Oracle}\label{MP-SHO}
+
 
 \subsection{Conclusions}
 
@@ -34,7 +40,7 @@ It may allow, depending on the contract requirements to \textbf{keep trust stand
         \begin{tabular}{@{}lcccc@{}}
                                        & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}OaaS w/SDF \ref{OaaS w/SDF}\end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}OaaS w/MDF \ref{OaaS w/ MDF}\end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}SP-SHO \ref{SP-SHO}\end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}MP-SHO \ref{MP-SHO}\end{tabular}} \\ \midrule
             Fast time-to-market        & X                                             & X                                             &                                               &                                               \\ \midrule
-            Keeping trust standards    & X*                                            &                                               & X                                             & X                                             \\ \midrule
+            Keeping trust standards    & X*                                            &                X                              & X                                             & X                                             \\ \midrule
             Data-feed fault tolerance  &                                               & X                                             &                                               & X                                             \\ \midrule
             Data veracity              &                                               & X                                             &                                               & X                                             \\ \midrule
             Lower smart contract costs &                                               &                                               & X                                             & X                                             \\ \midrule
