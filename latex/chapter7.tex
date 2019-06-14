@@ -23,16 +23,21 @@ Iterating on the previous architecture, this one upholds the same characteristic
 However, in this scenario we don't fully trust the data-source. Trust here, has two components. Trusting the data-source availability (uptime) and trusting the veracity of the data provided. By querying multiple data-feeds and setting a quorum both problems are solved. If some data providers fail to answer the request and the minimum quorum upholds the contract can still perform its duties. And if we cannot trust a single party to provide the data, as doing so will give full power to the outcome of the contract to that single data provider, the problem is solved by having a minimum quorum that can provide the same answer. This way, any outlier in the selected data provider is discarded. Guaranteeing both \textbf{data-feed fault tolerance} and \textbf{data veracity}.
 
 \subsection{Single-Party Self Hosted Oracle}\label{SP-SHO}
-This scenario takes a different approach, from the two previous ones, in terms of where to place the trust. In the previous scenario, due to the use of a third-party, it is required that some sort of proof is generated in order to guarantee the good behaviour of the third party. However, this proofs do add an extra over head to each request in terms of memory and computation used. In a scenario where in which a set of predefined set of parties are stakeholders in the smart-contract execution, it is possible to skip the use of authenticity proofs by having all the parties contributing to the oracle execution. With such approach we get to \textbf{keep the trust standards} of the execution of the smart-contract as a whole.
+This scenario takes a different approach, from the two previous ones, in terms of where to place the trust. In the previous scenario, due to the use of a third-party, it is required that some sort of proof is generated in order to guarantee the good behaviour of the third party. However, this proofs do add an extra over head to each request in terms of memory and computation used. In a scenario where the smart contract execution will only affect a single user, the owner of the client smart contract, and he is able to develop and maintain it's own oracle, then it will become a more viable approach to use a self-hosted oracle approach than to use a third-party oracle as a service. Since it is own code that is being executed and he controls the environment of execution he can have full trust in the oracle behaviour, not depending therefore on any extra mechanism.
+
+
+In a scenario where in which a set of predefined set of parties are stakeholders in the smart-contract execution, it is possible to skip the use of authenticity proofs by having all the parties contributing to the oracle execution. With such approach we get to \textbf{keep the trust standards} of the execution of the smart-contract as a whole.
 
 However, this approach introduces increases the time-to-market as it requires to develop and maintain the oracle service.
 
 Additionally, it reduces the costs of the oracle operation by removing the extra fee from each query. Also, as there is no need for authenticity proofs, the contract code becomes simpler and the storage costs decrease as well leading to \textbf{lower smart contract costs}. In fact, due to being purpose built, these contracts should have less executable code in comparison to contracts that need to fulfil a bigger list of requisites, \textbf{lower oracle complexity}, and therefore become cheaper contracts.
 
 \subsection{Multi-Party Self Hosted Oracle}\label{MP-SHO}
-
+Iterating on the previous scenario, this architecture addresses the issue of having several parties depeding on the execution of the client-smart contract. Here a predefined set of parties are stakeholders in the smart-contract execution, it is therefore possible to skip the use of authenticity proofs by having all the parties contributing to the oracle execution. Each party can deploy their own offchain oracle and the on-chain oracle smart contract, will serve as the contract to which all parties accept to abide by. Having all the parties identified in the contract, for example with the account address, then only them can make transactions that will be accepted in the smart contract. With such approach we get to \textbf{keep the trust standards} of the execution of the smart-contract as a whole, as well as, \textbf{oracle decentralization} and \textbf{oracle ownership decentralization}, by having each party contributing to the final result by launching their own oracle and having the same say in the final result. Having higher oracle availability and trust in its behaviour by having multiple  stakeholders performing the same job. It also allows for \textbf{data-feed fault tolerance} and \textbf{data veracity} if this quorum of oracles query different data-sources or being the source of information.
 
 \subsection{Conclusions}
+
+
 
 \begin{table}[H]
     \centering
@@ -40,11 +45,11 @@ Additionally, it reduces the costs of the oracle operation by removing the extra
         \begin{tabular}{@{}lcccc@{}}
                                        & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}OaaS w/SDF \ref{OaaS w/SDF}\end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}OaaS w/MDF \ref{OaaS w/ MDF}\end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}SP-SHO \ref{SP-SHO}\end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}MP-SHO \ref{MP-SHO}\end{tabular}} \\ \midrule
             Fast time-to-market        & X                                             & X                                             &                                               &                                               \\ \midrule
-            Keeping trust standards    & X*                                            &                X                              & X                                             & X                                             \\ \midrule
+            Keeping trust standards    & X                                             & X                                             & X                                             & X                                             \\ \midrule
             Data-feed fault tolerance  &                                               & X                                             &                                               & X                                             \\ \midrule
             Data veracity              &                                               & X                                             &                                               & X                                             \\ \midrule
             Lower smart contract costs &                                               &                                               & X                                             & X                                             \\ \midrule
-            Lower oracle complexity    &                                               &                                               & X                                             & X*                                            \\ \midrule
+            Lower oracle complexity    &                                               &                                               & X                                             & X                                             \\ \midrule
             Oracle decentralization    &                                               &                                               &                                               & X                                             \\ \midrule
             \begin{tabular}[c]{@{}l@{}}Oracle ownership \\ decentralization\end{tabular}  &                                               &                                               &                                               & X
         \end{tabular}%
@@ -55,6 +60,7 @@ Additionally, it reduces the costs of the oracle operation by removing the extra
 
 \section{Self-hosted Oracle Implementation}
 The author, proposes three main characteristics of its implementation comparing to the current existing oracle-as-a-service solutions. Reduced costs, higher trust and higher contract empowerment.
+
 
 
 \subsection{Reduced costs}
