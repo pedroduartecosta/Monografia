@@ -19,8 +19,8 @@ The goal of this literature review is to get a sense of the corpus of existing w
 \subsection{Research Questions}
 First of all and to guide the focus of the research, the following research questions were defined:
 \begin{itemize}
-  \item RQ1: What kind of blockchain oracles have been proposed?
-  \item RQ2: What are the research trends on blockchain oracles?
+  \item RQ1:\label{RQ1} What kind of blockchain oracles have been proposed?
+  \item RQ2:\label{RQ2} What are the research trends on blockchain oracles?
 \end{itemize}
 
 \textit{RQ1}, analyses the scope of existing blockchain oracles. The methodologies and technologies used, so as to understand how the oracle problem is tackled.
@@ -232,7 +232,7 @@ Summing up, this research highlighted two main types of oracles. The first is \t
 
 Summing up, this research highlighted three main types of oracles. The first is \textbf{Software-based oracles}, which try to prove their honest behaviour through the use of software-based authenticity proofs. These, mostly take advantage of some features of TLS to prove that the data they are relaying is the actually provided data. The second type is \textbf{Hardware-based oracles}. These leverage specific hardware, TEE, to securely separate the environment running the oracle code from the operating system and other applications to achieve higher guarantees on untampered code execution. They may even provide authenticity proofs regarding that the query actually came from a legit TEE. Lastly, \textbf{Consensus-based oracles}, which require a network of peers working together to achieve higher redundancy, having several peers querying the data and even in some cases peers performing the role of the verifier. This last approach largely depends on the existence of such a network and requires the use of monetary incentives to keep the networking running.
 
-Table \ref{oracle-summary}, summarises the found existing projects in both stages of state-of-the-art research.
+Table \ref{oracle-summary}, summarises the found existing projects and answers the first research question \ref{RQ1}.
 
 
 \begin{table}[]
@@ -260,12 +260,11 @@ Table \ref{oracle-summary}, summarises the found existing projects in both stage
 \section{Conclusions}
 
 
-Two main conclusions come from both academic and non-academic research.
+Two main conclusions arise from both academic and non-academic research, and answer the second research question \ref{RQ2}.
 
 First of all, there is a clear lack of academic research on the topic of creating trustable oracles. This is mostly likely due to the specificity of the problem and that blockchain related technology is usually paved by start ups and enthusiasts and not yet addressed in universities curricular plans.
 
 Secondly, even though the main research on trustable oracles is being pursued by startups or sole developers all the existing projects seem to be blockchain specific or in very early phases and not yet ready to be generally adopted.
-
 
 %FIXME: Answer research questions
 
