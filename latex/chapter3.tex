@@ -227,4 +227,23 @@ In scenarios, where there is a higher requirements for trust in the oracle behav
 
 \section{Summary}
 
+Table \ref{tab:summary-proofs} summarizes the previous analysed proofs regarding the necessities of specific hardware, the possibility of their usage to not be deprecated in the next following years, if whether they can query the web and are already be used in production.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    Proof & \multicolumn{1}{l}{Requires specific hardware} & \multicolumn{1}{l}{Can query the Web} & \multicolumn{1}{l}{Future-proof} & \multicolumn{1}{l}{Currently in production} \\ \midrule
+    TLSNotary &  & X &  & X \\
+    Android Proof & X & X & X & X \\
+    Ledger Proof & X &  & X & X \\
+    TLS-N &  & X & X &  \\
+    Town Crier & X & X & X & X \\ \bottomrule
+    \end{tabular}
+    \caption{Summary of authenticity proofs}
+    \label{tab:summary-proofs}
+    \end{table}
+
+
+
 %FIXME: Falta aqui um texto a comparar as várias opções, se possível ilustrado por uma tabela de síntese em que se mostre rapidamente em que pontos são semelhantes e diferentes
