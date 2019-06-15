@@ -185,6 +185,46 @@ TLS-N was designed with the oracle trust problem in mind, the generated proof is
 TLS-N is, therefore, a promising solution to the oracle trust problem being the only major drawback requiring the data providers to adopt the TLS-N protocol.
 
 
-\section{Summary and conclusions}
+\subsection{Town Crier}
+
+Town Crier~\citet{Zhang2016a} (TC) authenticates data-feeds through the use of trusted hardware, more specifically Intel SGX enabled CPUs. By levearing intel SGX, and as long as this system is trusted, there's is no need to trust the environment in which TC is running since it the TEE guarantees the isolation of the TC implementation.
+
+Thanks to its use of SGX and various innovations in its end-to-end design, Town Crier offers several properties that other oracles cannot achieve:
+
+\begin{enumerate}
+    \item \textbf{Authenticity guarantee}: There's no need to trust any particular service provider(s) in order to trust Town Crier data. (You need only believe that SGX is properly implemented.)
+    \item \textbf{Succinct replies}: Town Crier can prune target website replies in a trustworthy way to provide short responses to queries. It does not need to relay verbose website responses. Such succinctness is important in Ethereum, for instance, where message length determines transaction costs.
+    \item \textbf{Confidential queries}: Town Crier can handle secret query data in a trustworthy way. This feature makes TC far more powerful and flexible than conventional oracles.
+\end{enumerate}
+
+\subsubsection{How it works}
+
+Intel’s Software Guard Extensions (SGX) is a set of new instructions that confer hardware protections on user-level code. SGX enables process execution in a protected address space known as an enclave. The enclave protects the confidentiality and integrity of the process from certain forms of hardware attack and other software on the same host, including the operating system.
+
+Upon request, the enclave can generate a proof, usually called attestation, signed by and hardware protected key that can be used to prove that a certain software was run in a legit TEE.
+
+The flow of a TC requests, depicted in figure \ref{fig:/figures/town-crier2}, starts with a User Contract creating a datagram request to the TC Contract. The TC Contract, is a simple smart-contract on the blockchain that accepts client requests and to whom the TC server listens to for new requests.
+
+The TC Server, listens to events on the TC Contract and queries the requested data-source. The enclave takes care of signing the operation where as the relay is a simple networking interface. The answer is signed and returned to the TC Contract to later relay it to the User Contract.
+
+
+\begin{figure}[H]
+    \begin{center}
+      \leavevmode
+      \includegraphics[width=0.7\textwidth]{figures/town-crier.png}
+      \caption{Town crier Architecture.}
+      \label{fig:/figures/town-crier2}
+    \end{center}
+\end{figure}
+
+
+
+\subsubsection{Conclusions}
+Town Crier, presents an effective solution to tackle trust issues in the oracle operation. It does require the use of proofs as well as its later analysis for good behaviour and specific hardware.
+
+In scenarios, where there is a higher requirements for trust in the oracle behaviour and cost/performance is not a problem, TC is a viable and more secure solution than software-based proofs.
+
+
+\section{Summary}
 
 %FIXME: Falta aqui um texto a comparar as várias opções, se possível ilustrado por uma tabela de síntese em que se mostre rapidamente em que pontos são semelhantes e diferentes
