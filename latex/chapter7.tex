@@ -58,6 +58,16 @@ Having addressed these architectures in terms of a predefined set of values, tha
     \label{tab:architecture-summary}
 \end{table}
 
+% FIXME: Discuss the different architectures
+
+As the Table \ref{tab:architecture-summary} visually points out, no architecture can satisfy all requirements, which can be easily understood. For example, in a self-hosted scenario it is always impractical to achieve \textbf{fast time-to-market} as it is necessary to develop, study and deploy the whole solution.
+
+Also, \textbf{lower smart contract costs} requires further analysis. The author, considered that the self-hosted option is cheaper comparing to the use of a third-party provider by considering only the costs of running the oracle and not the costs of paying developers and infrastructure. Still on the topic of costs, the architecture MP-SHO \ref{MP-SHO} can only be assumed to have lower costs than the as a service approach since it does not require complex contracts or paying fees. But it might be more expensive than the architecture OaaS w/SDF \ref{OaaS w/SDF} if the number of oracles deployed is too large in comparison to the use of a single oracle in the latter mentioned architecture. As for each oracle, the cost of operations increases, as depicted on Figure  \ref{oracle-query-cost}.
+
+Finally, analysing the factor \textbf{keeping trust standards} all architectures checked this boxes, as oracles-as-a-service have at their disposal authenticity proofs, such as TLS-N and Town Crier, that can provide a trustable enough proofs for certain scenarios. It might not be the ones that their are using now, but looking from an architecture standpoint they can achieve this as well.
+
+
+
 \section{Self-hosted Oracle Implementation}
 
 The author proposes three main characteristics of its implementation comparing to the current existing oracle-as-a-service solutions. These are reduced costs, higher trust and higher contract empowerment.
