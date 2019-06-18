@@ -1,7 +1,7 @@
 \chapter{Validation} \label{chap:chap7}
 
 \section*{}
-In this Chapter, the author validates the proposed statements in the Chapter~\ref{chap:chap4} and to what extent they accomplish the proposed challenge.
+In this Chapter, the author seeks to demonstrate how the architectures and prototype detailed in Chapters \ref{chap:chap5} and \ref{chap:chap6} provide answers to the desiderata stated in Chapter \ref{chap:chap4}.
 
 Initially, the author compares the defined architectures with existing solutions and how broadly they describe all possible scenarios.
 
@@ -9,7 +9,7 @@ Then, the implemented solution in comparison to the state of the art, as well as
 
 
 \section{Oracle Architectures}
-In this section, I will validate each architecture against the forces defined previously in the desiderata \ref{Desiderata}.
+In this section, the author will validate each architecture against the forces defined previously in the desiderata, in Section \ref{Desiderata}.
 
 
 \subsection{Oracle as a Service w/ Single Data Feed}\label{OaaS w/SDF}
@@ -68,9 +68,9 @@ The author proposes three main characteristics of its implementation comparing t
 
 In this context, cost per query compromises multiple dimensions. Firstly, the cost of querying the oracle and inputting the result in the contract which corresponds to the execution of the contract code and is therefore directly related to the amount of code that needs to run. Secondly, underlying fees imposed by the third-party service. And finally, a smaller cost but still worth mentioning, the cost of the off-chain oracle service that will query the API.
 
-Analysing the first one, the contract executing cost paid by the caller, that is not much that the developer of the smart contract can do to optimize this since it is fully managed by the third-party service. Hence, on a self-deployed oracle, the cost can be further optimized by modelling a single purpose oracle for the smart contract needs which will inherently run less code due to its simplicity. Also, on a self-hosted oracle there is no need to add the over-head of authenticity proofs which either verified on-chain or partially stored off-chain lead to higher transaction costs.
+Analysing the first one, the contract executing cost paid by the caller, that is not much that the developer of the smart contract can do to optimize this since it is fully managed by the third-party service. Hence, on a self-deployed oracle, the cost can be further optimized by modelling a single purpose oracle for the smart contract needs, which will inherently run less code due to its simplicity. Also, on a self-hosted oracle there is no need to add the over-head of authenticity proofs which either verified on-chain or partially stored off-chain lead to higher transaction costs.
 
-Secondly, existing services are for-profit companies and therefore require an extra-payment for their service. Oraclize.it adds an extra fee paid in dollars, depicted on table ~\ref{tab:oraclize-fees}, that depends on the data source and authenticity proof used. Chainlink requires that every request is paid using its token LINK whose value depends on the current market price. In a self-deployed oracle approach, none of these fees are present leading therefore to lower costs.
+Secondly, existing services are for-profit companies and therefore require an extra-payment for their service. Oraclize.it adds an extra fee paid in dollars, depicted on Table ~\ref{tab:oraclize-fees}, that depends on the data source and authenticity proof used. Chainlink requires that every request is paid using its token LINK whose value depends on the current market price. In a self-deployed oracle approach, none of these fees are present leading therefore to lower costs.
 
 \begin{table}
     \centering
@@ -88,7 +88,7 @@ Secondly, existing services are for-profit companies and therefore require an ex
     \label{tab:oraclize-fees}
 \end{table}
 
-Finally, in a self-deployed oracle scenario, there are inherent costs of running the off-chain oracle which, in the oracle-as-a-service scenario these are taken care of by a third-party service. Although the cost per transaction of the service depends on the platform in which the service will be deployed it can be assumed that in comparison to the fees or, even more, to the cost of executing the smart contract code this cost is risible. Solutions such as AWS Lambda~\footnote{https://aws.amazon.com/lambda/} that offer 1M requests and 400,000 GB-SECONDS of compute time per month for free in their free tier~\footnote{https://aws.amazon.com/lambda/pricing/ queried on the 29th of May 2019.}, and even in a scaling scenario each request costs \$0.0000002. Therefore, this cost is not considered throughout this dissertation due to its small size in comparison with the previous analysed ones.
+Finally, in a self-deployed oracle scenario, there are inherent costs of running the off-chain oracle which, in the oracle-as-a-service scenario these are taken care of by a third-party service. Although the cost per transaction of the service depends on the platform in which the service will be deployed it can be assumed that in comparison to the fees or, even more, to the cost of executing the smart contract code this cost is risible. Solutions such as AWS Lambda~\footnote{More information about the lambda service can be found here: https://aws.amazon.com/lambda/} that offer 1M requests and 400,000 GB-SECONDS of compute time per month for free in their free tier~\footnote{The pricing for lambda was queried here: https://aws.amazon.com/lambda/pricing/ on the 29th of May 2019.}, and even in a scaling scenario each request costs \$0.0000002. Therefore, this cost is not considered throughout this dissertation due to its small size in comparison with the previous analysed ones.
 
 \subsection{Higher trust}
 

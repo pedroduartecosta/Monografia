@@ -203,7 +203,7 @@ Intel’s Software Guard Extensions (SGX) is a set of new instructions that conf
 
 Upon request, the enclave can generate a proof, usually called attestation, signed by and hardware protected key that can be used to prove that a certain software was run in a legit TEE.
 
-The flow of a TC requests, depicted in figure \ref{fig:/figures/town-crier2}, starts with a User Contract creating a datagram request to the TC Contract. The TC Contract, is a simple smart-contract on the blockchain that accepts client requests and to whom the TC server listens to for new requests.
+The flow of a TC requests, depicted in Figure \ref{fig:/figures/town-crier2}, starts with a User Contract creating a datagram request to the TC Contract. The TC Contract, is a simple smart-contract on the blockchain that accepts client requests and to whom the TC server listens to for new requests.
 
 The TC Server, listens to events on the TC Contract and queries the requested data-source. The enclave takes care of signing the operation where as the relay is a simple networking interface. The answer is signed and returned to the TC Contract to later relay it to the User Contract.
 

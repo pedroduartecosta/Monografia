@@ -30,14 +30,14 @@ Smart contracts have a wide range of use cases. For example, they can be used in
 
 \section{The Smart Contract Connectivity Problem}
 
-\begin{figure*}[t]
+\begin{figure}[H]
   \begin{center}
     \leavevmode
     \includegraphics[width=0.7\textwidth]{figures/sc_connectivity.jpg}
     \caption{Smart contract connectivity problem.}
     \label{fig:/figures/sc_connectivity.jpg}
   \end{center}
-\end{figure*}
+\end{figure}
 
 The Ethereum blockchain is designed to be entirely deterministic~\citet{GavinWood2014}, meaning that if someone downloads the whole network history and replays it they should always end up with the same state. Bearing this in mind, smart contracts cannot directly query URLs for certain information since everyone must be able to independently validate the outcome of running a given contract making it impossible to guarantee that everyone would retrieve the same information since the internet is non-deterministic and changes over time. Determinism is necessary so that nodes can come to a consensus. In order for smart contracts to gain traction, they need access information of the real world, outside of the blockchain. For example, the current price of the US dollar. However smart contracts cannot directly query the internet for information due to the non-deterministic nature of the internet. Meaning that the information retrieved at some point in time cannot be entrusted to be available or equal in another point in the future, which may result in different states when validating smart contracts by querying the internet in different moments. Oracles solve the non-deterministic problem, of querying the internet, by inputting external information on the blockchain through a transaction making sure that the blockchain contains all the information required to verify itself.
 
@@ -55,41 +55,44 @@ All in all, either for users of smart contracts or the teams deploying them, kee
 
 
 \section{Oracles as a Solution}
-The solution to the smart contract connectivity problem and to outsourcing computation from the blokchain is the use of a secure blockchain middle-ware, mentioned before as, an oracle. Oracles can query data from APIs, data feeds, other blockchains or perform their own calculations and input that data on the smart contract. This way the blockchain has all the necessary information to verify the result of running a smart contract, and will always produce the same result, independently of the point in time in which that verification runs.
+The solution to the smart contract connectivity problem and to outsourcing computation from the blockchain is the use of a secure blockchain middle-ware, mentioned before as, an oracle. Oracles can query data from APIs, data feeds, other blockchains or perform their own calculations and input that data on the smart contract. This way the blockchain has all the necessary information to verify the result of running a smart contract, and will always produce the same result, independently of the point in time in which that verification runs.
 
 
-\begin{figure*}[t]
+\begin{figure}[H]
   \begin{center}
     \leavevmode
     \includegraphics[width=\textwidth]{figures/oracle.jpg}
     \caption{Oracle integration.}
     \label{fig:/figures/oracle.jpg}
   \end{center}
-\end{figure*}
+\end{figure}
 
-\subsection{Authenticity Proofs}
+\section{Authenticity Proofs}
+Authenticity proofs, are cryptographic proofs commonly used by oracles in order to prove their honest behaviour. By generating some cryptographic document that can later be used to prove that the oracle actually saw the information that it relayed or computed. In Chapter \ref{chap:chap3} I take a closer look to the existing proofs.
 
 
 
 \section{Motivation and Objectives} \label{sec:goals}
-The research hereby exposed was proposed by Takai, a blockchain start-up born in Porto, Portugal with the purpose to be the first blockchain open innovation platform. Sponsored by Bright Pixel, an innovation hub and venture investment house, which supports promising startups in their early years. Taikai is building a platform that connects talent and entrepreneurs with the challenges of the corporate players, through the power of the sharing economy and blockchain trust. Taikai's project will serve as a proof-of-concept for the implementation of trustable oracles.
+The research hereby exposed was proposed by Takai, a blockchain start-up born in Porto, Portugal with the purpose to be the first blockchain open innovation platform. Sponsored by Bright Pixel, an innovation hub and venture investment house, which supports promising startups in their early years. Taikai is building a platform that connects talent and entrepreneurs with the challenges of the corporate players, through the power of the sharing economy and blockchain trust.
 
-The growing interest in blockchain technology and especially in the potential of Smart Contracts together with the lack of research on trustable oracles creates a gap in the general adoption of blockchain by business and governments. This gap and the opportunity bestowed with the Taikai project provides the perfect context for pursuing the construction of a bridge to overcome the oracle trust problem and further empower existing and future blockchain projects.
+The growing interest in blockchain technology and especially in the potential of Smart Contracts together with the lack of research on trustable oracles creates a gap in the general adoption of blockchain by business and governments.
 
 The proposed objectives for this work are as follows:
 \begin{itemize}
-  \item Identifying the necessary components for end-to-end reliability between smart contracts and outside blokchain information;
-  \item Providing a general framework for guaranteeing oracle trust;
-  \item Implementing a proof-of-concept in the Taikai project on the EOS blockchain;
+  \item Defining the requirements for oracle trust;
+  \item Understanding blockchain oracles behaviour;
+  \item In-depth analysis of existing Authenticity Proofs;
+  \item Define several oracle architectures in terms of trust;
+  \item Oracle implementation and analysis.
 \end{itemize}
 
 \section{Document Structure} \label{sec:struct}
 
 Additionally to the Introduction, this document contains seven more chapters.
 
-In Chapter \ref{chap:sota}, I analyse the state-of-the-art in terms of blockchain oracles. Initially by performing a systematic literature review, to capture existing academic work on the field and later I expose some more work detailed by companies and individuals in their projects' whitepapers.
+In Chapter \ref{chap:sota}, the author analyse the state-of-the-art in terms of blockchain oracles. Initially by performing a systematic literature review, to capture existing academic work on the field and later I expose some more work detailed by companies and individuals in their projects' whitepapers.
 
-In Chapter \ref{chap:chap3}, I deep-dive on existing authenticity proofs, detailing how they work, what they can achieve and their limitations.
+In Chapter \ref{chap:chap3}, the author deep-dive on existing authenticity proofs, detailing how they work, what they can achieve and their limitations.
 
 Chapter \ref{chap:chap4} exposes the problem statement underlying this dissertation and exposes a set of forces that are meant to be achieved.
 
@@ -97,7 +100,9 @@ Chapter \ref{chap:chap5} looks at different oracle architectures and their diffe
 
 Chapter \ref{chap:chap6} describes the implementation of the last architecture, creating a simple and effective boilerplate that can be leveraged for a wide range of oracle usage scenarios.
 
-Finally, Chapter \ref{chap:chap7} validates each architecture against the forces described in the problem statement, as well as the implementation in its ability to achieve its goal.
+In Chapter \ref{chap:chap7} the author validates each architecture against the forces described in the problem statement, as well as the implementation in its ability to achieve its goal.
+
+Finally Chapter \ref{chap:concl},
 
 %Para além da introdução, esta dissertação contém mais x capítulos.
 %No capítulo~\ref{chap:sota}, é descrito o estado da arte e são
