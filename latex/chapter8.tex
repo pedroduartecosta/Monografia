@@ -2,8 +2,27 @@
 
 \section*{}
 
-\section{Future Work}
+This chapter reflects on the entire work of this dissertation. Looking at the contributions of the work performed, difficulties and possible paths for improvement and work that can still be done.
+
+\section{Difficulties}
+One of the main difficulties around this topic is the complexity of the underlying system, the blockchain. In order to first understand the purpose of oracles, it is required to understand in depth the underlying blockchain. Each blockchain presents a different paradigm, programming language and challenges, and although the oracle problem usually transverses all of them, or at least the most used ones, it still requires some adaptation. For this specific work, the author chose the Ethereum for its huge adoption and smart contract features but others, such as the EOS blockchain could have been used.
+
+The other main difficulty is around the oracle topic itself. There's not a lot of documentation around it, specially in the blockchains documentation pages. The only information found is on a few papers and two companies which seem to dominate the market of oracles-as-a-service and are not so transparent in the actual implementation or proof verification.
+
+In the end, in terms of oracle implementation the author learned from the combined knowledge of a few articles from independent developers who tried to shared their knowledge on how they addressed their oracle implementation.
 
 \section{Contributions}
+With this dissertation, the author intends to pave the way for the development of secure oracle architectures and implementations.
+
+The author tries to demystify the existing authenticity proofs, explaining their inner workings and limitations so future developers can be more aware of their usage by the third party oracle providers.
+
+The author also presents several architectures and explains their points of trust and how to address each of those points. Also the weaknesses and strengths of each architecture so future developers can have a guided approach to choose the best model for their use case.
+
+Finally, due to the lack of documentation around building a self-hosted oracle the author provides a simple boilerplate than can be easily used and even worked upon and tailor to the needs of the smart contract. The author even adds in this implementation the necessary logic for having the oracle being used and deployed by multiple competing parties allowing them to trust in the oracle execution even if they don't trust the other involved parties. This implementation however is directed for the Ethereum blockchain, but the author believes that its logic can be ported to other blockchains effortlessly.
+
+\section{Future Work}
+
+
+
 
 \section{Conclusions}
