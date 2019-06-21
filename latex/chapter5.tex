@@ -62,7 +62,7 @@ The second point of failure is the oracle service itself. Although smart contrac
 In this context, if the authenticity proofs provide enough assurances for the smart contract creator and he trusts in the selected data-feed to provide the required data, then this model can satisfy its needs in terms of trust, as well as, performance since it only queries one data-feed and uses only one oracle. By not having any consensus mechanism an exchanging the least amount of messages it can both achieve greater performance and a lower cost. But this lower cost and higher performance architecture by itself is prone to failure due to lack of decentralization and does not guarantee service availability which could lead to a failure in the smart contract to obtain the requested information.
 
 \subsection{Known Uses}
-%% FIXME: Mention oraclize here
+Oracize.it~\citet{Oraclize} is a company currently using this type of architecture to power smart contracts. They provide a oracle-as-a-service solution available to several blockchains and multiple authenticity proofs. Their honesty is backed by the use of authenticity proofs, for a fee. They provide multiple integrations and tools to check the proofs.
 
 
 \section{Oracle as a Service w/ Multiple Data Feeds.}\label{OaaSwMultipleDataFeed}
@@ -100,6 +100,7 @@ The oracle service should have a mechanism to query several data-sources during 
 In this context, the layer of trust regarding the data-feed is almost eliminated by having the ability to choose from several data providers and therefore not relying on a source of truth. It also provides a higher system availability, as the oracle/smart contract can have some degree of redundancy in the data providers selection.
 
 \subsection{Known Uses}
+Chainlink~\ref{Ellis2017} is a known use case of a service that differentiates itself from the competition by using a decentralized network of oracles to guarantee data veracity and availability. Chainlink is partenering with Oraclize.it to integrate Oraclize.it service with authenticity proofs into the decentralized network of Chainlink.
 
 \section{Single-Party Self Hosted Oracle.}\label{SPSelfHostedOracle}
 
@@ -134,10 +135,12 @@ A solution to trusting an oracle service is to deploy our own oracle service. Su
 
 
 \subsection{Example Resolved}
+
 \subsection{Resulting Context}
 With this solution we almost remove the second layer of trust, trusting in the oracle service. Nonetheless, we move the trust to the developer ability in coding a secure and reliable oracle. The main benefit is not requiring to have the overhead expense of using, understanding and verifying the authenticity proofs required for a trustable use of Oracles as a service.
 
 \subsection{Known Uses}
+Gardener~\footnote{More information on the gardener oracle project can be found here: https://gardeneroracle.io/} is a recent open-source project, created in beginning of 2019, to tackle the use of third-party oracle providers. Their open-source solution can be self-hosted by anyone and allows to deploy your own oracle service without having to use authenticity proofs or trusting on a provider.
 
 \section{Multi-Party Self Hosted Oracle.}\label{MPSelfHostedOracle}
 
@@ -176,9 +179,8 @@ With this context, we bring the same trust level given by blockchain technology 
 
 In a community context, this approach is not suitable since nodes would be able to join and leave making it harder to achieve a predefined consensus. Involved parties would be able to launch more than one node, resulting in some parties being able to take over the minimum consensus quorum and overpower the network unless some proof-of-work mechanism is implemented. This would also result in a context of wisdom of the crowd, in which the most effective way of controlling a correct answer would be by implementing some incentives mechanism such as \cite{Adler2018a}. The problem around incentives is that they do not guarantee that, in edge cases, with enough incentives, the network will provide a wrong answer if justifiable. Although, as far as the author is concerned, no other mechanism is available when dealing with wisdom-of-the-crowd information.
 
-
-
 \subsection{Known Uses}
+As no specific use case for this architecture could be found, the implementation describe on Chapter~\ref{chap:chap6} is a proof-of-concept of the use of such architecture and it's pros and cons are also analysed on the chapter.
 
 
 \section{Summary and Conclusions}

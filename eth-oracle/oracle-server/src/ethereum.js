@@ -20,13 +20,13 @@ const account = () => {
   });
 };
 
-export const updateRequest = ({
-  id,
-  valueRetrieved
+export const createRequest = ({
+  urlToQuery,
+  attributeToFetch
 }) => {
   return new Promise((resolve, reject) => {
     account().then(account => {
-      contract.updateRequest(id, valueRetrieved, {
+      contract.createRequest(urlToQuery, attributeToFetch, {
         from: account,
         gas: 60000000
       }, (err, res) => {
@@ -40,13 +40,13 @@ export const updateRequest = ({
   });
 };
 
-export const createRequest = ({
-  urlToQuery,
-  attributeToFetch
+export const updateRequest = ({
+  id,
+  valueRetrieved
 }) => {
   return new Promise((resolve, reject) => {
     account().then(account => {
-      contract.createRequest(urlToQuery, attributeToFetch, {
+      contract.updateRequest(id, valueRetrieved, {
         from: account,
         gas: 60000000
       }, (err, res) => {
