@@ -764,3 +764,68 @@ url = {https://github.com/EOSIO/Documentation/blob/master/TechnicalWhitePaper.md
 urldate = {2019-06-19},
 year = {2018}
 }
+
+@techreport{Back2002,
+    abstract = {Hashcash was originally proposed as a mechanism to throttle systematic abuse of un-metered internet resources such as email, and anonymous remailers in May 1997. Five years on, this paper captures in one place the various applications, improvements suggested and related subsequent publications, and describes initial experience from experiments using hashcash. The hashcash CPU cost-function computes a token which can be used as a proof-of-work. Interactive and non-interactive variants of cost-functions can be constructed which can be used in situations where the server can issue a challenge (connection oriented interactive protocol), and where it can not (where the communication is store-and-forward, or packet oriented) respectively.},
+    author = {Back, Adam},
+    file = {:C$\backslash$:/Users/pedro/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Back - 2002 - Hashcash-A Denial of Service Counter-Measure.pdf:pdf},
+    keywords = {cost-functions,hashcash},
+    title = {{Hashcash-A Denial of Service Counter-Measure}},
+    url = {http://www.hashcash.org/papers/hashcash.pdf},
+    year = {2002}
+}
+
+@article{Korpela2017,
+author = {Korpela, Kari and Hallikas, Jukka and Dahlberg, Tomi},
+isbn = {978-0-9981331-0-2},
+keywords = {Conference Paper,blockchain,ecosystem,enterprise architecture,integration,supply chain},
+month = {jan},
+title = {{Digital Supply Chain Transformation toward Blockchain Integration}},
+url = {https://scholarspace.manoa.hawaii.edu/handle/10125/41666},
+year = {2017}
+}
+
+@techreport{Ben-SassonTechnionAlessandroChiesa2019,
+abstract = {We build a system that provides succinct non-interactive zero-knowledge proofs (zk-SNARKs) for program executions on a von Neumann RISC architecture. The system has two components: a cryptographic proof system for verifying satisfiability of arithmetic circuits, and a circuit generator to translate program executions to such circuits. Our design of both components improves in functionality and efficiency over prior work, as follows. Our circuit generator is the first to be universal: it does not need to know the program, but only a bound on its running time. Moreover, the size of the output circuit depends additively (rather than multiplicatively) on program size, allowing verification of larger programs. The cryptographic proof system improves proving and verification times, by leveraging new algorithms and a pairing library tailored to the protocol. We evaluated our system for programs with up to 10,000 instructions, running for up to 32,000 machine steps, each of which can arbitrarily access random-access memory; and also demonstrated it executing programs that use just-in-time compilation. Our proofs are 230 bytes long at 80 bits of security, or 288 bytes long at 128 bits of security. Typical verification time is 5 milliseconds, regardless of the original program's running time.},
+author = {{Ben-Sasson Technion Alessandro Chiesa}, Eli and Tromer, Eran and {Virza MIT}, Madars},
+file = {:C$\backslash$:/Users/pedro/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Ben-Sasson Technion Alessandro Chiesa, Tromer, Virza MIT - 2019 - Succinct Non-Interactive Zero Knowledge for a von Neumann Architecture.pdf:pdf},
+keywords = {computationally-sound proofs 1,succinct arguments,zero-knowledge},
+title = {{Succinct Non-Interactive Zero Knowledge for a von Neumann Architecture}},
+url = {https://eprint.iacr.org/2013/879.pdf},
+year = {2019}
+}
+
+@techreport{Ben-Sasson2018,
+abstract = {Human dignity demands that personal information, like medical and forensic data, be hidden from the public. But veils of secrecy designed to preserve privacy may also be abused to cover up lies and deceit by institutions entrusted with Data, unjustly harming citizens and eroding trust in central institutions. Zero knowledge (ZK) proof systems are an ingenious cryptographic solution to this tension between the ideals of personal privacy and institutional integrity, enforcing the latter in a way that does not compromise the former. Public trust demands transparency from ZK systems, meaning they be set up with no reliance on any trusted party, and have no trapdoors that could be exploited by powerful parties to bear false witness. For ZK systems to be used with Big Data, it is imperative that the public verification process scale sublinearly in data size. Transparent ZK proofs that can be verified exponentially faster than data size were first described in the 1990s but early constructions were impractical, and no ZK system realized thus far in code (including that used by crypto-currencies like Zcash™) has achieved both transparency and exponential verification speedup, simultaneously, for general computations. Here we report the first realization of a transparent ZK system (ZK-STARK) in which verification scales exponentially faster than database size, and moreover, this exponential speedup in verification is observed concretely for meaningful and sequential computations, described next. Our system uses several recent advances on interactive oracle proofs (IOP), such as a "fast" (linear time) IOP system for error correcting codes. Our proof-of-concept system allows the Police to prove to the public that the DNA profile of a Presidential Candidate does not appear in the forensic DNA profile database maintained by the Police. The proof, which is generated by the Police, relies on no external trusted party, and reveals no further information about the contents of the database, nor about the candidate's profile. In particular, no DNA information is disclosed to any party outside the Police. The proof is shorter than the size of the DNA database, and verified faster than the time needed to examine that database na¨ıvelyna¨ıvely.},
+author = {Ben-Sasson, Eli and Bentov, Iddo and Horesh, Yinon and Riabzev, Michael},
+file = {:C$\backslash$:/Users/pedro/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Ben-Sasson et al. - 2018 - Scalable, transparent, and post-quantum secure computational integrity.pdf:pdf},
+title = {{Scalable, transparent, and post-quantum secure computational integrity}},
+url = {https://eprint.iacr.org/2018/046.pdf},
+year = {2018}
+}
+
+@inproceedings{Bunz2018,
+author = {Bunz, Benedikt and Bootle, Jonathan and Boneh, Dan and Poelstra, Andrew and Wuille, Pieter and Maxwell, Greg},
+booktitle = {2018 IEEE Symposium on Security and Privacy (SP)},
+doi = {10.1109/SP.2018.00020},
+isbn = {978-1-5386-4353-2},
+month = {may},
+pages = {315--334},
+publisher = {IEEE},
+title = {{Bulletproofs: Short Proofs for Confidential Transactions and More}},
+url = {https://ieeexplore.ieee.org/document/8418611/},
+year = {2018}
+}
+
+@inproceedings{Bunz2018,
+author = {Bunz, Benedikt and Bootle, Jonathan and Boneh, Dan and Poelstra, Andrew and Wuille, Pieter and Maxwell, Greg},
+booktitle = {2018 IEEE Symposium on Security and Privacy (SP)},
+doi = {10.1109/SP.2018.00020},
+isbn = {978-1-5386-4353-2},
+month = {may},
+pages = {315--334},
+publisher = {IEEE},
+title = {{Bulletproofs: Short Proofs for Confidential Transactions and More}},
+url = {https://ieeexplore.ieee.org/document/8418611/},
+year = {2018}
+}
