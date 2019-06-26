@@ -124,18 +124,16 @@
 
 \author[add1]{Pedro Duarte da Costa}
 \ead{pedro.duartecosta@fe.up.pt}
-\author[add1]{Filipe Figueiredo Correia\corref{supervisor}}
+\author[add1]{Filipe Figueiredo Correia}
 \ead{ffcorreia@fe.up.pt}
-\author[add1]{Hugo Sereno Ferreira\corref{supervisor}}
+\author[add1]{Hugo Sereno Ferreira}
 \ead{hugosf@fe.up.pt}
-\author[add2]{Mário Ribeiro Alves\corref{proponent}}
+\author[add2]{Mário Ribeiro Alves}
 \ead{mario@brpx.com}
 
 \address[add1]{Faculty of Engineering, University of Porto, Oporto, Portugal}
 \address[add2]{BRPX - Bright Development Studio, S.A. - BRPX S.A}
 
-\cortext[supervisor]{Supervisors}
-\cortext[proponent]{Proponent}
 
 \begin{abstract}
 
@@ -164,7 +162,7 @@ The topic of blockchain oracles is still unexplored territory mostly investigate
 
 
 \section{Methodology}
-A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders, meaning, not duplicating existing research and find the gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review, to the extent that a human can, it is necessary to clarify and identify at the beginning of the research its methodology, what are the data sources and what is the selection criteria.
+A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders, meaning, not duplicating existing research and find the gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review, to the extent that a human can, it is necessary to clarify and identify at the beginning of the research its methodology, what are the data sources and what is the selection criteria. In the Section~\ref{search-process} we describe this methodology based on the guidelines proposed by~\citet{Kitchenham2007}.
 
 The goal of this literature review is to get a sense of the corpus of existing works on the topic of blockchain oracles, and the directions and extent to which previous research has rendered significant results.
 
@@ -179,7 +177,7 @@ First of all and to guide the focus of the research, the following research ques
 
 \textit{RQ2}, tries to identify the direction that is proving to be the most effective. Analysing past solutions that never made it into production and solutions currently adopted.
 
-\subsection{Search Process}
+\subsection{Search Process}\label{search-process}
 Figure \ref{fig:/figures/SLR_stages}, depicts the predefined review strategy used in order to achieve such a goal and maintain unbiased, transparent and reproducible research. These steps are inspired on the guidelines for performing a systematic review by Kitchenham et al., 2007 \citet{Kitchenham2007}.
 
 \begin{figure*}[h]
@@ -225,8 +223,10 @@ This search query was used to comprise all the possible ways of referring to blo
 
 The search was performed on the 5th of February 2019 and revealed the results presented in Table \ref{search-results-table}.
 
-\begin{table}[H]
+\begin{table*}[h]
+  \begin{minipage}[c]{\textwidth}
   \centering
+  \resizebox{0.7\textwidth}{!}{%
   \begin{tabular}{llr}
     \hline
     \textbf{Database}   & \textbf{Filters}                & \textbf{Results} \\ \hline
@@ -236,14 +236,17 @@ The search was performed on the 5th of February 2019 and revealed the results pr
     Google Scholar      & Title                           & 8                \\ \hline
     \textbf{Total}      & \textbf{}                       & \textbf{123}     \\ \hline
   \end{tabular}
+  }
   \caption{Number of results and applied filters per database}
   \label{search-results-table}
-\end{table}
+  \end{minipage}
+\end{table*}
 
 Since the concept of smart contracts on the blockchain was only introduced in 2015, with the introduction of the Ethereum blockchain, only results after 2015 were considered, also, all duplicated papers were removed. Analysing the initial search results per year, in Figure \ref{search-results-per-year}, we can infer the growing popularity of oracle-related academic research. The year 2019 only comprises work done in the month of January since the search was performed at the beginning of February.
 
 \begin{figure}[H]
   \centering
+  \resizebox{0.4\textwidth}{!}{
   \begin{tikzpicture}
     \begin{axis}[
         xlabel={Year},
@@ -268,6 +271,7 @@ Since the concept of smart contracts on the blockchain was only introduced in 20
 
     \end{axis}
   \end{tikzpicture}
+  }
   \caption{Resulting papers from search distributed per year}
   \label{search-results-per-year}
 \end{figure}
@@ -290,7 +294,7 @@ The study selection process initially started with a pool of 123 papers from the
 \begin{figure}[H]
   \begin{center}
     \leavevmode
-    \includegraphics[width=0.7\textwidth]{figures/paper-screening.jpg}
+    \includegraphics[width=0.5\textwidth]{figures/paper-screening.jpg}
     \caption{Screening stages.}
     \label{fig:/figures/paper-screening}
   \end{center}
@@ -305,7 +309,7 @@ Town Crier (TC) \citet{Zhang2016a}, leverages trusted hardware, specifically Int
 \begin{figure}[H]
   \begin{center}
     \leavevmode
-    \includegraphics[width=0.7\textwidth]{figures/town-crier.png}
+    \includegraphics[width=0.45\textwidth]{figures/town-crier.png}
     \caption{Town crier high level view.}
     \label{fig:/figures/town-crier}
   \end{center}
@@ -321,7 +325,7 @@ Astraea \citet{Adler2018}, depicted on Figure~\ref{fig:/figures/astraea}~\footno
 \begin{figure}[H]
   \begin{center}
     \leavevmode
-    \includegraphics[width=0.7\textwidth]{figures/astraea.jpg}
+    \includegraphics[width=0.45\textwidth]{figures/astraea.jpg}
     \caption{High-level overview of Astraea's architecture.}
     \label{fig:/figures/astraea}
   \end{center}
@@ -371,8 +375,8 @@ Summing up, this research highlighted three main types of oracles. The first is 
 
 Table \ref{oracle-summary}, summarises the found existing projects and answers the first research question \ref{RQ1}.
 
-\begin{minipage}{18cm}
-\begin{table}[]
+\begin{table*}[h]
+  \begin{minipage}[c]{\textwidth}
   \centering
   \resizebox{\textwidth}{!}{%
   \begin{tabular}{llll}
@@ -390,12 +394,11 @@ Table \ref{oracle-summary}, summarises the found existing projects and answers t
   }
   \caption{Summary of oracle projects/research.}
   \label{oracle-summary}
-\end{table}
-\end{minipage}
+  \end{minipage}
+\end{table*}
 
 
 \section{Conclusions}
-
 
 Two main conclusions arise from both academic and non-academic research, and answer the second research question \ref{RQ2}.
 
