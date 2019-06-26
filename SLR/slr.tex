@@ -1,0 +1,454 @@
+%% This is file `elsarticle-template-1-num.tex',
+%%
+%% Copyright 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%%
+%% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
+%% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
+%%
+\documentclass[preprint,3p,12pt,twocolumn]{elsarticle}
+
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% The graphicx package provides the includegraphics command.
+\usepackage{graphicx}
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+\usepackage{lineno}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage{lscape}
+\usepackage{longtable}
+
+\usepackage{pgfplots}
+\usepackage{tikz}
+
+\usepackage{float}
+\restylefloat{table}
+
+\modulolinenumbers[5]
+
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+\usepackage{etoolbox}
+
+
+\makeatletter
+\patchcmd{\ps@pprintTitle}{\footnotesize\itshape
+       Preprint submitted to \ifx\@journal\@empty Elsevier
+       \else\@journal\fi}{\relax}{}{}
+\makeatother
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{<author name>}
+%% \address[label1]{<address>}
+%% \address[label2]{<address>}
+\title{Systematic Literature Review\\ \textbf{Trustable oracles for Blockchain data retrieval and aggregation} }
+
+\author[add1]{Pedro Duarte da Costa}
+\ead{pedro.duartecosta@fe.up.pt}
+\author[add1]{Filipe Figueiredo Correia\corref{supervisor}}
+\ead{ffcorreia@fe.up.pt}
+\author[add1]{Hugo Sereno Ferreira\corref{supervisor}}
+\ead{hugosf@fe.up.pt}
+\author[add2]{Mário Ribeiro Alves\corref{proponent}}
+\ead{mario@brpx.com}
+
+\address[add1]{Faculty of Engineering, University of Porto, Oporto, Portugal}
+\address[add2]{BRPX - Bright Development Studio, S.A. - BRPX S.A}
+
+\cortext[supervisor]{Supervisors}
+\cortext[proponent]{Proponent}
+
+\begin{abstract}
+
+
+\end{abstract}
+\begin{keyword}
+Blockchain \sep Oracles \sep Distributed Systems \sep Trust
+%% keywords here, in the form: keyword \sep keyword
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+\end{keyword}
+
+
+
+\end{frontmatter}
+
+
+%\linenumbers
+
+\section{Introduction}
+
+The topic of blockchain oracles is still unexplored territory mostly investigated by start-up companies and individuals thriving to solve a new problem. Therefore, research related to oracles is scarcely found on peer-reviewed publications but, nonetheless, is invaluable in such an early phase of the technology. Consequently, the a review on existing work cannot be complete without reviewing the work developed by the academia and also by start-ups, enterprises, governments and individuals.
+
+\section{Background}
+
+
+\section{Methodology}
+A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders, meaning, not duplicating existing research and find the gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review, to the extent that a human can, it is necessary to clarify and identify at the beginning of the research its methodology, what are the data sources and what is the selection criteria.
+
+The goal of this literature review is to get a sense of the corpus of existing works on the topic of blockchain oracles, and the directions and extent to which previous research has rendered significant results.
+
+\subsection{Research Questions}
+First of all and to guide the focus of the research, the following research questions were defined:
+\begin{itemize}
+  \item RQ1:\label{RQ1} What kind of blockchain oracles have been proposed?
+  \item RQ2:\label{RQ2} What are the research trends on blockchain oracles?
+\end{itemize}
+
+\textit{RQ1}, analyses the scope of existing blockchain oracles. The methodologies and technologies used, so as to understand how the oracle problem is tackled.
+
+\textit{RQ2}, tries to identify the direction that is proving to be the most effective. Analysing past solutions that never made it into production and solutions currently adopted.
+
+\subsection{Search Process}
+Figure \ref{fig:/figures/SLR_stages}, depicts the predefined review strategy used in order to achieve such a goal and maintain unbiased, transparent and reproducible research. These steps are inspired on the guidelines for performing a systematic review by Kitchenham et al., 2007 \citet{Kitchenham2007}.
+
+\begin{figure*}[h]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=\textwidth]{figures/SLR_stages.png}
+    \caption{Review strategy.}
+    \label{fig:/figures/SLR_stages}
+  \end{center}
+\end{figure*}
+
+The first step, \textbf{Search Strategy and Data-sources}, compromises a preliminary search on several databases trying to optimize the query that best fits the research questions. After identifying the set of keywords that best describe the problem a full query is built and tested.
+
+Once a satisfactory query is achieved, we proceed to the next step, \textbf{Study selection}, here we aggregate the studies from all databases and in the \textit{Screening and cleaning} phase we remove papers written in other languages or duplicated.
+
+Next, in the \textbf{Quality assessment} step we iteratively exclude papers that do not answers to any of the research questions. Initially analysing only the title, and alter the abstract and so on until a full read of the article seems worth it to take conclusions and respond to que research queries.
+
+This leads to the \textbf{Data extraction} step, in which we take and summarize the findings after reading each paper.
+
+So that later, in the \textbf{Data synthesis} step, we can summarize all the findings, infer some conclusions and answer the research questions.
+
+\subsection{Search Strategy and Data-sources}
+Having defined the strategy for the systematic review and after testing some keywords on several databases, the author selected the following four electronic databases to query for relevant information:
+
+\begin{itemize}
+  \item ACM Digital Library
+  \item IEEE Xplore
+  \item Scopus
+  \item Google Scholar
+\end{itemize}
+
+The defined search query was the following:
+
+\texttt{
+  (("blockchain" OR "block chain" OR "block-chain")
+  AND
+  ("oracles" OR "oracle" OR "middle-ware" OR "middleware" OR "middle ware" OR "datafeed" OR "data feed" OR "data-feed"))
+}
+
+This search query was used to comprise all the possible ways of referring to blockchain and oracles. Some scholars have investigated the oracle issue by simply calling them a middleware or data-feed since oracles can either be used as an intermediary that relays data or as the source of the data.
+
+This search query was used to comprise all the possible ways of referring to blockchain and oracles. Some scholars have investigated the oracle issue by simply calling them a middleware or data-feed since oracles can either be used as an intermediary that relays data or as the source of the data.
+
+The search was performed on the 5th of February 2019 and revealed the results presented in Table \ref{search-results-table}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{llr}
+    \hline
+    \textbf{Database}   & \textbf{Filters}                & \textbf{Results} \\ \hline
+    ACM Digital Library & Title, abstract and keywords    & 34               \\
+    IEEE Xplore         & Title, abstract and index terms & 24               \\
+    Scopus              & Title, abstract and keywords    & 57               \\
+    Google Scholar      & Title                           & 8                \\ \hline
+    \textbf{Total}      & \textbf{}                       & \textbf{123}     \\ \hline
+  \end{tabular}
+  \caption{Number of results and applied filters per database}
+  \label{search-results-table}
+\end{table}
+
+Since the concept of smart contracts on the blockchain was only introduced in 2015, with the introduction of the Ethereum blockchain, only results after 2015 were considered, also, all duplicated papers were removed. Analysing the initial search results per year, in Figure \ref{search-results-per-year}, we can infer the growing popularity of oracle-related academic research. The year 2019 only comprises work done in the month of January since the search was performed at the beginning of February.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        xlabel={Year},
+        ylabel={Number of papers},
+        xtick=data,
+        x tick label style={
+            /pgf/number format/1000 sep=},
+        xmin=2015, xmax=2019,
+        ymin=0, ymax=60,
+        ytick={0,15,30,45,60,75},
+        ymajorgrids=true,
+        grid style=dashed,
+        enlargelimits=0.10,
+      ]
+
+      \addplot[
+        mark=square, nodes near coords
+      ]
+      coordinates {
+          (2015,1)(2016,6)(2017,27)(2018,55)(2019,2)
+        };
+
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Resulting papers from search distributed per year}
+  \label{search-results-per-year}
+\end{figure}
+
+
+\subsection{Study Selection and Quality Assessment}
+The process of exclusion is depicted in Figure \ref{fig:/figures/paper-screening} and all the information regarding the papers and in which phase they were excluded is transparently presented in Appendix \ref{ap1:slr}.
+
+The study selection process initially started with a pool of 123 papers from the previously stated online databases. As described on Figure \ref{fig:/figures/SLR_stages}, the selection and quality assessment compromised four stages:
+\begin{itemize}
+  \item Stage 1: Screening and cleaning duplicated articles or articles that were not in English.
+  \item Stage 2: Exclusion by carefully reading the title but most importantly the abstract. After this stage, only 13 of the 91 non-duplicated papers were either describing specific trustable oracle implementations or mentioning the use of oracles.
+  \item Stage 3: Analysing the introduction and conclusions in order to remove papers which do not describe an implementation of a trustable oracle or a protocol to overcome the trust in oracles.
+  \item Stage 4: Full article reading to assess if the final bucket of articles answers the research questions.
+\end{itemize}
+
+
+%FIXME: Há uma relação entre esta figura e a 2.1. Esta parece uma versão simplificada com mais alguns detalhes (números dos que foram considerados e dos ue foram excluídos) mas nem sempre consigo fazer facilmente um match entre estas caixas e as da Figura 2.1. Pode ajudar se se uniformizar as expressões usadas em ambas. Em vez de as cores serem usadas apenas para fazer um gradiente, se forem usadas para ajudar a ver a equivalência entre as caixas dos dois diagramas, também pode ajudar.
+
+\begin{figure}[H]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=0.7\textwidth]{figures/paper-screening.jpg}
+    \caption{Screening stages.}
+    \label{fig:/figures/paper-screening}
+  \end{center}
+\end{figure}
+
+
+\subsection{Data extraction and Data Synthesis}
+The following process resulted in three articles and two theses that approach varying problems in implementing and guaranteeing trust in oracles.
+
+Town Crier (TC) \citet{Zhang2016a}, leverages trusted hardware, specifically Intel SGX\footnote{Intel Corporation. Intel® Software Guard Extensions SDK. https://software.intel.com/en-us/sgx-sdk, 2019}, to scrape HTTPS-enabled websites and serve source-authenticated data to smart contracts. TC architecture, depicted on Figure~\ref{fig:/figures/town-crier}~\footnote{Image taken from: https://town-crier.readthedocs.io/en/latest/how\_tc\_works.html}, involves a TC contract on the blockchain that receives requests from a client contract and communicates those request to a TC server which runs a SGX-protected process to retrieves an answer from a data source through an HTTPS connection. TEE prevent even the operating system of the server from peeking into the enclave or modifying its behavior, while use of TLS prevents tampering or eavesdropping on communications on the network.
+
+\begin{figure}[H]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=0.7\textwidth]{figures/town-crier.png}
+    \caption{Town crier high level view.}
+    \label{fig:/figures/town-crier}
+  \end{center}
+\end{figure}
+
+
+
+
+% FIXME: Outra coisa que seria interessante aqui seria já mencionares explicitamente, para cada uma das soluções que aqui são descritas, até que ponto é que nos dão trust, e a que nível o fazem. nalgumas já o mencionas, noutras fica um bocado nas entrelinhas
+
+Astraea \citet{Adler2018}, depicted on Figure~\ref{fig:/figures/astraea}~\footnote{Image taken from: https://blockchain.ieee.org/technicalbriefs/march-2019/astraea-a-decentralized-blockchain-oracle}, proposes a decentralized oracle network with submitters, voters and certifiers, in which voters play a low-risk game and certifies a high-risk game with associated resources. Using an monetary incentive structure as a means to keep the players honest.
+
+\begin{figure}[H]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=0.7\textwidth]{figures/astraea.jpg}
+    \caption{High-level overview of Astraea's architecture.}
+    \label{fig:/figures/astraea}
+  \end{center}
+\end{figure}
+
+Gilroy Gordon \citet{Gordon2017} proposes a protocol for oracle sensor data authenticity and integrity to IoT devices network with low computational resources. Using sets of public and private keys to authenticate that the oracle sensor data actually was originated by that oracle even if the information needs to pass by several oracles before being consumed by the application.
+
+Francisco Monroy \citet{MontotoMonroy2018} defines a gambling protocol based on incentives and assuming that every entity involved has the objective to maximize their profit. The protocol overcomes the trust in a single Oracle by polling a network of 7 oracles from a large network of available oracles, they will then stake their money on a specific bet and only receive their investment back if the majority of the oracles vote in the same winner. Creating, therefore, incentives for Oracle good behaviour.
+
+
+J. Eberhardt \citet{Eberhardt2018} does not propose a specific method but analyses existing solutions and defines a systematic classification for existing trustable off-chain computation oracles. The authors identify the following off-chain computation oracles approaches:
+
+
+
+\begin{itemize}
+  \item \textit{Verifiable off-chain Computation}, a technique where a prover executes a computation and then publishes the result including a cryptographic proof attesting the computation’s correctness to the blockchain. An on-chain verifier then verifies the proof and persists the result in case of success. Identified existing solutions are zkSNARKs, Bulletproofs and zkSTARKs. zkSNARKs require a setup phase which is more expensive than naive execution. After the setup, however, proof size and verification complexity are extremely small and independent of circuit complexity. This amortization makes zkSNARKs especially efficient for computations executed repeatedly, which is usually the case for off-chain state transitions. While zkSTARKs and Bulletproofs require no setup, proof size and verification complexity grow with circuit complexity, which limits applicability.
+  \item \textit{Secure Multiparty Computation}, SMPCs, enable a set of nodes to compute functions on secret data in a way that none of the nodes ever has access to the data in its entirety. Identifies Enigma~\citet{Tam2018}, which proposes a privacy-preserving decentralized computation platform based on multiple parties where a blockchain stores a publicly verifiable audit trail. However, current SMPC protocols add too much overhead for them to be practical. Hence, Enigma now relies on Trusted Execution Environments.
+
+  \item \textit{Enclave-based Computation}, EbC, relying on Trusted Execution Environments (TEE) to execute computations off-chain. Identified existing solutions are Enigma and Ekiden \citet{Cheng2018} which present two different implementations of EbCs. In Enigma, programs can either be executed on-chain or in enclaves that are distributed across a separate off-chain network. An Enigma-specific scripting language allows developers to mark objects as private and hence, enforce off-chain computation. In contrast to Enigma, Ekiden does not allow on-chain computation but instead, the blockchain is solely used as persistent state storage.
+
+
+  \item \textit{Incentive-driven Off-chain Computation}, IOC, relies on incentive mechanisms applied to motivate off-chain computation and guarantee computational correctness. IOCs inherit two critical design issues: (1) keep verifiers motivated to validate solutions and (2) reduce computational effort for the on-chain judge. The paper identifies TrueBit~\citet{Teutsch2017}, as the first IOC implementation, proposing solutions for both challenges. As verifiers would stop validating if solvers only published correct solutions, TrueBit enforces solvers to provide erroneous solutions from time to time and offers a reward to the verifiers for finding them.
+\end{itemize}
+
+
+\section{Commercial Products and Projects}
+
+This search, on the contrary of the systematic one explained before, cannot be described in a systematic way, since the source of the information is spread on whitepapers and startup companies' documentation pages which cannot be guaranteed to be available and consulted on a systematic way.
+
+To search for existing commercial products and projects, Google, a search engine and Medium, a platform for blog posting used widely by developers and the start-up community, were used as a means to find new projects or solutions for the oracle trust problem. Using these two tools a lot of projects were found trying to solve the oracle trust problem and are solely documented on white-papers or on the companies' website documentation page. This kind of literature cannot be found in peer-reviewed databases, but can nonetheless provide invaluable information and is therefore worth being analysed.
+
+The results of this search revealed a wide range of projects and protocols with varying degrees of decentralization or authenticity. A short explanation of each will be detailed here:
+
+\begin{itemize}
+  \item Oraclize.it \citet{Oraclize}, provides Authenticity Proofs for the data it fetches guaranteeing that the original data-source is genuine and untampered and can even make use of several data sources in order the gather trustable data, but its centralized model does not guarantee an always available service.
+  \item ChainLink\citet{Ellis2017}, describes a decentralized network of oracles that can query multiple sources in order to avoid dependency of a sole oracle which can be prone to fail and also to gather knowledge from multiple sources to obtain a more reliable result. ChainLink is also considering implementing, in the future, authenticity proofs and make use of trusted hardware, as of now it requires users to trust in the ChainLink nodes to behave correctly.
+  \item SchellingCoin~\citet{VitalikButerin2014} protocol incentivizes a decentralized network of oracles to perform computation by rewarding participants who submit results that are closest to the median of all submitted results in a commit-reveal process.
+  \item TrueBit~\citet{Teutsch2017}, introduces a system of solvers and verifiers. Solvers are compensated for performing computation and verifiers are compensated for detecting errors in solutions submitted by solvers.
+\end{itemize}
+
+\section{Summary}
+
+Summing up, this research highlighted two main types of oracles. The first is \textbf{Data-Carrier oracles}, whose main purpose is relaying query results from a trusted data source to a smart contract. The second is \textbf{Computation Oracles}, which not only relay query results but also perform the relevant computation themselves. Computation oracles can be used as building blocks to construct off-chain computation markets. A summary of the results is described in Table \ref{oracle-summary}.
+
+
+Summing up, this research highlighted three main types of oracles. The first is \textbf{Software-based oracles}, which try to prove their honest behaviour through the use of software-based authenticity proofs. These, mostly take advantage of some features of TLS to prove that the data they are relaying is the actually provided data. The second type is \textbf{Hardware-based oracles}. These leverage specific hardware, TEE, to securely separate the environment running the oracle code from the operating system and other applications to achieve higher guarantees on untampered code execution. They may even provide authenticity proofs regarding that the query actually came from a legit TEE. Lastly, \textbf{Consensus-based oracles}, which require a network of peers working together to achieve higher redundancy, having several peers querying the data and even in some cases peers performing the role of the verifier. This last approach largely depends on the existence of such a network and requires the use of monetary incentives to keep the networking running.
+
+Table \ref{oracle-summary}, summarises the found existing projects and answers the first research question \ref{RQ1}.
+
+
+\begin{table}[]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{llll}
+  \hline
+  Name & Type & Distributed Network & Achieves trust through \\ \hline
+  Town Crier & Hardware-based & No & Trusted hardware signed attestations \\
+  Astraea & Consensus-based & Yes & Network with submitters,  voters and certifier \\
+  \citet{Gordon2017} & Software-based & Yes & Sets of public and private keys \\
+  \citet{MontotoMonroy2018} & Consensus-based & Yes & Gambling protocol based on incentives \\
+  TrueBit & Consensus-based & Yes & System of solvers and verifiers \\
+  Oraclize.it & Software-based & No & TLSNotary, Android Proof \\
+  ChainLink & \begin{tabular}[c]{@{}l@{}}Consensus-based / \\ Software-based\end{tabular} & Yes & Query multiple sources \\
+  SchellingCoin & Consensus-based & Yes & Incentive based \\ \hline
+  \end{tabular}%
+  }
+  \caption{Summary of oracle projects/research.}
+  \label{oracle-summary}
+\end{table}
+
+
+
+\section{Conclusions}
+
+
+Two main conclusions arise from both academic and non-academic research, and answer the second research question \ref{RQ2}.
+
+First of all, there is a clear lack of academic research on the topic of creating trustable oracles. This is mostly likely due to the specificity of the problem and that blockchain related technology is usually paved by start ups and enthusiasts and not yet addressed in universities curricular plans.
+
+Secondly, even though the main research on trustable oracles is being pursued by startups or sole developers all the existing projects seem to be blockchain specific or in very early phases and not yet ready to be generally adopted.
+
+
+
+
+
+\nolinenumbers
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%% \section{}
+%% \label{}
+
+%% References
+%%
+%% Following citation commands can be used in the body text:
+%% Usage of \cite is as follows:
+%%   \cite{key}          ==>>  [#]
+%%   \cite[chap. 2]{key} ==>>  [#, chap. 2]
+%%   \citet{key}         ==>>  Author [#]
+
+%% References with bibTeX database:
+
+\bibliographystyle{model1-num-names}
+\bibliography{references.bib}
+
+\appendix
+\include{appendix1}
+
+%% Authors are advised to submit their bibtex database files. They are
+%% requested to list a bibtex style file in the manuscript if they do
+%% not want to use model1-num-names.bst.
+
+%% References without bibTeX database:
+
+% \begin{thebibliography}{00}
+
+%% \bibitem must have the following form:
+%%   \bibitem{key}...
+%%
+
+% \bibitem{}
+
+% \end{thebibliography}
+
+
+\end{document}
+
+%%
+%% End of file `elsarticle-template-1-num.tex'.
