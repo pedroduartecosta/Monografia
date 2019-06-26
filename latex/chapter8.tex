@@ -11,6 +11,7 @@ The other main difficulty is around the oracle topic itself. There's not a lot o
 
 In the end, in terms of oracle implementation, the author learned from the combined knowledge of a few articles from independent developers who tried to share their knowledge on how they addressed their oracle implementation.
 
+%FIXME: Formata a bold os nomes das contribuições de que aqui falas. Embora enumeres todas as contribuições, seria interessante conseguires relaciona-las melhor, dizendo explicitamente de que forma é que umas suportaram as outras
 
 
 \section{Contributions}
@@ -18,13 +19,13 @@ With this dissertation, the author intends to pave the way for the development o
 
 The author tries to demystify the existing authenticity proofs, explaining their inner workings and limitations so future developers can be more aware of their usage by the third party oracle providers.
 
-The author also presents several architectures and explains their points of trust and how to address each of those points. Also the weaknesses and strengths of each architecture so future developers can have a guided approach to choose the best model for their use case.
+Moreover, the author presents several architectures and explains their points of trust and how to address each of those points. Also the weaknesses and strengths of each architecture so future developers can have a guided approach to choose the best model for their use case.
 
 Finally, due to the lack of documentation around building a self-hosted oracle the author provides a simple boilerplate that can be easily used and even worked upon and tailor to the needs of the smart contract. The author even adds in this implementation the necessary logic for having the oracle being used and deployed by multiple competing parties allowing them to trust in the oracle execution even if they don't trust the other involved parties. This implementation, however, is directed for the Ethereum blockchain, but the author believes that its logic can be ported to other blockchains effortlessly.
 
 \section{Future Work}
 
-In terms of future work, it would be interesting to analyse use cases of the presented architectures. As of now, the author could not find examples to fit all of them and therefore, the author was not confident enough to call them patterns. This work would also help in the validation of the assertions made about each architecture.
+In terms of future work, it would be interesting to analyse use cases of the presented architectures. Not only of oracle services, but use cases in the industry that were created by the same need but not divulged to the community and may fit in the described scenarios. As of now, the author could not find examples to fit all of them and therefore, the author was not confident enough to call them patterns~\citet{Alexander,Gamma1995}. This work would also help in the validation of the assertions made about each architecture.
 
 In terms of the implementation of a self-hosted oracle, the author would like to see some work done in terms of designing a self-hosted that could be applied to a community problem. This means, to a scenario where the stakeholders of the oracle execution are not predefined and can enter or leave the network, more similar to the way blockchain works. Due to time limitations, the author could not think of a feasible way of achieving this without using some kind of proof-of-work, similarly to the blockchain.
 
@@ -32,4 +33,4 @@ In terms of the implementation of a self-hosted oracle, the author would like to
 
 \section{Conclusions}
 
-All in all, this dissertation allowed the author to gain a broader knowledge of cryptography, consensus mechanisms and blockchain technology. The author also, truly believes that this dissertation is paving the way for future applications of smart-contracts and blockchain technology. And will help developers who may be struggling using oracles and, unnecessarily, will recur to third-party providers having to support extra costs in their product.
+All in all, this dissertation allowed the author to gain a broader knowledge of cryptography, consensus mechanisms and blockchain technology. The author also truly believes that this dissertation is paving the way for future applications of smart-contracts and blockchain technology. Additionally, will help developers who may be struggling using oracles and, unnecessarily, will recur to third-party providers having to support extra costs in their product.
