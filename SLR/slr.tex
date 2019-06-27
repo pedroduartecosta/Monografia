@@ -17,8 +17,9 @@
 %%
 %% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
 %% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
+
 %%
-\documentclass[preprint,3p,12pt,twocolumn]{elsarticle}
+\documentclass[final,3p,12pt,twocolumn]{elsarticle}
 
 
 %% Use the option review to obtain double line spacing
@@ -85,67 +86,74 @@
 
 
 \makeatletter
-\patchcmd{\ps@pprintTitle}{\footnotesize\itshape
-       Preprint submitted to \ifx\@journal\@empty Elsevier
-       \else\@journal\fi}{\relax}{}{}
+
+\def\ps@pprintTitle{%
+\let\@oddhead\@empty
+\let\@evenhead\@empty
+\def\@oddfoot{\footnotesize\itshape
+% line below modified from elsarticle.cls
+ \ifx\@journal\@empty
+\else\@journal\fi\hfill\today}%
+\let\@evenfoot\@oddfoot}
 \makeatother
 
 \begin{document}
 
+
 \begin{frontmatter}
 
-%% Title, authors and addresses
+  %% Title, authors and addresses
 
-%% use the tnoteref command within \title for footnotes;
-%% use the tnotetext command for the associated footnote;
-%% use the fnref command within \author or \address for footnotes;
-%% use the fntext command for the associated footnote;
-%% use the corref command within \author for corresponding author footnotes;
-%% use the cortext command for the associated footnote;
-%% use the ead command for the email address,
-%% and the form \ead[url] for the home page:
-%%
-%% \title{Title\tnoteref{label1}}
-%% \tnotetext[label1]{}
-%% \author{Name\corref{cor1}\fnref{label2}}
-%% \ead{email address}
-%% \ead[url]{home page}
-%% \fntext[label2]{}
-%% \cortext[cor1]{}
-%% \address{Address\fnref{label3}}
-%% \fntext[label3]{}
-
-
-%% use optional labels to link authors explicitly to addresses:
-%% \author[label1,label2]{<author name>}
-%% \address[label1]{<address>}
-%% \address[label2]{<address>}
-\title{Systematic Literature Review\\ \textbf{Trustable oracles for Blockchain data retrieval and aggregation} }
-
-\author[add1]{Pedro Duarte da Costa}
-\ead{pedro.duartecosta@fe.up.pt}
-\author[add1]{Filipe Figueiredo Correia}
-\ead{filipe.correia@fe.up.pt}
-\author[add1]{Hugo Sereno Ferreira}
-\ead{hugosf@fe.up.pt}
-\author[add2]{Mário Ribeiro Alves}
-\ead{mario@brpx.com}
-
-\address[add1]{Faculty of Engineering, University of Porto, Oporto, Portugal}
-\address[add2]{BRPX - Bright Development Studio, S.A. - BRPX S.A}
+  %% use the tnoteref command within \title for footnotes;
+  %% use the tnotetext command for the associated footnote;
+  %% use the fnref command within \author or \address for footnotes;
+  %% use the fntext command for the associated footnote;
+  %% use the corref command within \author for corresponding author footnotes;
+  %% use the cortext command for the associated footnote;
+  %% use the ead command for the email address,
+  %% and the form \ead[url] for the home page:
+  %%
+  %% \title{Title\tnoteref{label1}}
+  %% \tnotetext[label1]{}
+  %% \author{Name\corref{cor1}\fnref{label2}}
+  %% \ead{email address}
+  %% \ead[url]{home page}
+  %% \fntext[label2]{}
+  %% \cortext[cor1]{}
+  %% \address{Address\fnref{label3}}
+  %% \fntext[label3]{}
 
 
-\begin{abstract}
+  %% use optional labels to link authors explicitly to addresses:
+  %% \author[label1,label2]{<author name>}
+  %% \address[label1]{<address>}
+  %% \address[label2]{<address>}
+  \title{\textbf{Systematic Literature Review on Blockchain Oracles} }
+
+  \author[add1]{Pedro Duarte da Costa}
+  \ead{pedro.duartecosta@fe.up.pt}
+  \author[add1]{Filipe Figueiredo Correia}
+  \ead{filipe.correia@fe.up.pt}
+  \author[add1]{Hugo Sereno Ferreira}
+  \ead{hugosf@fe.up.pt}
+  \author[add2]{Mário Ribeiro Alves}
+  \ead{mario@brpx.com}
+
+  \address[add1]{Faculty of Engineering, University of Porto, Oporto, Portugal}
+  \address[add2]{BRPX - Bright Development Studio, S.A. - BRPX S.A}
 
 
-\end{abstract}
-\begin{keyword}
-Blockchain \sep Oracles \sep Distributed Systems \sep Trust
-%% keywords here, in the form: keyword \sep keyword
+  \begin{abstract}
 
-%% MSC codes here, in the form: \MSC code \sep code
-%% or \MSC[2008] code \sep code (2000 is the default)
-\end{keyword}
+
+  \end{abstract}
+  \begin{keyword}
+    Blockchain \sep Oracles \sep Distributed Systems \sep Trust
+    %% keywords here, in the form: keyword \sep keyword
+
+    %% MSC codes here, in the form: \MSC code \sep code
+    %% or \MSC[2008] code \sep code (2000 is the default)
+  \end{keyword}
 
 
 
@@ -172,15 +180,9 @@ A literature review allows scholars not to step on each other's shoes but to cli
 \subsection{Research Questions}
 First of all and to guide the focus of the research, the following research questions were defined:
 \begin{itemize}
-  \item RQ1:\label{RQ1} What kind of blockchain oracles have been proposed?
-  \item RQ2:\label{RQ2} What are the research trends on blockchain oracles?
+  \item \textbf{RQ1:\label{RQ1} What kind of blockchain oracles have been proposed?}\newline This question analyses the scope of existing blockchain oracles. The methodologies and technologies used, so as to understand how the oracle problem is tackled.
+  \item \textbf{RQ2:\label{RQ2} What are the research trends on blockchain oracles?}\newline This question tries to identify the direction that is proving to be the most effective. Analysing past solutions that never made it into production and solutions currently adopted.
 \end{itemize}
-
-%FIXME: colocar a explicação debaixo de cada pergunta
-
-\textit{RQ1}, analyses the scope of existing blockchain oracles. The methodologies and technologies used, so as to understand how the oracle problem is tackled.
-
-\textit{RQ2}, tries to identify the direction that is proving to be the most effective. Analysing past solutions that never made it into production and solutions currently adopted.
 
 \subsection{Search Process}\label{search-process}
 Figure \ref{fig:/figures/SLR_stages}, depicts the predefined review strategy used in order to achieve such a goal and maintain unbiased, transparent and reproducible research. These steps are inspired on the guidelines for performing a systematic review by Kitchenham et al., 2007 \citet{Kitchenham2007}.
@@ -228,20 +230,20 @@ The search was performed on the 5th of February 2019 and revealed the results pr
 
 \begin{table*}[h]
   \begin{minipage}[c]{\textwidth}
-  \centering
-  \resizebox{0.7\textwidth}{!}{%
-  \begin{tabular}{llr}
-    \hline
-    \textbf{Database}   & \textbf{Filters}                & \textbf{Results} \\ \hline
-    ACM Digital Library & Title, abstract and keywords    & 34               \\
-    IEEE Xplore         & Title, abstract and index terms & 24               \\
-    Scopus              & Title, abstract and keywords    & 57               \\
-    Google Scholar      & Title                           & 8                \\ \hline
-    \textbf{Total}      & \textbf{}                       & \textbf{123}     \\ \hline
-  \end{tabular}
-  }
-  \caption{Number of results and applied filters per database}
-  \label{search-results-table}
+    \centering
+    \resizebox{0.7\textwidth}{!}{%
+      \begin{tabular}{llr}
+        \hline
+        \textbf{Database}   & \textbf{Filters}                & \textbf{Results} \\ \hline
+        ACM Digital Library & Title, abstract and keywords    & 34               \\
+        IEEE Xplore         & Title, abstract and index terms & 24               \\
+        Scopus              & Title, abstract and keywords    & 57               \\
+        Google Scholar      & Title                           & 8                \\ \hline
+        \textbf{Total}      & \textbf{}                       & \textbf{123}     \\ \hline
+      \end{tabular}
+    }
+    \caption{Number of results and applied filters per database}
+    \label{search-results-table}
   \end{minipage}
 \end{table*}
 
@@ -250,30 +252,30 @@ Since the concept of smart contracts on the blockchain was only introduced in 20
 \begin{figure}[H]
   \centering
   \resizebox{0.4\textwidth}{!}{
-  \begin{tikzpicture}
-    \begin{axis}[
-        xlabel={Year},
-        ylabel={Number of papers},
-        xtick=data,
-        x tick label style={
-            /pgf/number format/1000 sep=},
-        xmin=2015, xmax=2019,
-        ymin=0, ymax=60,
-        ytick={0,15,30,45,60,75},
-        ymajorgrids=true,
-        grid style=dashed,
-        enlargelimits=0.10,
-      ]
+    \begin{tikzpicture}
+      \begin{axis}[
+          xlabel={Year},
+          ylabel={Number of papers},
+          xtick=data,
+          x tick label style={
+              /pgf/number format/1000 sep=},
+          xmin=2015, xmax=2019,
+          ymin=0, ymax=60,
+          ytick={0,15,30,45,60,75},
+          ymajorgrids=true,
+          grid style=dashed,
+          enlargelimits=0.10,
+        ]
 
-      \addplot[
-        mark=square, nodes near coords
-      ]
-      coordinates {
-          (2015,1)(2016,6)(2017,27)(2018,55)(2019,2)
-        };
+        \addplot[
+          mark=square, nodes near coords
+        ]
+        coordinates {
+            (2015,1)(2016,6)(2017,27)(2018,55)(2019,2)
+          };
 
-    \end{axis}
-  \end{tikzpicture}
+      \end{axis}
+    \end{tikzpicture}
   }
   \caption{Resulting papers from search distributed per year}
   \label{search-results-per-year}
@@ -363,7 +365,7 @@ The results of this search revealed a wide range of projects and protocols with 
   \item TrueBit~\citet{Teutsch2017}, introduces a system of solvers and verifiers. Solvers are compensated for performing computation and verifiers are compensated for detecting errors in solutions submitted by solvers.
 \end{itemize}
 
-\section{Summary}
+\section{Results}
 
 %FIXME: Esta é a secção mais importante deste artigo, e por isso devia crescer mais e ter mais destaque:
 %- muda-lhe o nome para algo como "Results"
@@ -371,32 +373,33 @@ The results of this search revealed a wide range of projects and protocols with 
 %- embora a tabela já diga quais são os oracles de cada tipo, não faz mal se os referires de passagem como exemplos aqui no texto
 %- tenta dar aqui uma resposta às RQs que estabeleces no início (se necessário, ajusta o texto das RQs para o que fizer mais sentido)
 
-
-Summing up, this research highlighted three main types of oracles. The first is \textbf{Software-based oracles}, which try to prove their honest behaviour through the use of software-based authenticity proofs. These, mostly take advantage of some features of TLS to prove that the data they are relaying is the actually provided data. The second type is \textbf{Hardware-based oracles}. These leverage specific hardware, TEE, to securely separate the environment running the oracle code from the operating system and other applications to achieve higher guarantees on untampered code execution. They may even provide authenticity proofs regarding that the query actually came from a legit TEE. Lastly, \textbf{Consensus-based oracles}, which require a network of peers working together to achieve higher redundancy, having several peers querying the data and even in some cases peers performing the role of the verifier. This last approach largely depends on the existence of such a network and requires the use of monetary incentives to keep the networking running.
-
 Table \ref{oracle-summary}, summarises the found existing projects and answers the first research question \ref{RQ1}.
+
 
 \begin{table*}[h]
   \begin{minipage}[c]{\textwidth}
-  \centering
-  \resizebox{\textwidth}{!}{%
-  \begin{tabular}{llll}
-  \hline
-  Name & Type & Distributed Network & Achieves trust through \\ \hline
-  Town Crier & Hardware-based & No & Trusted hardware signed attestations \\
-  Astraea & Consensus-based & Yes & Network with submitters,  voters and certifier \\
-  \citet{Gordon2017} & Software-based & Yes & Sets of public and private keys \\
-  \citet{MontotoMonroy2018} & Consensus-based & Yes & Gambling protocol based on incentives \\
-  TrueBit & Consensus-based & Yes & System of solvers and verifiers \\
-  Oraclize.it & Software-based & No & TLSNotary, Android Proof \\
-  ChainLink & \begin{tabular}[c]{@{}l@{}}Consensus-based / \\ Software-based\end{tabular} & Yes & Query multiple sources \\
-  SchellingCoin & Consensus-based & Yes & Incentive based \\ \hline
-  \end{tabular}%
-  }
-  \caption{Summary of oracle projects/research.}
-  \label{oracle-summary}
+    \centering
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{llll}
+        \hline
+        Name                      & Type                       & Distributed Network & Achieves trust through                         \\ \hline
+        Town Crier                & Hardware-based             & No                  & Trusted hardware signed attestations           \\
+        Astraea                   & Consensus-based            & Yes                 & Network with submitters,  voters and certifier \\
+        \citet{Gordon2017}        & Software-based             & Yes                 & Sets of public and private keys                \\
+        \citet{MontotoMonroy2018} & Consensus-based            & Yes                 & Gambling protocol based on incentives          \\
+        TrueBit                   & Consensus-based            & Yes                 & System of solvers and verifiers                \\
+        Oraclize.it               & Software-based             & No                  & TLSNotary, Android Proof                       \\
+        ChainLink                 & \begin{tabular}[c]{@{}l@{}}Consensus-based / \\ Software-based\end{tabular} & Yes                 & Query multiple sources                         \\
+        SchellingCoin             & Consensus-based            & Yes                 & Incentive based                                \\ \hline
+      \end{tabular}%
+    }
+    \caption{Summary of oracle projects/research.}
+    \label{oracle-summary}
   \end{minipage}
 \end{table*}
+
+
+This research highlighted three main types of oracles. The first is \textbf{Software-based oracles}, which try to prove their honest behaviour through the use of software-based authenticity proofs. These, mostly take advantage of some features of TLS to prove that the data they are relaying is the actually provided data. The second type is \textbf{Hardware-based oracles}. These leverage specific hardware, TEE, to securely separate the environment running the oracle code from the operating system and other applications to achieve higher guarantees on untampered code execution. They may even provide authenticity proofs regarding that the query actually came from a legit TEE. Lastly, \textbf{Consensus-based oracles}, which require a network of peers working together to achieve higher redundancy, having several peers querying the data and even in some cases peers performing the role of the verifier. This last approach largely depends on the existence of such a network and requires the use of monetary incentives to keep the networking running.
 
 
 \section{Conclusions}
@@ -405,10 +408,7 @@ Two main conclusions arise from both academic and non-academic research, and ans
 
 First of all, there is a clear lack of academic research on the topic of creating trustable oracles. This is mostly likely due to the specificity of the problem and that blockchain related technology is usually paved by start ups and enthusiasts and not yet addressed in universities curricular plans.
 
-Secondly, even though the main research on trustable oracles is being pursued by startups or sole developers all the existing projects seem to be blockchain specific or in very early phases and not yet ready to be generally adopted.
-
-
-
+Secondly, even though the main research on trustable oracles is being pursued by startups or sole developers all the existing projects seem to be specific to a certain blockchain or in very early phases and not yet ready to be generally adopted.
 
 
 \nolinenumbers
