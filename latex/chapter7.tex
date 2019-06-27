@@ -1,4 +1,4 @@
-\chapter{Validation} \label{chap:chap7}
+\chapter{Evaluation} \label{chap:chap7}
 
 \section*{}
 In this Chapter, the author seeks to demonstrate how the architectures and prototype detailed in Chapters \ref{chap:chap5} and \ref{chap:chap6} provide answers to the desiderata stated in Chapter \ref{chap:chap4}.
@@ -12,18 +12,18 @@ Then, the implemented solution in comparison to the state of the art, as well as
 In this section, the author will validate each architecture against the forces defined previously in the desiderata, in Section \ref{Desiderata}.
 
 
-\subsection{Oracle as a Service w/ Single Data Feed}\label{OaaS w/SDF}
-This architecture achieves a \textbf{fast time-to-market}, allowing the developer of the smart-contract to quickly retrieve data from the web by plugin-in an oracle-as-a-service solution. Thus, not requiring any study and development and maintenance of an oracle service, quickly satisfying the contract data needs.
+\subsection{Oracle-as-a-Service w/ Single Data Feed}\label{OaaS w/SDF}
+This architecture achieves a \textbf{fast time-to-market}, allowing the developer of the smart-contract to quickly retrieve data from the web by plugging-in an oracle-as-a-service solution. Thus, this approach does not require any study, development and maintenance of an oracle service, quickly satisfying the contract data needs.
 
-In terms of \textbf{keeping trust standards}, this type of architectures usually involves the use of trusted hardware or authenticity proofs to achieve such end. There are some caveats associated with some of them, such as the most widely used one, TLSNotary, but others such as the Android Proof and the use of trusted hardware may suffice to guarantee trust in the oracle service if their implementation and proofs are readily and transparently available. This proofs are managed by the third-party provider and therefore are not an overhead in achieving a fast time-to-market.
+In terms of \textbf{keeping trust standards}, this type of architectures usually involves the use of trusted hardware or authenticity proofs to achieve such end. There are some caveats associated with some of them, such as the most widely used one, TLSNotary, but others such as the Android Proof and the use of trusted hardware may suffice to guarantee trust in the oracle service if their implementation and proofs are readily and transparently available. These proofs are managed by the third-party provider and therefore do not hinder achieving a fast time-to-market.
 
-\subsection{Oracle as a Service w/ Multiple Data Feeds}\label{OaaS w/ MDF}
+\subsection{Oracle-as-a-Service w/ Multiple Data Feeds}\label{OaaS w/ MDF}
 Iterating on the previous architecture, this one upholds the same characteristics of the previous one, \textbf{fast time-to-market} and \textbf{keeping trust standards}.
 
-However, in this scenario, we don't fully trust the data-source. Trust here, has two components. Trusting the data-source availability (uptime) and trusting the veracity of the data provided. By querying multiple data-feeds and setting a quorum both problems are solved. If some data providers fail to answer the request and the minimum quorum upholds the contract can still perform its duties. And if we cannot trust a single party to provide the data, as doing so will give full power to the outcome of the contract to that single data provider, the problem is solved by having a minimum quorum that can provide the same answer. This way, an outlier in the selected data provider is discarded. Guaranteeing both \textbf{data-feed fault tolerance} and \textbf{data veracity}.
+However, in this scenario, we don't fully trust the data-source. Trust here, has two components. Trusting the data-source availability (uptime) and trusting the veracity of the data provided. By querying multiple data-feeds and setting a quorum both problems are solved. If some data providers fail to answer the request and the minimum quorum upholds the contract can still perform its duties. Also, if we cannot trust a single party to provide the data, as doing so will give full power to the outcome of the contract to that single data provider, the problem is solved by having a minimum quorum that can provide the same answer. This way, an outlier in the selected data provider is discarded. Guaranteeing both \textbf{data-feed fault tolerance} and \textbf{data veracity}.
 
 \subsection{Single-Party Self Hosted Oracle}\label{SP-SHO}
-This scenario takes a different approach, from the two previous ones, in terms of where to place the trust. In the previous scenario, due to the use of a third-party, it is required that some sort of proof is generated in order to guarantee the good behaviour of the third party. However, these proofs do add extra overhead to each request in terms of memory and computation used. In a scenario where the smart contract execution will only affect a single user, the owner of the client smart contract, and he is able to develop and maintain its own oracle, then it will become a more viable approach to use a self-hosted oracle approach than to use a third-party oracle as a service. Since it is own code that is being executed and he controls the environment of execution he can have full trust in the oracle behaviour, not depending therefore on any extra mechanism.
+This scenario takes a different approach, from the two previous ones, in terms of where to place the trust. In the previous scenario, due to the use of a third-party, it is required that some sort of proof is generated in order to guarantee the good behaviour of the third party. However, these proofs do add extra overhead to each request in terms of memory and computation used. In a scenario where the smart contract execution will only affect a single user, the owner of the client smart contract, and he is able to develop and maintain its own oracle, then it will become a more viable approach to use a self-hosted oracle approach than to use a third-party oracle-as-a-service. Since it is own code that is being executed and he controls the environment of execution he can have full trust in the oracle behaviour, not depending therefore on any extra mechanism.
 
 
 In a scenario wherein a set of predefined parties are stakeholders in the smart-contract execution, it is possible to skip the use of authenticity proofs by having all the parties contributing to the oracle execution. With such approach, we get to \textbf{keep the trust standards} of the execution of the smart-contract as a whole.
@@ -62,7 +62,7 @@ Having addressed these architectures in terms of a predefined set of values, tha
 
 As the Table \ref{tab:architecture-summary} visually points out, no architecture can satisfy all requirements, which can be easily understood. For example, in a self-hosted scenario it is always impractical to achieve \textbf{fast time-to-market} as it is necessary to develop, study and deploy the whole solution.
 
-Also, \textbf{lower smart contract costs} requires further analysis. The author, considered that the self-hosted option is cheaper comparing to the use of a third-party provider by considering only the costs of running the oracle and not the costs of paying developers and infrastructure. Still on the topic of costs, the architecture MP-SHO \ref{MP-SHO} can only be assumed to have lower costs than the as a service approach since it does not require complex contracts or paying fees. But it might be more expensive than the architecture OaaS w/SDF \ref{OaaS w/SDF} if the number of oracles deployed is too large in comparison to the use of a single oracle in the latter mentioned architecture. As for each oracle, the cost of operations increases, as depicted on Figure  \ref{oracle-query-cost}.
+Also, \textbf{lower smart contract costs} requires further analysis. The author, considered that the self-hosted option is cheaper comparing to the use of a third-party provider by considering only the costs of running the oracle and not the costs of paying developers and infrastructure. Still on the topic of costs, the architecture MP-SHO \ref{MP-SHO} can only be assumed to have lower costs than the as-a-service approach since it does not require complex contracts or paying fees. But it might be more expensive than the architecture OaaS w/SDF \ref{OaaS w/SDF} if the number of oracles deployed is too large in comparison to the use of a single oracle in the latter mentioned architecture. As for each oracle, the cost of operations increases, as depicted on Figure  \ref{oracle-query-cost}.
 
 Finally, analysing the factor \textbf{keeping trust standards} all architectures checked this boxes, as oracles-as-a-service have at their disposal authenticity proofs, such as TLS-N and Town Crier, that can provide a trustable enough proofs for certain scenarios. It might not be the ones that their are using now, but looking from an architecture standpoint they can achieve this as well.
 
@@ -82,17 +82,17 @@ Analysing the first one, the contract executing cost paid by the caller, that is
 
 Secondly, existing services are for-profit companies and therefore require an extra-payment for their service. Oraclize.it adds an extra fee paid in dollars, depicted on Table ~\ref{tab:oraclize-fees}, that depends on the data source and authenticity proof used. Chainlink requires that every request is paid using its token LINK whose value depends on the current market price. In a self-deployed oracle approach, none of these fees are present leading therefore to lower costs.
 
-\begin{table}[H]
+\begin{table}[]
     \centering
-    \begin{tabular}{@{}llllll@{}}
-        \cmidrule(l){3-6}
-                                       & \multicolumn{1}{l|}{}          & \multicolumn{4}{c|}{Proof type}                                                                                            \\ \cmidrule(r){1-2}
-        \multicolumn{1}{c}{Datasource} & \multicolumn{1}{c}{Base price} & \multicolumn{1}{r}{None}        & \multicolumn{1}{r}{TLSNotary} & \multicolumn{1}{r}{Android} & \multicolumn{1}{r}{Ledger} \\ \midrule
-        URL                            & 0.01\$                         & +0.0\$                          & +0.04\$                       & +0.04\$                     & N/A                        \\
-        WolframAlpha                   & 0.03\$                         & +0.0\$                          & N/A                           & N/A                         & N/A                        \\
-        IPFS                           & 0.01\$                         & +0.0\$                          & N/A                           & N/A                         & N/A                        \\
-        random                         & 0.05\$                         & +0.0\$                          & N/A                           & N/A                         & +0.0\$                     \\
-        computation                    & 0.50\$                         & +0.0\$                          & +0.04\$                       & +0.04\$                     & N/A                        \\ \bottomrule
+    \begin{tabular}{@{}lccccc@{}}
+    \cmidrule(l){3-6}
+     & \multicolumn{1}{l}{} & \multicolumn{4}{c}{Proof type} \\ \midrule
+    Datasource & Base price & None & TLSNotary & Android & Ledger \\ \midrule
+    URL & 0.01\$ & +0.0\$ & +0.04\$ & +0.04\$ & N/A \\
+    WolframAlpha & 0.03\$ & +0.0\$ & N/A & N/A & N/A \\
+    IPFS & 0.01\$ & +0.0\$ & N/A & N/A & N/A \\
+    Random & 0.05\$ & +0.0\$ & N/A & N/A & +0.0\$ \\
+    Computation & 0.50\$ & +0.0\$ & +0.04\$ & +0.04\$ & N/A \\ \bottomrule
     \end{tabular}
     \caption{Oraclize fees in USD}
     \label{tab:oraclize-fees}
@@ -113,5 +113,7 @@ The presented implementation provides a great starting point to be worked upon a
 \subsection{Conclusions}
 
 This implementation intends to be a simple, cost-effective boilerplate that can already service a range of different contracts by allowing to query any JSON API and accomplishes exactly that purpose. Furthermore, implement already an important feature, allowing the outcome of each request made from a client smart contract to the oracle smart contract to require a minimum quorum of off-chain oracles responses. This way increasing the infrastructure availability and decentralize its ownership.
+
+Moreover, the implementation demonstrates the viability of the last architecture, Architecture \ref{MPSelfHostedOracle}, the only one to which the author could not find a use case, as it fulfils the expected desiderata values proposed for it. This architecture \textbf{keeps trust standards} by having each party involved contributing to the final result, but still being resilient to failures by defining a desired minimum quorum. Achieving \textbf{data-feed fault tolerance} and \textbf{data veracity} as the client can make several requests to it and obtain information provided by different data-sources and queried by different oracle entities. Additionally, it accomplishes \textbf{lower smart contract costs} and \textbf{lower oracle complexity} but not requiring to verify any authenticity proof, which are complex in terms of implementation and computational resources. Finally, it is designed with \textbf{oracle decentralization} and \textbf{oracles ownership decentralization} by being able to have multiple and distinct entities inputting data into the system.
 
 With this in mind, this implementation fully accomplishes the objectives proposed by the author.
