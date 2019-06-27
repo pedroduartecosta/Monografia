@@ -17,11 +17,20 @@ In the end, in terms of oracle implementation, the author learned from the combi
 \section{Contributions}
 With this dissertation, the author intends to pave the way for the development of secure oracle architectures and implementations.
 
-The author tries to demystify the existing authenticity proofs, explaining their inner workings and limitations so future developers can be more aware of their usage by the third party oracle providers.
+It starts with a \textbf{deep analysis of authenticity proofs}, demystifying its inner working and exposing their limitations as well as scenarios of use so that future developers can be more aware of their usage by existing third-party oracle providers.
 
-Moreover, the author presents several architectures and explains their points of trust and how to address each of those points. Also the weaknesses and strengths of each architecture so future developers can have a guided approach to choose the best model for their use case.
+Moreover, the author presents a \textbf{trust-oriented guide to architect oracles} backed up by the aforementioned analysis. Exposing the weaknesses and strengths of each architecture, addressing the as-a-service ones regarding their use of proofs. Also, the author exposes the points of trust in a oracle service and how can each one be covered and the trade-offs of doing so as well as relating to existing known uses, with exception for the last architecture.
 
-Finally, due to the lack of documentation around building a self-hosted oracle the author provides a simple boilerplate that can be easily used and even worked upon and tailor to the needs of the smart contract. The author even adds in this implementation the necessary logic for having the oracle being used and deployed by multiple competing parties allowing them to trust in the oracle execution even if they don't trust the other involved parties. This implementation, however, is directed for the Ethereum blockchain, but the author believes that its logic can be ported to other blockchains effortlessly.
+Finally, to address the lack of known uses in the last architecture, the author provides an \textbf{novel implementation of a multi-party self-hosted oracle}. This boilerplate can easily be used and even worked upon and tailor to the needs of distinct smart contract. The author even adds in this implementation the necessary logic for having the oracle being used and deployed by multiple competing parties allowing them to trust in the oracle execution even if they don't trust the other involved parties. This implementation, however, is directed for the Ethereum blockchain, but the author believes that its logic can be ported to other blockchains effortlessly. It also addresses the lack of documentation around building a self-hosted oracle.
+
+\vspace{1cm}
+Summing up, the author contributes with a:
+
+\begin{itemize}
+    \item Deep analysis of authenticity proofs;
+    \item Trust-oriented guide to architect oracles;
+    \item Novel implementation of a multi-party self-hosted oracle.
+\end{itemize}
 
 \section{Future Work}
 
