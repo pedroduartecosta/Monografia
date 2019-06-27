@@ -125,7 +125,7 @@
 \author[add1]{Pedro Duarte da Costa}
 \ead{pedro.duartecosta@fe.up.pt}
 \author[add1]{Filipe Figueiredo Correia}
-\ead{ffcorreia@fe.up.pt}
+\ead{filipe.correia@fe.up.pt}
 \author[add1]{Hugo Sereno Ferreira}
 \ead{hugosf@fe.up.pt}
 \author[add2]{Mário Ribeiro Alves}
@@ -156,15 +156,18 @@ Blockchain \sep Oracles \sep Distributed Systems \sep Trust
 
 \section{Introduction}
 
-The topic of blockchain oracles is still unexplored territory mostly investigated by start-up companies and individuals thriving to solve a new problem. Therefore, research related to oracles is scarcely found on peer-reviewed publications but, nonetheless, is invaluable in such an early phase of the technology. Consequently, the a review on existing work cannot be complete without reviewing the work developed by the academia and also by start-ups, enterprises, governments and individuals.
+The topic of blockchain oracles is still unexplored territory mostly investigated by start-up companies and individuals thriving to solve a new problem. Therefore, research related to oracles is scarcely found on peer-reviewed publications but, nonetheless, is invaluable in such an early phase of the technology. Consequently, a review on existing work cannot be complete without considering the work developed by academia and also by start-ups, enterprises, governments and individuals.
+
+%FIXME: No fim da introdução devia haver uma visão geral do artigo. isto não é uma mera listagem de secções (embora possas referir as secções principais), serve para dar uma ideia do fio condutor que se pode esperar encontrar no resto do artigo
+
+
+The goal of this literature review is to get a sense of the corpus of existing works on the topic of blockchain oracles, and the directions and extent to which previous research has rendered significant results.
 
 \section{Background}
 
 
 \section{Methodology}
-A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders, meaning, not duplicating existing research and find the gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review, to the extent that a human can, it is necessary to clarify and identify at the beginning of the research its methodology, what are the data sources and what is the selection criteria. In the Section~\ref{search-process} we describe this methodology based on the guidelines proposed by~\citet{Kitchenham2007}.
-
-The goal of this literature review is to get a sense of the corpus of existing works on the topic of blockchain oracles, and the directions and extent to which previous research has rendered significant results.
+A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders, meaning, not duplicating existing research and find the gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review we will clarify and identify at the beginning of the research its methodology, what are the data sources and what is the selection criteria. In Section~\ref{search-process} we describe this methodology.
 
 \subsection{Research Questions}
 First of all and to guide the focus of the research, the following research questions were defined:
@@ -172,6 +175,8 @@ First of all and to guide the focus of the research, the following research ques
   \item RQ1:\label{RQ1} What kind of blockchain oracles have been proposed?
   \item RQ2:\label{RQ2} What are the research trends on blockchain oracles?
 \end{itemize}
+
+%FIXME: colocar a explicação debaixo de cada pergunta
 
 \textit{RQ1}, analyses the scope of existing blockchain oracles. The methodologies and technologies used, so as to understand how the oracle problem is tackled.
 
@@ -217,9 +222,7 @@ The defined search query was the following:
   ("oracles" OR "oracle" OR "middle-ware" OR "middleware" OR "middle ware" OR "datafeed" OR "data feed" OR "data-feed"))
 }
 
-This search query was used to comprise all the possible ways of referring to blockchain and oracles. Some scholars have investigated the oracle issue by simply calling them a middleware or data-feed since oracles can either be used as an intermediary that relays data or as the source of the data.
-
-This search query was used to comprise all the possible ways of referring to blockchain and oracles. Some scholars have investigated the oracle issue by simply calling them a middleware or data-feed since oracles can either be used as an intermediary that relays data or as the source of the data.
+This search query was used to comprise the most frequent ways of referring to blockchain and oracles. Some scholars have investigated the oracle issue by simply calling them a middleware or data-feed since oracles can either be used as an intermediary that relays data or as the source of the data.
 
 The search was performed on the 5th of February 2019 and revealed the results presented in Table \ref{search-results-table}.
 
@@ -242,7 +245,7 @@ The search was performed on the 5th of February 2019 and revealed the results pr
   \end{minipage}
 \end{table*}
 
-Since the concept of smart contracts on the blockchain was only introduced in 2015, with the introduction of the Ethereum blockchain, only results after 2015 were considered, also, all duplicated papers were removed. Analysing the initial search results per year, in Figure \ref{search-results-per-year}, we can infer the growing popularity of oracle-related academic research. The year 2019 only comprises work done in the month of January since the search was performed at the beginning of February.
+Since the concept of smart contracts on the blockchain was only introduced in 2015, with the introduction of the Ethereum blockchain, only results after 2015 were considered, also, all duplicated papers were removed. Analysing the initial search results per year, in Figure \ref{search-results-per-year}, we can infer the growing popularity of oracle-related academic research. The year 2019 only comprises work published in the month of January since the search was performed at the beginning of February.
 
 \begin{figure}[H]
   \centering
@@ -302,9 +305,9 @@ The study selection process initially started with a pool of 123 papers from the
 
 
 \subsection{Data extraction and Data Synthesis}
-The following process resulted in three articles and two theses that approach varying problems in implementing and guaranteeing trust in oracles.
+The following process resulted in finding three articles and two theses that approach varying problems in implementing and guaranteeing trust in oracles.
 
-Town Crier (TC) \citet{Zhang2016a}, leverages trusted hardware, specifically Intel SGX\footnote{Intel Corporation. Intel® Software Guard Extensions SDK. https://software.intel.com/en-us/sgx-sdk, 2019}, to scrape HTTPS-enabled websites and serve source-authenticated data to smart contracts. TC architecture, depicted on Figure~\ref{fig:/figures/town-crier}~\footnote{Image taken from: https://town-crier.readthedocs.io/en/latest/how\_tc\_works.html}, involves a TC contract on the blockchain that receives requests from a client contract and communicates those request to a TC server which runs a SGX-protected process to retrieves an answer from a data source through an HTTPS connection. TEE prevent even the operating system of the server from peeking into the enclave or modifying its behavior, while use of TLS prevents tampering or eavesdropping on communications on the network.
+Town Crier (TC) \citet{Zhang2016a}, leverages trusted hardware, specifically Intel SGX\footnote{Intel Corporation. Intel® Software Guard Extensions SDK. https://software.intel.com/en-us/sgx-sdk, 2019}, to scrape HTTPS-enabled websites and serve source-authenticated data to smart contracts. The architecture of TC, depicted on Figure~\ref{fig:/figures/town-crier}~\footnote{Image taken from: https://town-crier.readthedocs.io/en/latest/how\_tc\_works.html}, involves a TC contract on the blockchain that receives requests from a client contract and communicates those request to a TC server which runs a SGX-protected process to retrieve an answer from a data source through an HTTPS connection. Trusted Execution Environments (TEE) prevent even the operating system of the server from peeking into the enclave or modifying its behaviour, while use of the TLS (Transport Layer Security) protocol prevents tampering or eavesdropping on communications on the network.
 
 \begin{figure}[H]
   \begin{center}
@@ -320,7 +323,7 @@ Town Crier (TC) \citet{Zhang2016a}, leverages trusted hardware, specifically Int
 
 % FIXME: Outra coisa que seria interessante aqui seria já mencionares explicitamente, para cada uma das soluções que aqui são descritas, até que ponto é que nos dão trust, e a que nível o fazem. nalgumas já o mencionas, noutras fica um bocado nas entrelinhas
 
-Astraea \citet{Adler2018}, depicted on Figure~\ref{fig:/figures/astraea}~\footnote{Image taken from: https://blockchain.ieee.org/technicalbriefs/march-2019/astraea-a-decentralized-blockchain-oracle}, proposes a decentralized oracle network with submitters, voters and certifiers, in which voters play a low-risk game and certifies a high-risk game with associated resources. Using an monetary incentive structure as a means to keep the players honest.
+Astraea, proposed by \citet{Adler2018}, describes a decentralized oracle network, which is depicted on Figure~\ref{fig:/figures/astraea}~\footnote{Image taken from: https://blockchain.ieee.org/technicalbriefs/march-2019/astraea-a-decentralized-blockchain-oracle}, with submitters, voters and certifiers, in which voters play a low-risk game and certifies a high-risk game with associated resources. Using an monetary incentive structure as a means to keep the players honest.
 
 \begin{figure}[H]
   \begin{center}
@@ -362,7 +365,11 @@ The results of this search revealed a wide range of projects and protocols with 
 
 \section{Summary}
 
-Summing up, this research highlighted two main types of oracles. The first is \textbf{Data-Carrier oracles}, whose main purpose is relaying query results from a trusted data source to a smart contract. The second is \textbf{Computation Oracles}, which not only relay query results but also perform the relevant computation themselves. Computation oracles can be used as building blocks to construct off-chain computation markets. A summary of the results is described in Table \ref{oracle-summary}.
+%FIXME: Esta é a secção mais importante deste artigo, e por isso devia crescer mais e ter mais destaque:
+%- muda-lhe o nome para algo como "Results"
+%-  Traz para aqui para cima a tabela 2
+%- embora a tabela já diga quais são os oracles de cada tipo, não faz mal se os referires de passagem como exemplos aqui no texto
+%- tenta dar aqui uma resposta às RQs que estabeleces no início (se necessário, ajusta o texto das RQs para o que fizer mais sentido)
 
 
 Summing up, this research highlighted three main types of oracles. The first is \textbf{Software-based oracles}, which try to prove their honest behaviour through the use of software-based authenticity proofs. These, mostly take advantage of some features of TLS to prove that the data they are relaying is the actually provided data. The second type is \textbf{Hardware-based oracles}. These leverage specific hardware, TEE, to securely separate the environment running the oracle code from the operating system and other applications to achieve higher guarantees on untampered code execution. They may even provide authenticity proofs regarding that the query actually came from a legit TEE. Lastly, \textbf{Consensus-based oracles}, which require a network of peers working together to achieve higher redundancy, having several peers querying the data and even in some cases peers performing the role of the verifier. This last approach largely depends on the existence of such a network and requires the use of monetary incentives to keep the networking running.
