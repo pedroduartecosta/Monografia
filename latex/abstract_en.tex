@@ -7,17 +7,12 @@ However, currently, smart contracts lack an important feature: internet connecti
 Oracles solve the connectivity problem, by listening to events produced by smart-contracts, they can insert the needed information on the Blockchain to later be used by the contracts. But oracles do not abide by the same rules and do not support the same guarantees given by Blockchain, so they must either be trusted without hard guarantees about the truthfulness of the data that they provide or we must find ways of guaranteeing their honesty.
 
 In order to find out how blockchain oracles are being designed, a systematic literature review was performed. This review produced fewer oracle solutions than expected, and, therefore, the author also searched for projects created by the industry. Existing oracle solutions rely on two main solutions: authenticity proofs, which are cryptographic proofs that something actually happened, or wisdom-of-the-crowd solutions based on incentives and penalising bad behaviour.
-%The former, mostly employed by third-party providers are not fully transparent and always requires some level of trust, and the latter requires a large community and its bad behaviour can go unchecked.
-
-% This text before this is to long on introduction - o texto daqui para cima está demasiado longo, e foca-se muito no background e pouco no SotA. Podes começar por um texto de motivação para o problema, mas podes assumir que as pessoas que lêem o abstract não precisam de encontrar cá a motivação para blockchains e para smart contracts.
-
-% Enumerate architectures in "Secondly, it defines..."
 
 Bearing this in mind, this dissertation contribution is threefold.
 
 Firstly, it analyses and summarises the existing authenticity proofs and mechanisms for guaranteeing oracle trust, allowing a smart-contract developer to be fully informed of the implications of using each proof and their limitations.
 
-Secondly, it defines four possible architectures for oracle design and how each of them addresses different points of trust in the oracle. Starting from the use of a third-party the author identifies and describes two architectures: \textit{Oracle-as-a-Service w/Single Data Feed} and \textit{Oracle-as-a-service w/Multiple Data Feeds}. Then the author describes a self hosted approach with another two architectures: \textit{Single-Party Self Hosted Oracle} and \textit{Multi-Party Self Hosted Oracle}. This way, the author creates a guide that can support those creating blockchain oracles in thinking about the many limitations, trade-offs and possibilities that are inherent to the design of such kinds of system.
+Secondly, it defines four possible architectures for oracle design and how each of them addresses different points of trust in the oracle. Starting from the use of a third-party the author identifies and describes two architectures: \textit{Oracle-as-a-Service w/Single Data Feed} and \textit{Oracle-as-a-service w/Multiple Data Feeds}. Then the author describes a self-hosted approach with another two architectures: \textit{Single-Party Self Hosted Oracle} and \textit{Multi-Party Self Hosted Oracle}. This way, the author creates a guide that can support those creating blockchain oracles in thinking about the many limitations, trade-offs and possibilities that are inherent to the design of such kinds of system.
 
 Finally, as the author worked on each architecture he found existing oracle solutions that would fit in the first two, regarding third-party providers, and later a new project focusing on the development of the third architecture. Regarding this, the author decided to implement the fourth architecture, both because no existing solution was available and because doing would demonstrate the viability of this new architecture.
 
@@ -27,26 +22,24 @@ In conclusion, this dissertation paves the way for oracle development and resear
 \chapter*{Resumo}
 
 
+O conceito Blockchain foi proposto como uma forma de processar e registrar transações financeiras em uma rede \textit{peer-to-peer}, evitando o problema de \textit{double-spending} e sem exigir qualquer autoridade centralizada. Mais tarde, os \textit{smart contracts} foram introduzidos como aplicações imutáveis ​​cujos termos são escritos diretamente em linhas de código que são persistidas e executadas na Blockchain.
 
-%O Resumo fornece ao leitor um sumário do conteúdo da dissertação.
-%Deverá ser breve mas conter detalhe suficiente e, uma vez que é a porta
-%de entrada para a dissertação, deverá dar ao leitor uma boa impressão
-%inicial.
 
-%Este texto inicial da dissertação é escrito no fim e resume numa
-%página, sem referências externas, o tema e o contexto do trabalho, a
-%motivação e os objectivos, as metodologias e técnicas empregues, os
-%principais resultados alcançados e as conclusões.
+No entanto, atualmente, os \textit{smart contracts} carecem de um recurso importante: a conectividade com a Internet. Devido à natureza determinista da Blockchain e à natureza não-determinista da Web, os \textit{smart contracts} não podem consultá-la diretamente.
 
-%Este documento ilustra o formato a usar em dissertações na \Feup.
-%São dados exemplos de margens, cabeçalhos, títulos, paginação, estilos
-%de índices, etc.
-%São ainda dados exemplos de formatação de citações, figuras e tabelas,
-%equações, referências cruzadas, lista de referências e índices.
-%Este documento não pretende exemplificar conteúdos a usar.
-%É usado texto descartável, \emph{Loren Ipsum}, para preencher a
-%dissertação por forma a ilustrar os formatos.
+Oracles resolvem o problema de conectividade, ouvindo eventos produzidos por \textit{smart contracts}, eles podem inserir as informações necessárias na Blockchain para depois serem usadas pelos contratos. Mas os oracles não cumprem as mesmas regras e não suportam as mesmas garantias dadas pela Blockchain, desta forma ou se confia na sua execução sem garantias concretas sobre a veracidade dos dados que fornece, ou se encontra formas de garantir a sua honestidade.
 
+A fim de descobrir como os \textit{blockchain oracles} estão sendo desenvolvidos, uma revisão sistemática da literatura foi realizada. Esta revisão produziu menos soluções do que o esperado e, portanto, o autor também procurou por projetos criados pela indústria. As soluções existentes de oracles recorrem a: provas de autenticidade, que são provas criptográficas de que algo realmente aconteceu, ou soluções de \textit{wisdom-of-the-crowd} baseadas em incentivos.
+
+Com isto, esta dissertação contribui em três frentes.
+
+Em primeiro lugar, analisa e resume as provas de autenticidade existentes e mecanismos para garantir a confiança de oracles, permitindo que um desenvolvedor de \textit{smart contracts} seja totalmente informado sobre as implicações de usar cada prova e suas limitações.
+
+Em segundo lugar, define quatro arquiteturas possíveis para desenhar oracles e como cada uma delas aborda diferentes pontos de confiança no oracle. O autor identifica e descreve duas arquiteturas que utilizam serviços de terceiros: \textit{Oracle-as-a-Service com Single Data Feed} e \textit{Oracle-as-a-service com Multiple Data Feeds} . Em seguida, o autor descreve uma abordagem auto-hospedada com outras duas arquiteturas: \textit{Single-Party Self Hosted Oracle} e \textit{Multi-Party Self Hosted Oracle}. Desta forma, o autor cria um guia que para apoiar aqueles que criam oracles de blockchain a pensar sobre as limitações, trade-offs e possibilidades inerentes ao design de soluções de oracles.
+
+Por fim, como o autor apenas encontrou casos de uso existentes para as três primeiras arquiteturas, decidiu implementar a quarta arquitetura. Isto porque nenhuma solução existente estava disponível e porque isso demonstraria a viabilidade dessa nova arquitetura.
+
+Em conclusão, esta dissertação abre o caminho para o desenvolvimento de oracles e descreve inicialmente soluções existentes e posteriormente contribui com um conjunto sistemático de arquiteturas e uma solução que pode ser facilmente adotada por equipas interessadas em desenvolver o seu próprio oracle para alcançar padrões mais elevados de confiança.
 %Seguem-se umas notas breves mas muito importantes sobre a versão
 %provisória e a versão final do documento.
 %A versão provisória, depois de verificada pelo orientador e de
