@@ -22,24 +22,25 @@ In conclusion, this dissertation paves the way for oracle development and resear
 \chapter*{Resumo}
 
 
-O conceito Blockchain foi proposto como uma forma de processar e registrar transações financeiras em uma rede \textit{peer-to-peer}, evitando o problema de \textit{double-spending} e sem exigir qualquer autoridade centralizada. Mais tarde, os \textit{smart contracts} foram introduzidos como aplicações imutáveis ​​cujos termos são escritos diretamente em linhas de código que são persistidas e executadas na Blockchain.
+O conceito de Blockchain foi proposto como uma forma de processar e registrar transações financeiras numa rede \textit{peer-to-peer}, evitando o problema de \textit{double-spending} e sem exigir qualquer autoridade centralizada. Mais tarde, os \textit{smart contracts} foram introduzidos como aplicações mutáveis cujos termos são escritos diretamente em linhas de código que são persistidas e executadas na Blockchain.
 
 
-No entanto, atualmente, os \textit{smart contracts} carecem de um recurso importante: a conectividade com a Internet. Devido à natureza determinista da Blockchain e à natureza não-determinista da Web, os \textit{smart contracts} não podem consultá-la diretamente.
+No entanto, atualmente, os \textit{smart contracts} carecem de um recurso importante: a ligação à Internet. Devido à natureza determinística da Blockchain e à natureza não-determinística da Web, os \textit{smart contracts} não podem consultá-la diretamente.
 
-Oracles resolvem o problema de conectividade, ouvindo eventos produzidos por \textit{smart contracts}, eles podem inserir as informações necessárias na Blockchain para depois serem usadas pelos contratos. Mas os oracles não cumprem as mesmas regras e não suportam as mesmas garantias dadas pela Blockchain, desta forma ou se confia na sua execução sem garantias concretas sobre a veracidade dos dados que fornece, ou se encontra formas de garantir a sua honestidade.
+Oracles resolvem o problema de conectividade; ouvindo eventos produzidos por \textit{smart contracts}, os oracles inserem as informações necessárias na Blockchain para depois serem usadas pelos contratos. Mas os oracles não cumprem as mesmas regras e não suportam as mesmas garantias dadas pela Blockchain e, desta forma, ou é possível confiar-se na sua execução sem garantias concretas sobre a veracidade dos dados que fornecem, ou é necessário encontrar outras formas de garantir a sua honestidade.
 
-A fim de descobrir como os \textit{blockchain oracles} estão sendo desenvolvidos, uma revisão sistemática da literatura foi realizada. Esta revisão produziu menos soluções do que o esperado e, portanto, o autor também procurou por projetos criados pela indústria. As soluções existentes de oracles recorrem a: provas de autenticidade, que são provas criptográficas de que algo realmente aconteceu, ou soluções de \textit{wisdom-of-the-crowd} baseadas em incentivos.
+A fim de descobrir como os \textit{blockchain oracles} são atualmente desenvolvidos, foi realizada uma revisão sistemática da literatura científica e de projetos criados pela indústria. As soluções existentes de oracles recorrem a: provas de autenticidade, que são provas criptográficas de que algo realmente aconteceu, ou soluções de \textit{wisdom-of-the-crowd} baseadas em incentivos.
 
 Com isto, esta dissertação contribui em três frentes.
 
 Em primeiro lugar, analisa e resume as provas de autenticidade existentes e mecanismos para garantir a confiança de oracles, permitindo que um desenvolvedor de \textit{smart contracts} seja totalmente informado sobre as implicações de usar cada prova e suas limitações.
 
-Em segundo lugar, define quatro arquiteturas possíveis para desenhar oracles e como cada uma delas aborda diferentes pontos de confiança no oracle. O autor identifica e descreve duas arquiteturas que utilizam serviços de terceiros: \textit{Oracle-as-a-Service com Single Data Feed} e \textit{Oracle-as-a-service com Multiple Data Feeds} . Em seguida, o autor descreve uma abordagem auto-hospedada com outras duas arquiteturas: \textit{Single-Party Self Hosted Oracle} e \textit{Multi-Party Self Hosted Oracle}. Desta forma, o autor cria um guia que para apoiar aqueles que criam oracles de blockchain a pensar sobre as limitações, trade-offs e possibilidades inerentes ao design de soluções de oracles.
+Em segundo lugar, define quatro arquiteturas possíveis para desenhar oracles e como cada uma delas aborda diferentes pontos de confiança no oracle. O autor identifica e descreve duas arquiteturas que utilizam serviços de terceiros: \textit{Oracle-as-a-Service com Single Data Feed} e \textit{Oracle-as-a-service com Multiple Data Feeds} . Em seguida, o autor descreve uma abordagem auto-hospedada com outras duas arquiteturas: \textit{Single-Party Self Hosted Oracle} e \textit{Multi-Party Self Hosted Oracle}. Estas arquiteturas constituem um guia, capaz de apoiar aqueles que criam oracles de blockchain a pensar sobre as limitações, trade-offs e possibilidades inerentes ao design de soluções de oracles.
 
-Por fim, como o autor apenas encontrou casos de uso existentes para as três primeiras arquiteturas, decidiu implementar a quarta arquitetura. Isto porque nenhuma solução existente estava disponível e porque isso demonstraria a viabilidade dessa nova arquitetura.
+Por fim, como o autor apenas encontrou casos de uso existentes para as três primeiras arquiteturas, decidiu implementar a quarta arquitetura. Isto porque nenhuma solução existente estava disponível e porque isso demonstraria a viabilidade da nova arquitetura proposta.
 
 Em conclusão, esta dissertação abre o caminho para o desenvolvimento de oracles e descreve inicialmente soluções existentes e posteriormente contribui com um conjunto sistemático de arquiteturas e uma solução que pode ser facilmente adotada por equipas interessadas em desenvolver o seu próprio oracle para alcançar padrões mais elevados de confiança.
+
 %Seguem-se umas notas breves mas muito importantes sobre a versão
 %provisória e a versão final do documento.
 %A versão provisória, depois de verificada pelo orientador e de

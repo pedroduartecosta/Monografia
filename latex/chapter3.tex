@@ -157,10 +157,10 @@ The protocol ends when the requester sends a request for evidence. The evidence 
 
 \begin{figure*}[h]
     \begin{center}
-      \leavevmode
-      \includegraphics[width=0.9\textwidth]{figures/tlsn-content-omission.PNG}
-      \caption{Content Omission Attack - The left figure shows the original and the right figure the signed conversation.}{Image extracted from \citet{Ritzdorf2017a}}
-      \label{fig:/figures/tlsn-content-omission}
+        \leavevmode
+        \includegraphics[width=0.9\textwidth]{figures/tlsn-content-omission.PNG}
+        \caption{Content Omission Attack - The left figure shows the original and the right figure the signed conversation.}{Image extracted from \citet{Ritzdorf2017a}}
+        \label{fig:/figures/tlsn-content-omission}
     \end{center}
 \end{figure*}
 
@@ -169,10 +169,10 @@ In this situation the evidence collection only starts after the first request is
 
 \begin{figure*}[h]
     \begin{center}
-      \leavevmode
-      \includegraphics[width=0.7\textwidth]{figures/tlsn-normal-flow.PNG}
-      \caption{Simplied Overview of TLS-N.}{Image extracted from \citet{Ritzdorf2017a}}
-      \label{fig:/figures/tlsn-normal-flow}
+        \leavevmode
+        \includegraphics[width=0.7\textwidth]{figures/tlsn-normal-flow.PNG}
+        \caption{Simplied Overview of TLS-N.}{Image extracted from \citet{Ritzdorf2017a}}
+        \label{fig:/figures/tlsn-normal-flow}
     \end{center}
 \end{figure*}
 
@@ -210,10 +210,10 @@ The TC Server, listens to events on the TC Contract and queries the requested da
 
 \begin{figure}[H]
     \begin{center}
-      \leavevmode
-      \includegraphics[width=0.7\textwidth]{figures/town-crier.png}
-      \caption{Town crier Architecture.}
-      \label{fig:/figures/town-crier2}
+        \leavevmode
+        \includegraphics[width=0.7\textwidth]{figures/town-crier.png}
+        \caption{Town crier Architecture.}
+        \label{fig:/figures/town-crier2}
     \end{center}
 \end{figure}
 
@@ -231,18 +231,20 @@ Table \ref{tab:summary-proofs} summarizes the previous analysed proofs regarding
 
 \begin{table}[]
     \centering
+    \resizebox{0.9\textwidth}{!}{%
     \begin{tabular}{@{}lcccc@{}}
-    \toprule
-    Proof & \multicolumn{1}{l}{Requires specific hardware} & \multicolumn{1}{l}{Can query the Web} & \multicolumn{1}{l}{Future-proof} & \multicolumn{1}{l}{Currently in production} \\ \midrule
-    TLSNotary &  & X &  & X \\
-    Android Proof & X & X & X & X \\
-    Ledger Proof & X &  & X & X \\
-    TLS-N &  & X & X &  \\
-    Town Crier & X & X & X & X \\ \bottomrule
+        \toprule
+        Proof         & \multicolumn{1}{l}{Requires specific hardware} & \multicolumn{1}{l}{Can query the Web} & \multicolumn{1}{l}{Future-proof} & \multicolumn{1}{l}{Currently in production} \\ \midrule
+        TLSNotary     &                                                & X                                     &                                  & X                                           \\
+        Android Proof & X                                              & X                                     & X                                & X                                           \\
+        Ledger Proof  & X                                              &                                       & X                                & X                                           \\
+        TLS-N         &                                                & X                                     & X                                &                                             \\
+        Town Crier    & X                                              & X                                     & X                                & X                                           \\ \bottomrule
     \end{tabular}
+    }
     \caption{Summary of authenticity proofs}
     \label{tab:summary-proofs}
-    \end{table}
+\end{table}
 
 
 
