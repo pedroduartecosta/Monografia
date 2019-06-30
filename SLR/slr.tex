@@ -166,15 +166,16 @@
 
 The topic of blockchain oracles is still unexplored territory mostly investigated by start-up companies and individuals thriving to solve a new problem. Therefore, research related to oracles is scarcely found on peer-reviewed publications but, nonetheless, is invaluable in such an early phase of the technology. Consequently, a review on existing work cannot be complete without considering the work developed by academia and also by start-ups, enterprises, governments and individuals.
 
-%FIXME: No fim da introdução devia haver uma visão geral do artigo. isto não é uma mera listagem de secções (embora possas referir as secções principais), serve para dar uma ideia do fio condutor que se pode esperar encontrar no resto do artigo
-
-
 The goal of this literature review is to get a sense of the corpus of existing works on the topic of blockchain oracles, and the directions and extent to which previous research has rendered significant results.
 
-\section{Background}
+This review is structured as follows: Section~\ref{sec:2} provides some background knowledge required to clarify some concepts mentioning ahead. Section~\ref{sec:3} details the methodology used to carry on the research, including which databases where queried and the search query as well as the process for including or excluding certain works. Section~\ref{sec:4} analyses further work carried on by the industry. Section~\ref{sec:5} summarises the results found both in academic literature as well as in the industry and answers the first research question. Finally, Section~\ref{sec:6} infers some conclusions on the existing work and answers the second research question.
 
 
-\section{Methodology}
+
+\section{Background}\label{sec:2}
+
+
+\section{Methodology}\label{sec:3}
 A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders, meaning, not duplicating existing research and find the gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review we will clarify and identify at the beginning of the research its methodology, what are the data sources and what is the selection criteria. In Section~\ref{search-process} we describe this methodology.
 
 \subsection{Research Questions}
@@ -350,7 +351,7 @@ J. Eberhardt \citet{Eberhardt2018} does not propose a specific method but analys
   \item \textit{Incentive-driven Off-chain Computation}, IOC, relies on incentive mechanisms applied to motivate off-chain computation and guarantee computational correctness. IOCs inherit two critical design issues: (1) keep verifiers motivated to validate solutions and (2) reduce computational effort for the on-chain judge. The paper identifies TrueBit~\citet{Teutsch2017}, as the first IOC implementation, proposing solutions for both challenges. As verifiers would stop validating if solvers only published correct solutions, TrueBit enforces solvers to provide erroneous solutions from time to time and offers a reward to the verifiers for finding them.
 \end{itemize}
 
-\section{Commercial Products and Projects}
+\section{Commercial Products and Projects}\label{sec:4}
 
 This search, on the contrary of the systematic one explained before, cannot be described in a systematic way, since the source of the information is spread on whitepapers and startup companies' documentation pages which cannot be guaranteed to be available and consulted on a systematic way.
 
@@ -365,7 +366,7 @@ The results of this search revealed a wide range of projects and protocols with 
   \item TrueBit~\citet{Teutsch2017}, introduces a system of solvers and verifiers. Solvers are compensated for performing computation and verifiers are compensated for detecting errors in solutions submitted by solvers.
 \end{itemize}
 
-\section{Results}
+\section{Results}\label{sec:5}
 
 %FIXME: Esta é a secção mais importante deste artigo, e por isso devia crescer mais e ter mais destaque:
 %- muda-lhe o nome para algo como "Results"
@@ -402,7 +403,7 @@ Table \ref{oracle-summary}, summarises the found existing projects and answers t
 This research highlighted three main types of oracles. The first is \textbf{Software-based oracles}, which try to prove their honest behaviour through the use of software-based authenticity proofs. These, mostly take advantage of some features of TLS to prove that the data they are relaying is the actually provided data. The second type is \textbf{Hardware-based oracles}. These leverage specific hardware, TEE, to securely separate the environment running the oracle code from the operating system and other applications to achieve higher guarantees on untampered code execution. They may even provide authenticity proofs regarding that the query actually came from a legit TEE. Lastly, \textbf{Consensus-based oracles}, which require a network of peers working together to achieve higher redundancy, having several peers querying the data and even in some cases peers performing the role of the verifier. This last approach largely depends on the existence of such a network and requires the use of monetary incentives to keep the networking running.
 
 
-\section{Conclusions}
+\section{Conclusions}\label{sec:6}
 
 Two main conclusions arise from both academic and non-academic research, and answer the second research question \ref{RQ2}.
 
