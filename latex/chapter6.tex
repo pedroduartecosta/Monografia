@@ -136,8 +136,14 @@ In order to create theses transactions we connect to the Ethereum blockchain, us
 
 The off-chain oracle is very versatile, as it can be written in any language, that is supported by the Ethereum API. It can be worked upon to easily integrate new APIs or further logic and features without requiring any changes to the smart contract, as long as it respects the contract callback requirements.
 
-\section{Project Set-up}
-%FIXME: Antes desta secção falta uma secção sobre o projecto, com informação sobre onde está o repositório, com que licença é disponibilizado, e como é que se usa do ponto de vista de quem quer correr um oracle e do ponto de vista de quem quer usar a tua implementação como framework para desenvolver o seu próprio oracle
+\section{Project Information}
+
+The full project code hosted on a Github repository and can be found here: \url{https://github.com/pedroduartecosta/blockchain-oracle}. All the information regarding dependencies and how to run can be found in the README.md file inside the repository.
+
+The specified set-up, will launch a new local deterministic Ethereum blockchain with three accounts for testing. It is deterministic so as to make testing easier. It will also, compile and deploy the oracle smart contract to the local created blockchain and launch the off-chain oracle services required to listen to the blockchain events for new requests and query the requested APIs. It will also launch a off-chain client that will act as a client smart-contract and will create new requests every second to the oracle smart contract and a off-chain consumer that will log all the requests being made for debugging purposes.
+
+The project is licensed with "The Unlicense"~\footnote{Information regarding this license can be found here: https://unlicense.org/}, a license with no conditions whatsoever which dedicates works to the public domain.
+
 
 \section{Summary and Conclusions}
 
