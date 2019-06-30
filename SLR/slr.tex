@@ -136,19 +136,15 @@
   \ead{filipe.correia@fe.up.pt}
   \author[add1]{Hugo Sereno Ferreira}
   \ead{hugosf@fe.up.pt}
-  \author[add2]{Mário Ribeiro Alves}
-  \ead{mario@brpx.com}
 
   \address[add1]{Faculty of Engineering, University of Porto, Oporto, Portugal}
-  \address[add2]{BRPX - Bright Development Studio, S.A. - BRPX S.A}
-
 
   \begin{abstract}
-
+  Blockchain is fomenting a growing number of solutions and smart contracts are powering new, secure and trusted applications. However, smart contracts lack the important feature of internet connectivity and thus require the use of Oracles as a middleware for obtaining information from the Web. This creates a new problem: trusting the use of those oracles; as they do not abide by the same rules as smart contracts. This paper, seeks to systematize existing works regarding oracles, both from academia research as well as from the industry. No survey of the kind was found, to the date of this writing. This analysis comprises a transparent and systematic review of 123 papers queried from the ACM Digital Library, IEEE Xplore, Scopus and Google Scholar. The author concludes that the industry is paving the way in the field of Blockchain oracles and that they can be grouped in the following three categories: \textit{Software-based oracles}, \textit{Hardware-based oracles} and \textit{Consensus-based  oracles}.
 
   \end{abstract}
   \begin{keyword}
-    Blockchain \sep Oracles \sep Distributed Systems \sep Trust
+    Blockchain \sep Oracles \sep Trusted Computation
     %% keywords here, in the form: keyword \sep keyword
 
     %% MSC codes here, in the form: \MSC code \sep code
@@ -180,13 +176,19 @@ This section briefly introduces some necessary background concepts.
 Blockchain is a tool for distributed consensus, in a byzantine fault-tolerant approach, without requiring to trust in centralized parties. In this ledger, transactions are recorded in an ongoing chain, creating an immutable record.
 
 \subsection{Smart Contracts}
+In 2015, Ethereum~\citet{GavinWood2014} was launched as an alternative protocol for building decentralized applications called smart contracts. As applications that run on the blockchain, smart contracts are self-verifying, self-executing and immutable contracts whose terms are directly written in lines of code. They can be used to build a wide range of applications.
 
 \subsection{Blockchain Oracles}
+Smart contracts lack an important feature: internet connectivity. Due to the deterministic nature of Blockchain and the incompatible indeterministic nature of the Web, smart-contracts cannot directly query it.
+Oracles solve the connectivity problem, by listening to events produced by smart contracts, they can insert the needed information on the Blockchain to later be used by the contracts. But oracles do not abide by the same rules and do not support the same guarantees given by Blockchain, so they must either be trusted without hard guarantees about the truthfulness of the data that they provide or we must find ways of guaranteeing their honesty.
 
 \subsection{Authenticity Proofs}
+A software or hardware generated cryptographic proof during or after an execution that can later be used to prove the integrity and honesty of the execution or of the provided data.
 
 \subsection{Trusted Execution Environment (TEE)}
+A Trusted Execution Environment is a secure computational environment that is strongly isolated from the main operating system. It provides application isolation, integrity and memory confidentiality. Sensitive data is stored, processed and protected from the main operating system or network. This isolation is accomplished through software and hardware-enforced mechanism. TEE runs a small operating system which exposes a minimal interface to the running application and therefore reduces the attack surface. Advanced TEE embeds unique identities that allow to verify the device authenticity and can be used to generate proofs of the device honest execution.
 
+Examples of TEEs are Intel Software Guard Extensions (SGX)~\footnote{More information on Intel SGX can be found here: https://software.intel.com/en-us/sgx/sdk} and ARM Trustzone-based Secure Elements~\citet{Bunz2018}, the latter is commonly found on smartphones. Another example is Trusty~\footnote{More information on Trusty can be found here: https://source.android.com/security/trusty}, a secure Operating System (OS) that provides a TEE for Android. It is isolated from the rest of the system by both hardware and software. Trusty's isolation protects it from malicious apps installed by the user and potential vulnerabilities that may be discovered in Android.
 
 
 \section{Methodology}\label{sec:3}
@@ -335,7 +337,7 @@ Town Crier (TC) \cite{Zhang2016a}, leverages trusted hardware, specifically Inte
 \end{figure}
 
 
-Astraea, proposed by \cite{Adler2018}, describes a decentralized oracle network, which is depicted on Figure~\ref{fig:/figures/astraea}~\footnote{Image taken from: https://blockchain.ieee.org/technicalbriefs/march-2019/astraea-a-decentralized-blockchain-oracle}, with submitters, voters and certifiers, in which voters play a low-risk game and certifies a high-risk game with associated resources. Using an monetary incentive structure as a means to keep the players honest.
+Astraea, proposed by \citet{Adler2018}, describes a decentralized oracle network, which is depicted on Figure~\ref{fig:/figures/astraea}~\footnote{Image taken from: https://blockchain.ieee.org/technicalbriefs/march-2019/astraea-a-decentralized-blockchain-oracle}, with submitters, voters and certifiers, in which voters play a low-risk game and certifies a high-risk game with associated resources. Using an monetary incentive structure as a means to keep the players honest.
 
 \begin{figure}[H]
   \begin{center}
@@ -396,8 +398,8 @@ Table \ref{oracle-summary}, summarises the found existing projects and answers t
         Name                      & Type                       & Distributed Network & Achieves trust through                         \\ \hline
         Town Crier                & Hardware-based             & No                  & Trusted hardware signed attestations           \\
         Astraea                   & Consensus-based            & Yes                 & Network with submitters,  voters and certifier \\
-        \cite{Gordon2017}        & Software-based             & Yes                 & Sets of public and private keys                \\
-        \cite{MontotoMonroy2018} & Consensus-based            & Yes                 & Gambling protocol based on incentives          \\
+        \citet{Gordon2017}        & Software-based             & Yes                 & Sets of public and private keys                \\
+        \citet{MontotoMonroy2018} & Consensus-based            & Yes                 & Gambling protocol based on incentives          \\
         TrueBit                   & Consensus-based            & Yes                 & System of solvers and verifiers                \\
         Oraclize.it               & Software-based             & No                  & TLSNotary, Android Proof                       \\
         ChainLink                 & \begin{tabular}[c]{@{}l@{}}Consensus-based / \\ Software-based\end{tabular} & Yes                 & Query multiple sources                         \\

@@ -2,15 +2,15 @@
 
 The Blockchain concept was proposed as a way of processing and recording financial transactions in a peer-to-peer network while avoiding the double-spending problem and without requiring any centralized authority. Later, smart contracts were introduced as immutable applications whose terms are directly written in lines of code that are persisted and run on the Blockchain.
 
-However, currently, smart contracts lack an important feature: internet connectivity. Due to the deterministic nature of Blockchain and the incompatible indeterministic nature of the Web, smart-contracts cannot directly query it.
+However, currently, smart contracts lack an important feature: internet connectivity. Due to the deterministic nature of Blockchain and the incompatible indeterministic nature of the Web, smart contracts cannot directly query it.
 
-Oracles solve the connectivity problem, by listening to events produced by smart-contracts, they can insert the needed information on the Blockchain to later be used by the contracts. But oracles do not abide by the same rules and do not support the same guarantees given by Blockchain, so they must either be trusted without hard guarantees about the truthfulness of the data that they provide or we must find ways of guaranteeing their honesty.
+Oracles solve the connectivity problem, by listening to events produced by smart contracts, they can insert the needed information on the Blockchain to later be used by the contracts. But oracles do not abide by the same rules and do not support the same guarantees given by Blockchain, so they must either be trusted without hard guarantees about the truthfulness of the data that they provide or we must find ways of guaranteeing their honesty.
 
 In order to find out how blockchain oracles are being designed, a systematic literature review was performed. This review produced fewer oracle solutions than expected, and, therefore, the author also searched for projects created by the industry. Existing oracle solutions rely on two main solutions: authenticity proofs, which are cryptographic proofs that something actually happened, or wisdom-of-the-crowd solutions based on incentives and penalising bad behaviour.
 
 Bearing this in mind, this dissertation contribution is threefold.
 
-Firstly, it analyses and summarises the existing authenticity proofs and mechanisms for guaranteeing oracle trust, allowing a smart-contract developer to be fully informed of the implications of using each proof and their limitations.
+Firstly, it analyses and summarises the existing authenticity proofs and mechanisms for guaranteeing oracle trust, allowing a smart contract developer to be fully informed of the implications of using each proof and their limitations.
 
 Secondly, it defines four possible architectures for oracle design and how each of them addresses different points of trust in the oracle. Starting from the use of a third-party the author identifies and describes two architectures: \textit{Oracle-as-a-Service w/Single Data Feed} and \textit{Oracle-as-a-service w/Multiple Data Feeds}. Then the author describes a self-hosted approach with another two architectures: \textit{Single-Party Self Hosted Oracle} and \textit{Multi-Party Self Hosted Oracle}. This way, the author creates a guide that can support those creating blockchain oracles in thinking about the many limitations, trade-offs and possibilities that are inherent to the design of such kinds of system.
 
