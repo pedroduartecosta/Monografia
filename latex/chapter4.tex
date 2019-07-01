@@ -31,16 +31,16 @@ Furthermore, in Chapter \ref{chap:chap6}, the author presents a possible impleme
 This section describes several forces that separately or in combination drive the design of oracle architectures and implementations. Defining this forces will help validate each architecture/implementation in what forces they are able to accomplish in their different scenarios.
 
 \begin{description}
-    \item [Fast time-to-market] Not having to assemble a team or allocate resources into a developing a new product which will only serve as component of the main product being developed.
-    \item [Keeping trust standards] The company focus is not the development and security of the  oracle  service and  may  not  have  enough  resources  to  keep  the  oracle  as  secure  and reliable as the underlying blockchain.
-    \item [Data-feed fault tolerance] Ensuring  that  a  contract  can  follow  through  even  if  a  data provider is down by querying another provider.
-    \item [Data veracity] Querying several data sources guarantees a higher trust on the veracity of the data by not allowing a single service to be the owner o the truth.
+    \item [Fast time-to-market] Not having to assemble a team or allocate resources into a developing a new product which will only serve as a component of the main product being developed.
+    \item [Keeping trust standards] The company focus is not the development and securement of the oracle service and may not have enough resources to keep the oracle as secure and reliable as the underlying blockchain.
+    \item [Data-feed fault tolerance] Ensuring that a  contract can follow through even if a data provider is down by querying another provider.
+    \item [Data veracity] Querying several data sources guarantees a higher trust on the veracity of the data by not allowing a single service to be the owner of the truth.
     \item [Lower smart contract costs] Checking authenticity proofs leads to higher contract deployment costs, as the proof can be long and computationally expensive. Striving to build simple oracle smart contracts will lead to reduced costs.
-    \item [Lower oracle complexity] Dealing with authenticity proofs and implementing the necessary mechanisms verify them requires a higher and deeper knowledge of their implementation mechanisms and underlying cryptography.
+    \item [Lower oracle complexity] Dealing with authenticity proofs and implementing the necessary mechanisms to verify them requires a higher and deeper knowledge of their implementation and underlying cryptography.
     \item [Oracle decentralization] Connecting a smart contract to data through a single node, creates the problem that smart contracts intend to avoid, a single point of failure.  With a single oracle, a smart contract is only as reliable as that one oracle.
-    \item [Oracle ownership decentralization] Having one party control the oracle network centralizes the power to manipulate all the contracts relying on the information provided by that network of oracles.
+    \item [Oracle ownership decentralization] Having one party controlling the oracle network centralizes the power to manipulate all the contracts relying on the information provided by that network of oracles.
 \end{description}
 
 
 \section{Conclusions}
-This project aims to pave the way for oracle and smart contract development. It does not try to come up with a new authenticity proof which adds extra complexity for the common smart contract developer, but instead guide the developer to a solution accordingly to the problem necessities. As well as, providing a simple but yet effective implementation of a self-hosted oracle so as to have a simple skeleton to which the developer can iterate upon and adapt to the specific smart contract needs.
+This project aims to pave the way for oracle and smart contract development and design. It does not try to come up with a new authenticity proof which adds extra complexity for the common smart contract developer, but instead guide the developer to a solution accordingly to the problem necessities. As well as, providing a simple but yet effective implementation of a self-hosted oracle so as to have a simple skeleton to which the developer can iterate upon and adapt to the specific smart contract needs.
