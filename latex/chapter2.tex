@@ -67,8 +67,6 @@ The defined search query was the following:
   ("oracles" OR "oracle" OR "middle-ware" OR "middleware" OR "middle ware" OR "datafeed" OR "data feed" OR "data-feed"))
 }
 
-% FIXME: Explain if there was any variantion on the search query in the different databases
-
 This search query was used to comprise all the possible ways of referring to blockchain and oracles. Some scholars have investigated the oracle issue by simply calling them a middleware or data-feed since oracles can either be used as an intermediary that relays data or as the source of the data.
 
 The search was performed on the 5th of February 2019 and revealed the results presented in Table \ref{search-results-table}.
@@ -133,9 +131,6 @@ The study selection process initially started with a pool of 123 papers from the
   \item Stage 4: Full article reading to assess if the final bucket of articles answers the research questions.
 \end{itemize}
 
-
-%FIXME: Há uma relação entre esta figura e a 2.1. Esta parece uma versão simplificada com mais alguns detalhes (números dos que foram considerados e dos ue foram excluídos) mas nem sempre consigo fazer facilmente um match entre estas caixas e as da Figura 2.1. Pode ajudar se se uniformizar as expressões usadas em ambas. Em vez de as cores serem usadas apenas para fazer um gradiente, se forem usadas para ajudar a ver a equivalência entre as caixas dos dois diagramas, também pode ajudar.
-
 \begin{figure}[H]
   \begin{center}
     \leavevmode
@@ -146,8 +141,6 @@ The study selection process initially started with a pool of 123 papers from the
 \end{figure}
 
 \subsection{Data extraction and Data Synthesis}
-
-% FIXME: É francamente pouco para um SLR. Já sabemos que a razão para isto é que existem de facto poucas coisas publicadas sobre o assunto... mas... Que esforço achas que estaria envolvido em tornar a correr a SLR? Se apanhássemos mais dois~três artigos relevantes já seria bom. Assumindo que a maioria dos artigos que aparecerá será a que já apareceu antes, terias que "processar" apenas os novos. Ao fazê-lo também podes aproveitar para rever o processo de execução da SLR que descreves aqui, para confirmar se não falta nenhum detalhe importante do teu processo
 
 The following process resulted in three articles and two theses that approach varying problems in implementing and guaranteeing trust in oracles.
 
@@ -162,10 +155,6 @@ Town Crier (TC) \citet{Zhang2016a}, leverages trusted hardware, specifically Int
   \end{center}
 \end{figure}
 
-
-
-
-% FIXME: Outra coisa que seria interessante aqui seria já mencionares explicitamente, para cada uma das soluções que aqui são descritas, até que ponto é que nos dão trust, e a que nível o fazem. nalgumas já o mencionas, noutras fica um bocado nas entrelinhas
 
 Astraea \citet{Adler2018}, depicted on Figure~\ref{fig:/figures/astraea}~\footnote{Image taken from: https://blockchain.ieee.org/technicalbriefs/march-2019/astraea-a-decentralized-blockchain-oracle}, proposes a decentralized oracle network with submitters, voters and certifiers, in which voters play a low-risk game and certifies a high-risk game with associated resources. Using an monetary incentive structure as a means to keep the players honest.
 
@@ -213,57 +202,51 @@ The results of this search revealed a wide range of projects and protocols with 
 
 \section{Summary}
 
-% FIXME: Summary, ou Conclusions, evita misturar os dois... Esta secção está a precisar de ser reorganizada. começas por fazer a distinção entre data-carrier oracles e computation oracles, depois falas de questões bibliométricas ("lack of academic research"...) e depois voltas a falar de diferenças entre oracles. Sugiro que fales apenas de questões bibliométricas primeiro (e podes concluir sobre várias outras de que falas em cima mas para as quais não tens aqui informação nas conclusões) e então depois tentasses concluir sobre os oracles que encontraste.  Ontem chegamos a falar em dividir estas conclusões, uma para a SLR e outra para a pesquisa no google, mas depois de ler todo o capítulo de novo estou a achar que faz mais sentido manter apenas uma secção final de conclusões. Nesta secção (ou numa anterior, a adicionar) seria umportante tentar responder às perguntas de investigação que colocaste no início.
-
-% FIXME: Force table to be on this section when compiled
-
 % FIXME: Além do mecanismo que é usado, era interessante concluir aqui o que é que é efetivamente confiável. Será que conseguimos decompor esta coluna em várias? Por exemplo: Incentive System, Specialized Hardware, Concensus Protocol, Authenticity Proofs, Data carrier, Computational. A ideia seria que se conseguisse visualmente perceber de forma rápida até que ponto têm coisas em comum.
 
-
-Summing up, this research highlighted three main types of oracles. The first is \textbf{Software-based oracles}, which try to prove their honest behaviour through the use of software-based authenticity proofs. These, mostly take advantage of some features of TLS to prove that the data they are relaying is the actually provided data. The second type is \textbf{Hardware-based oracles}. These leverage specific hardware, TEE, to securely separate the environment running the oracle code from the operating system and other applications to achieve higher guarantees on untampered code execution. They may even provide authenticity proofs regarding that the query actually came from a legit TEE. Lastly, \textbf{Consensus-based oracles}, which require a network of peers working together to achieve higher redundancy, having several peers querying the data and even in some cases peers performing the role of the verifier. This last approach largely depends on the existence of such a network and requires the use of monetary incentives to keep the networking running.
-
-Table \ref{oracle-summary}, summarises the found existing projects and answers the first research question \ref{RQ1}.
+Table \ref{oracle-summary}, summarises the found existing projects and answers the first research question \ref{RQ1}, highlighting three main types of oracles.
 
 
 \begin{table}[]
   \centering
   \resizebox{\textwidth}{!}{%
-  \begin{tabular}{llll}
-  \hline
-  Name & Type & Distributed Network & Achieves trust through \\ \hline
-  Town Crier & Hardware-based & No & Trusted hardware signed attestations \\
-  Astraea & Consensus-based & Yes & Network with submitters,  voters and certifier \\
-  \citet{Gordon2017} & Software-based & Yes & Sets of public and private keys \\
-  \citet{MontotoMonroy2018} & Consensus-based & Yes & Gambling protocol based on incentives \\
-  TrueBit & Consensus-based & Yes & System of solvers and verifiers \\
-  Oraclize.it & Software-based & No & TLSNotary, Android Proof \\
-  ChainLink & \begin{tabular}[c]{@{}l@{}}Consensus-based / \\ Software-based\end{tabular} & Yes & Query multiple sources \\
-  SchellingCoin & Consensus-based & Yes & Incentive based \\ \hline
-  \end{tabular}%
+    \begin{tabular}{llll}
+      \hline
+      Name                      & Type                       & Distributed Network & Achieves trust through                         \\ \hline
+      Town Crier                & Hardware-based             & No                  & Trusted hardware signed attestations           \\
+      Astraea                   & Consensus-based            & Yes                 & Network with submitters,  voters and certifier \\
+      \citet{Gordon2017}        & Software-based             & Yes                 & Sets of public and private keys                \\
+      \citet{MontotoMonroy2018} & Consensus-based            & Yes                 & Gambling protocol based on incentives          \\
+      TrueBit                   & Consensus-based            & Yes                 & System of solvers and verifiers                \\
+      Oraclize.it               & Software-based             & No                  & TLSNotary, Android Proof                       \\
+      ChainLink                 & \begin{tabular}[c]{@{}l@{}}Consensus-based / \\ Software-based\end{tabular} & Yes                 & Query multiple sources                         \\
+      SchellingCoin             & Consensus-based            & Yes                 & Incentive based                                \\ \hline
+    \end{tabular}%
   }
   \caption{Summary of oracle projects/research.}
   \label{oracle-summary}
 \end{table}
 
+The first is \textbf{Software-based oracles}, which try to prove their honest behaviour through the use of software-based authenticity proofs. These, mostly take advantage of some features of TLS to prove that the data they are relaying is the actually provided data.
+
+The second type is \textbf{Hardware-based oracles}. These leverage specific hardware, TEE, to securely separate the environment running the oracle code from the operating system and other applications to achieve higher guarantees on untampered code execution. They may even provide authenticity proofs regarding that the query actually came from a legit TEE.
+
+Lastly, \textbf{Consensus-based oracles}, which require a network of peers working together to achieve higher redundancy, having several peers querying the data and even in some cases peers performing the role of the verifier. This last approach largely depends on the existence of such a network and requires the use of monetary incentives to keep the networking running.
+
+The most promising solutions are Town Crier, ChainLink and Oraclize.it .  Town Crier hardware-based solution, more specifically Intel SGX, adds strong guarantees that the computation performed can be trusted due to its isolution from the remaining environment. To this reason, ChainLink is adopting Town Crier\footnote{ChainLink's annoucement regarding the use of Town Crier: https://blog.chain.link/town-crier-and-chainlink/} to add increasing reliability to their distributed solution. ChainLink distributed oracle network and their partnerships with huge players such as SWIFT~\footnote{SWIFT is a global provider
+  of secure financial messaging services, more info: https://www.swift.com/} make it a promising solution, altough a private and fee-based one.
+
+Oraclize.it, is an industry leading service because of their use and research of authenticity proofs. They have also integrations with the most widely used blockchains implementations, such as, Ethereum, EOS~\cite{Block.one2018}, Hyperledger Fabric~\cite{Androulaki}, Rootstock~\footnote{More information on Rootstock can be found here: https://www.rsk.co/} and Corda~\cite{Brown2016}. Their authenticity proofs are both software-based and hardware-based, with the use of TLSNotary~\cite{TLSNotary}, Android Proof~\footnote{More information on the Android Proof can be found here: https://provable.xyz/papers/android\_proof-rev2.pdf} and Ledger Proof~\footnote{More information on the Ledger Proof can be found here: https://docs.provable.xyz/\#security-deepdive-authenticity-proofstypes-ledger-proof}.
+
+In conclusion, the industry presents ready to use solutions for a fee where as the academia mostly investigates the use of consensus-based solutions which adopt an incentives based network. The latter has the problem of requiring such a network of peers to existing in order to be trusted where as the former can be used right away.
 
 
 \section{Conclusions}
 
+The author surveys 123 papers and fully analyses 5. One resulting in an hardware-based oracle solutions, two consensus-based oracle proposals, one software-based solution for an IoT devices network data authentication and the last one proposing a classification system of existing off-chain computation oracles. The industry presents us four projects, in which two of them are widely in use, namely Oraclize.it and ChainLink, and other two consensus-based solutions. The industry seems to be investing the most on oracle research, as the two previous mentioned companies are developing a wide range of authenticity proofs and leverage hardware solutions to increase their oracles trustability as details on the previous section. As well as partnering with major banks and institutions to allow their solutions to power new solutions for smart contracts.
 
 Two main conclusions arise from both academic and non-academic research, and answer the second research question \ref{RQ2}.
 
 First of all, there is a clear lack of academic research on the topic of creating trustable oracles. This is mostly likely due to the specificity of the problem and that blockchain related technology is usually paved by start ups and enthusiasts and not yet addressed in universities curricular plans.
 
 Secondly, even though the main research on trustable oracles is being pursued by startups or sole developers all the existing projects seem to be blockchain specific or in very early phases and not yet ready to be generally adopted.
-
-%FIXME: Answer research questions
-
-%First of all and to guide the focus of the research, the following research questions were defined:
-%\begin{itemize}
-%  \item RQ1: What kind of blockchain oracles have been proposed?
-%  \item RQ2: What are the research trends on blockchain oracles?
-%\end{itemize}
-
-%\textit{RQ1}, analyses the scope of existing blockchain oracles. The methodologies and technologies used, so as to understand how the oracle problem is tackled.
-
-%\textit{RQ2}, tries to identify the direction that is proving to be the most effective. Analysing past solutions that never made it into production and solutions currently adopted.
