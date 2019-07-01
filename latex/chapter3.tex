@@ -23,8 +23,6 @@ Several authenticity mechanisms have been developed and, as described in the sta
 
 \subsection{TLSNotary}\label{proof:TLSNotary}
 
-% FIXME: devias explicar sucintamente como funciona o HTTPS e o que é o TLS. o sítio certo para isso talvez seja a secção seguinte, e talvez nem seja preciso mesmo mencionar TLS aqui.  Ambos estes acronimos (HTTPS e TLS) deviam aparecer por extenso nalgum ponto. quando explicares em que consiste o TLS, explca também o papel desta master key
-
 TLSNotary is a mechanism for independently audited HTTPS (Hyper Text Transfer Protocol Secure) sessions. Allowing clients to provide evidence to a third party auditor that certain web traffic occurred between himself and the server. This mechanism takes leverage of the TLS (Transport Layer Security)~\footnote{Information on the TLS protocol can be found here: https://www.ietf.org/rfc/rfc2246.txt} handshake protocol to create an irrefutable proof, as long as the auditor trusts the server's public key, by splitting the TLS master secret~\footnote{The master secret is used, when generating keys and MAC secrets, as an entropy source, and the random values provide unencrypted salt material and IVs for exportable ciphers.} between three parties: the server, the auditee and the auditor.
 
 The algorithm allows an auditor to verify some part of a session by withholding a small part of the secret data used to set up the HTTPS connection while allowing the client to conduct an HTTPS session normally. The auditor never fully possesses, at any time, any of the session keys and therefore cannot decrypt any sensitive information and can only verify that certain traffic did occur.
@@ -104,7 +102,6 @@ TLSNotary provides some capabilities to attest TLS connections but comes with se
 The TLSNotary proof is promising due to be software based and is, as of this moment, the most spoken of authenticity proof. However, it's applicability is increasingly getting limited due to the deployment of new TLS versions and the assurances provided by the proof current implementations, which simply move the trust to a bigger entity. Therefore, it should not be considered a reliable authentication method for future implementations.
 
 \subsection{Android Proof}
-%FIXME: add references
 
 In the oracle context, the Android Proof \footnote{Documented explanation of the proof can be found here: https://provable.xyz/papers/android\_proof-rev2.pdf} results from Oraclize research and development efforts. It takes leverage of SafetyNet software attestation and Android Hardware Attestation to provision a secure and auditable environment to fetch authenticated data.
 

@@ -13,10 +13,9 @@ The second, and most relevant for analysis, is the oracle service used. Oracles 
 
 \section{Oracle Architectures}
 
-Having analysed what trust means, it is evident that no short definition is appropriate and that it depends on the stakeholder beliefs. Hence, several architectural models for what a trustable system arise. Varying in decentralization and complexity. Each model satisfies different requirements, such as performance, security and decentralization.
-In this section, I will describe several possible architectures and point out use cases and compromises for each model.
+Having analysed what trust means, it is evident that no short definition is appropriate and that it depends on the stakeholder beliefs. Hence, several architectural models for what a trustable system is arise. Varying in decentralization and complexity. Each model satisfies different requirements, such as performance, security and decentralization.
+In this section, I will describe multiple architectures and point out the limitations and achievements of each one.
 
-% FIXME: Explain the structure of the architecures
 
 \section{Oracle as a Service w/ Single Data Feed.}\label{OaaSwSingleDataFeed}
 
@@ -47,7 +46,6 @@ Oracle as a service, come as a quick and efficient solution for fast moving comp
 \end{figure*}
 
 \subsection{Resulting Context}
-%% FIXME: o resulting context muitas vezes foca-se nos "quality attributes" (e.g., trust, reliability, resilience, cost) que são característica da solução. ao ler esta secção fico a achar que estas características estão de facto aqui descritas, mas às vezes é preciso ler nas entrelinhas quais são. uma forma de as tornar mais visíveis é estruturar este texto como bullet points (um ponto por quality attribute); outra forma é de formatar a bold as palavras que identificam esses quality attributes
 
 This solution results in an architecture that compromises two points of trust. The first being the data-feed itself. No guarantees are given that the data provided is reliable and the smart contract owner must, therefore, to the best of his knowledge, select a data-feed in which, by the operator size or record of good behaviour, he can trust.
 
