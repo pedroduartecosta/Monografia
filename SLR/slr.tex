@@ -132,15 +132,16 @@
 
   \author[add1]{Pedro Duarte da Costa}
   \ead{pedro.duartecosta@fe.up.pt}
-  \author[add1]{Filipe Figueiredo Correia}
+  \author[add1,add2]{Filipe Figueiredo Correia}
   \ead{filipe.correia@fe.up.pt}
-  \author[add1]{Hugo Sereno Ferreira}
+  \author[add1,add2]{Hugo Sereno Ferreira}
   \ead{hugosf@fe.up.pt}
 
   \address[add1]{Faculty of Engineering, University of Porto, Oporto, Portugal}
+  \address[add2]{INESC TEC, Oporto, Portugal}
 
   \begin{abstract}
-  Blockchain is fomenting a growing number of solutions and smart contracts are powering new, secure and trusted applications. However, smart contracts lack the important feature of internet connectivity and thus require the use of oracles as a middleware for obtaining information from the Web. This creates a new problem: trusting the use of those oracles; as they do not abide by the same rules as smart contracts. This paper, seeks to systematize existing works regarding oracles, both from academia research as well as from the industry. No survey of the kind was found, to the date of this writing. This analysis comprises a transparent and systematic review of 123 papers queried from the ACM Digital Library, IEEE Xplore, Scopus and Google Scholar. The author concludes that the industry is paving the way in the field of Blockchain oracles and that they can be grouped in the following three categories: \textit{Software-based oracles}, \textit{Hardware-based oracles} and \textit{Consensus-based  oracles}.
+  Blockchain is fomenting a growing number of solutions and smart contracts are powering new, secure and trusted applications. Smart contracts, currently, lack the important feature of internet connectivity and thus require the use of oracles as a middleware for obtaining information from the Web. This creates a new problem: trusting the use of those oracles; as they do not abide by the same rules as smart contracts. However, current research on Blockchain oracles is scarce and therefore this paper, seeks to systematize existing works regarding oracles, both from academia research as well as from the industry. No survey of the kind was found, to the date of this writing. This analysis comprises a transparent and systematic review of 123 papers queried from the ACM Digital Library, IEEE Xplore, Scopus and Google Scholar. The author concludes that the industry is paving the way in the field of Blockchain oracles and that they can be grouped in the following three categories: \textit{Software-based oracles}, \textit{Hardware-based oracles} and \textit{Consensus-based  oracles}.
 
   \end{abstract}
   \begin{keyword}
@@ -160,23 +161,23 @@
 
 \section{Introduction}
 
-The topic of blockchain oracles is still unexplored territory mostly investigated by start-up companies and individuals thriving to solve a new problem. Therefore, research related to oracles is scarcely found on peer-reviewed publications but, nonetheless, is invaluable in such an early phase of the technology. Consequently, a review on existing work cannot be complete without considering the work developed by academia and also by start-ups, enterprises, governments and individuals.
+The topic of blockchain oracles is still unexplored territory mostly investigated by start-up companies and individuals thriving to solve a new problem. Therefore, research related to oracles is scarcely found on peer-reviewed publications but, nonetheless, is invaluable in such an early phase of the technology. Consequently, a review on existing work cannot be complete without considering the one developed by academia and also by start-ups, enterprises, governments and individuals.
 
 The goal of this literature review is to get a sense of the corpus of existing works on the topic of blockchain oracles, and the directions and extent to which previous research has rendered significant results.
 
-This review is structured as follows: Section~\ref{sec:2} provides some background knowledge required to clarify some concepts mentioning ahead. Section~\ref{sec:3} details the methodology used to carry on the research, including which databases where queried and the search query as well as the process for including or excluding certain works. Section~\ref{sec:4} analyses further work carried on by the industry. Section~\ref{sec:5} summarises the results found both in academic literature as well as in the industry and answers the first research question. Finally, Section~\ref{sec:6} infers some conclusions on the existing work and answers the second research question.
+This review is structured as follows: Section~\ref{sec:2} provides some background knowledge required to clarify important concepts used in the next sections. Section~\ref{sec:3} details the methodology used to carry out the research, including which databases where queried, how they were queried, and the process for including or excluding certain works. Section~\ref{sec:4} analyses further work carried out by the industry. Section~\ref{sec:5} summarises the results found both in academic literature as well as in the industry and answers the first research question. Finally, Section~\ref{sec:6} infers some conclusions on the existing work and answers the second research question.
 
 
 
 \section{Background}\label{sec:2}
 
-This section briefly introduces some necessary background concepts.
+To discuss the topic of blockchain oracles it's important to understand a few key concepts.
 
 \subsection{Blockchain}
-Blockchain is a tool for distributed consensus, in a byzantine fault-tolerant approach, without requiring to trust in centralized parties. In this ledger, transactions are recorded in an ongoing chain, creating an immutable record.
+Blockchain is an implementation for distributed consensus, in a byzantine fault-tolerant approach, without requiring to trust in centralized parties. In this ledger, transactions are recorded in an ongoing chain, creating an immutable record.
 
 \subsection{Smart Contracts}
-In 2015, Ethereum~\citet{GavinWood2014} was launched as an alternative protocol for building decentralized applications called smart contracts. As applications that run on the blockchain, smart contracts are self-verifying, self-executing and immutable contracts whose terms are directly written in lines of code. They can be used to build a wide range of applications.
+In 2015, Ethereum~\cite{GavinWood2014} was launched as an alternative protocol for building decentralized applications called smart contracts. As applications that run on the blockchain, they are self-verifying, self-executing and immutable contracts whose terms are directly written in lines of code. They can be used to build a wide range of applications.
 
 \subsection{Blockchain Oracles}
 Smart contracts lack an important feature: internet connectivity. Due to the deterministic nature of Blockchain and the incompatible indeterministic nature of the Web, smart-contracts cannot directly query it.
@@ -192,13 +193,13 @@ Examples of TEEs are Intel Software Guard Extensions (SGX)~\footnote{More inform
 
 
 \section{Methodology}\label{sec:3}
-A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders, meaning, not duplicating existing research and find the gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review we will clarify and identify at the beginning of the research its methodology, what are the data sources and what is the selection criteria. In Section~\ref{search-process} we describe this methodology.
+A literature review allows scholars not to step on each other's shoes but to climb on each other's shoulders, meaning, not duplicated existing research, find research gaps and strive to discover something new. To conduct a non-biased, methodical and reproducible review we identify its methodology, what are the data sources and what is the selection selection criteria (see \ref{search-process}).
 
 \subsection{Research Questions}
 First of all and to guide the focus of the research, the following research questions were defined:
 \begin{itemize}
-  \item \textbf{RQ1:\label{RQ1} What kind of blockchain oracles have been proposed?}\newline This question analyses the scope of existing blockchain oracles. The methodologies and technologies used, so as to understand how the oracle problem is tackled.
-  \item \textbf{RQ2:\label{RQ2} What are the research trends on blockchain oracles?}\newline This question tries to identify the direction that is proving to be the most effective. Analysing past solutions that never made it into production and solutions currently adopted.
+  \item \textbf{RQ1:\label{RQ1} What kind of blockchain oracles have been proposed?}\newline We seek to analyse the scope of existing blockchain oracles. The methodologies and technologies used, so as to understand how the oracle problem is tackled.
+  \item \textbf{RQ2:\label{RQ2} What are the research trends on blockchain oracles?}\newline The goal of this question is to identify the main directions of research. Analysing past solutions that never made it into production and solutions currently adopted.
 \end{itemize}
 
 \subsection{Search Process}\label{search-process}
@@ -213,18 +214,18 @@ Figure \ref{fig:/figures/SLR_stages}, depicts the predefined review strategy use
   \end{center}
 \end{figure*}
 
-The first step, \textbf{Search Strategy and Data-sources}, compromises a preliminary search on several databases trying to optimize the query that best fits the research questions. After identifying the set of keywords that best describe the problem a full query is built and tested.
+The first step, \textbf{Search Strategy and Data-sources}, comprises a preliminary search on several databases trying to optimize the query that best fits the research questions. After identifying the set of keywords that best describe the problem a full query is built and tested.
 
 Once a satisfactory query is achieved, we proceed to the next step, \textbf{Study selection}, here we aggregate the studies from all databases and in the \textit{Screening and cleaning} phase we remove papers written in other languages or duplicated.
 
-Next, in the \textbf{Quality assessment} step we iteratively exclude papers that do not answers to any of the research questions. Initially analysing only the title, and alter the abstract and so on until a full read of the article seems worth it to take conclusions and respond to que research queries.
+Next, in the \textbf{Quality assessment} step we iteratively exclude papers that do not help us answer to any of the research questions. Initially analysing only the title followed by the abstract and so on until a full read of the article seems worth it to take conclusions and respond to que research queries.
 
 This leads to the \textbf{Data extraction} step, in which we take and summarize the findings after reading each paper.
 
-So that later, in the \textbf{Data synthesis} step, we can summarize all the findings, infer some conclusions and answer the research questions.
+These findings are used in the \textbf{Data synthesis} step, we can summarize all the findings, infer some conclusions and answer the research questions.
 
 \subsection{Search Strategy and Data-sources}
-Having defined the strategy for the systematic review and after testing some keywords on several databases, the author selected the following four electronic databases to query for relevant information:
+Having defined the strategy for the systematic review and after testing some keywords on several databases, the author selected the following four electronic databases to query for relevant publications:
 
 \begin{itemize}
   \item ACM Digital Library
