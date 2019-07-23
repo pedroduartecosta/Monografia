@@ -406,14 +406,9 @@ title = {{Ethereum: A secure decentralised generalised transaction ledger}},
 url = {http://gavwood.com/paper.pdf},
 year = {2014}
 }
-@techreport{TLSNotary,
-abstract = {1 Abstract 'TLSnotary' allows a client to provide evidence to a third party auditor that certain web traffic occurred between himself and a server. The evidence is irrefutable as long as the auditor trusts the server's public key. The remainder of this paper describes how TLSnotary allows the auditee to conduct an https session normally with a web server such that the auditor can verify some part of that session (e.g. a single HTML page), by temporarily withholding a small part of the secret data used to set up the https session. The auditee does not at any time reveal any of the session keys to the auditor or anyone else, nor does he render or decrypt any data without authentication. Thus the full security model of the TLS 1.0 session is maintained, modulo some reduction in the entropy of the secrets used to protect it. Notes to the reader: As of this writing, TLSnotary is only compatible with TLS 1.0 and 1.1, not TLS 1.2 In order to fully understand the algorithm described below, it is advisable to have a basic familiarity with the steps of the TLS 1.0 protocol, in particular how the master secret, used to derive encryption keys and MAC secrets, is shared between client and server during the SSL Handshake.},
-file = {:C$\backslash$:/Users/pedro/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Unknown - 2014 - TLSnotary-a mechanism for independently audited https sessions.pdf:pdf},
-institution = {TLSnotary},
-title = {{TLSnotary-a mechanism for independently audited https sessions}},
-url = {https://tlsnotary.org/TLSNotary.pdf},
-year = {2014}
-}
+
+
+
 @techreport{Zhang2016a,
 abstract = {Smart contracts are programs that execute autonomously on blockchains. Their key envisioned uses (e.g. financial instruments) require them to consume data from outside the blockchain (e.g. stock quotes). Trustworthy data feeds that support a broad range of data requests will thus be critical to smart contract ecosystems. We present an authenticated data feed system called Town Crier (TC). TC acts as a bridge between smart contracts and existing web sites, which are already commonly trusted for non-blockchain applications. It combines a blockchain front end with a trusted hardware back end to scrape HTTPS-enabled websites and serve source-authenticated data to relying smart contracts. TC also supports confidentiality. It enables private data requests with encrypted parameters. Additionally, in a generalization that executes smart-contract logic within TC, the system permits secure use of user credentials to scrape access-controlled online data sources. We describe TC's design principles and architecture and report on an implementation that uses Intel's recently introduced Software Guard Extensions (SGX) to furnish data to the Ethereum smart contract system. We formally model TC and define and prove its basic security properties in the Universal Composability (UC) framework. Our results include definitions and techniques of general interest relating to resource consumption (Ethereum's "gas" fee system) and TCB minimization. We also report on experiments with three example applications. We plan to launch TC soon as an online public service.},
 author = {Zhang, Fan and Cecchetti, Ethan and Croman, Kyle and Juels, Ari and Shi, Elaine},
@@ -532,3 +527,11 @@ year = {2018}
 }
 
 
+@techreport{TLSNotar,
+    abstract = {1 Abstract 'TLSnotary' allows a client to provide evidence to a third party auditor that certain web traffic occurred between himself and a server. The evidence is irrefutable as long as the auditor trusts the server's public key. The remainder of this paper describes how TLSnotary allows the auditee to conduct an https session normally with a web server such that the auditor can verify some part of that session (e.g. a single HTML page), by temporarily withholding a small part of the secret data used to set up the https session. The auditee does not at any time reveal any of the session keys to the auditor or anyone else, nor does he render or decrypt any data without authentication. Thus the full security model of the TLS 1.0 session is maintained, modulo some reduction in the entropy of the secrets used to protect it. Notes to the reader: As of this writing, TLSnotary is only compatible with TLS 1.0 and 1.1, not TLS 1.2 In order to fully understand the algorithm described below, it is advisable to have a basic familiarity with the steps of the TLS 1.0 protocol, in particular how the master secret, used to derive encryption keys and MAC secrets, is shared between client and server during the SSL Handshake.},
+    file = {:C$\backslash$:/Users/pedro/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Unknown - 2014 - TLSnotary-a mechanism for independently audited https sessions.pdf:pdf},
+    institution = {TLSnotary},
+    title = {{TLSnotary-a mechanism for independently audited https sessions}},
+    url = {https://tlsnotary.org/TLSNotary.pdf},
+    year = {2014}
+}

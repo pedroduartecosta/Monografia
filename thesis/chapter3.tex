@@ -91,7 +91,7 @@ Only then, does the auditor send the remaining bytes of Y to the auditee and thi
 
 This complex sequence of calculations prevents the auditee from creating a fake version of the post-handshake traffic from the server since he did not have in his possession the server-mac-write-secret to decrypt and authenticate the initially requested data.
 
-A more detailed flow and explanation can be consulted in the TLSNotary white-paper \cite{TLSNotary}.
+A more detailed flow and explanation can be consulted in the TLSNotary white-paper \cite{TLSNotar}.
 
 
 \subsubsection{Limitations}
@@ -199,19 +199,9 @@ Intel’s Software Guard Extensions (SGX) is a set of new instructions that conf
 
 Upon request, the enclave can generate a proof, usually called attestation, signed by and hardware protected key that can be used to prove that a certain software was run in a legit TEE.
 
-The flow of a TC requests, depicted in Figure \ref{fig:/figures/town-crier2}, starts with a User Contract creating a datagram request to the TC Contract. The TC Contract, is a simple smart-contract on the blockchain that accepts client requests and to whom the TC server listens to for new requests.
+The flow of a TC requests starts with a User Contract creating a datagram request to the TC Contract. The TC Contract, is a simple smart-contract on the blockchain that accepts client requests and to whom the TC server listens to for new requests.
 
 The TC Server, listens to events on the TC Contract and queries the requested data-source. The enclave takes care of signing the operation where as the relay is a simple networking interface. The answer is signed and returned to the TC Contract to later relay it to the User Contract.
-
-
-\begin{figure}[H]
-    \begin{center}
-        \leavevmode
-        \includegraphics[width=0.7\textwidth]{figures/town-crier.png}
-        \caption{Town crier Architecture.}
-        \label{fig:/figures/town-crier2}
-    \end{center}
-\end{figure}
 
 
 
@@ -228,15 +218,15 @@ Table \ref{tab:summary-proofs} summarizes the previous analysed proofs regarding
 \begin{table}[]
     \centering
     \resizebox{0.95\textwidth}{!}{%
-    \begin{tabular}{@{}lcccc@{}}
-        \toprule
-        Proof         & \multicolumn{1}{l}{Requires specific hardware} & \multicolumn{1}{l}{Can query the Web} & \multicolumn{1}{l}{Future-proof} & \multicolumn{1}{l}{Currently in production} \\ \midrule
-        TLSNotary     &                                                & X                                     &                                  & X                                           \\
-        Android Proof & X                                              & X                                     & X                                & X                                           \\
-        Ledger Proof  & X                                              &                                       & X                                & X                                           \\
-        TLS-N         &                                                & X                                     & X                                &                                             \\
-        Town Crier    & X                                              & X                                     & X                                & X                                           \\ \bottomrule
-    \end{tabular}
+        \begin{tabular}{@{}lcccc@{}}
+            \toprule
+            Proof         & \multicolumn{1}{l}{Requires specific hardware} & \multicolumn{1}{l}{Can query the Web} & \multicolumn{1}{l}{Future-proof} & \multicolumn{1}{l}{Currently in production} \\ \midrule
+            TLSNotary     &                                                & X                                     &                                  & X                                           \\
+            Android Proof & X                                              & X                                     & X                                & X                                           \\
+            Ledger Proof  & X                                              &                                       & X                                & X                                           \\
+            TLS-N         &                                                & X                                     & X                                &                                             \\
+            Town Crier    & X                                              & X                                     & X                                & X                                           \\ \bottomrule
+        \end{tabular}
     }
     \caption{Summary of authenticity proofs}
     \label{tab:summary-proofs}
