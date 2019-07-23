@@ -91,9 +91,6 @@ Only then, does the auditor send the remaining bytes of Y to the auditee and thi
 
 This complex sequence of calculations prevents the auditee from creating a fake version of the post-handshake traffic from the server since he did not have in his possession the server-mac-write-secret to decrypt and authenticate the initially requested data.
 
-A more detailed flow and explanation can be consulted in the TLSNotary white-paper \cite{TLSNotar}.
-
-
 \subsubsection{Limitations}
 TLSNotary provides some capabilities to attest TLS connections but comes with several limitations. Firstly, TLSNotary supports only TLS 1.0 or 1.1, the properties mentioned before are not present in TLS 1.2 and 1.3 and the former are considered less secure versions of TLS. Secondly, TLSNotary depends on RSA Key exchange, which does not provide forward secrecy. Thirdly, TLSNotary uses MD5 and SHA-1 functions, which are now considered deprecated. Finally and most importantly, TLSNotary requires trusting in a third party in most of its implementations, such as in Oraclize~\cite{Oraclize.it2018}, and being an interactive proof there is no way to verify the TLSNotary proof unless you were performing the role of the auditor during the retrieval. Oraclize, runs an auditor node on Amazon Web Services (AWS), claiming that this implementation is secure as far as AWS is trusted, simply moving the trust to a larger central entity. It also only allows the existence of one auditor in which we must trust, TLSNotary will not be a suitable solution if more than one auditor is required.
 
